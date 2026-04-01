@@ -17,7 +17,8 @@ Overall, the system focuses on providing a simple, intuitive, and user-friendly 
 This system will support different types of users:
 
 - Students: can register, log in, select courses, and generate timetables.
-- Teachers/Admin: can view enrollment statistics and monitor course selections.
+- Teachers: can view the list of students enrolled in their units and monitor course enrolment.
+- Admin: can approve teacher registrations and manage user roles.
 
 To prevent misuse, teacher/admin accounts will require additional verification, such as admin approval or a special registration code. 
 
@@ -40,7 +41,6 @@ The system will follow a simple workflow:
 - As a student, I want to remove or update selected courses so that I can adjust my schedule.
 - As a student, I want to generate a timetable automatically, so that I can see a structured weekly plan.
 - As a student, I want to view my timetable in a calendar format, so that I can easily understand my schedule.
-- As a student, I want to share my timetable with others, so that I can get feedback from classmates.
 - As a student, I want to view other students’ schedules so that I can get ideas for my own course selection.
 - As a teacher, I want to view the list of students enrolled in my course, so that I can understand class size and manage my teaching.
 - As an admin, I want to approve teacher registrations so that only authorised users can access teacher functionalities.
@@ -48,8 +48,7 @@ The system will follow a simple workflow:
 
 ## Main pages
 
-- Signup Page
-- Login Page
+- Login & Signup Page
 - Home Page (Dashboard)
 - Course Selection Page
 - Timetable Page
