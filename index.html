@@ -5,51 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Course Selector Tool - Sign In</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-
     <header id="main-header">
         <div class="container">
             <h1>Course Selector Tool</h1>
-            <p class="tagline">Plan your units more easily and explore suitable course combinations.</p>
+            <p class="tagline">Sign in to explore suitable unit combinations and manage your course preferences.</p>
         </div>
     </header>
 
-    <main class="signin-page">
+    <nav>
         <div class="container">
-            <div class="signin-box">
+            <a href="index.html">Sign In</a>
+            <a href="#">About</a>
+            <a href="#">Features</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section class="content-section signin-section">
                 <h2>Welcome Back</h2>
-                <p class="signin-text">Sign in to continue to your course selector account.</p>
-
-                <form id="signin-form">
-                    <div class="form-group">
-                        <label for="user-email">Email Address</label>
-                        <input type="email" id="user-email" class="form-control" placeholder="Enter your email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user-password">Password</label>
-                        <input type="password" id="user-password" class="form-control" placeholder="Enter your password">
-                    </div>
-
-                    <button type="button" class="btn btn-primary btn-block" onclick="loginUser()">
-                        <span class="glyphicon glyphicon-log-in"></span> Log In
-                    </button>
-                </form>
-
-                <p id="signin-output"></p>
-
-                <hr>
-
-                <p class="signup-text">
-                    Don’t have an account?
+                <p>
+                    Sign in to continue using the Course Selector Tool. Once logged in, you will be able to
+                    enter your course details, explore possible unit selections, and review suggested plans.
                 </p>
 
-                <button type="button" class="btn btn-default btn-block" onclick="goToSignUp()">
-                    <span class="glyphicon glyphicon-user"></span> Sign Up
-                </button>
-            </div>
+                <form id="signin-form">
+                    <fieldset>
+                        <legend>Account Sign In</legend>
+
+                        <div class="form-group">
+                            <label for="user-email">Email Address</label>
+                            <input type="email" id="user-email" class="form-control" placeholder="Enter your email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user-password">Password</label>
+                            <input type="password" id="user-password" class="form-control" placeholder="Enter your password">
+                        </div>
+
+                        <p>
+                            <button type="button" class="btn btn-primary" onclick="loginUser()">
+                                <span class="glyphicon glyphicon-log-in"></span> Log In
+                            </button>
+
+                            <button type="button" class="btn btn-default" onclick="goToSignUp()">
+                                <span class="glyphicon glyphicon-user"></span> Sign Up
+                            </button>
+                        </p>
+                    </fieldset>
+                </form>
+
+                <p id="signin-output">Your sign in result will appear here.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>New Here?</h2>
+                <p>
+                    If you do not already have an account, click the Sign Up button to begin creating one.
+                    This feature can be added later as part of the project.
+                </p>
+            </section>
         </div>
     </main>
 
@@ -59,6 +78,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
