@@ -1,0 +1,9 @@
+/* Sign in page */
+#signin-form {
+    max-width: 500px;
+}
+
+#signin-output {
+    margin-top: 15px;
+    font-weight: bold;
+}
