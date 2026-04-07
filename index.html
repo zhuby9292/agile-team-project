@@ -28,9 +28,8 @@
         <div class="container">
             <section class="content-section signin-section">
                 <h2>Welcome Back</h2>
-                <p>
-                    Sign in to continue using the Course Selector Tool. Once logged in, you will be able to
-                    enter your course details, explore possible unit selections, and review suggested plans.
+                <p class="signin-text">
+                    Sign in to continue using the Course Selector Tool.
                 </p>
 
                 <form id="signin-form">
@@ -47,13 +46,13 @@
                             <input type="password" id="user-password" class="form-control" placeholder="Enter your password">
                         </div>
 
-                        <p>
+                        <p class="button-row">
                             <button type="button" class="btn btn-primary" onclick="loginUser()">
-                                <span class="glyphicon glyphicon-log-in"></span> Log In
+                                <span class="glyphicon glyphicon-log-in"></span> Sign In
                             </button>
 
-                            <button type="button" class="btn btn-default" onclick="goToSignUp()">
-                                <span class="glyphicon glyphicon-user"></span> Sign Up
+                            <button type="button" class="btn btn-default" onclick="forgotPassword()">
+                                <span class="glyphicon glyphicon-lock"></span> Forgot Password
                             </button>
                         </p>
                     </fieldset>
@@ -62,11 +61,16 @@
                 <p id="signin-output">Your sign in result will appear here.</p>
             </section>
 
-            <section class="content-section">
-                <h2>New Here?</h2>
+            <section class="content-section info-section">
+                <h2>Need an Account?</h2>
                 <p>
-                    If you do not already have an account, click the Sign Up button to begin creating one.
-                    This feature can be added later as part of the project.
+                    If you do not already have an account, you can sign up here.
+                </p>
+
+                <p class="signup-button-row">
+                    <button type="button" class="btn btn-default" onclick="goToSignUp()">
+                        <span class="glyphicon glyphicon-user"></span> Sign Up
+                    </button>
                 </p>
             </section>
         </div>

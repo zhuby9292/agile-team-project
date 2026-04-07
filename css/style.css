@@ -4,7 +4,7 @@
 
 /* General page styling */
 body {
-    background: linear-gradient(to right, #eef3f9, #dfeaf5);
+    background-color: #eef2f7;
     color: #222222;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -13,10 +13,21 @@ body {
 
 /* Header styling */
 #main-header {
-    background-color: #1f3c5a;
+    background-color: #003b5c;
     color: white;
     padding: 40px 20px;
     text-align: center;
+}
+
+#main-header h1,
+#main-header p {
+    color: white;
+    margin: 0;
+}
+
+#main-header h1 {
+    margin-bottom: 10px;
+    font-size: 42px;
 }
 
 .tagline {
@@ -24,95 +35,129 @@ body {
     margin-top: 10px;
 }
 
-/* Sign in page layout */
-.signin-page {
-    padding: 60px 20px;
+/* Navigation styling */
+nav {
+    background-color: #00263a;
+    padding: 14px 0;
+    text-align: center;
 }
 
-.signin-box {
-    max-width: 450px;
-    margin: 0 auto;
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 16px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: #d9edf7;
+}
+
+/* Main layout */
+main {
+    padding: 40px 0;
+}
+
+/* Content section card */
+.content-section {
     background-color: white;
-    padding: 35px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    border: 1px solid #d6dde6;
 }
 
-.signin-box h2 {
+/* Sign-in section */
+.signin-section {
+    max-width: 760px;
+    margin: 0 auto 24px auto;
     text-align: center;
+}
+
+/* Information section */
+.info-section {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Headings */
+h2 {
+    color: #003b5c;
     margin-top: 0;
-    margin-bottom: 10px;
-    color: #1f3c5a;
+    font-size: 28px;
 }
 
+/* Sign-in text */
 .signin-text {
-    text-align: center;
     color: #555555;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+#signin-form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+fieldset {
+    border: 1px solid #b7c7d8;
+    border-radius: 10px;
+    padding: 18px;
+    background-color: #fafcff;
+}
+
+legend {
+    width: auto;
+    border: none;
+    padding: 0 8px;
+    color: #003b5c;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 #signin-form label {
     font-weight: bold;
 }
 
-#signin-output {
-    margin-top: 15px;
+/* Button rows */
+.button-row {
+    margin-top: 20px;
+    margin-bottom: 0;
     text-align: center;
-    font-weight: bold;
-    color: #1f3c5a;
 }
 
-.signup-text {
+.button-row .btn {
+    margin-right: 10px;
+}
+
+.signup-button-row {
+    margin-top: 15px;
+    margin-bottom: 0;
     text-align: center;
-    margin-bottom: 15px;
-    color: #444444;
+}
+
+/* Output message */
+#signin-output {
+    background-color: #f8fbff;
+    border: 1px solid #d6e2f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 18px;
+    text-align: center;
 }
 
 /* Footer */
 footer {
-    background-color: #1f3c5a;
+    background-color: #003b5c;
     color: white;
     text-align: center;
     padding: 15px 10px;
     margin-top: 40px;
 }
 
-/* Sign in page specific styling */
-.signin-section {
-    max-width: 750px;
-    margin: 0 auto 24px auto;
-}
-
-#signin-form {
-    margin-top: 20px;
-}
-
-#signin-output {
-    background: #f8fbff;
-    border: 1px solid #dbeafe;
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-top: 14px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
-    font-family: Verdana, Arial, sans-serif;
-}
-
-/* Sign in page specific styling */
-.signin-section {
-    max-width: 750px;
-    margin: 0 auto 24px auto;
-}
-
-#signin-form {
-    margin-top: 20px;
-}
-
-#signin-output {
-    background: #f8fbff;
-    border: 1px solid #dbeafe;
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-top: 14px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
-    font-family: Verdana, Arial, sans-serif;
+footer p {
+    margin: 0;
 }
