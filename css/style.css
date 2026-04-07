@@ -1,9 +1,78 @@
-/* Sign in page */
-#signin-form {
-    max-width: 500px;
+* {
+    box-sizing: border-box;
+}
+
+/* General page styling */
+body {
+    background: linear-gradient(to right, #eef3f9, #dfeaf5);
+    color: #222222;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+#main-header {
+    background-color: #1f3c5a;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.tagline {
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Sign in page layout */
+.signin-page {
+    padding: 60px 20px;
+}
+
+.signin-box {
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.signin-box h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1f3c5a;
+}
+
+.signin-text {
+    text-align: center;
+    color: #555555;
+    margin-bottom: 25px;
+}
+
+#signin-form label {
+    font-weight: bold;
 }
 
 #signin-output {
     margin-top: 15px;
+    text-align: center;
     font-weight: bold;
+    color: #1f3c5a;
+}
+
+.signup-text {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #444444;
+}
+
+/* Footer */
+footer {
+    background-color: #1f3c5a;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    margin-top: 40px;
 }
