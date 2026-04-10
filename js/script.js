@@ -31,3 +31,9 @@ function goToSignUp() {
         "Sign up page will be added later.";
     console.log("Sign up button clicked.");
 }
+
+// Shows a dashboard message when the user clicks a dashboard action button.
+function showDashboardMessage(message) {
+    document.getElementById("dashboard-output").innerHTML = message;
+    console.log("Dashboard action clicked: " + message);
+}
