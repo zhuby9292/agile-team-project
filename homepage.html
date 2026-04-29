@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Selector Tool - Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <header id="main-header">
+        <div class="container">
+            <h1>Course Selector Tool</h1>
+            <p class="tagline">Plan your courses and organise your timetable</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <a href="homepage.html">Dashboard</a>
+            <a href="index.html">Sign In</a>
+            <a href="#summary">Summary</a>
+            <a href="#actions">Actions</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <div class="container dashboard-container">
+
+            <!-- Top Section -->
+            <section class="dashboard-top">
+                <div class="dashboard-welcome">
+                    <p class="dashboard-kicker">Overview</p>
+                    <h2>Student Dashboard</h2>
+                    <p class="dashboard-description">
+                        This page provides an overview of your study planning progress
+                        and gives access to key system features such as course selection
+                        and timetable organisation.
+                    </p>
+                </div>
+
+                <div class="dashboard-badge-box">
+                    <span class="status-badge">Student Status</span>
+                    <p>Degree selected</p>
+                    <p>No courses added</p>
+                    <p>Timetable not created</p>
+                </div>
+            </section>
+
+            <!-- Summary Section -->
+            <section class="dashboard-grid" id="summary">
+                <div class="dashboard-panel dashboard-panel-large">
+                    <div class="panel-title-row">
+                        <div>
+                            <p class="dashboard-kicker">Summary</p>
+                            <h3>Study Summary</h3>
+                        </div>
+                    </div>
+
+                    <div class="summary-grid">
+                        <div class="mini-card">
+                            <p class="mini-label">Degree</p>
+                            <h4>Master of IT</h4>
+                            <p class="mini-note">Current degree information</p>
+                        </div>
+
+                        <div class="mini-card">
+                            <p class="mini-label">Selected Courses</p>
+                            <h4>0 Units</h4>
+                            <p class="mini-note">Selected units will appear here</p>
+                        </div>
+
+                        <div class="mini-card">
+                            <p class="mini-label">Total Credits</p>
+                            <h4>0 Credit Points</h4>
+                            <p class="mini-note">Calculated from selected courses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Panel -->
+                <div class="dashboard-panel">
+                    <p class="dashboard-kicker">Progress</p>
+                    <h3>System Flow</h3>
+
+                    <div class="progress-item">
+                        <span>Sign in</span>
+                        <span class="progress-done">Done</span>
+                    </div>
+
+                    <div class="progress-item">
+                        <span>Dashboard</span>
+                        <span class="progress-done">Active</span>
+                    </div>
+
+                    <div class="progress-item">
+                        <span>Course selection</span>
+                        <span class="progress-pending">Pending</span>
+                    </div>
+
+                    <div class="progress-item">
+                        <span>Timetable</span>
+                        <span class="progress-pending">Pending</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions Section -->
+            <section class="dashboard-panel" id="actions">
+                <div class="panel-title-row">
+                    <div>
+                        <p class="dashboard-kicker">Actions</p>
+                        <h3>Quick Actions</h3>
+                    </div>
+                </div>
+
+                <div class="action-grid">
+                    <div class="action-box">
+                        <h4>Browse Courses</h4>
+                        <p>View available units and course details.</p>
+                        <button type="button" class="btn dashboard-btn-primary"
+                            onclick="showDashboardMessage('Course Selection page will be linked here.')">
+                            Browse
+                        </button>
+                    </div>
+
+                    <div class="action-box">
+                        <h4>Plan Timetable</h4>
+                        <p>Organise selected units into a timetable.</p>
+                        <button type="button" class="btn dashboard-btn-primary"
+                            onclick="showDashboardMessage('Timetable page will be linked here.')">
+                            Plan
+                        </button>
+                    </div>
+
+                    <div class="action-box">
+                        <h4>Admin Panel</h4>
+                        <p>Access system management features.</p>
+                        <button type="button" class="btn dashboard-btn-secondary"
+                            onclick="showDashboardMessage('Admin features will be available here.')">
+                            Open
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Message Section -->
+            <section class="dashboard-panel dashboard-message-panel">
+                <p class="dashboard-kicker">Message</p>
+                <h3>System Message</h3>
+                <p id="dashboard-output">
+                    Use the dashboard to review your study plan and access system features.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Course Selector Tool Project</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

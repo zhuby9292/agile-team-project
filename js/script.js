@@ -74,4 +74,9 @@ function registerUser() {
     output.innerHTML =
         "Account created successfully for " + fullName + " with email: " + signupEmail;
     alert("Registration successful.");
+
+// Shows a dashboard message when the user clicks a dashboard action button.
+function showDashboardMessage(message) {
+    document.getElementById("dashboard-output").innerHTML = message;
+    console.log("Dashboard action clicked: " + message);
 }
