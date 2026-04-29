@@ -31,6 +31,49 @@ function goToSignUp() {
         "Sign up page will be added later.";
     console.log("Sign up button clicked.");
 }
+function goToSignUp() {
+    window.location.href = "signup.html";
+}
+
+function goToSignIn() {
+    window.location.href = "index.html";
+}
+
+function registerUser() {
+    let fullName = document.getElementById("full-name").value.trim();
+    let signupEmail = document.getElementById("signup-email").value.trim();
+    let studentId = document.getElementById("student-id").value.trim();
+    let signupPassword = document.getElementById("signup-password").value;
+    let confirmPassword = document.getElementById("confirm-password").value;
+    let output = document.getElementById("signup-output");
+
+    if (
+        fullName === "" ||
+        signupEmail === "" ||
+        studentId === "" ||
+        signupPassword === "" ||
+        confirmPassword === ""
+    ) {
+        alert("Please complete all registration fields.");
+        output.innerHTML = "Registration failed. Please complete all fields.";
+        return;
+    }
+
+    if (signupPassword !== confirmPassword) {
+        alert("Passwords do not match.");
+        output.innerHTML = "Registration failed. The passwords do not match.";
+        return;
+    }
+
+    if (signupPassword.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        output.innerHTML = "Registration failed. Password must contain at least 6 characters.";
+        return;
+    }
+
+    output.innerHTML =
+        "Account created successfully for " + fullName + " with email: " + signupEmail;
+    alert("Registration successful.");
 
 // Shows a dashboard message when the user clicks a dashboard action button.
 function showDashboardMessage(message) {
