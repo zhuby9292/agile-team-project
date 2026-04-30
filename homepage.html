@@ -18,16 +18,15 @@
     <nav>
         <div class="container">
             <a href="homepage.html">Dashboard</a>
-            <a href="index.html">Sign In</a>
-            <a href="#summary">Summary</a>
-            <a href="#actions">Actions</a>
+            <a href="course-selection.html">Course Selection</a>
+            <a href="timetable.html">Timetable</a>
+            <a href="/">Logout</a>
         </div>
     </nav>
 
     <main class="dashboard-main">
         <div class="container dashboard-container">
 
-            <!-- Top Section -->
             <section class="dashboard-top">
                 <div class="dashboard-welcome">
                     <p class="dashboard-kicker">Overview</p>
@@ -47,7 +46,6 @@
                 </div>
             </section>
 
-            <!-- Summary Section -->
             <section class="dashboard-grid" id="summary">
                 <div class="dashboard-panel dashboard-panel-large">
                     <div class="panel-title-row">
@@ -78,7 +76,6 @@
                     </div>
                 </div>
 
-                <!-- Progress Panel -->
                 <div class="dashboard-panel">
                     <p class="dashboard-kicker">Progress</p>
                     <h3>System Flow</h3>
@@ -105,7 +102,6 @@
                 </div>
             </section>
 
-            <!-- Actions Section -->
             <section class="dashboard-panel" id="actions">
                 <div class="panel-title-row">
                     <div>
@@ -119,7 +115,7 @@
                         <h4>Browse Courses</h4>
                         <p>View available units and course details.</p>
                         <button type="button" class="btn dashboard-btn-primary"
-                            onclick="showDashboardMessage('Course Selection page will be linked here.')">
+                            onclick="window.location.href='course-selection.html'">
                             Browse
                         </button>
                     </div>
@@ -128,7 +124,7 @@
                         <h4>Plan Timetable</h4>
                         <p>Organise selected units into a timetable.</p>
                         <button type="button" class="btn dashboard-btn-primary"
-                            onclick="showDashboardMessage('Timetable page will be linked here.')">
+                            onclick="window.location.href='timetable.html'">
                             Plan
                         </button>
                     </div>
@@ -144,7 +140,6 @@
                 </div>
             </section>
 
-            <!-- Message Section -->
             <section class="dashboard-panel dashboard-message-panel">
                 <p class="dashboard-kicker">Message</p>
                 <h3>System Message</h3>
