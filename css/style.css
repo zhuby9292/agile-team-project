@@ -762,3 +762,15 @@ footer p {
     color: white;
     margin: 0;
 }
+
+.signup-layout {
+    align-items: start;
+}
+
+.signup-card {
+    margin-top: 10px;
+}
+
+.signup-feature-grid {
+    margin-top: 34px;
+}
