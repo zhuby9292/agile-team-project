@@ -774,3 +774,148 @@ footer p {
 .signup-feature-grid {
     margin-top: 34px;
 }
+
+/* Modern application dashboard pages */
+
+.app-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(48, 116, 176, 0.18), transparent 32%),
+        linear-gradient(135deg, #eef5fb 0%, #f8fbff 48%, #edf3f8 100%);
+    color: #1f2d3d;
+}
+
+.app-header {
+    padding: 22px 0;
+}
+
+.app-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-links a {
+    min-width: 94px;
+    text-align: center;
+}
+
+.dashboard-container {
+    max-width: 1120px;
+}
+
+.dashboard-hero {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #d9e4ee;
+    border-radius: 28px;
+    padding: 34px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1.5fr 0.75fr;
+    gap: 28px;
+    align-items: center;
+    box-shadow: 0 24px 60px rgba(24, 59, 91, 0.1);
+}
+
+.dashboard-hero h1 {
+    color: #102c45;
+    font-size: 42px;
+    line-height: 1.12;
+    font-weight: bold;
+    letter-spacing: -0.8px;
+    margin: 0 0 14px;
+}
+
+.dashboard-status-card {
+    background: #f6f9fc;
+    border: 1px solid #dce6ef;
+    border-radius: 22px;
+    padding: 22px;
+}
+
+.status-label {
+    color: #183b5b;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 11px 0;
+    border-bottom: 1px solid #e4edf5;
+    color: #526273;
+}
+
+.status-row:last-child {
+    border-bottom: none;
+}
+
+.status-row strong {
+    color: #102c45;
+}
+
+.dashboard-overview-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.mini-icon {
+    color: #183b5b;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.dashboard-action-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.action-icon {
+    color: #183b5b;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.action-box h3 {
+    color: #183b5b;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 8px 0 10px;
+}
+
+.progress-list {
+    margin-top: 12px;
+}
+
+@media (max-width: 991px) {
+    .app-nav {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .dashboard-hero,
+    .dashboard-overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-action-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .dashboard-hero {
+        padding: 24px;
+    }
+
+    .dashboard-hero h1 {
+        font-size: 32px;
+    }
+
+    .dashboard-action-grid {
+        grid-template-columns: 1fr;
+    }
+}
