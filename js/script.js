@@ -74,9 +74,73 @@ function registerUser() {
     output.innerHTML =
         "Account created successfully for " + fullName + " with email: " + signupEmail;
     alert("Registration successful.");
+}
 
 // Shows a dashboard message when the user clicks a dashboard action button.
 function showDashboardMessage(message) {
     document.getElementById("dashboard-output").innerHTML = message;
     console.log("Dashboard action clicked: " + message);
+}
+
+// add course display & select course
+let selectedCourses = [];
+
+function addCourse(code, name, credits) {
+    const degree = document.getElementById("degree-select").value;
+    const message = document.getElementById("course-message");
+
+    if (degree === "") {
+        message.innerHTML = "Please select a degree first.";
+        return;
+    }
+
+    const exists = selectedCourses.some(course => course.code === code);
+
+    if (exists) {
+        message.innerHTML = code + " has already been added.";
+        return;
+    }
+
+    selectedCourses.push({
+        code: code,
+        name: name,
+        credits: credits
+    });
+
+    message.innerHTML = code + " added successfully.";
+    displaySelectedCourses();
+}
+
+function displaySelectedCourses() {
+    const selectedBox = document.getElementById("selected-courses");
+    const creditOutput = document.getElementById("credit-output");
+
+    if (selectedCourses.length === 0) {
+        selectedBox.innerHTML = "<p>No courses selected yet.</p>";
+        creditOutput.innerHTML = "Total credits: 0";
+        return;
+    }
+
+    let totalCredits = 0;
+
+    selectedBox.innerHTML = selectedCourses.map(course => {
+        totalCredits += course.credits;
+
+        return `
+        <p>
+            <strong>${course.code}</strong> - ${course.name} (${course.credits} credit points)
+            <button class="btn btn-xs btn-danger"
+                onclick="removeCourse('${course.code}')">
+                Remove
+            </button>
+        </p>
+        `;
+    }).join("");
+
+    creditOutput.innerHTML = "Total credits: " + totalCredits;
+}
+
+function removeCourse(code) {
+    selectedCourses = selectedCourses.filter(c => c.code !== code);
+    displaySelectedCourses();
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Selector Tool - Timetable</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header id="main-header">
+    <div class="container">
+        <h1>Course Selector Tool</h1>
+        <p class="tagline">View and organise your weekly timetable</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="homepage.html">Dashboard</a>
+        <a href="course-selection.html">Course Selection</a>
+        <a href="timetable.html">Timetable</a>
+        <a href="/">Logout</a>
+    </div>
+</nav>
+
+<main class="dashboard-main">
+    <div class="container dashboard-container">
+
+        <!-- Title -->
+        <section class="dashboard-top">
+            <div class="dashboard-welcome">
+                <p class="dashboard-kicker">Planning</p>
+                <h2>Your Timetable</h2>
+                <p class="dashboard-description">
+                    Generate and view your weekly course schedule.
+                </p>
+            </div>
+        </section>
+
+        <section class="dashboard-panel">
+            <h3>Weekly Schedule</h3>
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Course</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td id="mon">-</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td id="tue">-</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td id="wed">-</td>
+                    </tr>
+                    <tr>
+                        <td>Thursday</td>
+                        <td id="thu">-</td>
+                    </tr>
+                    <tr>
+                        <td>Friday</td>
+                        <td id="fri">-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="btn dashboard-btn-primary"
+                onclick="generateTimetable()">
+                Generate Timetable
+            </button>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Course Selector Tool Project</p>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+
+<script>
+function generateTimetable() {
+    document.getElementById("mon").innerHTML = "CITS5505";
+    document.getElementById("tue").innerHTML = "CITS5504";
+    document.getElementById("wed").innerHTML = "CITS5508";
+    document.getElementById("thu").innerHTML = "-";
+    document.getElementById("fri").innerHTML = "-";
+}
+</script>
+
+</body>
+</html>
