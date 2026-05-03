@@ -51,38 +51,95 @@
                 <p id="course-message">Please select a degree before adding courses.</p>
             </section>
 
-            <section class="dashboard-panel">
-                <h3>Available Courses</h3>
+           <section class="dashboard-panel">
+    <div class="panel-title-row">
+        <p class="dashboard-kicker">Available Options</p>
+        <h3>Available Courses</h3>
+        <p class="dashboard-description">
+            Review the key details for each course before adding it to your study plan.
+        </p>
+    </div>
 
-                <div class="action-grid">
-                    <div class="action-box">
-                        <h4>CITS5505</h4>
-                        <p>Agile Web Development<br>6 credit points<br>Monday 10:00-12:00</p>
-                        <button type="button" class="btn dashboard-btn-primary"
-                            onclick="addCourse('CITS5505', 'Agile Web Development', 6)">
-                            Add Course
-                        </button>
-                    </div>
-
-                    <div class="action-box">
-                        <h4>CITS5504</h4>
-                        <p>Data Warehousing<br>6 credit points<br>Tuesday 14:00-16:00</p>
-                        <button type="button" class="btn dashboard-btn-primary"
-                            onclick="addCourse('CITS5504', 'Data Warehousing', 6)">
-                            Add Course
-                        </button>
-                    </div>
-
-                    <div class="action-box">
-                        <h4>CITS5508</h4>
-                        <p>Machine Learning<br>6 credit points<br>Wednesday 09:00-11:00</p>
-                        <button type="button" class="btn dashboard-btn-primary"
-                            onclick="addCourse('CITS5508', 'Machine Learning', 6)">
-                            Add Course
-                        </button>
-                    </div>
+    <div class="course-card-grid">
+        <article class="course-card">
+            <div class="course-card-header">
+                <span class="course-code">CITS5505</span>
+                <span class="course-tag">Semester 1</span>
+            </div>
+            <h4>Agile Web Development</h4>
+            <p class="course-description">
+                Learn how to design and build interactive web applications using HTML, CSS,
+                JavaScript, and agile development practices.
+            </p>
+            <dl class="course-meta">
+                <div>
+                    <dt>Credit Points</dt>
+                    <dd>6</dd>
                 </div>
-            </section>
+                <div>
+                    <dt>Class Time</dt>
+                    <dd>Monday 10:00-12:00</dd>
+                </div>
+            </dl>
+            <button type="button" class="btn dashboard-btn-primary"
+                onclick="addCourse('CITS5505', 'Agile Web Development', 6)">
+                Add Course
+            </button>
+        </article>
+
+        <article class="course-card">
+            <div class="course-card-header">
+                <span class="course-code">CITS5504</span>
+                <span class="course-tag">Semester 1</span>
+            </div>
+            <h4>Data Warehousing</h4>
+            <p class="course-description">
+                Explore data warehouse design, ETL processes, star schemas, and business
+                intelligence reporting for decision support.
+            </p>
+            <dl class="course-meta">
+                <div>
+                    <dt>Credit Points</dt>
+                    <dd>6</dd>
+                </div>
+                <div>
+                    <dt>Class Time</dt>
+                    <dd>Tuesday 14:00-16:00</dd>
+                </div>
+            </dl>
+            <button type="button" class="btn dashboard-btn-primary"
+                onclick="addCourse('CITS5504', 'Data Warehousing', 6)">
+                Add Course
+            </button>
+        </article>
+
+        <article class="course-card">
+            <div class="course-card-header">
+                <span class="course-code">CITS5508</span>
+                <span class="course-tag">Semester 2</span>
+            </div>
+            <h4>Machine Learning</h4>
+            <p class="course-description">
+                Study machine learning concepts, model training, evaluation methods, and
+                practical applications of predictive analytics.
+            </p>
+            <dl class="course-meta">
+                <div>
+                    <dt>Credit Points</dt>
+                    <dd>6</dd>
+                </div>
+                <div>
+                    <dt>Class Time</dt>
+                    <dd>Wednesday 09:00-11:00</dd>
+                </div>
+            </dl>
+            <button type="button" class="btn dashboard-btn-primary"
+                onclick="addCourse('CITS5508', 'Machine Learning', 6)">
+                Add Course
+            </button>
+        </article>
+    </div>
+</section>
 
             <section class="dashboard-panel">
                 <h3>Selected Courses</h3>
