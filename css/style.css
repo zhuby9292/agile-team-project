@@ -394,16 +394,113 @@ footer p {
     color: #44505c;
 }
 
+.course-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.course-card {
+    background: #f8fbfe;
+    border: 1px solid #dce6f0;
+    border-radius: 18px;
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 330px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(15, 43, 70, 0.08);
+}
+
+.course-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.course-code {
+    background: #183b5b;
+    color: white;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.course-tag {
+    background: #e7f6ec;
+    color: #2f7a47;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.course-card h4 {
+    color: #183b5b;
+    font-size: 21px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.course-description {
+    color: #5f6b76;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.course-meta {
+    background: white;
+    border: 1px solid #e4ebf2;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 18px;
+}
+
+.course-meta div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.course-meta div:last-child {
+    border-bottom: none;
+}
+
+.course-meta dt {
+    color: #6f7e8c;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.course-meta dd {
+    color: #183b5b;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+}
+
 @media (max-width: 991px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
 
-    .summary-grid,
-    .action-grid {
-        grid-template-columns: 1fr;
-    }
-
+.summary-grid,
+.action-grid,
+.course-card-grid {
+    grid-template-columns: 1fr;
+}
     .dashboard-top {
         flex-direction: column;
         align-items: flex-start;
