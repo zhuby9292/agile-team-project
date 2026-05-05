@@ -491,6 +491,38 @@ footer p {
     text-align: right;
 }
 
+.course-search-area {
+    background: #f8fbfe;
+    border: 1px solid #dce6f0;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.course-search-area label {
+    color: #183b5b;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.course-search-area input {
+    border-radius: 12px;
+    border: 1px solid #cbd8e3;
+    box-shadow: none;
+    min-height: 42px;
+}
+
+.empty-state-message {
+    background: #fff;
+    border: 1px dashed #b8c7d6;
+    border-radius: 16px;
+    color: #5f6b76;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 991px) {
     .dashboard-grid {
         grid-template-columns: 1fr;

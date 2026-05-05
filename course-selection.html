@@ -60,8 +60,22 @@
         </p>
     </div>
 
+<div class="course-search-area">
+    <label for="course-search">Search courses</label>
+    <input
+        type="text"
+        id="course-search"
+        class="form-control"
+        placeholder="Search by course code or course name"
+        oninput="filterCourses()"
+    >
+</div>
+
+<p id="no-course-results" class="empty-state-message" style="display: none;">
+    No courses found. Try searching with another keyword.
+</p>
     <div class="course-card-grid">
-        <article class="course-card">
+        <article class="course-card course-option" data-search="cits5505 agile web development">
             <div class="course-card-header">
                 <span class="course-code">CITS5505</span>
                 <span class="course-tag">Semester 1</span>
@@ -87,7 +101,7 @@
             </button>
         </article>
 
-        <article class="course-card">
+       <article class="course-card course-option" data-search="cits5504 data warehousing">
             <div class="course-card-header">
                 <span class="course-code">CITS5504</span>
                 <span class="course-tag">Semester 1</span>
@@ -113,7 +127,7 @@
             </button>
         </article>
 
-        <article class="course-card">
+        <article class="course-card course-option" data-search="cits5508 machine learning">
             <div class="course-card-header">
                 <span class="course-code">CITS5508</span>
                 <span class="course-tag">Semester 2</span>
