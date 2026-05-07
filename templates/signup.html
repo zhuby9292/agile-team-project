@@ -2,41 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Course Selector Tool - Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Planner - Sign Up</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <header id="main-header">
-        <div class="container">
-            <h1>Course Selector Tool</h1>
-            <p class="tagline">Create an account to start exploring suitable unit combinations and save your course preferences.</p>
+
+<body class="auth-page">
+    <header class="auth-header">
+        <div class="container auth-nav">
+            <div class="brand">
+                <span class="brand-icon glyphicon glyphicon-calendar"></span>
+                <span class="brand-name">Course Planner</span>
+            </div>
+
+            <nav class="auth-links">
+                <a href="index.html">Sign In</a>
+                <a href="signup.html" class="active">Sign Up</a>
+                <a href="index.html#features">Features</a>
+            </nav>
         </div>
     </header>
 
-    <nav>
+    <main class="auth-main">
         <div class="container">
-            <a href="index.html">Sign In</a>
-            <a href="signup.html">Sign Up</a>
-            <a href="#">About</a>
-            <a href="#">Features</a>
-            <a href="#">Contact</a>
-        </div>
-    </nav>
+            <div class="auth-layout signup-layout">
+                <section class="auth-hero">
+                    <p class="eyebrow-text">Create your study planning account</p>
 
-    <main>
-        <div class="container">
-            <section class="content-section signin-section">
-                <h2>Create Your Account</h2>
-                <p class="signin-text">
-                    Sign up to access the Course Selector Tool and manage your study planning more easily.
-                </p>
+                    <h1>Start organising your semester in one place.</h1>
 
-                <form id="signup-form">
-                    <fieldset>
-                        <legend>Account Registration</legend>
+                    <p class="hero-description">
+                        Create an account to save your course selections, prepare your timetable,
+                        and manage your study planning more easily throughout the semester.
+                    </p>
 
+                    <div class="feature-grid signup-feature-grid">
+                        <div class="feature-card">
+                            <span class="glyphicon glyphicon-education"></span>
+                            <h3>Select Degree</h3>
+                            <p>Choose your degree pathway and browse courses relevant to your study plan.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="glyphicon glyphicon-check"></span>
+                            <h3>Save Courses</h3>
+                            <p>Add preferred courses to your plan and keep track of your selections.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            <h3>Build Timetable</h3>
+                            <p>Use your selected courses to create a clearer weekly timetable structure.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="signin-card signup-card">
+                    <div class="signin-card-header">
+                        <h2>Create account</h2>
+                        <p>Enter your details to begin using Course Planner.</p>
+                    </div>
+
+                    <form id="signup-form">
                         <div class="form-group">
                             <label for="full-name">Full Name</label>
                             <input type="text" id="full-name" class="form-control" placeholder="Enter your full name">
@@ -62,33 +91,27 @@
                             <input type="password" id="confirm-password" class="form-control" placeholder="Re-enter your password">
                         </div>
 
-                        <p class="button-row">
-                            <button type="button" class="btn btn-primary" onclick="registerUser()">
-                                <span class="glyphicon glyphicon-user"></span> Create Account
-                            </button>
+                        <button type="button" class="btn signin-btn" onclick="registerUser()">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Create Account
+                        </button>
 
-                            <button type="button" class="btn btn-default" onclick="goToSignIn()">
-                                <span class="glyphicon glyphicon-log-in"></span> Back to Sign In
-                            </button>
-                        </p>
-                    </fieldset>
-                </form>
+                        <button type="button" class="btn forgot-btn" onclick="goToSignIn()">
+                            Already have an account? Sign in
+                        </button>
+                    </form>
 
-                <p id="signup-output">Your registration result will appear here.</p>
-            </section>
-
-            <section class="content-section info-section">
-                <h2>Already Have an Account?</h2>
-                <p>
-                    Return to the sign in page to access your account.
-                </p>
-            </section>
+                    <p id="signup-output" class="signin-output">
+                        Your registration result will appear here.
+                    </p>
+                </section>
+            </div>
         </div>
     </main>
 
-    <footer>
+    <footer class="auth-footer">
         <div class="container">
-            <p>Created for the Course Selector Tool project.</p>
+            <p>Created for the Agile Web Development Group Project.</p>
         </div>
     </footer>
 

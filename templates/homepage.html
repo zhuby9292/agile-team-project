@@ -2,75 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Course Selector Tool - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Planner - Dashboard</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <header id="main-header">
-        <div class="container">
-            <h1>Course Selector Tool</h1>
-            <p class="tagline">Plan your courses and organise your timetable</p>
+
+<body class="app-page">
+    <header class="app-header">
+        <div class="container app-nav">
+            <div class="brand">
+                <span class="brand-icon glyphicon glyphicon-calendar"></span>
+                <span class="brand-name">Course Planner</span>
+            </div>
+
+            <nav class="auth-links app-links">
+                <a href="homepage.html" class="active">Dashboard</a>
+                <a href="course-selection.html">Courses</a>
+                <a href="timetable.html">Timetable</a>
+                <a href="index.html">Logout</a>
+            </nav>
         </div>
     </header>
-
-    <nav>
-        <div class="container">
-            <a href="homepage.html">Dashboard</a>
-            <a href="course-selection.html">Course Selection</a>
-            <a href="timetable.html">Timetable</a>
-            <a href="/">Logout</a>
-        </div>
-    </nav>
 
     <main class="dashboard-main">
         <div class="container dashboard-container">
 
-            <section class="dashboard-top">
+            <section class="dashboard-hero">
                 <div class="dashboard-welcome">
-                    <p class="dashboard-kicker">Overview</p>
-                    <h2>Student Dashboard</h2>
+                    <p class="dashboard-kicker">Student workspace</p>
+                    <h1>Welcome to your course planning dashboard.</h1>
                     <p class="dashboard-description">
-                        This page provides an overview of your study planning progress
-                        and gives access to key system features such as course selection
-                        and timetable organisation.
+                        Review your study progress, browse available courses, prepare your timetable,
+                        and explore planning tools from one central place.
                     </p>
                 </div>
 
-                <div class="dashboard-badge-box">
-                    <span class="status-badge">Student Status</span>
-                    <p>Degree selected</p>
-                    <p>No courses added</p>
-                    <p>Timetable not created</p>
+                <div class="dashboard-status-card">
+                    <p class="status-label">Current Plan Status</p>
+
+                    <div class="status-row">
+                        <span>Degree selected</span>
+                        <strong>Yes</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Courses added</span>
+                        <strong>0</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Timetable created</span>
+                        <strong>No</strong>
+                    </div>
                 </div>
             </section>
 
-            <section class="dashboard-grid" id="summary">
+            <section class="dashboard-overview-grid">
                 <div class="dashboard-panel dashboard-panel-large">
                     <div class="panel-title-row">
                         <div>
-                            <p class="dashboard-kicker">Summary</p>
-                            <h3>Study Summary</h3>
+                            <p class="dashboard-kicker">Overview</p>
+                            <h2>Study Summary</h2>
                         </div>
                     </div>
 
                     <div class="summary-grid">
                         <div class="mini-card">
+                            <span class="mini-icon glyphicon glyphicon-education"></span>
                             <p class="mini-label">Degree</p>
-                            <h4>Master of IT</h4>
-                            <p class="mini-note">Current degree information</p>
+                            <h3>Master of IT</h3>
+                            <p class="mini-note">Current study pathway</p>
                         </div>
 
                         <div class="mini-card">
+                            <span class="mini-icon glyphicon glyphicon-list-alt"></span>
                             <p class="mini-label">Selected Courses</p>
-                            <h4>0 Units</h4>
-                            <p class="mini-note">Selected units will appear here</p>
+                            <h3>0 Units</h3>
+                            <p class="mini-note">Courses selected for this semester</p>
                         </div>
 
                         <div class="mini-card">
+                            <span class="mini-icon glyphicon glyphicon-credit-card"></span>
                             <p class="mini-label">Total Credits</p>
-                            <h4>0 Credit Points</h4>
+                            <h3>0 Credit Points</h3>
                             <p class="mini-note">Calculated from selected courses</p>
                         </div>
                     </div>
@@ -78,82 +94,97 @@
 
                 <div class="dashboard-panel">
                     <p class="dashboard-kicker">Progress</p>
-                    <h3>System Flow</h3>
+                    <h2>Planning Flow</h2>
 
-                    <div class="progress-item">
-                        <span>Sign in</span>
-                        <span class="progress-done">Done</span>
-                    </div>
+                    <div class="progress-list">
+                        <div class="progress-item">
+                            <span>Sign in</span>
+                            <span class="progress-done">Done</span>
+                        </div>
 
-                    <div class="progress-item">
-                        <span>Dashboard</span>
-                        <span class="progress-done">Active</span>
-                    </div>
+                        <div class="progress-item">
+                            <span>Dashboard</span>
+                            <span class="progress-done">Active</span>
+                        </div>
 
-                    <div class="progress-item">
-                        <span>Course selection</span>
-                        <span class="progress-pending">Pending</span>
-                    </div>
+                        <div class="progress-item">
+                            <span>Course selection</span>
+                            <span class="progress-pending">Pending</span>
+                        </div>
 
-                    <div class="progress-item">
-                        <span>Timetable</span>
-                        <span class="progress-pending">Pending</span>
+                        <div class="progress-item">
+                            <span>Timetable planning</span>
+                            <span class="progress-pending">Pending</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="dashboard-panel" id="actions">
+            <section class="dashboard-panel">
                 <div class="panel-title-row">
                     <div>
                         <p class="dashboard-kicker">Actions</p>
-                        <h3>Quick Actions</h3>
+                        <h2>What would you like to do?</h2>
                     </div>
                 </div>
 
-                <div class="action-grid">
+                <div class="action-grid dashboard-action-grid">
                     <div class="action-box">
-                        <h4>Browse Courses</h4>
-                        <p>View available units and course details.</p>
+                        <span class="action-icon glyphicon glyphicon-search"></span>
+                        <h3>Browse Courses</h3>
+                        <p>Explore available courses, course codes, credit points, and scheduling information.</p>
                         <button type="button" class="btn dashboard-btn-primary"
                             onclick="window.location.href='course-selection.html'">
-                            Browse
+                            Browse Courses
                         </button>
                     </div>
 
                     <div class="action-box">
-                        <h4>Plan Timetable</h4>
-                        <p>Organise selected units into a timetable.</p>
+                        <span class="action-icon glyphicon glyphicon-time"></span>
+                        <h3>Plan Timetable</h3>
+                        <p>Use your selected courses to prepare a clear weekly timetable structure.</p>
                         <button type="button" class="btn dashboard-btn-primary"
                             onclick="window.location.href='timetable.html'">
-                            Plan
+                            Open Timetable
                         </button>
                     </div>
 
                     <div class="action-box">
-                        <h4>Admin Panel</h4>
-                        <p>Access system management features.</p>
+                        <span class="action-icon glyphicon glyphicon-user"></span>
+                        <h3>Compare Plans</h3>
+                        <p>View other students’ timetable examples to explore different course combinations.</p>
                         <button type="button" class="btn dashboard-btn-secondary"
-                            onclick="showDashboardMessage('Admin features will be available here.')">
-                            Open
+                            onclick="showDashboardMessage('Student timetable comparison will be added in a future update.')">
+                            View Examples
+                        </button>
+                    </div>
+
+                    <div class="action-box">
+                        <span class="action-icon glyphicon glyphicon-stats"></span>
+                        <h3>Admin Statistics</h3>
+                        <p>Preview course demand and enrolment statistics for teachers or administrators.</p>
+                        <button type="button" class="btn dashboard-btn-secondary"
+                            onclick="showDashboardMessage('Admin statistics will be available in a future update.')">
+                            View Statistics
                         </button>
                     </div>
                 </div>
             </section>
 
             <section class="dashboard-panel dashboard-message-panel">
-                <p class="dashboard-kicker">Message</p>
-                <h3>System Message</h3>
+                <p class="dashboard-kicker">System message</p>
+                <h2>Dashboard Updates</h2>
                 <p id="dashboard-output">
-                    Use the dashboard to review your study plan and access system features.
+                    Use this dashboard to review your study plan and access the main course planning features.
                 </p>
             </section>
 
         </div>
     </main>
 
-    <footer>
+    <footer class="auth-footer">
         <div class="container">
-            <p>Course Selector Tool Project</p>
+            <p>Created for the Agile Web Development Group Project.</p>
         </div>
     </footer>
 

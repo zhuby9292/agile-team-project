@@ -2,176 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Course Selector Tool - Course Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Planner - Course Selection</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <header id="main-header">
-        <div class="container">
-            <h1>Course Selector Tool</h1>
-            <p class="tagline">Select your courses and prepare your timetable</p>
+
+<body class="app-page">
+    <header class="app-header">
+        <div class="container app-nav">
+            <div class="brand">
+                <span class="brand-icon glyphicon glyphicon-calendar"></span>
+                <span class="brand-name">Course Planner</span>
+            </div>
+
+            <nav class="auth-links app-links">
+                <a href="{{ url_for('homepage') }}">Dashboard</a>
+                <a href="{{ url_for('course_selection') }}" class="active">Courses</a>
+                <a href="{{ url_for('timetable') }}">Timetable</a>
+                <a href="{{ url_for('index') }}">Logout</a>
+            </nav>
         </div>
     </header>
-
-    <nav>
-        <div class="container">
-            <a href="homepage.html">Dashboard</a>
-            <a href="course-selection.html">Course Selection</a>
-            <a href="timetable.html">Timetable</a>
-            <a href="/">Logout</a>
-        </div>
-    </nav>
 
     <main class="dashboard-main">
         <div class="container dashboard-container">
 
-            <section class="dashboard-top">
+            <section class="dashboard-hero course-hero">
                 <div class="dashboard-welcome">
-                    <p class="dashboard-kicker">Course Planning</p>
-                    <h2>Course Selection</h2>
+                    <p class="dashboard-kicker">Course planning</p>
+                    <h1>Select courses for your semester.</h1>
                     <p class="dashboard-description">
-                        Choose your degree and add courses to your study plan.
+                        Choose your study level and degree pathway, browse available courses,
+                        and add units to your study plan before generating a timetable.
                     </p>
                 </div>
+
+                <div class="dashboard-status-card">
+                    <p class="status-label">Selection Summary</p>
+
+                    <div class="status-row">
+                        <span>Study level</span>
+                        <strong id="study-level-summary">Not selected</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Degree</span>
+                        <strong id="degree-summary">Not selected</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Selected courses</span>
+                        <strong id="course-count-summary">0</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span>Total credits</span>
+                        <strong id="credit-summary">0</strong>
+                    </div>
+                </div>
             </section>
 
-            <section class="dashboard-panel">
-                <h3>Select Your Degree</h3>
-                <div class="form-group">
-                    <label for="degree-select">Degree</label>
-                    <select id="degree-select" class="form-control">
-                        <option value="">-- Select a degree --</option>
-                        <option value="MIT">Master of Information Technology</option>
-                        <option value="CS">Computer Science</option>
-                        <option value="DS">Data Science</option>
-                    </select>
-                </div>
-                <p id="course-message">Please select a degree before adding courses.</p>
-            </section>
+            <section class="course-layout">
+                <div class="course-main-column">
 
-           <section class="dashboard-panel">
-    <div class="panel-title-row">
-        <p class="dashboard-kicker">Available Options</p>
-        <h3>Available Courses</h3>
-        <p class="dashboard-description">
-            Review the key details for each course before adding it to your study plan.
-        </p>
-    </div>
+                    <section class="dashboard-panel">
+                        <div class="panel-title-row">
+                            <div>
+                                <p class="dashboard-kicker">Step 1</p>
+                                <h2>Choose your study pathway</h2>
+                            </div>
+                        </div>
 
-<div class="course-search-area">
-    <label for="course-search">Search courses</label>
-    <input
-        type="text"
-        id="course-search"
-        class="form-control"
-        placeholder="Search by course code or course name"
-        oninput="filterCourses()"
-    >
-</div>
+                        <div class="degree-select-card">
+                            <div class="degree-form-grid">
+                                <div class="form-group">
+                                    <label for="study-level-select">Study level</label>
+                                    <select id="study-level-select" class="form-control" onchange="updateDegreeOptions()">
+                                        <option value="">-- Select a study level --</option>
+                                        <option value="bachelor">Bachelor</option>
+                                        <option value="master">Master</option>
+                                        <option value="diploma">Diploma</option>
+                                    </select>
+                                </div>
 
-<p id="no-course-results" class="empty-state-message" style="display: none;">
-    No courses found. Try searching with another keyword.
-</p>
-    <div class="course-card-grid">
-        <article class="course-card course-option" data-search="cits5505 agile web development">
-            <div class="course-card-header">
-                <span class="course-code">CITS5505</span>
-                <span class="course-tag">Semester 1</span>
-            </div>
-            <h4>Agile Web Development</h4>
-            <p class="course-description">
-                Learn how to design and build interactive web applications using HTML, CSS,
-                JavaScript, and agile development practices.
-            </p>
-            <dl class="course-meta">
-                <div>
-                    <dt>Credit Points</dt>
-                    <dd>6</dd>
-                </div>
-                <div>
-                    <dt>Class Time</dt>
-                    <dd>Monday 10:00-12:00</dd>
-                </div>
-            </dl>
-            <button type="button" class="btn dashboard-btn-primary"
-                onclick="addCourse('CITS5505', 'Agile Web Development', 6)">
-                Add Course
-            </button>
-        </article>
+                                <div class="form-group">
+                                    <label for="degree-select">Degree</label>
+                                    <select id="degree-select" class="form-control" onchange="selectDegree()" disabled>
+                                        <option value="">-- Select a study level first --</option>
+                                    </select>
+                                </div>
+                            </div>
 
-       <article class="course-card course-option" data-search="cits5504 data warehousing">
-            <div class="course-card-header">
-                <span class="course-code">CITS5504</span>
-                <span class="course-tag">Semester 1</span>
-            </div>
-            <h4>Data Warehousing</h4>
-            <p class="course-description">
-                Explore data warehouse design, ETL processes, star schemas, and business
-                intelligence reporting for decision support.
-            </p>
-            <dl class="course-meta">
-                <div>
-                    <dt>Credit Points</dt>
-                    <dd>6</dd>
-                </div>
-                <div>
-                    <dt>Class Time</dt>
-                    <dd>Tuesday 14:00-16:00</dd>
-                </div>
-            </dl>
-            <button type="button" class="btn dashboard-btn-primary"
-                onclick="addCourse('CITS5504', 'Data Warehousing', 6)">
-                Add Course
-            </button>
-        </article>
+                            <p id="course-message" class="helper-message">
+                                Please select a study level, then choose a degree before adding courses.
+                            </p>
+                        </div>
+                    </section>
 
-        <article class="course-card course-option" data-search="cits5508 machine learning">
-            <div class="course-card-header">
-                <span class="course-code">CITS5508</span>
-                <span class="course-tag">Semester 2</span>
-            </div>
-            <h4>Machine Learning</h4>
-            <p class="course-description">
-                Study machine learning concepts, model training, evaluation methods, and
-                practical applications of predictive analytics.
-            </p>
-            <dl class="course-meta">
-                <div>
-                    <dt>Credit Points</dt>
-                    <dd>6</dd>
-                </div>
-                <div>
-                    <dt>Class Time</dt>
-                    <dd>Wednesday 09:00-11:00</dd>
-                </div>
-            </dl>
-            <button type="button" class="btn dashboard-btn-primary"
-                onclick="addCourse('CITS5508', 'Machine Learning', 6)">
-                Add Course
-            </button>
-        </article>
-    </div>
-</section>
+                    <section class="dashboard-panel">
+                        <div class="panel-title-row">
+                            <div>
+                                <p class="dashboard-kicker">Step 2</p>
+                                <h2>Available courses</h2>
+                            </div>
+                        </div>
 
-            <section class="dashboard-panel">
-                <h3>Selected Courses</h3>
-                <div id="selected-courses">
-                    <p>No courses selected yet.</p>
+                        <div id="available-courses" class="course-card-grid">
+                            <div class="empty-course-state">
+                                <p>Please select a study level and degree to view available courses.</p>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <p id="credit-output">Total credits: 0</p>
+
+                <aside class="course-side-column">
+                    <section class="dashboard-panel selected-panel">
+                        <p class="dashboard-kicker">Step 3</p>
+                        <h2>Your selected courses</h2>
+
+                        <div id="selected-courses" class="selected-courses-box">
+                            <p>No courses selected yet.</p>
+                        </div>
+
+                        <div class="credit-total-box">
+                            <span>Total credits</span>
+                            <strong id="credit-output">0</strong>
+                        </div>
+
+                        <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-secondary selected-next-btn">
+                            Continue to Timetable
+                        </a>
+                    </section>
+                </aside>
             </section>
 
         </div>
     </main>
 
-    <footer>
+    <footer class="auth-footer">
         <div class="container">
-            <p>Course Selector Tool Project</p>
+            <p>Created for the Agile Web Development Group Project.</p>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
