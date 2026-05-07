@@ -1,10 +1,11 @@
 from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_login import LoginManager, UserMixin, current_user, login_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
-# Secret key is required for flash messages.
+# Secret key is required for flash messages and login sessions.
 # This is fine for local development. Later, it can be moved to config.py or an environment variable.
 app.config["SECRET_KEY"] = "temporary-development-secret-key"
 
@@ -16,14 +17,25 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Creates the SQLAlchemy database object.
 db = SQLAlchemy(app)
 
+# Sets up Flask-Login.
+login_manager = LoginManager(app)
+login_manager.login_view = "index"
+
 
 # User model for storing registered user account details.
-class User(db.Model):
+# UserMixin gives the model the properties Flask-Login needs, such as is_authenticated.
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     student_id = db.Column(db.String(30), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+
+
+# Loads a user from the database using the stored user ID in the login session.
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -45,6 +57,8 @@ def index():
         if not check_password_hash(user.password_hash, password):
             flash("Incorrect password. Please try again.", "error")
             return redirect(url_for("index"))
+
+        login_user(user)
 
         flash("Signed in successfully.", "success")
         return redirect(url_for("homepage"))
@@ -106,17 +120,17 @@ def signup():
 
 @app.route("/homepage.html")
 def homepage():
-    return render_template("homepage.html")
+    return render_template("homepage.html", current_user=current_user)
 
 
 @app.route("/course-selection.html")
 def course_selection():
-    return render_template("course-selection.html")
+    return render_template("course-selection.html", current_user=current_user)
 
 
 @app.route("/timetable.html")
 def timetable():
-    return render_template("timetable.html")
+    return render_template("timetable.html", current_user=current_user)
 
 
 if __name__ == "__main__":
