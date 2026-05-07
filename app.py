@@ -1,7 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
+
+# Secret key is required for flash messages.
+# This is fine for local development. Later, it can be moved to config.py or an environment variable.
+app.config["SECRET_KEY"] = "temporary-development-secret-key"
 
 # Basic SQLite database configuration.
 # The database file will be created inside the instance folder.
@@ -31,8 +36,50 @@ def index_html():
     return render_template("index.html")
 
 
-@app.route("/signup.html")
+@app.route("/signup.html", methods=["GET", "POST"])
 def signup():
+    if request.method == "POST":
+        full_name = request.form.get("full_name", "").strip()
+        email = request.form.get("email", "").strip().lower()
+        student_id = request.form.get("student_id", "").strip()
+        password = request.form.get("password", "")
+        confirm_password = request.form.get("confirm_password", "")
+
+        if not full_name or not email or not student_id or not password or not confirm_password:
+            flash("Please complete all registration fields.", "error")
+            return redirect(url_for("signup"))
+
+        if password != confirm_password:
+            flash("Passwords do not match.", "error")
+            return redirect(url_for("signup"))
+
+        if len(password) < 6:
+            flash("Password must be at least 6 characters long.", "error")
+            return redirect(url_for("signup"))
+
+        existing_email = User.query.filter_by(email=email).first()
+        if existing_email:
+            flash("An account with this email already exists.", "error")
+            return redirect(url_for("signup"))
+
+        existing_student_id = User.query.filter_by(student_id=student_id).first()
+        if existing_student_id:
+            flash("An account with this student ID already exists.", "error")
+            return redirect(url_for("signup"))
+
+        new_user = User(
+            full_name=full_name,
+            email=email,
+            student_id=student_id,
+            password_hash=generate_password_hash(password)
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("Account created successfully. Please sign in.", "success")
+        return redirect(url_for("index"))
+
     return render_template("signup.html")
 
 
