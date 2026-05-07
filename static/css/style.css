@@ -612,10 +612,6 @@ footer p {
     text-decoration: none;
 }
 
-.auth-main {
-    padding: 24px 0 48px;
-}
-
 .auth-layout {
     display: grid;
     grid-template-columns: 1.25fr 0.75fr;
@@ -1357,4 +1353,388 @@ footer p {
     .timetable-actions .btn {
         width: 100%;
     }
+}
+
+/* Dark mode capsule toggle */
+
+.theme-toggle {
+    width: 96px;
+    height: 34px;
+    border: 1px solid #c9d6e2;
+    background: #dbe7f2;
+    color: #183b5b;
+    border-radius: 999px;
+    padding: 4px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.theme-toggle-label {
+    font-size: 12px;
+    padding-right: 10px;
+    z-index: 2;
+    color: #183b5b;
+    transition: color 0.25s ease, padding 0.25s ease;
+}
+
+.theme-toggle-thumb {
+    width: 24px;
+    height: 24px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    box-shadow: 0 3px 8px rgba(24, 59, 91, 0.25);
+    transform: translateX(0);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.theme-toggle:hover {
+    background: #c8d9e8;
+}
+
+/* Dark mode active state for the capsule toggle */
+
+body.dark-mode .theme-toggle {
+    background: #60a5fa;
+    border-color: #60a5fa;
+    color: #0f172a;
+    justify-content: flex-start;
+}
+
+body.dark-mode .theme-toggle-label {
+    padding-left: 10px;
+    padding-right: 0;
+    color: #0f172a;
+}
+
+body.dark-mode .theme-toggle-thumb {
+    background: #0f172a;
+    transform: translateX(62px);
+}
+
+body.dark-mode .theme-toggle:hover {
+    background: #93c5fd;
+}
+
+/* Dark mode page background */
+
+body.dark-mode.app-page,
+body.dark-mode.auth-page {
+    background:
+        radial-gradient(circle at top left, rgba(96, 165, 250, 0.16), transparent 32%),
+        linear-gradient(135deg, #0f172a 0%, #111827 48%, #020617 100%);
+    color: #f8fafc;
+}
+
+/* Dark mode cards and panels */
+
+body.dark-mode .dashboard-panel,
+body.dark-mode .dashboard-hero,
+body.dark-mode .dashboard-status-card,
+body.dark-mode .signin-card,
+body.dark-mode .feature-card,
+body.dark-mode .mini-card,
+body.dark-mode .action-box,
+body.dark-mode .degree-select-card,
+body.dark-mode .course-card,
+body.dark-mode .selected-courses-box,
+body.dark-mode .timetable-day,
+body.dark-mode .timetable-course-item {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+/* Dark mode text */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode .brand-name,
+body.dark-mode .dashboard-kicker,
+body.dark-mode .status-label,
+body.dark-mode .mini-label,
+body.dark-mode .status-row strong,
+body.dark-mode .mini-card h3,
+body.dark-mode .mini-card h4,
+body.dark-mode .action-box h3,
+body.dark-mode .course-card h3,
+body.dark-mode .timetable-course-item strong,
+body.dark-mode .timetable-course-item span {
+    color: #f8fafc;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode small,
+body.dark-mode .dashboard-description,
+body.dark-mode .hero-description,
+body.dark-mode .mini-note,
+body.dark-mode .course-detail-list p,
+body.dark-mode .helper-message,
+body.dark-mode .signin-card-header p,
+body.dark-mode .status-row,
+body.dark-mode .progress-item,
+body.dark-mode .action-box p,
+body.dark-mode .timetable-course-item small {
+    color: #cbd5e1;
+}
+
+/* Dark mode nav */
+
+body.dark-mode .auth-links {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: #334155;
+}
+
+body.dark-mode .auth-links a {
+    color: #cbd5e1;
+}
+
+body.dark-mode .auth-links a:hover,
+body.dark-mode .auth-links a.active {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+/* Dark mode buttons and icons */
+
+body.dark-mode .brand-icon,
+body.dark-mode .day-heading,
+body.dark-mode .credit-total-box {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+body.dark-mode .mini-icon,
+body.dark-mode .action-icon,
+body.dark-mode .course-detail-list .glyphicon {
+    color: #cbd5e1;
+}
+
+body.dark-mode .dashboard-btn-primary {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+body.dark-mode .dashboard-btn-primary:hover {
+    background: #93c5fd;
+    color: #0f172a;
+}
+
+body.dark-mode .dashboard-btn-secondary,
+body.dark-mode .signup-btn {
+    background: #1e293b;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .dashboard-btn-secondary:hover,
+body.dark-mode .signup-btn:hover {
+    background: #334155;
+    color: #f8fafc;
+}
+
+/* Dark mode forms */
+
+body.dark-mode .form-control {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* Dark mode messages and empty states */
+
+body.dark-mode .empty-course-state,
+body.dark-mode .signin-output,
+body.dark-mode #signin-output,
+body.dark-mode #signup-output,
+body.dark-mode .dashboard-message-panel p#dashboard-output {
+    background: #1e293b;
+    border-color: #475569;
+    color: #cbd5e1;
+}
+
+body.dark-mode .filled-slot {
+    background: #1e293b;
+}
+
+body.dark-mode .empty-slot {
+    background: #111827;
+    color: #94a3b8;
+}
+
+body.dark-mode .progress-done,
+body.dark-mode .progress-pending {
+    background: #334155;
+    color: #f8fafc;
+}
+
+body.dark-mode .credit-pill {
+    background: #334155;
+    color: #f8fafc;
+}
+
+body.dark-mode .course-code {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+/* Dark mode contrast fixes */
+
+body.dark-mode label,
+body.dark-mode .form-group label,
+body.dark-mode .degree-select-card label,
+body.dark-mode .signin-card label {
+    color: #e5e7eb;
+}
+
+body.dark-mode .helper-message {
+    background: #111827;
+    border-color: #475569;
+    color: #e5e7eb;
+}
+
+body.dark-mode .selected-courses-box p,
+body.dark-mode .empty-course-state p,
+body.dark-mode #selected-courses p,
+body.dark-mode #available-courses p {
+    color: #e5e7eb;
+}
+
+body.dark-mode .status-row span,
+body.dark-mode .status-row strong {
+    color: #f8fafc;
+}
+
+body.dark-mode .degree-select-card,
+body.dark-mode .selected-courses-box,
+body.dark-mode .empty-course-state {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+body.dark-mode select.form-control,
+body.dark-mode input.form-control,
+body.dark-mode textarea.form-control {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border-color: #64748b;
+}
+
+body.dark-mode select.form-control option {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+body.dark-mode .form-control:disabled,
+body.dark-mode select.form-control:disabled {
+    background-color: #111827;
+    color: #cbd5e1;
+    border-color: #475569;
+    opacity: 1;
+}
+
+body.dark-mode .dashboard-btn-secondary,
+body.dark-mode .selected-next-btn {
+    color: #f8fafc;
+    border-color: #64748b;
+}
+
+body.dark-mode .dashboard-btn-secondary:hover,
+body.dark-mode .selected-next-btn:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
+body.dark-mode .credit-total-box span,
+body.dark-mode .credit-total-box strong {
+    color: #0f172a;
+}
+
+body.dark-mode .progress-done,
+body.dark-mode .progress-pending {
+    color: #ffffff;
+}
+
+body.dark-mode .course-code,
+body.dark-mode .credit-pill {
+    color: #0f172a;
+}
+
+body.dark-mode .auth-footer,
+body.dark-mode footer {
+    background: #020617;
+    color: #f8fafc;
+}
+
+body.dark-mode .auth-footer p,
+body.dark-mode footer p {
+    color: #f8fafc;
+}
+
+/* Extra dark mode contrast fixes for auth pages */
+
+body.dark-mode .eyebrow-text {
+    background: #1e293b;
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+body.dark-mode .forgot-btn {
+    color: #93c5fd;
+}
+
+body.dark-mode .forgot-btn:hover {
+    color: #bfdbfe;
+    background: transparent;
+}
+
+body.dark-mode .hero-link {
+    color: #93c5fd;
+}
+
+body.dark-mode .hero-link:hover {
+    color: #bfdbfe;
+}
+
+body.dark-mode .signup-prompt {
+    border-top-color: #475569;
+}
+
+body.dark-mode .signup-prompt p {
+    color: #cbd5e1;
+}
+
+/* Auth page layout alignment */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 56px;
+    padding-bottom: 56px;
+}
+
+.auth-layout,
+.signup-layout {
+    align-items: center;
 }
