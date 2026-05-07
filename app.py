@@ -1,6 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
@@ -26,14 +26,35 @@ class User(db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+    if request.method == "POST":
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
+
+        if not email or not password:
+            flash("Please enter both your email address and password.", "error")
+            return redirect(url_for("index"))
+
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            flash("No account found with this email address.", "error")
+            return redirect(url_for("index"))
+
+        if not check_password_hash(user.password_hash, password):
+            flash("Incorrect password. Please try again.", "error")
+            return redirect(url_for("index"))
+
+        flash("Signed in successfully.", "success")
+        return redirect(url_for("homepage"))
+
     return render_template("index.html")
 
 
-@app.route("/index.html")
+@app.route("/index.html", methods=["GET", "POST"])
 def index_html():
-    return render_template("index.html")
+    return index()
 
 
 @app.route("/signup.html", methods=["GET", "POST"])
