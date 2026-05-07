@@ -919,3 +919,175 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+
+/* Course selection page */
+
+.course-layout {
+    display: grid;
+    grid-template-columns: 1.45fr 0.75fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.course-main-column,
+.course-side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.degree-select-card {
+    background: #f6f9fc;
+    border: 1px solid #dce6ef;
+    border-radius: 20px;
+    padding: 22px;
+}
+
+.degree-select-card label {
+    color: #2f3d4c;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.degree-select-card .form-control {
+    height: 46px;
+    border-radius: 12px;
+    border: 1px solid #cfdbe6;
+    box-shadow: none;
+}
+
+.helper-message {
+    background: white;
+    border: 1px solid #dce6ef;
+    border-radius: 14px;
+    color: #526273;
+    padding: 13px 14px;
+    margin: 16px 0 0;
+}
+
+.course-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.course-card {
+    background: #f8fbfe;
+    border: 1px solid #e0e7ef;
+    border-radius: 20px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+}
+
+.course-card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.course-code {
+    background: #183b5b;
+    color: white;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.credit-pill {
+    background: #e8f0f7;
+    color: #183b5b;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.course-card h3 {
+    color: #102c45;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 14px;
+}
+
+.course-detail-list {
+    flex: 1;
+    margin-bottom: 18px;
+}
+
+.course-detail-list p {
+    color: #5e6c7a;
+    margin-bottom: 8px;
+    line-height: 1.45;
+}
+
+.course-detail-list .glyphicon {
+    color: #183b5b;
+    margin-right: 6px;
+}
+
+.selected-panel {
+    position: sticky;
+    top: 24px;
+}
+
+.selected-courses-box {
+    background: #f6f9fc;
+    border: 1px solid #dce6ef;
+    border-radius: 18px;
+    padding: 18px;
+    min-height: 130px;
+    color: #526273;
+    margin: 18px 0;
+}
+
+.credit-total-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #183b5b;
+    color: white;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.credit-total-box span,
+.credit-total-box strong {
+    color: white;
+}
+
+.selected-next-btn {
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .course-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .selected-panel {
+        position: static;
+    }
+
+    .course-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.degree-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+@media (max-width: 700px) {
+    .degree-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
