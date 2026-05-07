@@ -6,7 +6,7 @@
     <title>Course Planner - Course Selection</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body class="app-page">
@@ -18,10 +18,10 @@
             </div>
 
             <nav class="auth-links app-links">
-                <a href="homepage.html">Dashboard</a>
-                <a href="course-selection.html" class="active">Courses</a>
-                <a href="timetable.html">Timetable</a>
-                <a href="index.html">Logout</a>
+                <a href="{{ url_for('homepage') }}">Dashboard</a>
+                <a href="{{ url_for('course_selection') }}" class="active">Courses</a>
+                <a href="{{ url_for('timetable') }}">Timetable</a>
+                <a href="{{ url_for('index') }}">Logout</a>
             </nav>
         </div>
     </header>
@@ -132,7 +132,7 @@
                         </div>
 
                         <button type="button" class="btn dashboard-btn-secondary selected-next-btn"
-                            onclick="window.location.href='timetable.html'">
+                            onclick="window.location.href='{{ url_for('timetable') }}'">
                             Continue to Timetable
                         </button>
                     </section>
@@ -148,7 +148,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

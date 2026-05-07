@@ -735,3 +735,30 @@ function removeCourse(code) {
     selectedCourses = selectedCourses.filter(course => course.code !== code);
     displaySelectedCourses();
 }
+
+// Filters course cards when a course search input exists on the page.
+function filterCourses() {
+    const searchInput = document.getElementById("course-search");
+    const emptyMessage = document.getElementById("no-course-results");
+    const courseCards = document.querySelectorAll(".course-option");
+
+    if (!searchInput || !emptyMessage || courseCards.length === 0) {
+        return;
+    }
+
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    courseCards.forEach(function (card) {
+        const searchableText = card.getAttribute("data-search") || "";
+
+        if (searchableText.includes(searchTerm)) {
+            card.style.display = "flex";
+            visibleCount++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
+}
