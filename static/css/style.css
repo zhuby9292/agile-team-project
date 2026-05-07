@@ -612,10 +612,6 @@ footer p {
     text-decoration: none;
 }
 
-.auth-main {
-    padding: 24px 0 48px;
-}
-
 .auth-layout {
     display: grid;
     grid-template-columns: 1.25fr 0.75fr;
@@ -1722,21 +1718,13 @@ body.dark-mode .signup-prompt p {
     color: #cbd5e1;
 }
 
-/* Keep auth page footer near the bottom */
+/* Auth page layout alignment */
 
 .auth-page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-
-.auth-main {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-/* Keep sign-in and sign-up hero sections aligned consistently */
 
 .auth-main {
     flex: 1;

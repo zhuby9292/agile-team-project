@@ -800,6 +800,12 @@ function updateThemeToggleLabel(labelText) {
         if (label) {
             label.textContent = labelText;
         }
+
+        if (labelText === "Light") {
+            button.setAttribute("aria-pressed", "true");
+        } else {
+            button.setAttribute("aria-pressed", "false");
+        }
     });
 }
 
