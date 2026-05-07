@@ -18,11 +18,16 @@
             </div>
 
             <nav class="auth-links app-links">
-                <a href="homepage.html" class="active">Dashboard</a>
-                <a href="course-selection.html">Courses</a>
-                <a href="timetable.html">Timetable</a>
-                <a href="index.html">Logout</a>
+                <a href="{{ url_for('homepage') }}" class="active">Dashboard</a>
+                <a href="{{ url_for('course_selection') }}">Courses</a>
+                <a href="{{ url_for('timetable') }}">Timetable</a>
+                <a href="{{ url_for('index') }}">Logout</a>
             </nav>
+
+            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                <span class="theme-toggle-label">Dark</span>
+                <span class="theme-toggle-thumb"></span>
+            </button>
         </div>
     </header>
 

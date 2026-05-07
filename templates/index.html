@@ -18,10 +18,15 @@
             </div>
 
             <nav class="auth-links">
-                <a href="index.html" class="active">Sign In</a>
-                <a href="signup.html">Sign Up</a>
+                <a href="{{ url_for('index') }}" class="active">Sign In</a>
+                <a href="{{ url_for('signup') }}">Sign Up</a>
                 <a href="#features">Features</a>
             </nav>
+
+            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                <span class="theme-toggle-label">Dark</span>
+                <span class="theme-toggle-thumb"></span>
+            </button>
         </div>
     </header>
 

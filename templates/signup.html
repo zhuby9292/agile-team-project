@@ -17,11 +17,16 @@
                 <span class="brand-name">Course Planner</span>
             </div>
 
-            <nav class="auth-links">
-                <a href="index.html">Sign In</a>
-                <a href="signup.html" class="active">Sign Up</a>
-                <a href="index.html#features">Features</a>
+           <nav class="auth-links">
+                <a href="{{ url_for('index') }}">Sign In</a>
+                <a href="{{ url_for('signup') }}" class="active">Sign Up</a>
+                <a href="{{ url_for('index') }}#features">Features</a>
             </nav>
+
+            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                <span class="theme-toggle-label">Dark</span>
+                <span class="theme-toggle-thumb"></span>
+            </button>
         </div>
     </header>
 
@@ -115,7 +120,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
