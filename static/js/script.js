@@ -903,3 +903,54 @@ function filterCourses() {
 
     emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
 }
+
+// Applies the saved theme when a page loads.
+function applySavedTheme() {
+    const savedTheme = localStorage.getItem("coursePlannerTheme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        updateThemeToggleLabel("Light");
+    } else {
+        document.body.classList.remove("dark-mode");
+        updateThemeToggleLabel("Dark");
+    }
+}
+
+// Switches between light mode and dark mode.
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("coursePlannerTheme", "dark");
+        updateThemeToggleLabel("Light");
+    } else {
+        localStorage.setItem("coursePlannerTheme", "light");
+        updateThemeToggleLabel("Dark");
+    }
+}
+
+// Updates only the label inside the theme toggle.
+// This keeps the slider track and thumb structure intact.
+function updateThemeToggleLabel(labelText) {
+    const themeButtons = document.querySelectorAll(".theme-toggle");
+
+    themeButtons.forEach(function(button) {
+        const label = button.querySelector(".theme-toggle-label");
+
+        if (label) {
+            label.textContent = labelText;
+        }
+
+        if (labelText === "Light") {
+            button.setAttribute("aria-pressed", "true");
+        } else {
+            button.setAttribute("aria-pressed", "false");
+        }
+    });
+}
+
+// Runs when the page finishes loading.
+document.addEventListener("DOMContentLoaded", function() {
+    applySavedTheme();
+});
