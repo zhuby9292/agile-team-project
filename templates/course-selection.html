@@ -1,157 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Planner - Course Selection</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+{% block title %}
+Course Selection
+{% endblock %}
 
-<body class="app-page">
-    <header class="app-header">
-        <div class="container app-nav">
-            <div class="brand">
-                <span class="brand-icon glyphicon glyphicon-calendar"></span>
-                <span class="brand-name">Course Planner</span>
+{% block content %}
+<div class="container dashboard-container">
+
+    <section class="dashboard-hero course-hero">
+        <div class="dashboard-welcome">
+            <p class="dashboard-kicker">Course planning</p>
+            <h1>Select courses for your semester.</h1>
+            <p class="dashboard-description">
+                Choose your study level and degree pathway, browse available courses,
+                and add units to your study plan before generating a timetable.
+            </p>
+        </div>
+
+        <div class="dashboard-status-card">
+            <p class="status-label">Selection Summary</p>
+
+            <div class="status-row">
+                <span>Study level</span>
+                <strong id="study-level-summary">Not selected</strong>
             </div>
 
-            <nav class="auth-links app-links">
-                <a href="{{ url_for('homepage') }}">Dashboard</a>
-                <a href="{{ url_for('course_selection') }}" class="active">Courses</a>
-                <a href="{{ url_for('timetable') }}">Timetable</a>
-                <a href="{{ url_for('index') }}">Logout</a>
-            </nav>
-            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode" aria-pressed="false">
-                <span class="theme-toggle-label">Dark</span>
-                <span class="theme-toggle-thumb"></span>
-            </button>
+            <div class="status-row">
+                <span>Degree</span>
+                <strong id="degree-summary">Not selected</strong>
+            </div>
+
+            <div class="status-row">
+                <span>Selected courses</span>
+                <strong id="course-count-summary">0</strong>
+            </div>
+
+            <div class="status-row">
+                <span>Total credits</span>
+                <strong id="credit-summary">0</strong>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main class="dashboard-main">
-        <div class="container dashboard-container">
+    <section class="course-layout">
+        <div class="course-main-column">
 
-            <section class="dashboard-hero course-hero">
-                <div class="dashboard-welcome">
-                    <p class="dashboard-kicker">Course planning</p>
-                    <h1>Select courses for your semester.</h1>
-                    <p class="dashboard-description">
-                        Choose your study level and degree pathway, browse available courses,
-                        and add units to your study plan before generating a timetable.
+            <section class="dashboard-panel">
+                <div class="panel-title-row">
+                    <div>
+                        <p class="dashboard-kicker">Step 1</p>
+                        <h2>Choose your study pathway</h2>
+                    </div>
+                </div>
+
+                <div class="degree-select-card">
+                    <div class="degree-form-grid">
+                        <div class="form-group">
+                            <label for="study-level-select">Study level</label>
+                            <select id="study-level-select" class="form-control" onchange="updateDegreeOptions()">
+                                <option value="">-- Select a study level --</option>
+                                <option value="bachelor">Bachelor</option>
+                                <option value="master">Master</option>
+                                <option value="diploma">Diploma</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="degree-select">Degree</label>
+                            <select id="degree-select" class="form-control" onchange="selectDegree()" disabled>
+                                <option value="">-- Select a study level first --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <p id="course-message" class="helper-message">
+                        Please select a study level, then choose a degree before adding courses.
                     </p>
                 </div>
+            </section>
 
-                <div class="dashboard-status-card">
-                    <p class="status-label">Selection Summary</p>
-
-                    <div class="status-row">
-                        <span>Study level</span>
-                        <strong id="study-level-summary">Not selected</strong>
+            <section class="dashboard-panel">
+                <div class="panel-title-row">
+                    <div>
+                        <p class="dashboard-kicker">Step 2</p>
+                        <h2>Available courses</h2>
                     </div>
+                </div>
 
-                    <div class="status-row">
-                        <span>Degree</span>
-                        <strong id="degree-summary">Not selected</strong>
-                    </div>
-
-                    <div class="status-row">
-                        <span>Selected courses</span>
-                        <strong id="course-count-summary">0</strong>
-                    </div>
-
-                    <div class="status-row">
-                        <span>Total credits</span>
-                        <strong id="credit-summary">0</strong>
+                <div id="available-courses" class="course-card-grid">
+                    <div class="empty-course-state">
+                        <p>Please select a study level and degree to view available courses.</p>
                     </div>
                 </div>
             </section>
+        </div>
 
-            <section class="course-layout">
-                <div class="course-main-column">
+        <aside class="course-side-column">
+            <section class="dashboard-panel selected-panel">
+                <p class="dashboard-kicker">Step 3</p>
+                <h2>Your selected courses</h2>
 
-                    <section class="dashboard-panel">
-                        <div class="panel-title-row">
-                            <div>
-                                <p class="dashboard-kicker">Step 1</p>
-                                <h2>Choose your study pathway</h2>
-                            </div>
-                        </div>
-
-                        <div class="degree-select-card">
-                            <div class="degree-form-grid">
-                                <div class="form-group">
-                                    <label for="study-level-select">Study level</label>
-                                    <select id="study-level-select" class="form-control" onchange="updateDegreeOptions()">
-                                        <option value="">-- Select a study level --</option>
-                                        <option value="bachelor">Bachelor</option>
-                                        <option value="master">Master</option>
-                                        <option value="diploma">Diploma</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="degree-select">Degree</label>
-                                    <select id="degree-select" class="form-control" onchange="selectDegree()" disabled>
-                                        <option value="">-- Select a study level first --</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <p id="course-message" class="helper-message">
-                                Please select a study level, then choose a degree before adding courses.
-                            </p>
-                        </div>
-                    </section>
-
-                    <section class="dashboard-panel">
-                        <div class="panel-title-row">
-                            <div>
-                                <p class="dashboard-kicker">Step 2</p>
-                                <h2>Available courses</h2>
-                            </div>
-                        </div>
-
-                        <div id="available-courses" class="course-card-grid">
-                            <div class="empty-course-state">
-                                <p>Please select a study level and degree to view available courses.</p>
-                            </div>
-                        </div>
-                    </section>
+                <div id="selected-courses" class="selected-courses-box">
+                    <p>No courses selected yet.</p>
                 </div>
 
-                <aside class="course-side-column">
-                    <section class="dashboard-panel selected-panel">
-                        <p class="dashboard-kicker">Step 3</p>
-                        <h2>Your selected courses</h2>
+                <div class="credit-total-box">
+                    <span>Total credits</span>
+                    <strong id="credit-output">0</strong>
+                </div>
 
-                        <div id="selected-courses" class="selected-courses-box">
-                            <p>No courses selected yet.</p>
-                        </div>
-
-                        <div class="credit-total-box">
-                            <span>Total credits</span>
-                            <strong id="credit-output">0</strong>
-                        </div>
-
-                        <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-secondary selected-next-btn">
-                            Continue to Timetable
-                        </a>
-                    </section>
-                </aside>
+                <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-secondary selected-next-btn">
+                    Continue to Timetable
+                </a>
             </section>
+        </aside>
+    </section>
 
-        </div>
-    </main>
-
-    <footer class="auth-footer">
-        <div class="container">
-            <p>Created for the Agile Web Development Group Project.</p>
-        </div>
-    </footer>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}
