@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{% block title %}Course Planner{% endblock %}</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-<header class="app-header">
-    <div class="container app-nav">
+    <header class="app-header">
+        <div class="container app-nav">
 
-        <div class="brand">
-            <span class="brand-name">Course Planner</span>
+            <div class="brand">
+                <span class="brand-name">Course Planner</span>
+            </div>
+
+            {% block nav %}
+            <nav class="auth-links">
+                <a href="{{ url_for('index') }}">Sign In</a>
+                <a href="{{ url_for('signup') }}">Sign Up</a>
+            </nav>
+            {% endblock %}
         </div>
+    </header>
 
-        <nav class="auth-links app-links">
-            <a href="/homepage">Dashboard</a>
-            <a href="/course-selection">Courses</a>
-            <a href="/timetable">Timetable</a>
-            <a href="/">Logout</a>
-        </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    </div>
-</header>
+    <footer class="auth-footer">
+        <div class="container">
+            <p>Created for the Agile Web Development Group Project.</p>
+        </div>
+    </footer>
 
-<main>
-    {% block content %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    {% block scripts %}
     {% endblock %}
-</main>
-
-<footer class="auth-footer">
-    <div class="container">
-        <p>Created for the Agile Web Development Group Project.</p>
-    </div>
-</footer>
-
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
-{% block scripts %}
-{% endblock %}
 
 </body>
+
 </html>
