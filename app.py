@@ -132,6 +132,14 @@ def course_selection():
 def timetable():
     return render_template("timetable.html", current_user=current_user)
 
+@app.route("/forgot-password")
+def forgot_password():
+    return render_template("forgot-password.html")
+
+
+@app.route("/reset-password")
+def reset_password():
+    return render_template("reset-password.html")
 
 if __name__ == "__main__":
     with app.app_context():

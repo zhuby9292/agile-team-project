@@ -16,22 +16,163 @@ function loginUser() {
     }
 }
 
-// Shows a simple message when the user clicks the forgot password button.
-function forgotPassword() {
-    alert("Password recovery is not available yet.");
-    document.getElementById("signin-output").innerHTML =
-        "Forgot password feature will be added later.";
-    console.log("Forgot password button clicked.");
+// Takes the user to the forgot password page.
+function goToForgotPassword() {
+    window.location.href = "/forgot-password";
 }
+
+function resetPassword() {
+
+    const recoveryEmail =
+        document.getElementById("recovery-email").value.trim();
+
+    const newPassword =
+        document.getElementById("new-password").value;
+
+    const output =
+        document.getElementById("forgot-output");
+
+    if (recoveryEmail === "" || newPassword === "") {
+
+        output.innerHTML =
+            "Please complete all fields.";
+
+        return;
+    }
+
+    if (newPassword.length < 6) {
+
+        output.innerHTML =
+            "Password must be at least 6 characters.";
+
+        return;
+    }
+
+    output.innerHTML =
+        "Password reset successful for: " + recoveryEmail;
+}
+
+let demoVerificationCode = "";
+
+function sendVerificationCode() {
+    const email = document.getElementById("recovery-email").value.trim();
+    const output = document.getElementById("forgot-output");
+
+    if (email === "") {
+        output.innerHTML = "Please enter your email address.";
+        return;
+    }
+
+    localStorage.setItem("recoveryEmail", email);
+    localStorage.setItem("verificationCode", "1234");
+
+    output.innerHTML = "Verification code sent. Redirecting...";
+
+    setTimeout(function() {
+        window.location.href = "/reset-password";
+    }, 600);
+}
+
+function resetPasswordWithCode() {
+    const verificationCode = getVerificationCodeFromBoxes();
+    const newPassword = document.getElementById("new-password").value;
+    const output = document.getElementById("reset-output");
+
+    const savedCode = localStorage.getItem("verificationCode");
+    const recoveryEmail = localStorage.getItem("recoveryEmail");
+
+    if (verificationCode === "" || newPassword === "") {
+        output.innerHTML = "Please enter the verification code and new password.";
+        return;
+    }
+
+    if (verificationCode !== savedCode) {
+        output.innerHTML = "Invalid verification code. Please try again.";
+        return;
+    }
+
+    if (newPassword.length < 6) {
+        output.innerHTML = "Password must be at least 6 characters.";
+        return;
+    }
+
+    output.innerHTML = "Password reset successful! You can now sign in with your new password.";
+    alert("Password reset successful! Please sign in again.");
+
+    localStorage.removeItem("verificationCode");
+    localStorage.removeItem("recoveryEmail");
+}
+
+function getVerificationCodeFromBoxes() {
+    const inputs = document.querySelectorAll(".code-input");
+    let code = "";
+
+    inputs.forEach(function(input) {
+        code += input.value;
+    });
+
+    return code;
+}
+
+function updateResetFormState() {
+    const code = getVerificationCodeFromBoxes();
+    const passwordInput = document.getElementById("new-password");
+    const resetButton = document.getElementById("reset-password-btn");
+
+    if (!passwordInput || !resetButton) {
+        return;
+    }
+
+    const isCodeComplete = code.length === 4;
+
+    passwordInput.disabled = !isCodeComplete;
+    resetButton.disabled = !isCodeComplete;
+}
+
+function handleCodeInput(event) {
+    const input = event.target;
+    const inputs = Array.from(document.querySelectorAll(".code-input"));
+
+    input.value = input.value.replace(/\D/g, "");
+
+    if (input.value.length === 1) {
+        const currentIndex = inputs.indexOf(input);
+        const nextInput = inputs[currentIndex + 1];
+
+        if (nextInput) {
+            nextInput.focus();
+        }
+    }
+
+    updateResetFormState();
+}
+
+function handleCodeBackspace(event) {
+    const input = event.target;
+    const inputs = Array.from(document.querySelectorAll(".code-input"));
+
+    if (event.key === "Backspace" && input.value === "") {
+        const currentIndex = inputs.indexOf(input);
+        const previousInput = inputs[currentIndex - 1];
+
+        if (previousInput) {
+            previousInput.focus();
+        }
+    }
+
+    setTimeout(updateResetFormState, 0);
+}
+        
+
 
 // Takes the user to the sign up page.
 function goToSignUp() {
-    window.location.href = "signup.html";
+    window.location.href = "/signup.html";
 }
 
 // Takes the user back to the sign in page.
 function goToSignIn() {
-    window.location.href = "index.html";
+    window.location.href = "/";
 }
 
 // Checks the sign up form and shows a message to the user.

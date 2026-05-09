@@ -1738,3 +1738,48 @@ body.dark-mode .signup-prompt p {
 .signup-layout {
     align-items: center;
 }
+
+.reset-card {
+    max-width: 560px;
+    margin: 40px auto;
+}
+
+#reset-password-form .form-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.verification-boxes {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+}
+
+.code-input {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #d9dee7;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    background-color: white;
+    outline: none;
+}
+
+.code-input:focus {
+    border-color: #1f3b64;
+    box-shadow: 0 0 0 3px rgba(31, 59, 100, 0.15);
+}
+
+.reset-password-field label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#new-password {
+    width: 100%;
+}
+
