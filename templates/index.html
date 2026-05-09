@@ -78,18 +78,28 @@
                         <p>Sign in to continue planning your semester.</p>
                     </div>
 
-                    <form id="signin-form">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="signin-output">
+                                {% for category, message in messages %}
+                                    <p class="flash-message {{ category }}">{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <form id="signin-form" method="POST" action="{{ url_for('index') }}">
                         <div class="form-group">
                             <label for="user-email">Email Address</label>
-                            <input type="email" id="user-email" class="form-control" placeholder="Enter your email address">
+                            <input type="email" id="user-email" name="email" class="form-control" placeholder="Enter your email address">
                         </div>
 
                         <div class="form-group">
                             <label for="user-password">Password</label>
-                            <input type="password" id="user-password" class="form-control" placeholder="Enter your password">
+                            <input type="password" id="user-password" name="password" class="form-control" placeholder="Enter your password">
                         </div>
 
-                        <button type="button" class="btn signin-btn" onclick="loginUser()">
+                        <button type="submit" class="btn signin-btn">
                             <span class="glyphicon glyphicon-log-in"></span>
                             Sign In
                         </button>
@@ -98,10 +108,6 @@
                             Forgot Password?
                         </button>
                     </form>
-
-                    <p id="signin-output" class="signin-output">
-                        Your sign in result will appear here.
-                    </p>
 
                     <div class="signup-prompt">
                         <p>New to Course Planner?</p>
