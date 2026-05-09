@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body>
+<body class="app-page">
 
     <header class="app-header">
         <div class="container app-nav">
 
             <div class="brand">
+                <span class="brand-icon glyphicon glyphicon-calendar"></span>
                 <span class="brand-name">Course Planner</span>
             </div>
 
@@ -27,6 +28,11 @@
                 <a href="{{ url_for('signup') }}">Sign Up</a>
             </nav>
             {% endblock %}
+
+            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+                <span class="theme-toggle-label">Dark</span>
+                <span class="theme-toggle-thumb"></span>
+            </button>
         </div>
     </header>
 

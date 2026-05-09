@@ -1,16 +1,7 @@
-{% extends "base.html" %}
+{% extends "dashboard-base.html" %}
 
 {% block title %}
 Course Selection
-{% endblock %}
-
-{% block nav %}
-<nav class="auth-links app-links">
-    <a href="{{ url_for('homepage') }}">Dashboard</a>
-    <a href="{{ url_for('course_selection') }}" class="active">Courses</a>
-    <a href="{{ url_for('timetable') }}">Timetable</a>
-    <a href="{{ url_for('index') }}">Logout</a>
-</nav>
 {% endblock %}
 
 {% block content %}

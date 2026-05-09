@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block nav %}
+<nav class="auth-links app-links">
+    <a href="{{ url_for('homepage') }}">Dashboard</a>
+    <a href="{{ url_for('course_selection') }}">Courses</a>
+    <a href="{{ url_for('timetable') }}">Timetable</a>
+    <a href="{{ url_for('index') }}">Logout</a>
+</nav>
+{% endblock %}
