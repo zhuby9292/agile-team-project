@@ -87,6 +87,17 @@ Course Selection
                     </div>
                 </div>
 
+                <div class="course-filter-bar">
+                    <input type="text" id="course-search" class="form-control" placeholder="Search courses..."
+                        oninput="filterCourses()">
+
+                    <select id="semester-filter" class="form-control" onchange="filterCourses()">
+                        <option value="all">All Semesters</option>
+                        <option value="semester1">Semester 1</option>
+                        <option value="semester2">Semester 2</option>
+                    </select>
+                </div>
+
                 <div id="available-courses" class="course-card-grid">
                     <div class="empty-course-state">
                         <p>Please select a study level and degree to view available courses.</p>
