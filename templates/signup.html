@@ -1,132 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Planner - Sign Up</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+{% block title %}Course Planner - Sign Up{% endblock %}
 
-<body class="auth-page">
-    <header class="auth-header">
-        <div class="container auth-nav">
-            <div class="brand">
-                <span class="brand-icon glyphicon glyphicon-calendar"></span>
-                <span class="brand-name">Course Planner</span>
-            </div>
+{% block nav %}
+<nav class="auth-links">
+    <a href="{{ url_for('index') }}">Sign In</a>
+    <a href="{{ url_for('signup') }}" class="active">Sign Up</a>
+    <a href="{{ url_for('index') }}#features">Features</a>
+</nav>
+{% endblock %}
 
-            <nav class="auth-links">
-                <a href="{{ url_for('index') }}">Sign In</a>
-                <a href="{{ url_for('signup') }}" class="active">Sign Up</a>
-                <a href="{{ url_for('index') }}#features">Features</a>
-            </nav>
+{% block content %}
+<div class="auth-main">
+    <div class="container">
+        <div class="auth-layout signup-layout">
+            <section class="auth-hero">
+                <p class="eyebrow-text">Create your study planning account</p>
 
-            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode" aria-pressed="false">
-                <span class="theme-toggle-label">Dark</span>
-                <span class="theme-toggle-thumb"></span>
-            </button>
-        </div>
-    </header>
+                <h1>Start organising your semester in one place.</h1>
 
-    <main class="auth-main">
-        <div class="container">
-            <div class="auth-layout signup-layout">
-                <section class="auth-hero">
-                    <p class="eyebrow-text">Create your study planning account</p>
+                <p class="hero-description">
+                    Create an account to save your course selections, prepare your timetable,
+                    and manage your study planning more easily throughout the semester.
+                </p>
 
-                    <h1>Start organising your semester in one place.</h1>
-
-                    <p class="hero-description">
-                        Create an account to save your course selections, prepare your timetable,
-                        and manage your study planning more easily throughout the semester.
-                    </p>
-
-                    <div class="feature-grid signup-feature-grid">
-                        <div class="feature-card">
-                            <span class="glyphicon glyphicon-education"></span>
-                            <h3>Select Degree</h3>
-                            <p>Choose your degree pathway and browse courses relevant to your study plan.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <span class="glyphicon glyphicon-check"></span>
-                            <h3>Save Courses</h3>
-                            <p>Add preferred courses to your plan and keep track of your selections.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                            <h3>Build Timetable</h3>
-                            <p>Use your selected courses to create a clearer weekly timetable structure.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="signin-card signup-card">
-                    <div class="signin-card-header">
-                        <h2>Create account</h2>
-                        <p>Enter your details to begin using Course Planner.</p>
+                <div class="feature-grid signup-feature-grid">
+                    <div class="feature-card">
+                        <span class="glyphicon glyphicon-education"></span>
+                        <h3>Select Degree</h3>
+                        <p>Choose your degree pathway and browse courses relevant to your study plan.</p>
                     </div>
 
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            <div class="signin-output">
-                                {% for category, message in messages %}
-                                    <p class="flash-message {{ category }}">{{ message }}</p>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    {% endwith %}
+                    <div class="feature-card">
+                        <span class="glyphicon glyphicon-check"></span>
+                        <h3>Save Courses</h3>
+                        <p>Add preferred courses to your plan and keep track of your selections.</p>
+                    </div>
 
-                    <form id="signup-form" method="POST" action="{{ url_for('signup') }}">
-                        <div class="form-group">
-                            <label for="full-name">Full Name</label>
-                            <input type="text" id="full-name" name="full_name" class="form-control" placeholder="Enter your full name">
+                    <div class="feature-card">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        <h3>Build Timetable</h3>
+                        <p>Use your selected courses to create a clearer weekly timetable structure.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="signin-card signup-card">
+                <div class="signin-card-header">
+                    <h2>Create account</h2>
+                    <p>Enter your details to begin using Course Planner.</p>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="signin-output">
+                            {% for category, message in messages %}
+                                <p class="flash-message {{ category }}">{{ message }}</p>
+                            {% endfor %}
                         </div>
+                    {% endif %}
+                {% endwith %}
 
-                        <div class="form-group">
-                            <label for="signup-email">Email Address</label>
-                            <input type="email" id="signup-email" name="email" class="form-control" placeholder="Enter your email address">
-                        </div>
+                <form id="signup-form" method="POST" action="{{ url_for('signup') }}">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="full_name" class="form-control" placeholder="Enter your full name">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="student-id">Student ID</label>
-                            <input type="text" id="student-id" name="student_id" class="form-control" placeholder="Enter your student ID">
-                        </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" name="email" class="form-control" placeholder="Enter your email address">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="signup-password">Password</label>
-                            <input type="password" id="signup-password" name="password" class="form-control" placeholder="Create a password">
-                        </div>
+                    <div class="form-group">
+                        <label for="student-id">Student ID</label>
+                        <input type="text" id="student-id" name="student_id" class="form-control" placeholder="Enter your student ID">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="confirm-password">Confirm Password</label>
-                            <input type="password" id="confirm-password" name="confirm_password" class="form-control" placeholder="Re-enter your password">
-                        </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" class="form-control" placeholder="Create a password">
+                    </div>
 
-                        <button type="submit" class="btn signin-btn">
-                            <span class="glyphicon glyphicon-user"></span>
-                            Create Account
-                        </button>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm_password" class="form-control" placeholder="Re-enter your password">
+                    </div>
 
-                        <button type="button" class="btn forgot-btn" onclick="goToSignIn()">
-                            Already have an account? Sign in
-                        </button>
-                    </form>
-                </section>
-            </div>
+                    <button type="submit" class="btn signin-btn">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Create Account
+                    </button>
+
+                    <button type="button" class="btn forgot-btn" onclick="goToSignIn()">
+                        Already have an account? Sign in
+                    </button>
+                </form>
+            </section>
         </div>
-    </main>
-
-    <footer class="auth-footer">
-        <div class="container">
-            <p>Created for the Agile Web Development Group Project.</p>
-        </div>
-    </footer>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}
