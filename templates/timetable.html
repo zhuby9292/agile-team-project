@@ -48,14 +48,14 @@
                     <p class="status-label">Timetable Status</p>
 
                     <div class="status-row">
-                        <span>Courses selected</span>
-                        <strong>3</strong>
-                    </div>
+    <span>Courses selected</span>
+    <strong id="timetable-course-count">0</strong>
+</div>
 
-                    <div class="status-row">
-                        <span>Total credits</span>
-                        <strong>18</strong>
-                    </div>
+<div class="status-row">
+    <span>Total credits</span>
+    <strong id="timetable-credit-total">0</strong>
+</div>
 
                     <div class="status-row">
                         <span>Status</span>
@@ -128,33 +128,17 @@
                         <p class="dashboard-kicker">Selected courses</p>
                         <h2>Course Summary</h2>
 
-                        <div class="timetable-course-list">
-                            <div class="timetable-course-item">
-                                <strong>CITS5505</strong>
-                                <span>Agile Web Development</span>
-                                <small>Monday 10:00–12:00 · 6 credits</small>
-                            </div>
-
-                            <div class="timetable-course-item">
-                                <strong>CITS5504</strong>
-                                <span>Data Warehousing</span>
-                                <small>Tuesday 14:00–16:00 · 6 credits</small>
-                            </div>
-
-                            <div class="timetable-course-item">
-                                <strong>CITS5508</strong>
-                                <span>Machine Learning</span>
-                                <small>Wednesday 09:00–11:00 · 6 credits</small>
-                            </div>
-                        </div>
+<div id="timetable-course-list" class="timetable-course-list">
+    <p>No courses selected yet.</p>
+</div>
                     </section>
 
                     <section class="dashboard-panel dashboard-message-panel">
                         <p class="dashboard-kicker">Prototype note</p>
                         <h2>Current Version</h2>
-                        <p id="timetable-output">
-                            This timetable is currently a static prototype. Later, it can be connected to selected course data and backend scheduling logic.
-                        </p>
+                       <p id="timetable-output">
+    Select courses first, then click Generate Timetable to create a schedule based on your selected courses.
+</p>
                     </section>
                 </aside>
             </section>
@@ -171,56 +155,139 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <script>
-        function generateTimetable() {
-            document.getElementById("mon").innerHTML = `
-                <strong>CITS5505</strong>
-                <span>Agile Web Development</span>
-                <small>10:00–12:00</small>
-            `;
+    const timetableDaySlots = [
+        { id: "mon", name: "Monday" },
+        { id: "tue", name: "Tuesday" },
+        { id: "wed", name: "Wednesday" },
+        { id: "thu", name: "Thursday" },
+        { id: "fri", name: "Friday" }
+    ];
 
-            document.getElementById("tue").innerHTML = `
-                <strong>CITS5504</strong>
-                <span>Data Warehousing</span>
-                <small>14:00–16:00</small>
-            `;
+    function getSlotIdFromCourse(course, index) {
+        const courseTime = course.time || "";
+        const dayMatch = courseTime.match(/^(Monday|Tuesday|Wednesday|Thursday|Friday)/);
 
-            document.getElementById("wed").innerHTML = `
-                <strong>CITS5508</strong>
-                <span>Machine Learning</span>
-                <small>09:00–11:00</small>
-            `;
-
-            document.getElementById("thu").innerHTML = "No class scheduled";
-            document.getElementById("fri").innerHTML = "No class scheduled";
-
-            document.getElementById("mon").className = "timetable-slot filled-slot";
-            document.getElementById("tue").className = "timetable-slot filled-slot";
-            document.getElementById("wed").className = "timetable-slot filled-slot";
-            document.getElementById("thu").className = "timetable-slot empty-slot";
-            document.getElementById("fri").className = "timetable-slot empty-slot";
-
-            document.getElementById("timetable-status").innerHTML = "Generated";
-            document.getElementById("timetable-output").innerHTML =
-                "A sample timetable has been generated using the selected course schedule.";
+        if (dayMatch) {
+            return dayMatch[1].toLowerCase().substring(0, 3);
         }
 
-        function clearTimetable() {
-            document.getElementById("mon").innerHTML = "No class scheduled";
-            document.getElementById("tue").innerHTML = "No class scheduled";
-            document.getElementById("wed").innerHTML = "No class scheduled";
-            document.getElementById("thu").innerHTML = "No class scheduled";
-            document.getElementById("fri").innerHTML = "No class scheduled";
+        return timetableDaySlots[index % timetableDaySlots.length].id;
+    }
 
-            document.getElementById("mon").className = "timetable-slot empty-slot";
-            document.getElementById("tue").className = "timetable-slot empty-slot";
-            document.getElementById("wed").className = "timetable-slot empty-slot";
-            document.getElementById("thu").className = "timetable-slot empty-slot";
-            document.getElementById("fri").className = "timetable-slot empty-slot";
+    function clearTimetableSlots() {
+        timetableDaySlots.forEach(function(day) {
+            const slot = document.getElementById(day.id);
 
-            document.getElementById("timetable-status").innerHTML = "Not generated";
-            document.getElementById("timetable-output").innerHTML =
-                "The timetable has been cleared. Click Generate Timetable to create a sample schedule again.";
+            if (slot) {
+                slot.innerHTML = "No class scheduled";
+                slot.className = "timetable-slot empty-slot";
+            }
+        });
+    }
+
+    function renderTimetableCourseSummary(courses) {
+        const courseList = document.getElementById("timetable-course-list");
+        const courseCount = document.getElementById("timetable-course-count");
+        const creditTotal = document.getElementById("timetable-credit-total");
+
+        const totalCredits = courses.reduce(function(total, course) {
+            return total + Number(course.credits || 0);
+        }, 0);
+
+        if (courseCount) {
+            courseCount.innerHTML = courses.length;
         }
-    </script>
+
+        if (creditTotal) {
+            creditTotal.innerHTML = totalCredits;
+        }
+
+        if (!courseList) {
+            return;
+        }
+
+        if (courses.length === 0) {
+            courseList.innerHTML = "<p>No courses selected yet. Please add courses on the Course Selection page first.</p>";
+            return;
+        }
+
+        courseList.innerHTML = courses.map(function(course) {
+            return `
+                <div class="timetable-course-item">
+                    <strong>${course.code}</strong>
+                    <span>${course.name}</span>
+                    <small>${course.time || "Time not set"} · ${course.credits} credits</small>
+                </div>
+            `;
+        }).join("");
+    }
+
+    function generateTimetable() {
+        const courses = loadSelectedCourses();
+        const timetableStatus = document.getElementById("timetable-status");
+        const timetableOutput = document.getElementById("timetable-output");
+
+        renderTimetableCourseSummary(courses);
+        clearTimetableSlots();
+
+        if (courses.length === 0) {
+            if (timetableStatus) {
+                timetableStatus.innerHTML = "Not generated";
+            }
+
+            if (timetableOutput) {
+                timetableOutput.innerHTML =
+                    "No courses have been selected. Please go to the Course Selection page and add courses before generating a timetable.";
+            }
+
+            return;
+        }
+
+        courses.forEach(function(course, index) {
+            const slotId = getSlotIdFromCourse(course, index);
+            const slot = document.getElementById(slotId);
+
+            if (!slot) {
+                return;
+            }
+
+            if (slot.className.includes("empty-slot")) {
+                slot.innerHTML = "";
+            }
+
+            slot.className = "timetable-slot filled-slot";
+            slot.innerHTML += `
+                <div class="timetable-course-item">
+                    <strong>${course.code}</strong>
+                    <span>${course.name}</span>
+                    <small>${course.time || "Time not set"}</small>
+                </div>
+            `;
+        });
+
+        if (timetableStatus) {
+            timetableStatus.innerHTML = "Generated";
+        }
+
+        if (timetableOutput) {
+            timetableOutput.innerHTML =
+                "The timetable has been generated using your selected courses.";
+        }
+    }
+
+    function clearTimetable() {
+        clearTimetableSlots();
+
+        document.getElementById("timetable-status").innerHTML = "Not generated";
+        document.getElementById("timetable-output").innerHTML =
+            "The timetable has been cleared. Your selected courses are still saved.";
+
+        renderTimetableCourseSummary(loadSelectedCourses());
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        renderTimetableCourseSummary(loadSelectedCourses());
+    });
+</script>
 </body>
 </html>
