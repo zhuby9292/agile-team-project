@@ -68,7 +68,7 @@ function sendVerificationCode() {
 
     output.innerHTML = "Verification code sent. Redirecting...";
 
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.href = "/reset-password";
     }, 600);
 }
@@ -107,7 +107,7 @@ function getVerificationCodeFromBoxes() {
     const inputs = document.querySelectorAll(".code-input");
     let code = "";
 
-    inputs.forEach(function(input) {
+    inputs.forEach(function (input) {
         code += input.value;
     });
 
@@ -162,7 +162,7 @@ function handleCodeBackspace(event) {
 
     setTimeout(updateResetFormState, 0);
 }
-        
+
 
 
 // Takes the user to the sign up page.
@@ -285,21 +285,24 @@ const courseOptions = {
             name: "Narratives of Place",
             credits: 6,
             time: "Monday 10:00–12:00",
-            stream: "Humanities and communication"
+            stream: "Humanities and communication",
+            semester: "semester1"
         },
         {
             code: "HIST1001",
             name: "Making History",
             credits: 6,
             time: "Tuesday 13:00–15:00",
-            stream: "History and culture"
+            stream: "History and culture",
+            semester: "semester1"
         },
         {
             code: "PHIL1002",
             name: "Introduction to Critical Thinking",
             credits: 6,
             time: "Thursday 11:00–13:00",
-            stream: "Philosophy and reasoning"
+            stream: "Philosophy and reasoning",
+            semester: "semester2"
         }
     ],
 
@@ -309,21 +312,24 @@ const courseOptions = {
             name: "Financial Accounting",
             credits: 6,
             time: "Monday 09:00–11:00",
-            stream: "Accounting"
+            stream: "Accounting",
+            semester: "semester1"
         },
         {
             code: "ECON1101",
             name: "Microeconomics",
             credits: 6,
             time: "Wednesday 10:00–12:00",
-            stream: "Economics"
+            stream: "Economics",
+            semester: "semester1"
         },
         {
             code: "MGMT1135",
             name: "Organisational Behaviour",
             credits: 6,
             time: "Friday 12:00–14:00",
-            stream: "Management"
+            stream: "Management",
+            semester: "semester1"
         }
     ],
 
@@ -333,21 +339,24 @@ const courseOptions = {
             name: "Molecular Biology of the Cell",
             credits: 6,
             time: "Monday 14:00–16:00",
-            stream: "Science foundation"
+            stream: "Science foundation",
+            semester: "semester1"
         },
         {
             code: "MATH1011",
             name: "Mathematical Methods",
             credits: 6,
             time: "Tuesday 09:00–11:00",
-            stream: "Mathematics"
+            stream: "Mathematics",
+            semester: "semester1"
         },
         {
             code: "STAT1400",
             name: "Statistics for Science",
             credits: 6,
             time: "Thursday 10:00–12:00",
-            stream: "Statistics"
+            stream: "Statistics",
+            semester: "semester1"
         }
     ],
 
@@ -357,21 +366,24 @@ const courseOptions = {
             name: "Human Biology I",
             credits: 6,
             time: "Monday 09:00–11:00",
-            stream: "Human biology"
+            stream: "Human biology",
+            semester: "semester1"
         },
         {
             code: "CHEM1001",
             name: "Chemistry for the Life Sciences",
             credits: 6,
             time: "Tuesday 12:00–14:00",
-            stream: "Chemistry"
+            stream: "Chemistry",
+            semester: "semester1"
         },
         {
             code: "IMED1001",
             name: "Form and Function",
             credits: 6,
             time: "Thursday 14:00–16:00",
-            stream: "Biomedical science"
+            stream: "Biomedical science",
+            semester: "semester2"
         }
     ],
 
@@ -381,21 +393,24 @@ const courseOptions = {
             name: "Engineering Design",
             credits: 6,
             time: "Monday 10:00–12:00",
-            stream: "Engineering foundation"
+            stream: "Engineering foundation",
+            semester: "semester1"
         },
         {
             code: "MATH1012",
             name: "Mathematical Theory and Methods",
             credits: 6,
             time: "Wednesday 09:00–11:00",
-            stream: "Mathematics"
+            stream: "Mathematics",
+            semester: "semester2"
         },
         {
             code: "PHYS1001",
             name: "Physics for Scientists and Engineers",
             credits: 6,
             time: "Friday 10:00–12:00",
-            stream: "Physics"
+            stream: "Physics",
+            semester: "semester1"
         }
     ],
 
@@ -405,21 +420,24 @@ const courseOptions = {
             name: "Agile Web Development",
             credits: 6,
             time: "Monday 10:00–12:00",
-            stream: "Web development"
+            stream: "Web development",
+            semester: "semester1"
         },
         {
             code: "CITS5504",
             name: "Data Warehousing",
             credits: 6,
             time: "Tuesday 14:00–16:00",
-            stream: "Data systems"
+            stream: "Data systems",
+            semester: "semester1"
         },
         {
             code: "CITS5508",
             name: "Machine Learning",
             credits: 6,
             time: "Wednesday 09:00–11:00",
-            stream: "Artificial intelligence"
+            stream: "Artificial intelligence",
+            semester: "semester2"
         }
     ],
 
@@ -429,21 +447,24 @@ const courseOptions = {
             name: "Machine Learning",
             credits: 6,
             time: "Monday 09:00–11:00",
-            stream: "Machine learning"
+            stream: "Machine learning",
+            semester: "semester1"
         },
         {
             code: "STAT4066",
             name: "Bayesian Computing and Statistics",
             credits: 6,
             time: "Wednesday 13:00–15:00",
-            stream: "Statistics"
+            stream: "Statistics",
+            semester: "semester1"
         },
         {
             code: "DATA5001",
             name: "Data Science Principles",
             credits: 6,
             time: "Friday 10:00–12:00",
-            stream: "Data science"
+            stream: "Data science",
+            semester: "semester2"
         }
     ],
 
@@ -453,21 +474,24 @@ const courseOptions = {
             name: "Business Analytics Foundations",
             credits: 6,
             time: "Monday 11:00–13:00",
-            stream: "Business analytics"
+            stream: "Business analytics",
+            semester: "semester1"
         },
         {
             code: "MGMT5504",
             name: "Data Analysis and Decision Making",
             credits: 6,
             time: "Tuesday 14:00–16:00",
-            stream: "Decision making"
+            stream: "Decision making",
+            semester: "semester2"
         },
         {
             code: "MKTG5502",
             name: "Marketing Analytics",
             credits: 6,
             time: "Thursday 10:00–12:00",
-            stream: "Marketing"
+            stream: "Marketing",
+            semester: "semester1"
         }
     ],
 
@@ -477,21 +501,24 @@ const courseOptions = {
             name: "Risk, Reliability and Safety",
             credits: 6,
             time: "Monday 13:00–15:00",
-            stream: "Engineering management"
+            stream: "Engineering management",
+            semester: "semester1"
         },
         {
             code: "ENGG5501",
             name: "Engineering Practice",
             credits: 6,
             time: "Wednesday 10:00–12:00",
-            stream: "Professional practice"
+            stream: "Professional practice",
+            semester: "semester1"
         },
         {
             code: "CIVL5502",
             name: "Advanced Structural Analysis",
             credits: 6,
             time: "Friday 09:00–11:00",
-            stream: "Civil engineering"
+            stream: "Civil engineering",
+            semester: "semester1"
         }
     ],
 
@@ -501,21 +528,24 @@ const courseOptions = {
             name: "Research Methods",
             credits: 6,
             time: "Monday 10:00–12:00",
-            stream: "Research preparation"
+            stream: "Research preparation",
+            semester: "semester1"
         },
         {
             code: "STUD5002",
             name: "Advanced Academic Practice",
             credits: 6,
             time: "Wednesday 12:00–14:00",
-            stream: "Academic development"
+            stream: "Academic development",
+            semester: "semester2"
         },
         {
             code: "STUD5003",
             name: "Project Preparation",
             credits: 6,
             time: "Friday 11:00–13:00",
-            stream: "Project planning"
+            stream: "Project planning",
+            semester: "semester2"
         }
     ],
 
@@ -525,21 +555,24 @@ const courseOptions = {
             name: "Teaching and Learning in Health",
             credits: 6,
             time: "Monday 09:00–11:00",
-            stream: "Health education"
+            stream: "Health education",
+            semester: "semester1"
         },
         {
             code: "HPEA5102",
             name: "Assessment in Health Professions",
             credits: 6,
             time: "Wednesday 10:00–12:00",
-            stream: "Assessment"
+            stream: "Assessment",
+            semester: "semester2"
         },
         {
             code: "HPEA5103",
             name: "Curriculum Design in Health",
             credits: 6,
             time: "Friday 13:00–15:00",
-            stream: "Curriculum"
+            stream: "Curriculum",
+            semester: "semester2"
         }
     ],
 
@@ -549,21 +582,24 @@ const courseOptions = {
             name: "Medical Microbiology",
             credits: 6,
             time: "Monday 11:00–13:00",
-            stream: "Microbiology"
+            stream: "Microbiology",
+            semester: "semester1"
         },
         {
             code: "IDIS5002",
             name: "Principles of Infectious Diseases",
             credits: 6,
             time: "Tuesday 14:00–16:00",
-            stream: "Infectious diseases"
+            stream: "Infectious diseases",
+            semester: "semester2"
         },
         {
             code: "PUBH5749",
             name: "Foundations of Public Health",
             credits: 6,
             time: "Thursday 09:00–11:00",
-            stream: "Public health"
+            stream: "Public health",
+            semester: "semester2"
         }
     ],
 
@@ -573,21 +609,24 @@ const courseOptions = {
             name: "Environmental Impact Assessment",
             credits: 6,
             time: "Monday 10:00–12:00",
-            stream: "Environmental planning"
+            stream: "Environmental planning",
+            semester: "semester1"
         },
         {
             code: "ENVT5502",
             name: "Climate Change Science",
             credits: 6,
             time: "Wednesday 13:00–15:00",
-            stream: "Climate science"
+            stream: "Climate science",
+            semester: "semester2"
         },
         {
             code: "ENVT5503",
             name: "Environmental Management",
             credits: 6,
             time: "Friday 10:00–12:00",
-            stream: "Management"
+            stream: "Management",
+            semester: "semester2"
         }
     ],
 
@@ -597,21 +636,24 @@ const courseOptions = {
             name: "Business Foundations",
             credits: 6,
             time: "Monday 13:00–15:00",
-            stream: "Business"
+            stream: "Business",
+            semester: "semester1"
         },
         {
             code: "MGMT5501",
             name: "Management and Organisations",
             credits: 6,
             time: "Tuesday 10:00–12:00",
-            stream: "Management"
+            stream: "Management",
+            semester: "semester2"
         },
         {
             code: "ECON5503",
             name: "Economic Management",
             credits: 6,
             time: "Thursday 12:00–14:00",
-            stream: "Economics"
+            stream: "Economics",
+            semester: "semester1"
         }
     ],
 
@@ -621,21 +663,24 @@ const courseOptions = {
             name: "Teaching and Learning",
             credits: 6,
             time: "Monday 09:00–11:00",
-            stream: "Education"
+            stream: "Education",
+            semester: "semester1"
         },
         {
             code: "EDUC5502",
             name: "Classroom Practice",
             credits: 6,
             time: "Wednesday 11:00–13:00",
-            stream: "Teaching practice"
+            stream: "Teaching practice",
+            semester: "semester2"
         },
         {
             code: "EDUC5503",
             name: "Curriculum and Assessment",
             credits: 6,
             time: "Friday 14:00–16:00",
-            stream: "Curriculum"
+            stream: "Curriculum",
+            semester: "semester1"
         }
     ]
 };
@@ -695,7 +740,7 @@ function updateDegreeOptions() {
     placeholderOption.textContent = "-- Select a degree --";
     degreeSelect.appendChild(placeholderOption);
 
-    degreeOptions[selectedLevel].forEach(function(degreeName) {
+    degreeOptions[selectedLevel].forEach(function (degreeName) {
         const option = document.createElement("option");
         option.value = degreeName;
         option.textContent = degreeName;
@@ -777,7 +822,10 @@ function displayAvailableCourses(degreeName) {
 
     availableCoursesBox.innerHTML = courses.map(course => {
         return `
-            <div class="course-card">
+            <div class="course-card"
+                data-search="${course.code.toLowerCase()} ${course.name.toLowerCase()}"
+                data-semester="${course.semester}">
+
                 <div class="course-card-top">
                     <span class="course-code">${course.code}</span>
                     <span class="credit-pill">${course.credits} credits</span>
@@ -796,17 +844,17 @@ function displayAvailableCourses(degreeName) {
                     </p>
                 </div>
 
-                <button type="button" class="btn dashboard-btn-primary"
-                   onclick="addCourse('${course.code}', '${course.name}', ${course.credits}, '${course.time}')">
+                <button type="button" class="btn dashboard-btn-primary" onclick="addCourse('${course.code}', '${course.name}', ${course.credits}, '${course.time}', '${course.stream}', '${course.semester}')">
                     Add Course
                 </button>
             </div>
         `;
     }).join("");
+    filterCourses();
 }
 
 // Adds a selected course to the user's course plan.
-function addCourse(code, name, credits, time) {
+function addCourse(code, name, credits, time, stream, semester) {
     const degreeSelect = document.getElementById("degree-select");
     const message = document.getElementById("course-message");
 
@@ -816,7 +864,14 @@ function addCourse(code, name, credits, time) {
         }
         return;
     }
+    const existingSemester = selectedCourses.length > 0
+        ? selectedCourses[0].semester
+        : null;
 
+    if (existingSemester && existingSemester !== semester) {
+        alert("Semester conflict detected. Please select courses from the same semester.");
+        return;
+    }
     const exists = selectedCourses.some(course => course.code === code);
 
     if (exists) {
@@ -827,13 +882,15 @@ function addCourse(code, name, credits, time) {
     }
 
     selectedCourses.push({
-    code: code,
-    name: name,
-    credits: credits,
-    time: time
-});
+        code: code,
+        name: name,
+        credits: credits,
+        time: time,
+        stream: stream,
+        semester: semester
+    });
 
-saveSelectedCourses();
+    localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
 
     if (message) {
         message.innerHTML = code + " added successfully.";
@@ -903,35 +960,39 @@ function displaySelectedCourses() {
 // Removes a selected course from the user's course plan.
 function removeCourse(code) {
     selectedCourses = selectedCourses.filter(course => course.code !== code);
-    saveSelectedCourses();
+    localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
     displaySelectedCourses();
 }
 
-// Filters course cards when a course search input exists on the page.
+// Filters displayed courses based on the search input and semester filter.
 function filterCourses() {
     const searchInput = document.getElementById("course-search");
-    const emptyMessage = document.getElementById("no-course-results");
-    const courseCards = document.querySelectorAll(".course-option");
+    const semesterFilter = document.getElementById("semester-filter");
+    const courseCards = document.querySelectorAll(".course-card");
 
-    if (!searchInput || !emptyMessage || courseCards.length === 0) {
+    if (!searchInput || !semesterFilter) {
         return;
     }
 
     const searchTerm = searchInput.value.trim().toLowerCase();
-    let visibleCount = 0;
+    const selectedSemester = semesterFilter.value;
 
     courseCards.forEach(function (card) {
-        const searchableText = card.getAttribute("data-search") || "";
+        const searchData = card.dataset.search;
+        const semesterData = card.dataset.semester;
 
-        if (searchableText.includes(searchTerm)) {
-            card.style.display = "flex";
-            visibleCount++;
+        const matchesSearch = searchTerm === "" || searchData.includes(searchTerm);
+
+        const matchesSemester =
+            selectedSemester === "all" ||
+            semesterData === selectedSemester;
+
+        if (matchesSearch && matchesSemester) {
+            card.style.display = "block";
         } else {
             card.style.display = "none";
         }
     });
-
-    emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
 }
 
 // Applies the saved theme when a page loads.
@@ -965,7 +1026,7 @@ function toggleDarkMode() {
 function updateThemeToggleLabel(labelText) {
     const themeButtons = document.querySelectorAll(".theme-toggle");
 
-    themeButtons.forEach(function(button) {
+    themeButtons.forEach(function (button) {
         const label = button.querySelector(".theme-toggle-label");
 
         if (label) {
@@ -981,10 +1042,191 @@ function updateThemeToggleLabel(labelText) {
 }
 
 // Runs when the page finishes loading.
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
+    loadTimetablePage();
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    displaySelectedCourses();
+// The following functions are placeholders for the timetable generation, clearing, and sharing features.
+function loadTimetablePage() {
+    const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
+    const courseList = document.getElementById("timetable-course-list");
+    const status = document.getElementById("timetable-status");
+    const output = document.getElementById("timetable-output");
+    const courseCount = document.getElementById("timetable-course-count");
+    const creditTotal = document.getElementById("timetable-credit-total");
+
+    if (!courseList) {
+        return;
+    }
+
+    if (savedCourses.length === 0) {
+        courseList.innerHTML = "<p>No courses selected yet.</p>";
+
+        if (status) {
+            status.innerHTML = "Not generated";
+        }
+
+        if (output) {
+            output.innerHTML = "Please select courses before generating a timetable.";
+        }
+
+        if (courseCount) {
+            courseCount.textContent = "0";
+        }
+
+        if (creditTotal) {
+            creditTotal.textContent = "0";
+        }
+
+        renderEmptyWeeklyCalendar();
+        return;
+    }
+    
+    let totalCredits = 0;
+    courseList.innerHTML = savedCourses.map(function (course) {
+        totalCredits += course.credits;
+        return `
+            <div class="timetable-course-item">
+                <strong>${course.code}</strong>
+                <span>${course.name}</span>
+                <small>${course.time} · ${course.credits} credits</small>
+            </div>
+        `;
+    }).join("");
+
+    if (status) {
+        status.innerHTML = "Ready";
+    }
+    if (courseCount) {
+        courseCount.innerHTML = savedCourses.length;
+    }
+
+    if (creditTotal) {
+        creditTotal.innerHTML = totalCredits;
+    }
+
+    renderEmptyWeeklyCalendar();
+}
+
+function renderEmptyWeeklyCalendar() {
+    const calendar = document.getElementById("weekly-calendar");
+
+    if (!calendar) {
+        return;
+    }
+
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    const times = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
+
+    let html = `<div class="calendar-time-header"></div>`;
+
+    days.forEach(function (day) {
+        html += `<div class="calendar-day-header">${day}</div>`;
+    });
+
+    times.forEach(function (time) {
+        html += `<div class="calendar-time">${time}</div>`;
+
+        days.forEach(function (day) {
+            html += `<div class="calendar-cell" data-day="${day}" data-time="${time}"></div>`;
+        });
+    });
+
+    calendar.innerHTML = html;
+}
+
+function generateTimetable() {
+    const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
+    const status = document.getElementById("timetable-status");
+    const output = document.getElementById("timetable-output");
+
+    if (savedCourses.length === 0) {
+        if (output) {
+            output.innerHTML = "Please select courses before generating a timetable.";
+        }
+        return;
+    }
+
+    const semesters = savedCourses.map(course => course.semester);
+    const uniqueSemesters = [...new Set(semesters)];
+
+    if (uniqueSemesters.length > 1) {
+        if (status) {
+            status.innerHTML = "Conflict";
+        }
+
+        if (output) {
+            output.innerHTML = "You selected courses from different semesters. Please choose courses from one semester before generating a timetable.";
+        }
+
+        renderEmptyWeeklyCalendar();
+        return;
+    }
+
+    renderEmptyWeeklyCalendar();
+
+    savedCourses.forEach(function (course) {
+        const day = getCourseDay(course.time);
+        const startTime = getCourseStartTime(course.time);
+
+        const cell = document.querySelector(
+            `.calendar-cell[data-day="${day}"][data-time="${startTime}"]`
+        );
+
+        if (cell) {
+            cell.classList.add("course-block");
+            cell.innerHTML = `
+                <strong>${course.code}</strong>
+                <span>${course.name}</span>
+                <small>${course.time}</small>
+            `;
+        }
+    });
+
+    if (status) {
+        status.innerHTML = "Generated";
+    }
+
+    if (output) {
+        output.innerHTML = "The weekly timetable has been generated successfully.";
+    }
+}
+
+function clearTimetable() {
+    renderEmptyWeeklyCalendar();
+
+    const status = document.getElementById("timetable-status");
+    const output = document.getElementById("timetable-output");
+
+    if (status) {
+        status.innerHTML = "Not generated";
+    }
+
+    if (output) {
+        output.innerHTML = "The timetable has been cleared.";
+    }
+}
+
+function getCourseDay(timeText) {
+    return timeText.split(" ")[0];
+}
+
+function getCourseStartTime(timeText) {
+    const timePart = timeText.split(" ")[1];
+    return timePart.split("–")[0];
+}
+
+function shareTimetable() {
+    const output = document.getElementById("timetable-output");
+
+    if (output) {
+        output.innerHTML =
+            "Your timetable has been shared successfully. Other users can now view it from the shared timetables page.";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    applySavedTheme();
+    loadTimetablePage();
 });

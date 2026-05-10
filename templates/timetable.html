@@ -1,258 +1,94 @@
 {% extends "dashboard-base.html" %}
 
-{% block title %}Course Planner - Timetable{% endblock %}
-
-{% block content %}
-<div class="dashboard-main">
-    <div class="container dashboard-container">
-
-        <section class="dashboard-hero timetable-hero">
-            <div class="dashboard-welcome">
-                <p class="dashboard-kicker">Timetable planning</p>
-                <h1>Your weekly timetable.</h1>
-                <p class="dashboard-description">
-                    Generate a sample weekly timetable based on selected courses and review how your semester schedule may look.
-                </p>
-            </div>
-
-            <div class="dashboard-status-card">
-                <p class="status-label">Timetable Status</p>
-
-                <div class="status-row">
-                    <span>Courses selected</span>
-                    <strong id="timetable-course-count">0</strong>
-                </div>
-
-                <div class="status-row">
-                    <span>Total credits</span>
-                    <strong id="timetable-credit-total">0</strong>
-                </div>
-
-                <div class="status-row">
-                    <span>Status</span>
-                    <strong id="timetable-status">Not generated</strong>
-                </div>
-            </div>
-        </section>
-
-        <section class="timetable-layout">
-            <div class="timetable-main-column">
-                <section class="dashboard-panel">
-                    <div class="panel-title-row">
-                        <div>
-                            <p class="dashboard-kicker">Weekly schedule</p>
-                            <h2>Generated Timetable</h2>
-                        </div>
-                    </div>
-
-                    <div class="timetable-grid">
-                        <div class="timetable-day">
-                            <div class="day-heading">Monday</div>
-                            <div id="mon" class="timetable-slot empty-slot">
-                                No class scheduled
-                            </div>
-                        </div>
-
-                        <div class="timetable-day">
-                            <div class="day-heading">Tuesday</div>
-                            <div id="tue" class="timetable-slot empty-slot">
-                                No class scheduled
-                            </div>
-                        </div>
-
-                        <div class="timetable-day">
-                            <div class="day-heading">Wednesday</div>
-                            <div id="wed" class="timetable-slot empty-slot">
-                                No class scheduled
-                            </div>
-                        </div>
-
-                        <div class="timetable-day">
-                            <div class="day-heading">Thursday</div>
-                            <div id="thu" class="timetable-slot empty-slot">
-                                No class scheduled
-                            </div>
-                        </div>
-
-                        <div class="timetable-day">
-                            <div class="day-heading">Friday</div>
-                            <div id="fri" class="timetable-slot empty-slot">
-                                No class scheduled
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timetable-actions">
-                        <button class="btn dashboard-btn-primary" onclick="generateTimetable()">
-                            Generate Timetable
-                        </button>
-
-                        <button class="btn dashboard-btn-secondary" onclick="clearTimetable()">
-                            Clear Timetable
-                        </button>
-                    </div>
-                </section>
-            </div>
-
-            <aside class="timetable-side-column">
-                <section class="dashboard-panel">
-                    <p class="dashboard-kicker">Selected courses</p>
-                    <h2>Course Summary</h2>
-
-                    <div id="timetable-course-list" class="timetable-course-list">
-                        <p>No courses selected yet.</p>
-                    </div>
-                </section>
-
-                <section class="dashboard-panel dashboard-message-panel">
-                    <p class="dashboard-kicker">Prototype note</p>
-                    <h2>Current Version</h2>
-
-                    <p id="timetable-output">
-                        Select courses first, then click Generate Timetable to create a schedule based on your selected courses.
-                    </p>
-                </section>
-            </aside>
-        </section>
-
-    </div>
-</div>
+{% block title %}
+Timetable
 {% endblock %}
 
-{% block scripts %}
-<script>
-    const timetableDaySlots = [
-        { id: "mon", name: "Monday" },
-        { id: "tue", name: "Tuesday" },
-        { id: "wed", name: "Wednesday" },
-        { id: "thu", name: "Thursday" },
-        { id: "fri", name: "Friday" }
-    ];
+{% block content %}
+<div class="container dashboard-container">
 
-    function getSlotIdFromCourse(course, index) {
-        const courseTime = course.time || "";
-        const dayMatch = courseTime.match(/^(Monday|Tuesday|Wednesday|Thursday|Friday)/);
+    <section class="dashboard-hero timetable-hero">
+        <div class="dashboard-welcome">
+            <p class="dashboard-kicker">Timetable planning</p>
+            <h1>Your weekly timetable.</h1>
+            <p class="dashboard-description">
+                Generate a sample weekly timetable based on selected courses and review how your semester
+                schedule may look.
+            </p>
+        </div>
 
-        if (dayMatch) {
-            return dayMatch[1].toLowerCase().substring(0, 3);
-        }
+        <div class="dashboard-status-card">
+            <p class="status-label">Timetable Status</p>
 
-        return timetableDaySlots[index % timetableDaySlots.length].id;
-    }
+            <div class="status-row">
+                <span>Courses selected</span>
+                <strong id="timetable-course-count">0</strong>
+            </div>
 
-    function clearTimetableSlots() {
-        timetableDaySlots.forEach(function(day) {
-            const slot = document.getElementById(day.id);
+            <div class="status-row">
+                <span>Total credits</span>
+                <strong id="timetable-credit-total">0</strong>
+            </div>
 
-            if (slot) {
-                slot.innerHTML = "No class scheduled";
-                slot.className = "timetable-slot empty-slot";
-            }
-        });
-    }
+            <div class="status-row">
+                <span>Status</span>
+                <strong id="timetable-status">Not generated</strong>
+            </div>
+        </div>
+    </section>
 
-    function renderTimetableCourseSummary(courses) {
-        const courseList = document.getElementById("timetable-course-list");
-        const courseCount = document.getElementById("timetable-course-count");
-        const creditTotal = document.getElementById("timetable-credit-total");
-
-        const totalCredits = courses.reduce(function(total, course) {
-            return total + Number(course.credits || 0);
-        }, 0);
-
-        if (courseCount) {
-            courseCount.innerHTML = courses.length;
-        }
-
-        if (creditTotal) {
-            creditTotal.innerHTML = totalCredits;
-        }
-
-        if (!courseList) {
-            return;
-        }
-
-        if (courses.length === 0) {
-            courseList.innerHTML = "<p>No courses selected yet. Please add courses on the Course Selection page first.</p>";
-            return;
-        }
-
-        courseList.innerHTML = courses.map(function(course) {
-            return `
-                <div class="timetable-course-item">
-                    <strong>${course.code}</strong>
-                    <span>${course.name}</span>
-                    <small>${course.time || "Time not set"} · ${course.credits} credits</small>
+    <section class="timetable-layout">
+        <div class="timetable-main-column">
+            <section class="dashboard-panel timetable-panel">
+                <div class="panel-title-row">
+                    <div>
+                        <p class="dashboard-kicker">Weekly schedule</p>
+                        <h2>Generated Timetable</h2>
+                    </div>
                 </div>
-            `;
-        }).join("");
-    }
 
-    function generateTimetable() {
-        const courses = loadSelectedCourses();
-        const timetableStatus = document.getElementById("timetable-status");
-        const timetableOutput = document.getElementById("timetable-output");
-
-        renderTimetableCourseSummary(courses);
-        clearTimetableSlots();
-
-        if (courses.length === 0) {
-            if (timetableStatus) {
-                timetableStatus.innerHTML = "Not generated";
-            }
-
-            if (timetableOutput) {
-                timetableOutput.innerHTML =
-                    "No courses have been selected. Please go to the Course Selection page and add courses before generating a timetable.";
-            }
-
-            return;
-        }
-
-        courses.forEach(function(course, index) {
-            const slotId = getSlotIdFromCourse(course, index);
-            const slot = document.getElementById(slotId);
-
-            if (!slot) {
-                return;
-            }
-
-            if (slot.className.includes("empty-slot")) {
-                slot.innerHTML = "";
-            }
-
-            slot.className = "timetable-slot filled-slot";
-            slot.innerHTML += `
-                <div class="timetable-course-item">
-                    <strong>${course.code}</strong>
-                    <span>${course.name}</span>
-                    <small>${course.time || "Time not set"}</small>
+                <div id="weekly-calendar" class="weekly-calendar">
                 </div>
-            `;
-        });
 
-        if (timetableStatus) {
-            timetableStatus.innerHTML = "Generated";
-        }
+                <div class="timetable-actions">
+                    <button class="btn dashboard-btn-primary" onclick="generateTimetable()">
+                        Generate Timetable
+                    </button>
 
-        if (timetableOutput) {
-            timetableOutput.innerHTML =
-                "The timetable has been generated using your selected courses.";
-        }
-    }
+                    <button class="btn dashboard-btn-secondary" onclick="clearTimetable()">
+                        Clear Timetable
+                    </button>
+                </div>
+            </section>
+        </div>
 
-    function clearTimetable() {
-        clearTimetableSlots();
+        <aside class="timetable-side-column">
+            <section class="dashboard-panel">
+                <p class="dashboard-kicker">Selected courses</p>
+                <h2>Course Summary</h2>
 
-        document.getElementById("timetable-status").innerHTML = "Not generated";
-        document.getElementById("timetable-output").innerHTML =
-            "The timetable has been cleared. Your selected courses are still saved.";
+                <div id="timetable-course-list" class="timetable-course-list">
+                    <p>No courses selected yet.</p>
+                </div>
+            </section>
 
-        renderTimetableCourseSummary(loadSelectedCourses());
-    }
+            <section class="dashboard-panel dashboard-message-panel">
+                <p class="dashboard-kicker">Sharing</p>
+                <h2>Share Timetable</h2>
+                <p id="timetable-output">
+                    Make your timetable available for other users to view.
+                </p>
 
-    document.addEventListener("DOMContentLoaded", function() {
-        renderTimetableCourseSummary(loadSelectedCourses());
-    });
-</script>
+                <button class="btn dashboard-btn-primary" onclick="shareTimetable()">
+                    Share Timetable
+                </button>
+
+                <a href="#" class="btn dashboard-btn-secondary" style="margin-top: 12px;">
+                    View Shared Timetables
+                </a>
+            </section>
+        </aside>
+    </section>
+
+</div>
 {% endblock %}

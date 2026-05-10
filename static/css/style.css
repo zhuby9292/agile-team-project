@@ -1049,8 +1049,8 @@ footer p {
 
 .course-layout {
     display: grid;
-    grid-template-columns: 1.45fr 0.75fr;
-    gap: 24px;
+    grid-template-columns: 1.6fr 0.9fr;
+    gap: 32px;
     align-items: start;
 }
 
@@ -1124,12 +1124,18 @@ footer p {
 }
 
 .credit-pill {
-    background: #e8f0f7;
+    background: #edf3f8;
     color: #183b5b;
-    border-radius: 999px;
-    padding: 6px 10px;
-    font-weight: bold;
     font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: 78px;
+    border: 1px solid #d8e4ef;
 }
 
 .course-card h3 {
@@ -1157,7 +1163,7 @@ footer p {
 
 .selected-panel {
     position: sticky;
-    top: 24px;
+    top: 40px;
 }
 
 .selected-courses-box {
@@ -1219,10 +1225,27 @@ footer p {
 /* Timetable page */
 
 .timetable-layout {
-    display: grid;
-    grid-template-columns: 1.35fr 0.8fr;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
-    align-items: start;
+}
+
+.timetable-main-column {
+    width: 100%;
+}
+
+.timetable-side-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.timetable-panel {
+    overflow-x: auto;
+}
+
+.weekly-calendar {
+    min-width: 760px;
 }
 
 .timetable-main-column,
@@ -1338,7 +1361,7 @@ footer p {
 }
 
 @media (max-width: 991px) {
-    .timetable-layout {
+    .timetable-side-column {
         grid-template-columns: 1fr;
     }
 
@@ -1860,6 +1883,120 @@ body.dark-mode .signup-prompt p {
 @media (max-width: 640px) {
     .admin-summary-grid,
     .admin-action-grid {
+        grid-template-columns: 1fr;
+    }
+}.course-card {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-detail-list {
+    min-height: 95px;
+}
+
+.course-card .dashboard-btn-primary {
+    margin-top: auto;
+}
+
+.empty-course-state {
+    background: white;
+    border: 1px solid #dce6ef;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 16px;
+    color: #526273;
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+.empty-course-state p {
+    margin: 0;
+}
+
+.weekly-calendar {
+    display: grid;
+    grid-template-columns: 70px repeat(5, 1fr);
+    border: 1px solid #dce6ef;
+    border-radius: 18px;
+    overflow: hidden;
+    background: white;
+}
+
+.calendar-day-header,
+.calendar-time-header {
+    background: #183b5b;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 8px;
+}
+
+.calendar-time {
+    background: #f6f9fc;
+    color: #526273;
+    font-weight: bold;
+    padding: 18px 10px;
+    border-top: 1px solid #dce6ef;
+    text-align: center;
+}
+
+.calendar-cell {
+    min-height: 74px;
+    border-top: 1px solid #dce6ef;
+    border-left: 1px solid #dce6ef;
+    padding: 10px;
+}
+
+.course-block {
+    background: #e8f0f7;
+    color: #102c45;
+    border-left: 4px solid #183b5b;
+}
+
+.course-block strong,
+.course-block span,
+.course-block small {
+    display: block;
+}
+
+.course-block strong {
+    color: #183b5b;
+    margin-bottom: 4px;
+}
+
+.course-block span {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.course-filter-bar {
+    background: #f6f9fc;
+    border: 1px solid #dce6ef;
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 18px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 12px;
+}
+
+.course-filter-bar .form-control {
+    height: 46px;
+    border-radius: 12px;
+    border: 1px solid #cfdbe6;
+    box-shadow: none;
+    background-color: white;
+    color: #2f3d4c;
+}
+
+.course-filter-bar .form-control:focus {
+    border-color: #183b5b;
+    box-shadow: 0 0 0 3px rgba(24, 59, 91, 0.08);
+}
+
+@media (max-width: 700px) {
+    .course-filter-bar {
         grid-template-columns: 1fr;
     }
 }
