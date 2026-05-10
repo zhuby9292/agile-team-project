@@ -1225,10 +1225,27 @@ footer p {
 /* Timetable page */
 
 .timetable-layout {
-    display: grid;
-    grid-template-columns: 1.35fr 0.8fr;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
-    align-items: start;
+}
+
+.timetable-main-column {
+    width: 100%;
+}
+
+.timetable-side-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.timetable-panel {
+    overflow-x: auto;
+}
+
+.weekly-calendar {
+    min-width: 760px;
 }
 
 .timetable-main-column,
@@ -1344,7 +1361,7 @@ footer p {
 }
 
 @media (max-width: 991px) {
-    .timetable-layout {
+    .timetable-side-column {
         grid-template-columns: 1fr;
     }
 
