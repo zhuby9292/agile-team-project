@@ -1,40 +1,39 @@
 {% extends "dashboard-base.html" %}
 
-{% block title %}Course Selection{% endblock %}
+{% block title %}{{ _('Course Selection') }}{% endblock %}
 
 {% block content %}
 <div class="container dashboard-container">
 
     <section class="dashboard-hero course-hero">
         <div class="dashboard-welcome">
-            <p class="dashboard-kicker">Course planning</p>
-            <h1>Select courses for your semester.</h1>
+            <p class="dashboard-kicker">{{ _('Course planning') }}</p>
+            <h1>{{ _('Select courses for your semester.') }}</h1>
             <p class="dashboard-description">
-                Choose your study level and degree pathway, browse available courses,
-                and add units to your study plan before generating a timetable.
+                {{ _('Choose your study level and degree pathway, browse available courses, and add units to your study plan before generating a timetable.') }}
             </p>
         </div>
 
         <div class="dashboard-status-card">
-            <p class="status-label">Selection Summary</p>
+            <p class="status-label">{{ _('Selection Summary') }}</p>
 
             <div class="status-row">
-                <span>Study level</span>
-                <strong id="study-level-summary">Not selected</strong>
+                <span>{{ _('Study level') }}</span>
+                <strong id="study-level-summary">{{ _('Not selected') }}</strong>
             </div>
 
             <div class="status-row">
-                <span>Degree</span>
-                <strong id="degree-summary">Not selected</strong>
+                <span>{{ _('Degree') }}</span>
+                <strong id="degree-summary">{{ _('Not selected') }}</strong>
             </div>
 
             <div class="status-row">
-                <span>Selected courses</span>
+                <span>{{ _('Selected courses') }}</span>
                 <strong id="course-count-summary">0</strong>
             </div>
 
             <div class="status-row">
-                <span>Total credits</span>
+                <span>{{ _('Total credits') }}</span>
                 <strong id="credit-summary">0</strong>
             </div>
         </div>
@@ -46,33 +45,57 @@
             <section class="dashboard-panel">
                 <div class="panel-title-row">
                     <div>
-                        <p class="dashboard-kicker">Step 1</p>
-                        <h2>Choose your study pathway</h2>
+                        <p class="dashboard-kicker">{{ _('Step 1') }}</p>
+                        <h2>{{ _('Choose your study pathway') }}</h2>
                     </div>
                 </div>
 
                 <div class="degree-select-card">
                     <div class="degree-form-grid">
                         <div class="form-group">
-                            <label for="study-level-select">Study level</label>
-                            <select id="study-level-select" class="form-control" onchange="updateDegreeOptions()">
-                                <option value="">-- Select a study level --</option>
-                                <option value="bachelor">Bachelor</option>
-                                <option value="master">Master</option>
-                                <option value="diploma">Diploma</option>
+                            <label for="study-level-select">{{ _('Study level') }}</label>
+
+                            <select id="study-level-select"
+                                class="form-control"
+                                onchange="updateDegreeOptions()">
+
+                                <option value="">
+                                    {{ _('-- Select a study level --') }}
+                                </option>
+
+                                <option value="bachelor">
+                                    {{ _('Bachelor') }}
+                                </option>
+
+                                <option value="master">
+                                    {{ _('Master') }}
+                                </option>
+
+                                <option value="diploma">
+                                    {{ _('Diploma') }}
+                                </option>
+
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="degree-select">Degree</label>
-                            <select id="degree-select" class="form-control" onchange="selectDegree()" disabled>
-                                <option value="">-- Select a study level first --</option>
+                            <label for="degree-select">{{ _('Degree') }}</label>
+
+                            <select id="degree-select"
+                                class="form-control"
+                                onchange="selectDegree()"
+                                disabled>
+
+                                <option value="">
+                                    {{ _('-- Select a study level first --') }}
+                                </option>
+
                             </select>
                         </div>
                     </div>
 
                     <p id="course-message" class="helper-message">
-                        Please select a study level, then choose a degree before adding courses.
+                        {{ _('Please select a study level, then choose a degree before adding courses.') }}
                     </p>
                 </div>
             </section>
@@ -80,25 +103,43 @@
             <section class="dashboard-panel">
                 <div class="panel-title-row">
                     <div>
-                        <p class="dashboard-kicker">Step 2</p>
-                        <h2>Available courses</h2>
+                        <p class="dashboard-kicker">{{ _('Step 2') }}</p>
+                        <h2>{{ _('Available courses') }}</h2>
                     </div>
                 </div>
 
                 <div class="course-filter-bar">
-                    <input type="text" id="course-search" class="form-control" placeholder="Search courses..."
+
+                    <input type="text"
+                        id="course-search"
+                        class="form-control"
+                        placeholder="{{ _('Search courses...') }}"
                         oninput="filterCourses()">
 
-                    <select id="semester-filter" class="form-control" onchange="filterCourses()">
-                        <option value="all">All Semesters</option>
-                        <option value="semester1">Semester 1</option>
-                        <option value="semester2">Semester 2</option>
+                    <select id="semester-filter"
+                        class="form-control"
+                        onchange="filterCourses()">
+
+                        <option value="all">
+                            {{ _('All Semesters') }}
+                        </option>
+
+                        <option value="semester1">
+                            {{ _('Semester 1') }}
+                        </option>
+
+                        <option value="semester2">
+                            {{ _('Semester 2') }}
+                        </option>
+
                     </select>
                 </div>
 
                 <div id="available-courses" class="course-card-grid">
                     <div class="empty-course-state">
-                        <p>Please select a study level and degree to view available courses.</p>
+                        <p>
+                            {{ _('Please select a study level and degree to view available courses.') }}
+                        </p>
                     </div>
                 </div>
             </section>
@@ -106,20 +147,25 @@
 
         <aside class="course-side-column">
             <section class="dashboard-panel selected-panel">
-                <p class="dashboard-kicker">Step 3</p>
-                <h2>Your selected courses</h2>
+
+                <p class="dashboard-kicker">{{ _('Step 3') }}</p>
+
+                <h2>{{ _('Your selected courses') }}</h2>
 
                 <div id="selected-courses" class="selected-courses-box">
-                    <p>No courses selected yet.</p>
+                    <p>{{ _('No courses selected yet.') }}</p>
                 </div>
 
                 <div class="credit-total-box">
-                    <span>Total credits</span>
+                    <span>{{ _('Total credits') }}</span>
                     <strong id="credit-output">0</strong>
                 </div>
 
-                <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-secondary selected-next-btn">
-                    Continue to Timetable
+                <a href="{{ url_for('timetable') }}"
+                    class="btn dashboard-btn-secondary selected-next-btn">
+
+                    {{ _('Continue to Timetable') }}
+
                 </a>
             </section>
         </aside>
