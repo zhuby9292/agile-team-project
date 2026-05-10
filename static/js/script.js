@@ -1406,7 +1406,7 @@ function downloadTimetable() {
     savedCourses.forEach(function (course) {
 
         csvContent +=
-            `${course.code},${course.name},${course.credits},${course.time},${course.stream},${course.semester}\n`;
+            `"${course.code}","${course.name}",${course.credits},"${course.time}","${course.stream}","${course.semester}"\n`;
     });
 
     const blob =
