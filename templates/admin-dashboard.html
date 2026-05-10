@@ -93,7 +93,6 @@
                     </thead>
 
                     <tbody>
-
                         <tr>
                             <td>{{ _('Sample Student') }}</td>
                             <td>student@example.com</td>
@@ -126,7 +125,6 @@
                                 </span>
                             </td>
                         </tr>
-
                     </tbody>
 
                 </table>
@@ -134,7 +132,6 @@
         </div>
 
         <div class="dashboard-panel">
-
             <p class="dashboard-kicker">{{ _('Course statistics') }}</p>
 
             <h2>{{ _('Popular Courses') }}</h2>
@@ -188,15 +185,13 @@
 
                 <button type="button"
                     class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('{{ _('User management tools will be connected to database records in a future update.') }}')">
-
+                    data-message="{{ _('User management tools will be connected to database records in a future update.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
                     {{ _('View Users') }}
-
                 </button>
             </div>
 
             <div class="action-box">
-
                 <span class="action-icon glyphicon glyphicon-book"></span>
 
                 <h3>{{ _('Manage Courses') }}</h3>
@@ -207,15 +202,13 @@
 
                 <button type="button"
                     class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('{{ _('Course management tools will be expanded in the next development stage.') }}')">
-
+                    data-message="{{ _('Course management tools will be expanded in the next development stage.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
                     {{ _('Manage Courses') }}
-
                 </button>
             </div>
 
             <div class="action-box">
-
                 <span class="action-icon glyphicon glyphicon-stats"></span>
 
                 <h3>{{ _('View Statistics') }}</h3>
@@ -226,15 +219,13 @@
 
                 <button type="button"
                     class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('{{ _('Statistics preview is currently based on sample dashboard data.') }}')">
-
+                    data-message="{{ _('Statistics preview is currently based on sample dashboard data.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
                     {{ _('View Statistics') }}
-
                 </button>
             </div>
 
             <div class="action-box">
-
                 <span class="action-icon glyphicon glyphicon-calendar"></span>
 
                 <h3>{{ _('Monitor Timetables') }}</h3>
@@ -245,10 +236,9 @@
 
                 <button type="button"
                     class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('{{ _('Timetable monitoring will use real timetable data in a later update.') }}')">
-
+                    data-message="{{ _('Timetable monitoring will use real timetable data in a later update.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
                     {{ _('Monitor Usage') }}
-
                 </button>
             </div>
 
