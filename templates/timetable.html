@@ -1,7 +1,7 @@
 {% extends "dashboard-base.html" %}
 
 {% block title %}
-Timetable
+{{ _('Timetable') }}
 {% endblock %}
 
 {% block content %}
@@ -9,30 +9,29 @@ Timetable
 
     <section class="dashboard-hero timetable-hero">
         <div class="dashboard-welcome">
-            <p class="dashboard-kicker">Timetable planning</p>
-            <h1>Your weekly timetable.</h1>
+            <p class="dashboard-kicker">{{ _('Timetable planning') }}</p>
+            <h1>{{ _('Your weekly timetable.') }}</h1>
             <p class="dashboard-description">
-                Generate a sample weekly timetable based on selected courses and review how your semester
-                schedule may look.
+                {{ _('Generate a sample weekly timetable based on selected courses and review how your semester schedule may look.') }}
             </p>
         </div>
 
         <div class="dashboard-status-card">
-            <p class="status-label">Timetable Status</p>
+            <p class="status-label">{{ _('Timetable Status') }}</p>
 
             <div class="status-row">
-                <span>Courses selected</span>
+                <span>{{ _('Courses selected') }}</span>
                 <strong id="timetable-course-count">0</strong>
             </div>
 
             <div class="status-row">
-                <span>Total credits</span>
+                <span>{{ _('Total credits') }}</span>
                 <strong id="timetable-credit-total">0</strong>
             </div>
 
             <div class="status-row">
-                <span>Status</span>
-                <strong id="timetable-status">Not generated</strong>
+                <span>{{ _('Status') }}</span>
+                <strong id="timetable-status">{{ _('Not generated') }}</strong>
             </div>
         </div>
     </section>
@@ -42,8 +41,8 @@ Timetable
             <section class="dashboard-panel timetable-panel">
                 <div class="panel-title-row">
                     <div>
-                        <p class="dashboard-kicker">Weekly schedule</p>
-                        <h2>Generated Timetable</h2>
+                        <p class="dashboard-kicker">{{ _('Weekly schedule') }}</p>
+                        <h2>{{ _('Generated Timetable') }}</h2>
                     </div>
                 </div>
 
@@ -52,11 +51,11 @@ Timetable
 
                 <div class="timetable-actions">
                     <button class="btn dashboard-btn-primary" onclick="generateTimetable()">
-                        Generate Timetable
+                        {{ _('Generate Timetable') }}
                     </button>
 
                     <button class="btn dashboard-btn-secondary" onclick="clearTimetable()">
-                        Clear Timetable
+                        {{ _('Clear Timetable') }}
                     </button>
                 </div>
             </section>
@@ -64,27 +63,27 @@ Timetable
 
         <aside class="timetable-side-column">
             <section class="dashboard-panel">
-                <p class="dashboard-kicker">Selected courses</p>
-                <h2>Course Summary</h2>
+                <p class="dashboard-kicker">{{ _('Selected courses') }}</p>
+                <h2>{{ _('Course Summary') }}</h2>
 
                 <div id="timetable-course-list" class="timetable-course-list">
-                    <p>No courses selected yet.</p>
+                    <p>{{ _('No courses selected yet.') }}</p>
                 </div>
             </section>
 
             <section class="dashboard-panel dashboard-message-panel">
-                <p class="dashboard-kicker">Sharing</p>
-                <h2>Share Timetable</h2>
+                <p class="dashboard-kicker">{{ _('Sharing') }}</p>
+                <h2>{{ _('Share Timetable') }}</h2>
                 <p id="timetable-output">
-                    Make your timetable available for other users to view.
+                    {{ _('Make your timetable available for other users to view.') }}
                 </p>
 
                 <button class="btn dashboard-btn-primary" onclick="shareTimetable()">
-                    Share Timetable
+                    {{ _('Share Timetable') }}
                 </button>
 
                 <a href="#" class="btn dashboard-btn-secondary" style="margin-top: 12px;">
-                    View Shared Timetables
+                    {{ _('View Shared Timetables') }}
                 </a>
             </section>
         </aside>
