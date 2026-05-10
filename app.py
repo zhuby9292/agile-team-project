@@ -132,6 +132,10 @@ def course_selection():
 def timetable():
     return render_template("timetable.html", current_user=current_user)
 
+@app.route("/admin-dashboard.html")
+def admin_dashboard():
+    return render_template("admin-dashboard.html", current_user=current_user)
+
 @app.route("/forgot-password")
 def forgot_password():
     return render_template("forgot-password.html")
