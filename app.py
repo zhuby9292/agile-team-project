@@ -16,6 +16,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "temporary-development-secret-key")
+app.config["ADMIN_EMAILS"] = os.environ.get("ADMIN_EMAILS", "admin@example.com")
+
+# Basic SQLite database configuration.
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///course_planner.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -52,6 +55,23 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+def is_admin_user(user):
+    admin_emails = {
+        email.strip().lower()
+        for email in app.config["ADMIN_EMAILS"].split(",")
+        if email.strip()
+    }
+
+    return user.is_authenticated and user.email.lower() in admin_emails
+
+
+@app.context_processor
+def inject_admin_status():
+    return {
+        "is_admin": current_user.is_authenticated and is_admin_user(current_user)
+    }
 
 
 @app.route("/set-language/<language>")
@@ -162,6 +182,10 @@ def timetable():
 @app.route("/admin-dashboard.html")
 @login_required
 def admin_dashboard():
+    if not is_admin_user(current_user):
+        flash("You do not have permission to access the admin dashboard.", "error")
+        return redirect(url_for("homepage"))
+
     return render_template("admin-dashboard.html", current_user=current_user)
 
 
