@@ -1806,7 +1806,86 @@ body.dark-mode .signup-prompt p {
     width: 100%;
 }
 
-.course-card {
+.admin-hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f3f7fb 100%);
+}
+
+.admin-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.admin-stat-card {
+    min-height: 150px;
+}
+
+.admin-management-grid {
+    margin-bottom: 24px;
+}
+
+.admin-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-table {
+    margin-bottom: 0;
+    background: white;
+}
+
+.admin-table thead th {
+    color: #183b5b;
+    border-bottom: 2px solid #d9e1ea;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.admin-table tbody td {
+    color: #43505d;
+    vertical-align: middle;
+}
+
+.admin-status {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.admin-status.active {
+    background: #e7f6ec;
+    color: #2f7a47;
+}
+
+.admin-status.pending {
+    background: #f4f1e8;
+    color: #8a6b2d;
+}
+
+.admin-course-list strong {
+    color: #183b5b;
+}
+
+.admin-action-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 991px) {
+    .admin-summary-grid,
+    .admin-action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .admin-summary-grid,
+    .admin-action-grid {
+        grid-template-columns: 1fr;
+    }
+}.course-card {
     min-height: 330px;
     display: flex;
     flex-direction: column;

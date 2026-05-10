@@ -224,8 +224,32 @@ function showDashboardMessage(message) {
     console.log("Dashboard action clicked: " + message);
 }
 
-// Stores the courses selected by the user.
-let selectedCourses = [];
+// Stores selected courses so they can be used across pages.
+const SELECTED_COURSES_STORAGE_KEY = "selectedCourses";
+
+let selectedCourses = loadSelectedCourses();
+
+function loadSelectedCourses() {
+    const savedCourses = localStorage.getItem(SELECTED_COURSES_STORAGE_KEY);
+
+    if (!savedCourses) {
+        return [];
+    }
+
+    try {
+        return JSON.parse(savedCourses);
+    } catch (error) {
+        console.log("Selected courses could not be loaded:", error);
+        return [];
+    }
+}
+
+function saveSelectedCourses() {
+    localStorage.setItem(
+        SELECTED_COURSES_STORAGE_KEY,
+        JSON.stringify(selectedCourses)
+    );
+}
 
 // Sample UWA-style degree data used for the course selection page.
 const degreeOptions = {
@@ -676,9 +700,10 @@ function updateDegreeOptions() {
     const selectedLevel = studyLevelSelect.value;
     const selectedLevelText = studyLevelSelect.options[studyLevelSelect.selectedIndex].text;
 
-    // Reset selected courses whenever the study level changes.
-    selectedCourses = [];
-    displaySelectedCourses();
+   // Reset selected courses whenever the study level changes.
+   selectedCourses = [];
+   saveSelectedCourses();
+   displaySelectedCourses();
 
     // Clear available courses until a degree is selected.
     displayAvailableCourses("");
@@ -747,9 +772,10 @@ function selectDegree() {
 
     const selectedDegree = degreeSelect.value;
 
-    // Reset selected courses whenever the degree changes.
-    selectedCourses = [];
-    displaySelectedCourses();
+   // Reset selected courses whenever the degree changes.
+selectedCourses = [];
+saveSelectedCourses();
+displaySelectedCourses();
 
     if (!selectedDegree) {
         if (courseMessage) {

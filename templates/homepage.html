@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Planner - Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
@@ -18,10 +19,11 @@
             </div>
 
             <nav class="auth-links app-links">
-                <a href="{{ url_for('homepage') }}" class="active">Dashboard</a>
-                <a href="{{ url_for('course_selection') }}">Courses</a>
-                <a href="{{ url_for('timetable') }}">Timetable</a>
-                <a href="{{ url_for('index') }}">Logout</a>
+               <a href="{{ url_for('homepage') }}" class="active">Dashboard</a>
+<a href="{{ url_for('course_selection') }}">Courses</a>
+<a href="{{ url_for('timetable') }}">Timetable</a>
+<a href="{{ url_for('admin_dashboard') }}">Admin</a>
+<a href="{{ url_for('index') }}">Logout</a>
             </nav>
 
             <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode" aria-pressed="false">
