@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ session.get('language', 'en') }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}Course Planner{% endblock %}</title>
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <title>{% block title %}{{ _('Course Planner') }}{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/svg+xml"
+        href="{{ url_for('static', filename='favicon.svg') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body class="app-page">
@@ -20,20 +24,52 @@
 
             <div class="brand">
                 <span class="brand-icon glyphicon glyphicon-calendar"></span>
-                <span class="brand-name">Course Planner</span>
+                <span class="brand-name">{{ _('Course Planner') }}</span>
             </div>
 
             {% block nav %}
             <nav class="auth-links">
-                <a href="{{ url_for('index') }}">Sign In</a>
-                <a href="{{ url_for('signup') }}">Sign Up</a>
+                <a href="{{ url_for('index') }}">{{ _('Sign In') }}</a>
+                <a href="{{ url_for('signup') }}">{{ _('Sign Up') }}</a>
             </nav>
             {% endblock %}
 
-            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
-                <span class="theme-toggle-label">Dark</span>
-                <span class="theme-toggle-thumb"></span>
-            </button>
+            <div class="header-actions">
+
+                <div class="language-icon-dropdown">
+                    <img src="{{ url_for('static', filename='images/translate.png') }}"
+                        alt="{{ _('Language') }}"
+                        class="language-icon">
+
+                    <select onchange="window.location.href=this.value"
+                        class="language-icon-select"
+                        aria-label="{{ _('Select language') }}">
+
+                        <option value="{{ url_for('set_language', language='en') }}"
+                            {% if session.get("language", "en") == "en" %}selected{% endif %}>
+                            {{ _('English') }}
+                        </option>
+
+                        <option value="{{ url_for('set_language', language='zh') }}"
+                            {% if session.get("language", "en") == "zh" %}selected{% endif %}>
+                            {{ _('Chinese') }}
+                        </option>
+
+                    </select>
+                </div>
+
+                <button type="button"
+                    class="theme-toggle"
+                    onclick="toggleDarkMode()"
+                    aria-label="{{ _('Toggle dark mode') }}">
+
+                    <span class="theme-toggle-label">{{ _('Dark') }}</span>
+                    <span class="theme-toggle-thumb"></span>
+
+                </button>
+
+            </div>
+
         </div>
     </header>
 
@@ -44,9 +80,56 @@
 
     <footer class="auth-footer">
         <div class="container">
-            <p>Created for the Agile Web Development Group Project.</p>
+            <p>{{ _('Created for the Agile Web Development Group Project.') }}</p>
         </div>
     </footer>
+
+    <script>
+        window.translations = {
+            "No courses selected yet.": "{{ _('No courses selected yet.') }}",
+            "Not generated": "{{ _('Not generated') }}",
+            "Please select courses before generating a timetable.": "{{ _('Please select courses before generating a timetable.') }}",
+            "Ready": "{{ _('Ready') }}",
+            "Generated": "{{ _('Generated') }}",
+            "Conflict": "{{ _('Conflict') }}",
+            "The weekly timetable has been generated successfully.": "{{ _('The weekly timetable has been generated successfully.') }}",
+            "The timetable has been cleared.": "{{ _('The timetable has been cleared.') }}",
+            "Your timetable has been shared successfully. Other users can now view it from the shared timetables page.": "{{ _('Your timetable has been shared successfully. Other users can now view it from the shared timetables page.') }}",
+            "Please select a degree first.": "{{ _('Please select a degree first.') }}",
+            "Please choose a degree before adding courses.": "{{ _('Please choose a degree before adding courses.') }}",
+            "Please select a study level, then choose a degree before adding courses.": "{{ _('Please select a study level, then choose a degree before adding courses.') }}",
+            "Please select a study level and degree to view available courses.": "{{ _('Please select a study level and degree to view available courses.') }}",
+            "Not selected": "{{ _('Not selected') }}",
+            "-- Select a study level first --": "{{ _('-- Select a study level first --') }}",
+            "-- Select a degree --": "{{ _('-- Select a degree --') }}",
+            "Now select a degree from the available": "{{ _('Now select a degree from the available') }}",
+            "options.": "{{ _('options.') }}",
+            "selected. You can now add courses to your study plan.": "{{ _('selected. You can now add courses to your study plan.') }}",
+            "Add Course": "{{ _('Add Course') }}",
+            "Remove": "{{ _('Remove') }}",
+            "credits": "{{ _('credits') }}",
+            "credit points": "{{ _('credit points') }}",
+            "has already been added.": "{{ _('has already been added.') }}",
+            "added successfully.": "{{ _('added successfully.') }}",
+            "Semester conflict detected. Please select courses from the same semester.": "{{ _('Semester conflict detected. Please select courses from the same semester.') }}",
+            "Light": "{{ _('Light') }}",
+            "Dark": "{{ _('Dark') }}",
+            "Monday": "{{ _('Monday') }}",
+            "Tuesday": "{{ _('Tuesday') }}",
+            "Wednesday": "{{ _('Wednesday') }}",
+            "Thursday": "{{ _('Thursday') }}",
+            "Friday": "{{ _('Friday') }}",
+            "You selected courses from different semesters. Please choose courses from one semester before generating a timetable.": "{{ _('You selected courses from different semesters. Please choose courses from one semester before generating a timetable.') }}",
+            "Please complete all fields.": "{{ _('Please complete all fields.') }}",
+            "Please enter your email address.": "{{ _('Please enter your email address.') }}",
+            "Verification code sent. Redirecting...": "{{ _('Verification code sent. Redirecting...') }}",
+            "Please enter the verification code and new password.": "{{ _('Please enter the verification code and new password.') }}",
+            "Invalid verification code. Please try again.": "{{ _('Invalid verification code. Please try again.') }}",
+            "Password must be at least 6 characters.": "{{ _('Password must be at least 6 characters.') }}",
+            "Password reset successful! You can now sign in with your new password.": "{{ _('Password reset successful! You can now sign in with your new password.') }}",
+            "Password reset successful! Please sign in again.": "{{ _('Password reset successful! Please sign in again.') }}"
+        };
+    </script>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
