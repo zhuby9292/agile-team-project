@@ -2000,3 +2000,112 @@ body.dark-mode .signup-prompt p {
         grid-template-columns: 1fr;
     }
 }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-icon-dropdown {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    z-index: 50;
+}
+
+.language-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.language-icon-select {
+    width: 42px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    color: #183b5b;
+    cursor: pointer;
+    appearance: auto;
+    font-size: 12px;
+    text-indent: -9999px;
+    padding-left: 22px;
+}
+
+.language-icon-select:focus {
+    outline: none;
+}
+
+.language-icon-select option {
+    color: #0f2d4a;
+    background-color: #ffffff;
+}
+
+body.dark-mode .language-icon-select {
+    color: #ffffff;
+    background: transparent;
+    font-size: 12px;
+    text-indent: -9999px;
+}
+
+body.dark-mode .language-icon-select option {
+    color: #0f2d4a;
+    background-color: #ffffff;
+}
+
+.language-icon-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid #cbd9e8;
+    border-radius: 999px;
+    background: #f4f8fc;
+    box-shadow: 0 6px 18px rgba(19, 61, 95, 0.08);
+}
+
+.language-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.language-icon-select {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #123452;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 22px 2px 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.language-icon-dropdown::after {
+    content: "▾";
+    position: absolute;
+    right: 12px;
+    font-size: 12px;
+    color: #123452;
+    pointer-events: none;
+}
+
+.language-icon-select option {
+    color: #123452;
+    background: #ffffff;
+    font-weight: 600;
+}
+
+body.dark-mode .language-icon-dropdown {
+    background: #183b5c;
+    border-color: #2f5f8f;
+}
+
+body.dark-mode .language-icon-select,
+body.dark-mode .language-icon-dropdown::after {
+    color: #ffffff;
+}

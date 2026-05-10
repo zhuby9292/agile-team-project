@@ -1,36 +1,35 @@
 {% extends "dashboard-base.html" %}
 
-{% block title %}Course Planner - Dashboard{% endblock %}
+{% block title %}{{ _('Course Planner - Dashboard') }}{% endblock %}
 
 {% block content %}
 <div class="container dashboard-container">
 
     <section class="dashboard-hero">
         <div class="dashboard-welcome">
-            <p class="dashboard-kicker">Student workspace</p>
-            <h1>Welcome to your course planning dashboard.</h1>
+            <p class="dashboard-kicker">{{ _('Student workspace') }}</p>
+            <h1>{{ _('Welcome to your course planning dashboard.') }}</h1>
             <p class="dashboard-description">
-                Review your study progress, browse available courses, prepare your timetable,
-                and explore planning tools from one central place.
+                {{ _('Review your study progress, browse available courses, prepare your timetable, and explore planning tools from one central place.') }}
             </p>
         </div>
 
         <div class="dashboard-status-card">
-            <p class="status-label">Current Plan Status</p>
+            <p class="status-label">{{ _('Current Plan Status') }}</p>
 
             <div class="status-row">
-                <span>Degree selected</span>
-                <strong>Yes</strong>
+                <span>{{ _('Degree selected') }}</span>
+                <strong>{{ _('Yes') }}</strong>
             </div>
 
             <div class="status-row">
-                <span>Courses added</span>
+                <span>{{ _('Courses added') }}</span>
                 <strong>0</strong>
             </div>
 
             <div class="status-row">
-                <span>Timetable created</span>
-                <strong>No</strong>
+                <span>{{ _('Timetable created') }}</span>
+                <strong>{{ _('No') }}</strong>
             </div>
         </div>
     </section>
@@ -39,58 +38,58 @@
         <div class="dashboard-panel dashboard-panel-large">
             <div class="panel-title-row">
                 <div>
-                    <p class="dashboard-kicker">Overview</p>
-                    <h2>Study Summary</h2>
+                    <p class="dashboard-kicker">{{ _('Overview') }}</p>
+                    <h2>{{ _('Study Summary') }}</h2>
                 </div>
             </div>
 
             <div class="summary-grid">
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-education"></span>
-                    <p class="mini-label">Degree</p>
-                    <h3>Master of IT</h3>
-                    <p class="mini-note">Current study pathway</p>
+                    <p class="mini-label">{{ _('Degree') }}</p>
+                    <h3>{{ _('Master of IT') }}</h3>
+                    <p class="mini-note">{{ _('Current study pathway') }}</p>
                 </div>
 
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-list-alt"></span>
-                    <p class="mini-label">Selected Courses</p>
-                    <h3>0 Units</h3>
-                    <p class="mini-note">Courses selected for this semester</p>
+                    <p class="mini-label">{{ _('Selected Courses') }}</p>
+                    <h3>{{ _('0 Units') }}</h3>
+                    <p class="mini-note">{{ _('Courses selected for this semester') }}</p>
                 </div>
 
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-credit-card"></span>
-                    <p class="mini-label">Total Credits</p>
-                    <h3>0 Credit Points</h3>
-                    <p class="mini-note">Calculated from selected courses</p>
+                    <p class="mini-label">{{ _('Total Credits') }}</p>
+                    <h3>{{ _('0 Credit Points') }}</h3>
+                    <p class="mini-note">{{ _('Calculated from selected courses') }}</p>
                 </div>
             </div>
         </div>
 
         <div class="dashboard-panel">
-            <p class="dashboard-kicker">Progress</p>
-            <h2>Planning Flow</h2>
+            <p class="dashboard-kicker">{{ _('Progress') }}</p>
+            <h2>{{ _('Planning Flow') }}</h2>
 
             <div class="progress-list">
                 <div class="progress-item">
-                    <span>Sign in</span>
-                    <span class="progress-done">Done</span>
+                    <span>{{ _('Sign in') }}</span>
+                    <span class="progress-done">{{ _('Done') }}</span>
                 </div>
 
                 <div class="progress-item">
-                    <span>Dashboard</span>
-                    <span class="progress-done">Active</span>
+                    <span>{{ _('Dashboard') }}</span>
+                    <span class="progress-done">{{ _('Active') }}</span>
                 </div>
 
                 <div class="progress-item">
-                    <span>Course selection</span>
-                    <span class="progress-pending">Pending</span>
+                    <span>{{ _('Course selection') }}</span>
+                    <span class="progress-pending">{{ _('Pending') }}</span>
                 </div>
 
                 <div class="progress-item">
-                    <span>Timetable planning</span>
-                    <span class="progress-pending">Pending</span>
+                    <span>{{ _('Timetable planning') }}</span>
+                    <span class="progress-pending">{{ _('Pending') }}</span>
                 </div>
             </div>
         </div>
@@ -99,37 +98,37 @@
     <section class="dashboard-panel">
         <div class="panel-title-row">
             <div>
-                <p class="dashboard-kicker">Actions</p>
-                <h2>What would you like to do?</h2>
+                <p class="dashboard-kicker">{{ _('Actions') }}</p>
+                <h2>{{ _('What would you like to do?') }}</h2>
             </div>
         </div>
 
         <div class="action-grid dashboard-action-grid">
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-search"></span>
-                <h3>Browse Courses</h3>
-                <p>Explore available courses, course codes, credit points, and scheduling information.</p>
+                <h3>{{ _('Browse Courses') }}</h3>
+                <p>{{ _('Explore available courses, course codes, credit points, and scheduling information.') }}</p>
                 <a href="{{ url_for('course_selection') }}" class="btn dashboard-btn-primary">
-                    Browse Courses
+                    {{ _('Browse Courses') }}
                 </a>
             </div>
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-time"></span>
-                <h3>Plan Timetable</h3>
-                <p>Use your selected courses to prepare a clear weekly timetable structure.</p>
+                <h3>{{ _('Plan Timetable') }}</h3>
+                <p>{{ _('Use your selected courses to prepare a clear weekly timetable structure.') }}</p>
                 <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-primary">
-                    Open Timetable
+                    {{ _('Open Timetable') }}
                 </a>
             </div>
         </div>
     </section>
 
     <section class="dashboard-panel dashboard-message-panel">
-        <p class="dashboard-kicker">System message</p>
-        <h2>Dashboard Updates</h2>
+        <p class="dashboard-kicker">{{ _('System message') }}</p>
+        <h2>{{ _('Dashboard Updates') }}</h2>
         <p id="dashboard-output">
-            Use this dashboard to review your study plan and access the main course planning features.
+            {{ _('Use this dashboard to review your study plan and access the main course planning features.') }}
         </p>
     </section>
 

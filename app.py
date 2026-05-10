@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask_babel import Babel, gettext
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -14,16 +15,25 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
-# Secret key is required for flash messages and login sessions.
-# It checks the SECRET_KEY environment variable first.
-# If it does not exist, it uses a temporary development key.
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "temporary-development-secret-key")
-
-# Basic SQLite database configuration.
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///course_planner.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+app.config["BABEL_DEFAULT_LOCALE"] = "en"
+app.config["LANGUAGES"] = {
+    "en": "English",
+    "zh": "中文",
+}
+
+
+def get_locale():
+    return session.get("language", "en")
+
+
 db = SQLAlchemy(app)
+
+babel = Babel(app, locale_selector=get_locale)
+app.jinja_env.globals["_"] = gettext
 
 login_manager = LoginManager(app)
 login_manager.login_view = "index"
@@ -44,6 +54,14 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+@app.route("/set-language/<language>")
+def set_language(language):
+    if language in app.config["LANGUAGES"]:
+        session["language"] = language
+
+    return redirect(request.referrer or url_for("index"))
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -51,21 +69,21 @@ def index():
         password = request.form.get("password", "")
 
         if not email or not password:
-            flash("Please enter both your email address and password.", "error")
+            flash(gettext("Please enter both your email address and password."), "error")
             return redirect(url_for("index"))
 
         user = User.query.filter_by(email=email).first()
 
         if not user:
-            flash("No account found with this email address.", "error")
+            flash(gettext("No account found with this email address."), "error")
             return redirect(url_for("index"))
 
         if not check_password_hash(user.password_hash, password):
-            flash("Incorrect password. Please try again.", "error")
+            flash(gettext("Incorrect password. Please try again."), "error")
             return redirect(url_for("index"))
 
         login_user(user)
-        flash("Signed in successfully.", "success")
+        flash(gettext("Signed in successfully."), "success")
         return redirect(url_for("homepage"))
 
     return render_template("index.html")
@@ -86,25 +104,25 @@ def signup():
         confirm_password = request.form.get("confirm_password", "")
 
         if not full_name or not email or not student_id or not password or not confirm_password:
-            flash("Please complete all registration fields.", "error")
+            flash(gettext("Please complete all registration fields."), "error")
             return redirect(url_for("signup"))
 
         if password != confirm_password:
-            flash("Passwords do not match.", "error")
+            flash(gettext("Passwords do not match."), "error")
             return redirect(url_for("signup"))
 
         if len(password) < 6:
-            flash("Password must be at least 6 characters long.", "error")
+            flash(gettext("Password must be at least 6 characters long."), "error")
             return redirect(url_for("signup"))
 
         existing_email = User.query.filter_by(email=email).first()
         if existing_email:
-            flash("An account with this email already exists.", "error")
+            flash(gettext("An account with this email already exists."), "error")
             return redirect(url_for("signup"))
 
         existing_student_id = User.query.filter_by(student_id=student_id).first()
         if existing_student_id:
-            flash("An account with this student ID already exists.", "error")
+            flash(gettext("An account with this student ID already exists."), "error")
             return redirect(url_for("signup"))
 
         new_user = User(
@@ -117,7 +135,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        flash("Account created successfully. Please sign in.", "success")
+        flash(gettext("Account created successfully. Please sign in."), "success")
         return redirect(url_for("index"))
 
     return render_template("signup.html")
@@ -159,7 +177,7 @@ def admin_dashboard():
 @login_required
 def logout():
     logout_user()
-    flash("You have been logged out successfully.", "success")
+    flash(gettext("You have been logged out successfully."), "success")
     return redirect(url_for("index"))
 
 
