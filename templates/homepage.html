@@ -19,17 +19,17 @@
 
             <div class="status-row">
                 <span>{{ _('Degree selected') }}</span>
-                <strong>{{ _('Yes') }}</strong>
+                <strong id="dashboard-degree-status">{{ _('Yes') }}</strong>
             </div>
 
             <div class="status-row">
                 <span>{{ _('Courses added') }}</span>
-                <strong>0</strong>
+                <strong id="dashboard-course-count">0</strong>
             </div>
 
             <div class="status-row">
                 <span>{{ _('Timetable created') }}</span>
-                <strong>{{ _('No') }}</strong>
+                <strong id="dashboard-timetable-status">{{ _('No') }}</strong>
             </div>
         </div>
     </section>
@@ -47,21 +47,21 @@
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-education"></span>
                     <p class="mini-label">{{ _('Degree') }}</p>
-                    <h3>{{ _('Master of IT') }}</h3>
+                    <h3 id="dashboard-degree-name">{{ _('Not selected') }}</h3>
                     <p class="mini-note">{{ _('Current study pathway') }}</p>
                 </div>
 
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-list-alt"></span>
                     <p class="mini-label">{{ _('Selected Courses') }}</p>
-                    <h3>{{ _('0 Units') }}</h3>
+                    <h3><span id="dashboard-selected-count">0</span> {{ _('Units') }}</h3>
                     <p class="mini-note">{{ _('Courses selected for this semester') }}</p>
                 </div>
 
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-credit-card"></span>
                     <p class="mini-label">{{ _('Total Credits') }}</p>
-                    <h3>{{ _('0 Credit Points') }}</h3>
+                    <h3><span id="dashboard-credit-total">0</span> {{ _('Credit Points') }}</h3>
                     <p class="mini-note">{{ _('Calculated from selected courses') }}</p>
                 </div>
             </div>
@@ -84,12 +84,16 @@
 
                 <div class="progress-item">
                     <span>{{ _('Course selection') }}</span>
-                    <span class="progress-pending">{{ _('Pending') }}</span>
+                    <span id="dashboard-course-progress" class="progress-pending">
+                        Pending
+                    </span>
                 </div>
 
                 <div class="progress-item">
                     <span>{{ _('Timetable planning') }}</span>
-                    <span class="progress-pending">{{ _('Pending') }}</span>
+                    <span id="dashboard-timetable-progress" class="progress-pending">
+                        {{ _('Pending
+                    ') }}</span>
                 </div>
             </div>
         </div>

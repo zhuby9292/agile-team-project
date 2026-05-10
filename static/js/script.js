@@ -669,7 +669,8 @@ const courseOptions = {
     ]
 };
 
-function updateDegreeOptions() {
+// Updates the degree dropdown after the user selects a study level.
+function updateDegreeOptions(shouldResetCourses = true) {
     const studyLevelSelect = document.getElementById("study-level-select");
     const degreeSelect = document.getElementById("degree-select");
     const courseMessage = document.getElementById("course-message");
@@ -682,10 +683,16 @@ function updateDegreeOptions() {
 
     const selectedLevel = studyLevelSelect.value;
     const selectedLevelText = studyLevelSelect.options[studyLevelSelect.selectedIndex].text;
+    localStorage.setItem("selectedStudyLevel", selectedLevel);
 
-    selectedCourses = [];
-    saveSelectedCourses();
-    displaySelectedCourses();
+    if (shouldResetCourses) {
+        selectedCourses = [];
+        saveSelectedCourses();
+        localStorage.removeItem("selectedDegree");
+        localStorage.setItem("timetableGenerated", "false");
+        displaySelectedCourses();
+        loadDashboardStats();
+    }
 
     displayAvailableCourses("");
 
@@ -742,7 +749,8 @@ function updateDegreeOptions() {
     }
 }
 
-function selectDegree() {
+// Updates the selected degree summary after the user selects a degree.
+function selectDegree(shouldResetCourses = true) {
     const degreeSelect = document.getElementById("degree-select");
     const courseMessage = document.getElementById("course-message");
     const degreeSummary = document.getElementById("degree-summary");
@@ -753,11 +761,16 @@ function selectDegree() {
 
     const selectedDegree = degreeSelect.value;
 
-    selectedCourses = [];
-    saveSelectedCourses();
-    displaySelectedCourses();
-
     if (!selectedDegree) {
+        selectedCourses = [];
+        saveSelectedCourses();
+
+        localStorage.removeItem("selectedDegree");
+        localStorage.setItem("timetableGenerated", "false");
+
+        displaySelectedCourses();
+        loadDashboardStats();
+
         if (courseMessage) {
             courseMessage.textContent = t("Please choose a degree before adding courses.");
         }
@@ -768,6 +781,17 @@ function selectDegree() {
 
         displayAvailableCourses("");
         return;
+    }
+
+    localStorage.setItem("selectedDegree", selectedDegree);
+
+    // Reset selected courses whenever the degree changes.
+    if (shouldResetCourses) {
+        selectedCourses = [];
+        saveSelectedCourses();
+        localStorage.setItem("timetableGenerated", "false");
+        displaySelectedCourses();
+        loadDashboardStats();
     }
 
     if (courseMessage) {
@@ -940,8 +964,17 @@ function displaySelectedCourses() {
 
 function removeCourse(code) {
     selectedCourses = selectedCourses.filter(course => course.code !== code);
-    localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
+    saveSelectedCourses();
+
+    if (selectedCourses.length === 0) {
+        localStorage.setItem("timetableGenerated", "false");
+        localStorage.removeItem("selectedDegree");
+        localStorage.removeItem("selectedStudyLevel");
+    }
+
     displaySelectedCourses();
+    loadTimetablePage();
+    loadDashboardStats();
 }
 
 function filterCourses() {
@@ -1016,6 +1049,7 @@ function updateThemeToggleLabel(labelText) {
     });
 }
 
+// The following functions are placeholders for the timetable generation, clearing, and sharing features.
 function loadTimetablePage() {
     const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
     const courseList = document.getElementById("timetable-course-list");
@@ -1077,7 +1111,14 @@ function loadTimetablePage() {
         creditTotal.innerHTML = totalCredits;
     }
 
-    renderEmptyWeeklyCalendar();
+    const timetableGenerated =
+        localStorage.getItem("timetableGenerated");
+
+    if (timetableGenerated === "true") {
+        generateTimetable();
+    } else {
+        renderEmptyWeeklyCalendar();
+    }
 }
 
 function renderEmptyWeeklyCalendar() {
@@ -1162,6 +1203,8 @@ function generateTimetable() {
     if (output) {
         output.innerHTML = t("The weekly timetable has been generated successfully.");
     }
+
+    localStorage.setItem("timetableGenerated", "true");
 }
 
 function clearTimetable() {
@@ -1177,6 +1220,8 @@ function clearTimetable() {
     if (output) {
         output.innerHTML = t("The timetable has been cleared.");
     }
+
+    localStorage.setItem("timetableGenerated", "false");
 }
 
 function getCourseDay(timeText) {
@@ -1199,5 +1244,187 @@ function shareTimetable() {
 
 document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
+    restoreCourseSelectionForm();
+    displaySelectedCourses();
     loadTimetablePage();
+    loadDashboardStats();
 });
+
+function loadDashboardStats() {
+    const savedCourses =
+        JSON.parse(localStorage.getItem("selectedCourses")) || [];
+
+    const savedDegree =
+        localStorage.getItem("selectedDegree") || "Not selected";
+
+    const courseProgress =
+        document.getElementById("dashboard-course-progress");
+
+    const timetableProgress =
+        document.getElementById("dashboard-timetable-progress");
+
+    const courseCount = savedCourses.length;
+
+    let totalCredits = 0;
+
+    savedCourses.forEach(function (course) {
+        totalCredits += course.credits;
+    });
+
+    const courseCountTop =
+        document.getElementById("dashboard-course-count");
+
+    const degreeName =
+        document.getElementById("dashboard-degree-name");
+
+    const degreeStatus =
+        document.getElementById("dashboard-degree-status");
+
+    const timetableStatus =
+        document.getElementById("dashboard-timetable-status");
+
+    const selectedCount =
+        document.getElementById("dashboard-selected-count");
+
+    const creditTotal =
+        document.getElementById("dashboard-credit-total");
+
+    if (courseCountTop) {
+        courseCountTop.innerHTML = courseCount;
+    }
+
+    if (degreeName) {
+        degreeName.innerHTML = savedDegree;
+    }
+
+    if (degreeStatus) {
+        degreeStatus.innerHTML =
+            savedDegree !== "Not selected" ? "Yes" : "No";
+    }
+
+    const timetableGenerated =
+        localStorage.getItem("timetableGenerated");
+
+    if (timetableStatus) {
+        timetableStatus.innerHTML =
+            timetableGenerated === "true" && courseCount > 0 ? "Yes" : "No";
+    }
+
+    if (selectedCount) {
+        selectedCount.innerHTML = courseCount;
+    }
+
+    if (creditTotal) {
+        creditTotal.innerHTML = totalCredits;
+    }
+
+    if (courseProgress) {
+        courseProgress.innerHTML =
+            courseCount > 0 ? "Done" : "Pending";
+
+        courseProgress.className =
+            courseCount > 0
+                ? "progress-done"
+                : "progress-pending";
+    }
+
+    if (timetableProgress) {
+
+        if (timetableGenerated === "true" && courseCount > 0) {
+
+            timetableProgress.innerHTML = "Generated";
+            timetableProgress.className = "progress-done";
+
+        } else if (courseCount > 0) {
+
+            timetableProgress.innerHTML = "Ready";
+            timetableProgress.className = "progress-active";
+
+        } else {
+
+            timetableProgress.innerHTML = "Pending";
+            timetableProgress.className = "progress-pending";
+        }
+    }
+}
+
+function restoreCourseSelectionForm() {
+    const savedStudyLevel = localStorage.getItem("selectedStudyLevel");
+    const savedDegree = localStorage.getItem("selectedDegree");
+
+    const studyLevelSelect = document.getElementById("study-level-select");
+    const degreeSelect = document.getElementById("degree-select");
+
+    if (!studyLevelSelect || !degreeSelect || !savedStudyLevel) {
+        return;
+    }
+
+    studyLevelSelect.value = savedStudyLevel;
+
+    updateDegreeOptions(false);
+
+    if (savedDegree) {
+        degreeSelect.value = savedDegree;
+
+        const degreeSummary = document.getElementById("degree-summary");
+        const courseMessage = document.getElementById("course-message");
+
+        if (degreeSummary) {
+            degreeSummary.textContent = savedDegree;
+        }
+
+        if (courseMessage) {
+            courseMessage.textContent =
+                savedDegree + " selected. You can now add courses to your study plan.";
+        }
+
+        displayAvailableCourses(savedDegree);
+    }
+}
+
+function downloadTimetable() {
+
+    const savedCourses =
+        JSON.parse(localStorage.getItem("selectedCourses")) || [];
+
+    const output =
+        document.getElementById("timetable-output");
+
+    if (savedCourses.length === 0) {
+
+        if (output) {
+            output.innerHTML =
+                "Please select courses before downloading a timetable.";
+        }
+
+        return;
+    }
+
+    let csvContent =
+        "Course Code,Course Name,Credits,Time,Stream,Semester\n";
+
+    savedCourses.forEach(function (course) {
+
+        csvContent +=
+            `"${course.code}","${course.name}",${course.credits},"${course.time}","${course.stream}","${course.semester}"\n`;
+    });
+
+    const blob =
+        new Blob([csvContent], { type: "text/csv" });
+
+    const downloadLink =
+        document.createElement("a");
+
+    downloadLink.href =
+        window.URL.createObjectURL(blob);
+
+    downloadLink.download =
+        "timetable.csv";
+
+    downloadLink.click();
+
+    if (output) {
+        output.innerHTML =
+            "Timetable downloaded successfully.";
+    }
+}

@@ -2001,6 +2001,23 @@ body.dark-mode .signup-prompt p {
     }
 }
 
+.progress-done,
+.progress-pending,
+.progress-active {
+    display: inline-block;
+    min-width: 72px;
+    text-align: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.progress-active {
+    background: #e8f0ff;
+    color: #355caa;
+}
+
 .header-actions {
     display: flex;
     align-items: center;

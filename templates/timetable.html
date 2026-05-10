@@ -72,19 +72,15 @@
             </section>
 
             <section class="dashboard-panel dashboard-message-panel">
-                <p class="dashboard-kicker">{{ _('Sharing') }}</p>
-                <h2>{{ _('Share Timetable') }}</h2>
+                <p class="dashboard-kicker">{{ _('Download') }}</p>
+                <h2>{{ _('Download Timetable') }}</h2>
                 <p id="timetable-output">
-                    {{ _('Make your timetable available for other users to view.') }}
+                    {{ _('Download your generated timetable as a CSV file.') }}
                 </p>
 
-                <button class="btn dashboard-btn-primary" onclick="shareTimetable()">
-                    {{ _('Share Timetable') }}
+                <button class="btn dashboard-btn-primary" onclick="downloadTimetable()">
+                    {{ _('Download CSV') }}
                 </button>
-
-                <a href="#" class="btn dashboard-btn-secondary" style="margin-top: 12px;">
-                    {{ _('View Shared Timetables') }}
-                </a>
             </section>
         </aside>
     </section>
