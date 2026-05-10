@@ -238,6 +238,63 @@ function saveSelectedCourses() {
     );
 }
 
+function saveSelectedCoursesToBackend() {
+    const courseCodes = selectedCourses.map(function (course) {
+        return course.code;
+    });
+
+    fetch("/api/save-selection", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            courses: courseCodes
+        })
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data.message);
+        })
+        .catch(function (error) {
+            console.log("Selected courses could not be saved:", error);
+        });
+}
+
+function loadCoursesFromBackend() {
+    fetch("/api/courses")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            courseOptions = {};
+
+            data.courses.forEach(function (course) {
+                if (!courseOptions[course.degree]) {
+                    courseOptions[course.degree] = [];
+                }
+
+                courseOptions[course.degree].push({
+                    code: course.code,
+                    name: course.name,
+                    credits: course.credits,
+                    time: course.time,
+                    stream: course.degree,
+                    semester: course.semester
+                });
+            });
+
+            restoreCourseSelectionForm();
+        })
+        .catch(function (error) {
+            console.log("Courses could not be loaded from backend:", error);
+        });
+}
+
+let courseOptions = {};
+
 const degreeOptions = {
     bachelor: [
         "Bachelor of Arts",
@@ -262,412 +319,6 @@ const degreeOptions = {
     ]
 };
 
-const courseOptions = {
-    "Bachelor of Arts": [
-        {
-            code: "ENGL1401",
-            name: "Narratives of Place",
-            credits: 6,
-            time: "Monday 10:00–12:00",
-            stream: "Humanities and communication",
-            semester: "semester1"
-        },
-        {
-            code: "HIST1001",
-            name: "Making History",
-            credits: 6,
-            time: "Tuesday 13:00–15:00",
-            stream: "History and culture",
-            semester: "semester1"
-        },
-        {
-            code: "PHIL1002",
-            name: "Introduction to Critical Thinking",
-            credits: 6,
-            time: "Thursday 11:00–13:00",
-            stream: "Philosophy and reasoning",
-            semester: "semester2"
-        }
-    ],
-
-    "Bachelor of Commerce": [
-        {
-            code: "ACCT1101",
-            name: "Financial Accounting",
-            credits: 6,
-            time: "Monday 09:00–11:00",
-            stream: "Accounting",
-            semester: "semester1"
-        },
-        {
-            code: "ECON1101",
-            name: "Microeconomics",
-            credits: 6,
-            time: "Wednesday 10:00–12:00",
-            stream: "Economics",
-            semester: "semester1"
-        },
-        {
-            code: "MGMT1135",
-            name: "Organisational Behaviour",
-            credits: 6,
-            time: "Friday 12:00–14:00",
-            stream: "Management",
-            semester: "semester1"
-        }
-    ],
-
-    "Bachelor of Science": [
-        {
-            code: "SCIE1106",
-            name: "Molecular Biology of the Cell",
-            credits: 6,
-            time: "Monday 14:00–16:00",
-            stream: "Science foundation",
-            semester: "semester1"
-        },
-        {
-            code: "MATH1011",
-            name: "Mathematical Methods",
-            credits: 6,
-            time: "Tuesday 09:00–11:00",
-            stream: "Mathematics",
-            semester: "semester1"
-        },
-        {
-            code: "STAT1400",
-            name: "Statistics for Science",
-            credits: 6,
-            time: "Thursday 10:00–12:00",
-            stream: "Statistics",
-            semester: "semester1"
-        }
-    ],
-
-    "Bachelor of Biomedical Science": [
-        {
-            code: "ANHB1101",
-            name: "Human Biology I",
-            credits: 6,
-            time: "Monday 09:00–11:00",
-            stream: "Human biology",
-            semester: "semester1"
-        },
-        {
-            code: "CHEM1001",
-            name: "Chemistry for the Life Sciences",
-            credits: 6,
-            time: "Tuesday 12:00–14:00",
-            stream: "Chemistry",
-            semester: "semester1"
-        },
-        {
-            code: "IMED1001",
-            name: "Form and Function",
-            credits: 6,
-            time: "Thursday 14:00–16:00",
-            stream: "Biomedical science",
-            semester: "semester2"
-        }
-    ],
-
-    "Bachelor of Engineering": [
-        {
-            code: "ENGG1100",
-            name: "Engineering Design",
-            credits: 6,
-            time: "Monday 10:00–12:00",
-            stream: "Engineering foundation",
-            semester: "semester1"
-        },
-        {
-            code: "MATH1012",
-            name: "Mathematical Theory and Methods",
-            credits: 6,
-            time: "Wednesday 09:00–11:00",
-            stream: "Mathematics",
-            semester: "semester2"
-        },
-        {
-            code: "PHYS1001",
-            name: "Physics for Scientists and Engineers",
-            credits: 6,
-            time: "Friday 10:00–12:00",
-            stream: "Physics",
-            semester: "semester1"
-        }
-    ],
-
-    "Master of Information Technology": [
-        {
-            code: "CITS5505",
-            name: "Agile Web Development",
-            credits: 6,
-            time: "Monday 10:00–12:00",
-            stream: "Web development",
-            semester: "semester1"
-        },
-        {
-            code: "CITS5504",
-            name: "Data Warehousing",
-            credits: 6,
-            time: "Tuesday 14:00–16:00",
-            stream: "Data systems",
-            semester: "semester1"
-        },
-        {
-            code: "CITS5508",
-            name: "Machine Learning",
-            credits: 6,
-            time: "Wednesday 09:00–11:00",
-            stream: "Artificial intelligence",
-            semester: "semester2"
-        }
-    ],
-
-    "Master of Data Science": [
-        {
-            code: "CITS5508",
-            name: "Machine Learning",
-            credits: 6,
-            time: "Monday 09:00–11:00",
-            stream: "Machine learning",
-            semester: "semester1"
-        },
-        {
-            code: "STAT4066",
-            name: "Bayesian Computing and Statistics",
-            credits: 6,
-            time: "Wednesday 13:00–15:00",
-            stream: "Statistics",
-            semester: "semester1"
-        },
-        {
-            code: "DATA5001",
-            name: "Data Science Principles",
-            credits: 6,
-            time: "Friday 10:00–12:00",
-            stream: "Data science",
-            semester: "semester2"
-        }
-    ],
-
-    "Master of Business Analytics": [
-        {
-            code: "BUSN5001",
-            name: "Business Analytics Foundations",
-            credits: 6,
-            time: "Monday 11:00–13:00",
-            stream: "Business analytics",
-            semester: "semester1"
-        },
-        {
-            code: "MGMT5504",
-            name: "Data Analysis and Decision Making",
-            credits: 6,
-            time: "Tuesday 14:00–16:00",
-            stream: "Decision making",
-            semester: "semester2"
-        },
-        {
-            code: "MKTG5502",
-            name: "Marketing Analytics",
-            credits: 6,
-            time: "Thursday 10:00–12:00",
-            stream: "Marketing",
-            semester: "semester1"
-        }
-    ],
-
-    "Master of Professional Engineering": [
-        {
-            code: "GENG5507",
-            name: "Risk, Reliability and Safety",
-            credits: 6,
-            time: "Monday 13:00–15:00",
-            stream: "Engineering management",
-            semester: "semester1"
-        },
-        {
-            code: "ENGG5501",
-            name: "Engineering Practice",
-            credits: 6,
-            time: "Wednesday 10:00–12:00",
-            stream: "Professional practice",
-            semester: "semester1"
-        },
-        {
-            code: "CIVL5502",
-            name: "Advanced Structural Analysis",
-            credits: 6,
-            time: "Friday 09:00–11:00",
-            stream: "Civil engineering",
-            semester: "semester1"
-        }
-    ],
-
-    "Master of Studies": [
-        {
-            code: "STUD5001",
-            name: "Research Methods",
-            credits: 6,
-            time: "Monday 10:00–12:00",
-            stream: "Research preparation",
-            semester: "semester1"
-        },
-        {
-            code: "STUD5002",
-            name: "Advanced Academic Practice",
-            credits: 6,
-            time: "Wednesday 12:00–14:00",
-            stream: "Academic development",
-            semester: "semester2"
-        },
-        {
-            code: "STUD5003",
-            name: "Project Preparation",
-            credits: 6,
-            time: "Friday 11:00–13:00",
-            stream: "Project planning",
-            semester: "semester2"
-        }
-    ],
-
-    "Graduate Diploma in Health Professions Education": [
-        {
-            code: "HPEA5101",
-            name: "Teaching and Learning in Health",
-            credits: 6,
-            time: "Monday 09:00–11:00",
-            stream: "Health education",
-            semester: "semester1"
-        },
-        {
-            code: "HPEA5102",
-            name: "Assessment in Health Professions",
-            credits: 6,
-            time: "Wednesday 10:00–12:00",
-            stream: "Assessment",
-            semester: "semester2"
-        },
-        {
-            code: "HPEA5103",
-            name: "Curriculum Design in Health",
-            credits: 6,
-            time: "Friday 13:00–15:00",
-            stream: "Curriculum",
-            semester: "semester2"
-        }
-    ],
-
-    "Graduate Diploma in Infectious Diseases": [
-        {
-            code: "MICR5001",
-            name: "Medical Microbiology",
-            credits: 6,
-            time: "Monday 11:00–13:00",
-            stream: "Microbiology",
-            semester: "semester1"
-        },
-        {
-            code: "IDIS5002",
-            name: "Principles of Infectious Diseases",
-            credits: 6,
-            time: "Tuesday 14:00–16:00",
-            stream: "Infectious diseases",
-            semester: "semester2"
-        },
-        {
-            code: "PUBH5749",
-            name: "Foundations of Public Health",
-            credits: 6,
-            time: "Thursday 09:00–11:00",
-            stream: "Public health",
-            semester: "semester2"
-        }
-    ],
-
-    "Graduate Diploma in Environmental Science": [
-        {
-            code: "ENVT4401",
-            name: "Environmental Impact Assessment",
-            credits: 6,
-            time: "Monday 10:00–12:00",
-            stream: "Environmental planning",
-            semester: "semester1"
-        },
-        {
-            code: "ENVT5502",
-            name: "Climate Change Science",
-            credits: 6,
-            time: "Wednesday 13:00–15:00",
-            stream: "Climate science",
-            semester: "semester2"
-        },
-        {
-            code: "ENVT5503",
-            name: "Environmental Management",
-            credits: 6,
-            time: "Friday 10:00–12:00",
-            stream: "Management",
-            semester: "semester2"
-        }
-    ],
-
-    "Graduate Diploma in Business": [
-        {
-            code: "BUSN5101",
-            name: "Business Foundations",
-            credits: 6,
-            time: "Monday 13:00–15:00",
-            stream: "Business",
-            semester: "semester1"
-        },
-        {
-            code: "MGMT5501",
-            name: "Management and Organisations",
-            credits: 6,
-            time: "Tuesday 10:00–12:00",
-            stream: "Management",
-            semester: "semester2"
-        },
-        {
-            code: "ECON5503",
-            name: "Economic Management",
-            credits: 6,
-            time: "Thursday 12:00–14:00",
-            stream: "Economics",
-            semester: "semester1"
-        }
-    ],
-
-    "Graduate Diploma in Education": [
-        {
-            code: "EDUC5501",
-            name: "Teaching and Learning",
-            credits: 6,
-            time: "Monday 09:00–11:00",
-            stream: "Education",
-            semester: "semester1"
-        },
-        {
-            code: "EDUC5502",
-            name: "Classroom Practice",
-            credits: 6,
-            time: "Wednesday 11:00–13:00",
-            stream: "Teaching practice",
-            semester: "semester2"
-        },
-        {
-            code: "EDUC5503",
-            name: "Curriculum and Assessment",
-            credits: 6,
-            time: "Friday 14:00–16:00",
-            stream: "Curriculum",
-            semester: "semester1"
-        }
-    ]
-};
 
 // Updates the degree dropdown after the user selects a study level.
 function updateDegreeOptions(shouldResetCourses = true) {
@@ -878,6 +529,15 @@ function addCourse(code, name, credits, time, stream, semester) {
         return;
     }
 
+    const timeConflict = selectedCourses.some(function (course) {
+        return course.time === time;
+    });
+
+    if (timeConflict) {
+        alert(t("Time conflict detected. This course overlaps with another selected course."));
+        return;
+    }
+
     const exists = selectedCourses.some(course => course.code === code);
 
     if (exists) {
@@ -903,6 +563,7 @@ function addCourse(code, name, credits, time, stream, semester) {
     }
 
     displaySelectedCourses();
+    saveSelectedCoursesToBackend();
 }
 
 function displaySelectedCourses() {
@@ -936,19 +597,20 @@ function displaySelectedCourses() {
         totalCredits += course.credits;
 
         return `
-            <div class="selected-course-item">
-                <div>
-                    <strong>${course.code}</strong>
-                    <span>${t(course.name)}</span>
-                    <small>${course.credits} ${t("credit points")}</small>
-                </div>
-
-                <button class="btn btn-xs btn-danger"
-                    onclick="removeCourse('${course.code}')">
-                    ${t("Remove")}
-                </button>
+        <div class="selected-course-item">
+            <div class="selected-course-info">
+                <strong>${course.code}</strong>
+                <span>${t(course.name)} · ${course.credits} ${t("credit points")}</span>
             </div>
-        `;
+
+            <button
+                class="remove-course-btn"
+                onclick="removeCourse('${course.code}')"
+            >
+                ${t("Remove")}
+            </button>
+        </div>
+`;
     }).join("");
 
     creditOutput.innerHTML = totalCredits;
@@ -975,6 +637,7 @@ function removeCourse(code) {
     displaySelectedCourses();
     loadTimetablePage();
     loadDashboardStats();
+    saveSelectedCoursesToBackend();
 }
 
 function filterCourses() {
@@ -1233,18 +896,9 @@ function getCourseStartTime(timeText) {
     return timePart.split("–")[0];
 }
 
-function shareTimetable() {
-    const output = document.getElementById("timetable-output");
-
-    if (output) {
-        output.innerHTML =
-            t("Your timetable has been shared successfully. Other users can now view it from the shared timetables page.");
-    }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
-    restoreCourseSelectionForm();
+    loadCoursesFromBackend();
     displaySelectedCourses();
     loadTimetablePage();
     loadDashboardStats();
