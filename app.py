@@ -186,7 +186,15 @@ def admin_dashboard():
         flash("You do not have permission to access the admin dashboard.", "error")
         return redirect(url_for("homepage"))
 
-    return render_template("admin-dashboard.html", current_user=current_user)
+    total_users = User.query.count()
+    recent_users = User.query.order_by(User.id.desc()).limit(5).all()
+
+    return render_template(
+        "admin-dashboard.html",
+        current_user=current_user,
+        total_users=total_users,
+        recent_users=recent_users,
+    )
 
 
 @app.route("/logout")
