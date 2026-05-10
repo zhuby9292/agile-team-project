@@ -1,0 +1,1011 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-10 18:03+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app.py:72
+msgid "Please enter both your email address and password."
+msgstr ""
+
+#: app.py:78
+msgid "No account found with this email address."
+msgstr ""
+
+#: app.py:82
+msgid "Incorrect password. Please try again."
+msgstr ""
+
+#: app.py:86
+msgid "Signed in successfully."
+msgstr ""
+
+#: app.py:107
+msgid "Please complete all registration fields."
+msgstr ""
+
+#: app.py:111
+msgid "Passwords do not match."
+msgstr ""
+
+#: app.py:115
+msgid "Password must be at least 6 characters long."
+msgstr ""
+
+#: app.py:120
+msgid "An account with this email already exists."
+msgstr ""
+
+#: app.py:125
+msgid "An account with this student ID already exists."
+msgstr ""
+
+#: app.py:138
+msgid "Account created successfully. Please sign in."
+msgstr ""
+
+#: app.py:172
+msgid "You have been logged out successfully."
+msgstr ""
+
+#: templates/admin-dashboard.html:4 templates/admin-dashboard.html:14
+msgid "Admin Dashboard"
+msgstr ""
+
+#: templates/admin-dashboard.html:12
+msgid "System management"
+msgstr ""
+
+#: templates/admin-dashboard.html:17
+msgid ""
+"Monitor users, courses, enrolment activity, and timetable usage from one "
+"central admin workspace."
+msgstr ""
+
+#: templates/admin-dashboard.html:22
+msgid "System Summary"
+msgstr ""
+
+#: templates/admin-dashboard.html:25 templates/admin-dashboard.html:78
+msgid "Registered users"
+msgstr ""
+
+#: templates/admin-dashboard.html:30 templates/course-selection.html:107
+msgid "Available courses"
+msgstr ""
+
+#: templates/admin-dashboard.html:35
+msgid "Timetables created"
+msgstr ""
+
+#: templates/admin-dashboard.html:45
+msgid "Users"
+msgstr ""
+
+#: templates/admin-dashboard.html:47
+msgid "Registered student accounts"
+msgstr ""
+
+#: templates/admin-dashboard.html:52 templates/dashboard-base.html:6
+msgid "Courses"
+msgstr ""
+
+#: templates/admin-dashboard.html:54
+msgid "Courses available for planning"
+msgstr ""
+
+#: templates/admin-dashboard.html:59
+msgid "Selections"
+msgstr ""
+
+#: templates/admin-dashboard.html:61
+msgid "Course selections recorded"
+msgstr ""
+
+#: templates/admin-dashboard.html:66
+msgid "Timetables"
+msgstr ""
+
+#: templates/admin-dashboard.html:68
+msgid "Generated timetable plans"
+msgstr ""
+
+#: templates/admin-dashboard.html:79
+msgid "User Management Preview"
+msgstr ""
+
+#: templates/admin-dashboard.html:88
+msgid "Name"
+msgstr ""
+
+#: templates/admin-dashboard.html:89
+msgid "Email"
+msgstr ""
+
+#: templates/admin-dashboard.html:90 templates/signup.html:83
+msgid "Student ID"
+msgstr ""
+
+#: templates/admin-dashboard.html:91 templates/timetable.html:33
+msgid "Status"
+msgstr ""
+
+#: templates/admin-dashboard.html:98
+msgid "Sample Student"
+msgstr ""
+
+#: templates/admin-dashboard.html:103 templates/admin-dashboard.html:114
+#: templates/homepage.html:82
+msgid "Active"
+msgstr ""
+
+#: templates/admin-dashboard.html:109
+msgid "Course Planner User"
+msgstr ""
+
+#: templates/admin-dashboard.html:120
+msgid "Pending User"
+msgstr ""
+
+#: templates/admin-dashboard.html:125 templates/homepage.html:87
+#: templates/homepage.html:92
+msgid "Pending"
+msgstr ""
+
+#: templates/admin-dashboard.html:138
+msgid "Course statistics"
+msgstr ""
+
+#: templates/admin-dashboard.html:140
+msgid "Popular Courses"
+msgstr ""
+
+#: templates/admin-dashboard.html:146
+msgid "42 selections"
+msgstr ""
+
+#: templates/admin-dashboard.html:151
+msgid "37 selections"
+msgstr ""
+
+#: templates/admin-dashboard.html:156
+msgid "35 selections"
+msgstr ""
+
+#: templates/admin-dashboard.html:161
+msgid "29 selections"
+msgstr ""
+
+#: templates/admin-dashboard.html:173
+msgid "Admin actions"
+msgstr ""
+
+#: templates/admin-dashboard.html:174
+msgid "Quick Management Tools"
+msgstr ""
+
+#: templates/admin-dashboard.html:183 templates/admin-dashboard.html:193
+msgid "View Users"
+msgstr ""
+
+#: templates/admin-dashboard.html:186
+msgid "Review registered users and account status information."
+msgstr ""
+
+#: templates/admin-dashboard.html:191
+msgid ""
+"User management tools will be connected to database records in a future "
+"update."
+msgstr ""
+
+#: templates/admin-dashboard.html:202 templates/admin-dashboard.html:212
+msgid "Manage Courses"
+msgstr ""
+
+#: templates/admin-dashboard.html:205
+msgid "Check available courses and prepare future course management features."
+msgstr ""
+
+#: templates/admin-dashboard.html:210
+msgid "Course management tools will be expanded in the next development stage."
+msgstr ""
+
+#: templates/admin-dashboard.html:221 templates/admin-dashboard.html:231
+msgid "View Statistics"
+msgstr ""
+
+#: templates/admin-dashboard.html:224
+msgid "Monitor course demand and timetable usage across the system."
+msgstr ""
+
+#: templates/admin-dashboard.html:229
+msgid "Statistics preview is currently based on sample dashboard data."
+msgstr ""
+
+#: templates/admin-dashboard.html:240
+msgid "Monitor Timetables"
+msgstr ""
+
+#: templates/admin-dashboard.html:243
+msgid "Review how many timetable plans have been created by students."
+msgstr ""
+
+#: templates/admin-dashboard.html:248
+msgid "Timetable monitoring will use real timetable data in a later update."
+msgstr ""
+
+#: templates/admin-dashboard.html:250
+msgid "Monitor Usage"
+msgstr ""
+
+#: templates/admin-dashboard.html:261
+msgid "Admin message"
+msgstr ""
+
+#: templates/admin-dashboard.html:263
+msgid "System Management Updates"
+msgstr ""
+
+#: templates/admin-dashboard.html:266
+msgid ""
+"Use this admin dashboard to monitor users, courses, statistics, and "
+"timetable usage."
+msgstr ""
+
+#: templates/base.html:8 templates/base.html:27
+msgid "Course Planner"
+msgstr ""
+
+#: templates/base.html:32 templates/index.html:7 templates/index.html:92
+#: templates/signup.html:7
+msgid "Sign In"
+msgstr ""
+
+#: templates/base.html:33 templates/index.html:8 templates/signup.html:8
+msgid "Sign Up"
+msgstr ""
+
+#: templates/base.html:41
+msgid "Language"
+msgstr ""
+
+#: templates/base.html:46
+msgid "Select language"
+msgstr ""
+
+#: templates/base.html:50
+msgid "English"
+msgstr ""
+
+#: templates/base.html:55
+msgid "Chinese"
+msgstr ""
+
+#: templates/base.html:64
+msgid "Toggle dark mode"
+msgstr ""
+
+#: templates/base.html:66 templates/base.html:116
+msgid "Dark"
+msgstr ""
+
+#: templates/base.html:83
+msgid "Created for the Agile Web Development Group Project."
+msgstr ""
+
+#: templates/base.html:89 templates/course-selection.html:156
+#: templates/timetable.html:70
+msgid "No courses selected yet."
+msgstr ""
+
+#: templates/base.html:90 templates/timetable.html:34
+msgid "Not generated"
+msgstr ""
+
+#: templates/base.html:91
+msgid "Please select courses before generating a timetable."
+msgstr ""
+
+#: templates/base.html:92
+msgid "Ready"
+msgstr ""
+
+#: templates/base.html:93
+msgid "Generated"
+msgstr ""
+
+#: templates/base.html:94
+msgid "Conflict"
+msgstr ""
+
+#: templates/base.html:95
+msgid "The weekly timetable has been generated successfully."
+msgstr ""
+
+#: templates/base.html:96
+msgid "The timetable has been cleared."
+msgstr ""
+
+#: templates/base.html:97
+msgid ""
+"Your timetable has been shared successfully. Other users can now view it "
+"from the shared timetables page."
+msgstr ""
+
+#: templates/base.html:98
+msgid "Please select a degree first."
+msgstr ""
+
+#: templates/base.html:99
+msgid "Please choose a degree before adding courses."
+msgstr ""
+
+#: templates/base.html:100 templates/course-selection.html:98
+msgid "Please select a study level, then choose a degree before adding courses."
+msgstr ""
+
+#: templates/base.html:101 templates/course-selection.html:141
+msgid "Please select a study level and degree to view available courses."
+msgstr ""
+
+#: templates/base.html:102 templates/course-selection.html:22
+#: templates/course-selection.html:27
+msgid "Not selected"
+msgstr ""
+
+#: templates/base.html:103 templates/course-selection.html:90
+msgid "-- Select a study level first --"
+msgstr ""
+
+#: templates/base.html:104
+msgid "-- Select a degree --"
+msgstr ""
+
+#: templates/base.html:105
+msgid "Now select a degree from the available"
+msgstr ""
+
+#: templates/base.html:106
+msgid "options."
+msgstr ""
+
+#: templates/base.html:107
+msgid "selected. You can now add courses to your study plan."
+msgstr ""
+
+#: templates/base.html:108
+msgid "Add Course"
+msgstr ""
+
+#: templates/base.html:109
+msgid "Remove"
+msgstr ""
+
+#: templates/base.html:110
+msgid "credits"
+msgstr ""
+
+#: templates/base.html:111
+msgid "credit points"
+msgstr ""
+
+#: templates/base.html:112
+msgid "has already been added."
+msgstr ""
+
+#: templates/base.html:113
+msgid "added successfully."
+msgstr ""
+
+#: templates/base.html:114
+msgid "Semester conflict detected. Please select courses from the same semester."
+msgstr ""
+
+#: templates/base.html:115
+msgid "Light"
+msgstr ""
+
+#: templates/base.html:117
+msgid "Monday"
+msgstr ""
+
+#: templates/base.html:118
+msgid "Tuesday"
+msgstr ""
+
+#: templates/base.html:119
+msgid "Wednesday"
+msgstr ""
+
+#: templates/base.html:120
+msgid "Thursday"
+msgstr ""
+
+#: templates/base.html:121
+msgid "Friday"
+msgstr ""
+
+#: templates/base.html:122
+msgid ""
+"You selected courses from different semesters. Please choose courses from"
+" one semester before generating a timetable."
+msgstr ""
+
+#: templates/base.html:123
+msgid "Please complete all fields."
+msgstr ""
+
+#: templates/base.html:124
+msgid "Please enter your email address."
+msgstr ""
+
+#: templates/base.html:125
+msgid "Verification code sent. Redirecting..."
+msgstr ""
+
+#: templates/base.html:126
+msgid "Please enter the verification code and new password."
+msgstr ""
+
+#: templates/base.html:127
+msgid "Invalid verification code. Please try again."
+msgstr ""
+
+#: templates/base.html:128
+msgid "Password must be at least 6 characters."
+msgstr ""
+
+#: templates/base.html:129
+msgid "Password reset successful! You can now sign in with your new password."
+msgstr ""
+
+#: templates/base.html:130
+msgid "Password reset successful! Please sign in again."
+msgstr ""
+
+#: templates/course-selection.html:3
+msgid "Course Selection"
+msgstr ""
+
+#: templates/course-selection.html:10
+msgid "Course planning"
+msgstr ""
+
+#: templates/course-selection.html:11
+msgid "Select courses for your semester."
+msgstr ""
+
+#: templates/course-selection.html:13
+msgid ""
+"Choose your study level and degree pathway, browse available courses, and"
+" add units to your study plan before generating a timetable."
+msgstr ""
+
+#: templates/course-selection.html:18
+msgid "Selection Summary"
+msgstr ""
+
+#: templates/course-selection.html:21 templates/course-selection.html:56
+msgid "Study level"
+msgstr ""
+
+#: templates/course-selection.html:26 templates/course-selection.html:82
+#: templates/homepage.html:49
+msgid "Degree"
+msgstr ""
+
+#: templates/course-selection.html:31 templates/timetable.html:66
+msgid "Selected courses"
+msgstr ""
+
+#: templates/course-selection.html:36 templates/course-selection.html:160
+#: templates/timetable.html:28
+msgid "Total credits"
+msgstr ""
+
+#: templates/course-selection.html:48
+msgid "Step 1"
+msgstr ""
+
+#: templates/course-selection.html:49
+msgid "Choose your study pathway"
+msgstr ""
+
+#: templates/course-selection.html:63
+msgid "-- Select a study level --"
+msgstr ""
+
+#: templates/course-selection.html:67
+msgid "Bachelor"
+msgstr ""
+
+#: templates/course-selection.html:71
+msgid "Master"
+msgstr ""
+
+#: templates/course-selection.html:75
+msgid "Diploma"
+msgstr ""
+
+#: templates/course-selection.html:106
+msgid "Step 2"
+msgstr ""
+
+#: templates/course-selection.html:116
+msgid "Search courses..."
+msgstr ""
+
+#: templates/course-selection.html:124
+msgid "All Semesters"
+msgstr ""
+
+#: templates/course-selection.html:128
+msgid "Semester 1"
+msgstr ""
+
+#: templates/course-selection.html:132
+msgid "Semester 2"
+msgstr ""
+
+#: templates/course-selection.html:151
+msgid "Step 3"
+msgstr ""
+
+#: templates/course-selection.html:153
+msgid "Your selected courses"
+msgstr ""
+
+#: templates/course-selection.html:167
+msgid "Continue to Timetable"
+msgstr ""
+
+#: templates/dashboard-base.html:5 templates/homepage.html:81
+msgid "Dashboard"
+msgstr ""
+
+#: templates/dashboard-base.html:7 templates/timetable.html:4
+msgid "Timetable"
+msgstr ""
+
+#: templates/dashboard-base.html:8
+msgid "Admin"
+msgstr ""
+
+#: templates/dashboard-base.html:9
+msgid "Logout"
+msgstr ""
+
+#: templates/forgot-password.html:4 templates/forgot-password.html:11
+msgid "Forgot Password"
+msgstr ""
+
+#: templates/forgot-password.html:12
+msgid "Enter your email address and we will send you a verification code."
+msgstr ""
+
+#: templates/forgot-password.html:17 templates/index.html:73
+#: templates/signup.html:74
+msgid "Email Address"
+msgstr ""
+
+#: templates/forgot-password.html:21 templates/index.html:78
+#: templates/signup.html:79
+msgid "Enter your email address"
+msgstr ""
+
+#: templates/forgot-password.html:25
+msgid "Send Verification Code"
+msgstr ""
+
+#: templates/forgot-password.html:29
+msgid "Back to Sign In"
+msgstr ""
+
+#: templates/forgot-password.html:34
+msgid "Enter your email address to receive a verification code."
+msgstr ""
+
+#: templates/homepage.html:3
+msgid "Course Planner - Dashboard"
+msgstr ""
+
+#: templates/homepage.html:10
+msgid "Student workspace"
+msgstr ""
+
+#: templates/homepage.html:11
+msgid "Welcome to your course planning dashboard."
+msgstr ""
+
+#: templates/homepage.html:13
+msgid ""
+"Review your study progress, browse available courses, prepare your "
+"timetable, and explore planning tools from one central place."
+msgstr ""
+
+#: templates/homepage.html:18
+msgid "Current Plan Status"
+msgstr ""
+
+#: templates/homepage.html:21
+msgid "Degree selected"
+msgstr ""
+
+#: templates/homepage.html:22
+msgid "Yes"
+msgstr ""
+
+#: templates/homepage.html:26
+msgid "Courses added"
+msgstr ""
+
+#: templates/homepage.html:31
+msgid "Timetable created"
+msgstr ""
+
+#: templates/homepage.html:32
+msgid "No"
+msgstr ""
+
+#: templates/homepage.html:41
+msgid "Overview"
+msgstr ""
+
+#: templates/homepage.html:42
+msgid "Study Summary"
+msgstr ""
+
+#: templates/homepage.html:50
+msgid "Master of IT"
+msgstr ""
+
+#: templates/homepage.html:51
+msgid "Current study pathway"
+msgstr ""
+
+#: templates/homepage.html:56
+msgid "Selected Courses"
+msgstr ""
+
+#: templates/homepage.html:57
+msgid "0 Units"
+msgstr ""
+
+#: templates/homepage.html:58
+msgid "Courses selected for this semester"
+msgstr ""
+
+#: templates/homepage.html:63
+msgid "Total Credits"
+msgstr ""
+
+#: templates/homepage.html:64
+msgid "0 Credit Points"
+msgstr ""
+
+#: templates/homepage.html:65
+msgid "Calculated from selected courses"
+msgstr ""
+
+#: templates/homepage.html:71
+msgid "Progress"
+msgstr ""
+
+#: templates/homepage.html:72
+msgid "Planning Flow"
+msgstr ""
+
+#: templates/homepage.html:76
+msgid "Sign in"
+msgstr ""
+
+#: templates/homepage.html:77
+msgid "Done"
+msgstr ""
+
+#: templates/homepage.html:86
+msgid "Course selection"
+msgstr ""
+
+#: templates/homepage.html:91 templates/timetable.html:12
+msgid "Timetable planning"
+msgstr ""
+
+#: templates/homepage.html:101
+msgid "Actions"
+msgstr ""
+
+#: templates/homepage.html:102
+msgid "What would you like to do?"
+msgstr ""
+
+#: templates/homepage.html:109 templates/homepage.html:112
+#: templates/index.html:37
+msgid "Browse Courses"
+msgstr ""
+
+#: templates/homepage.html:110
+msgid ""
+"Explore available courses, course codes, credit points, and scheduling "
+"information."
+msgstr ""
+
+#: templates/homepage.html:118
+msgid "Plan Timetable"
+msgstr ""
+
+#: templates/homepage.html:119
+msgid "Use your selected courses to prepare a clear weekly timetable structure."
+msgstr ""
+
+#: templates/homepage.html:121
+msgid "Open Timetable"
+msgstr ""
+
+#: templates/homepage.html:128
+msgid "System message"
+msgstr ""
+
+#: templates/homepage.html:129
+msgid "Dashboard Updates"
+msgstr ""
+
+#: templates/homepage.html:131
+msgid ""
+"Use this dashboard to review your study plan and access the main course "
+"planning features."
+msgstr ""
+
+#: templates/index.html:3
+msgid "Course Planner - Sign In"
+msgstr ""
+
+#: templates/index.html:9 templates/signup.html:9
+msgid "Features"
+msgstr ""
+
+#: templates/index.html:18
+msgid "Semester planning made simpler"
+msgstr ""
+
+#: templates/index.html:20
+msgid "Build your course plan with confidence."
+msgstr ""
+
+#: templates/index.html:23
+msgid ""
+"Select your degree, explore available courses, organise your timetable, "
+"and compare study plans with other students before finalising your "
+"semester."
+msgstr ""
+
+#: templates/index.html:28 templates/signup.html:111
+msgid "Create Account"
+msgstr ""
+
+#: templates/index.html:31
+msgid "View Features"
+msgstr ""
+
+#: templates/index.html:38
+msgid "View course codes, credit points, and scheduling details in one place."
+msgstr ""
+
+#: templates/index.html:43
+msgid "Plan Timetables"
+msgstr ""
+
+#: templates/index.html:44
+msgid "Create a structured weekly timetable based on your selected courses."
+msgstr ""
+
+#: templates/index.html:49
+msgid "Track Demand"
+msgstr ""
+
+#: templates/index.html:50
+msgid "Support administrators with basic enrolment and course demand insights."
+msgstr ""
+
+#: templates/index.html:57
+msgid "Welcome back"
+msgstr ""
+
+#: templates/index.html:58
+msgid "Sign in to continue planning your semester."
+msgstr ""
+
+#: templates/index.html:82 templates/signup.html:92
+msgid "Password"
+msgstr ""
+
+#: templates/index.html:87
+msgid "Enter your password"
+msgstr ""
+
+#: templates/index.html:96
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/index.html:101
+msgid "New to Course Planner?"
+msgstr ""
+
+#: templates/index.html:103
+msgid "Create an account"
+msgstr ""
+
+#: templates/reset-password.html:4 templates/reset-password.html:11
+#: templates/reset-password.html:48
+msgid "Reset Password"
+msgstr ""
+
+#: templates/reset-password.html:12
+msgid "Enter the verification code and create a new password."
+msgstr ""
+
+#: templates/reset-password.html:17
+msgid "Verification Code"
+msgstr ""
+
+#: templates/reset-password.html:35
+msgid "New Password"
+msgstr ""
+
+#: templates/reset-password.html:39
+msgid "Enter new password"
+msgstr ""
+
+#: templates/reset-password.html:52
+msgid "Back"
+msgstr ""
+
+#: templates/reset-password.html:57
+msgid "Enter the verification code sent to your email."
+msgstr ""
+
+#: templates/signup.html:3
+msgid "Course Planner - Sign Up"
+msgstr ""
+
+#: templates/signup.html:18
+msgid "Create your study planning account"
+msgstr ""
+
+#: templates/signup.html:20
+msgid "Start organising your semester in one place."
+msgstr ""
+
+#: templates/signup.html:23
+msgid ""
+"Create an account to save your course selections, prepare your timetable,"
+" and manage your study planning more easily throughout the semester."
+msgstr ""
+
+#: templates/signup.html:29
+msgid "Select Degree"
+msgstr ""
+
+#: templates/signup.html:30
+msgid "Choose your degree pathway and browse courses relevant to your study plan."
+msgstr ""
+
+#: templates/signup.html:35
+msgid "Save Courses"
+msgstr ""
+
+#: templates/signup.html:36
+msgid "Add preferred courses to your plan and keep track of your selections."
+msgstr ""
+
+#: templates/signup.html:41
+msgid "Build Timetable"
+msgstr ""
+
+#: templates/signup.html:42
+msgid "Use your selected courses to create a clearer weekly timetable structure."
+msgstr ""
+
+#: templates/signup.html:49
+msgid "Create account"
+msgstr ""
+
+#: templates/signup.html:50
+msgid "Enter your details to begin using Course Planner."
+msgstr ""
+
+#: templates/signup.html:65
+msgid "Full Name"
+msgstr ""
+
+#: templates/signup.html:70
+msgid "Enter your full name"
+msgstr ""
+
+#: templates/signup.html:88
+msgid "Enter your student ID"
+msgstr ""
+
+#: templates/signup.html:97
+msgid "Create a password"
+msgstr ""
+
+#: templates/signup.html:101
+msgid "Confirm Password"
+msgstr ""
+
+#: templates/signup.html:106
+msgid "Re-enter your password"
+msgstr ""
+
+#: templates/signup.html:115
+msgid "Already have an account? Sign in"
+msgstr ""
+
+#: templates/timetable.html:13
+msgid "Your weekly timetable."
+msgstr ""
+
+#: templates/timetable.html:15
+msgid ""
+"Generate a sample weekly timetable based on selected courses and review "
+"how your semester schedule may look."
+msgstr ""
+
+#: templates/timetable.html:20
+msgid "Timetable Status"
+msgstr ""
+
+#: templates/timetable.html:23
+msgid "Courses selected"
+msgstr ""
+
+#: templates/timetable.html:44
+msgid "Weekly schedule"
+msgstr ""
+
+#: templates/timetable.html:45
+msgid "Generated Timetable"
+msgstr ""
+
+#: templates/timetable.html:54
+msgid "Generate Timetable"
+msgstr ""
+
+#: templates/timetable.html:58
+msgid "Clear Timetable"
+msgstr ""
+
+#: templates/timetable.html:67
+msgid "Course Summary"
+msgstr ""
+
+#: templates/timetable.html:75
+msgid "Sharing"
+msgstr ""
+
+#: templates/timetable.html:76 templates/timetable.html:82
+msgid "Share Timetable"
+msgstr ""
+
+#: templates/timetable.html:78
+msgid "Make your timetable available for other users to view."
+msgstr ""
+
+#: templates/timetable.html:86
+msgid "View Shared Timetables"
+msgstr ""
+

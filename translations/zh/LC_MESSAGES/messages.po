@@ -1,0 +1,1031 @@
+# Chinese translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-10 18:03+0800\n"
+"PO-Revision-Date: 2026-05-10 16:14+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app.py:72
+msgid "Please enter both your email address and password."
+msgstr "请输入您的邮箱地址和密码。"
+
+#: app.py:78
+msgid "No account found with this email address."
+msgstr "未找到使用此邮箱地址的账户。"
+
+#: app.py:82
+msgid "Incorrect password. Please try again."
+msgstr "密码错误。请重试。"
+
+#: app.py:86
+msgid "Signed in successfully."
+msgstr "登录成功。"
+
+#: app.py:107
+msgid "Please complete all registration fields."
+msgstr "请填写所有注册字段。"
+
+#: app.py:111
+msgid "Passwords do not match."
+msgstr "密码不匹配。"
+
+#: app.py:115
+msgid "Password must be at least 6 characters long."
+msgstr "密码长度必须至少为 6 个字符。"
+
+#: app.py:120
+msgid "An account with this email already exists."
+msgstr "该邮箱地址的账户已存在。"
+
+#: app.py:125
+msgid "An account with this student ID already exists."
+msgstr "该学生 ID 的账户已存在。"
+
+#: app.py:138
+msgid "Account created successfully. Please sign in."
+msgstr "账户创建成功。请登录。"
+
+#: app.py:172
+msgid "You have been logged out successfully."
+msgstr "您已成功退出登录。"
+
+#: templates/admin-dashboard.html:4 templates/admin-dashboard.html:14
+msgid "Admin Dashboard"
+msgstr "管理员仪表板"
+
+#: templates/admin-dashboard.html:12
+msgid "System management"
+msgstr "系统管理"
+
+#: templates/admin-dashboard.html:17
+msgid ""
+"Monitor users, courses, enrolment activity, and timetable usage from one "
+"central admin workspace."
+msgstr "从一个集中管理工作区监控用户、课程、选课活动和时间表使用情况。"
+
+#: templates/admin-dashboard.html:22
+msgid "System Summary"
+msgstr "系统摘要"
+
+#: templates/admin-dashboard.html:25 templates/admin-dashboard.html:78
+msgid "Registered users"
+msgstr "注册用户"
+
+#: templates/admin-dashboard.html:30 templates/course-selection.html:107
+msgid "Available courses"
+msgstr "可选课程"
+
+#: templates/admin-dashboard.html:35
+msgid "Timetables created"
+msgstr "已创建时间表"
+
+#: templates/admin-dashboard.html:45
+msgid "Users"
+msgstr "用户"
+
+#: templates/admin-dashboard.html:47
+msgid "Registered student accounts"
+msgstr "已注册学生账户"
+
+#: templates/admin-dashboard.html:52 templates/dashboard-base.html:6
+msgid "Courses"
+msgstr "课程"
+
+#: templates/admin-dashboard.html:54
+msgid "Courses available for planning"
+msgstr "可用于规划的课程"
+
+#: templates/admin-dashboard.html:59
+msgid "Selections"
+msgstr "选择记录"
+
+#: templates/admin-dashboard.html:61
+msgid "Course selections recorded"
+msgstr "已记录的课程选择"
+
+#: templates/admin-dashboard.html:66
+msgid "Timetables"
+msgstr "时间表"
+
+#: templates/admin-dashboard.html:68
+msgid "Generated timetable plans"
+msgstr "已生成的时间表计划"
+
+#: templates/admin-dashboard.html:79
+msgid "User Management Preview"
+msgstr "用户管理预览"
+
+#: templates/admin-dashboard.html:88
+msgid "Name"
+msgstr "姓名"
+
+#: templates/admin-dashboard.html:89
+msgid "Email"
+msgstr "邮箱"
+
+#: templates/admin-dashboard.html:90 templates/signup.html:83
+msgid "Student ID"
+msgstr "学生 ID"
+
+#: templates/admin-dashboard.html:91 templates/timetable.html:33
+msgid "Status"
+msgstr "状态"
+
+#: templates/admin-dashboard.html:98
+msgid "Sample Student"
+msgstr "示例学生"
+
+#: templates/admin-dashboard.html:103 templates/admin-dashboard.html:114
+#: templates/homepage.html:82
+msgid "Active"
+msgstr "进行中"
+
+#: templates/admin-dashboard.html:109
+msgid "Course Planner User"
+msgstr "课程规划系统用户"
+
+#: templates/admin-dashboard.html:120
+msgid "Pending User"
+msgstr "待处理用户"
+
+#: templates/admin-dashboard.html:125 templates/homepage.html:87
+#: templates/homepage.html:92
+msgid "Pending"
+msgstr "待完成"
+
+#: templates/admin-dashboard.html:138
+msgid "Course statistics"
+msgstr "课程统计"
+
+#: templates/admin-dashboard.html:140
+msgid "Popular Courses"
+msgstr "热门课程"
+
+#: templates/admin-dashboard.html:146
+msgid "42 selections"
+msgstr "42 次选择"
+
+#: templates/admin-dashboard.html:151
+msgid "37 selections"
+msgstr "37 次选择"
+
+#: templates/admin-dashboard.html:156
+msgid "35 selections"
+msgstr "35 次选择"
+
+#: templates/admin-dashboard.html:161
+msgid "29 selections"
+msgstr "29 次选择"
+
+#: templates/admin-dashboard.html:173
+msgid "Admin actions"
+msgstr "管理员操作"
+
+#: templates/admin-dashboard.html:174
+msgid "Quick Management Tools"
+msgstr "快速管理工具"
+
+#: templates/admin-dashboard.html:183 templates/admin-dashboard.html:193
+msgid "View Users"
+msgstr "查看用户"
+
+#: templates/admin-dashboard.html:186
+msgid "Review registered users and account status information."
+msgstr "查看注册用户和账户状态信息。"
+
+#: templates/admin-dashboard.html:191
+msgid ""
+"User management tools will be connected to database records in a future "
+"update."
+msgstr "用户管理工具将在后续更新中连接到数据库记录。"
+
+#: templates/admin-dashboard.html:202 templates/admin-dashboard.html:212
+msgid "Manage Courses"
+msgstr "管理课程"
+
+#: templates/admin-dashboard.html:205
+msgid "Check available courses and prepare future course management features."
+msgstr "检查可选课程，并准备未来的课程管理功能。"
+
+#: templates/admin-dashboard.html:210
+msgid "Course management tools will be expanded in the next development stage."
+msgstr "课程管理工具将在下一阶段开发中扩展。"
+
+#: templates/admin-dashboard.html:221 templates/admin-dashboard.html:231
+msgid "View Statistics"
+msgstr "查看统计"
+
+#: templates/admin-dashboard.html:224
+msgid "Monitor course demand and timetable usage across the system."
+msgstr "监控整个系统中的课程需求和时间表使用情况。"
+
+#: templates/admin-dashboard.html:229
+msgid "Statistics preview is currently based on sample dashboard data."
+msgstr "统计预览目前基于示例仪表板数据。"
+
+#: templates/admin-dashboard.html:240
+msgid "Monitor Timetables"
+msgstr "监控时间表"
+
+#: templates/admin-dashboard.html:243
+msgid "Review how many timetable plans have been created by students."
+msgstr "查看学生已创建了多少时间表计划。"
+
+#: templates/admin-dashboard.html:248
+msgid "Timetable monitoring will use real timetable data in a later update."
+msgstr "时间表监控将在后续更新中使用真实时间表数据。"
+
+#: templates/admin-dashboard.html:250
+msgid "Monitor Usage"
+msgstr "监控使用情况"
+
+#: templates/admin-dashboard.html:261
+msgid "Admin message"
+msgstr "管理员消息"
+
+#: templates/admin-dashboard.html:263
+msgid "System Management Updates"
+msgstr "系统管理更新"
+
+#: templates/admin-dashboard.html:266
+msgid ""
+"Use this admin dashboard to monitor users, courses, statistics, and "
+"timetable usage."
+msgstr "使用此管理员仪表板监控用户、课程、统计信息和时间表使用情况。"
+
+#: templates/base.html:8 templates/base.html:27
+msgid "Course Planner"
+msgstr "课程规划系统"
+
+#: templates/base.html:32 templates/index.html:7 templates/index.html:92
+#: templates/signup.html:7
+msgid "Sign In"
+msgstr "登录"
+
+#: templates/base.html:33 templates/index.html:8 templates/signup.html:8
+msgid "Sign Up"
+msgstr "注册"
+
+#: templates/base.html:41
+msgid "Language"
+msgstr "语言"
+
+#: templates/base.html:46
+msgid "Select language"
+msgstr "选择语言"
+
+#: templates/base.html:50
+msgid "English"
+msgstr "英文"
+
+#: templates/base.html:55
+msgid "Chinese"
+msgstr "中文"
+
+#: templates/base.html:64
+msgid "Toggle dark mode"
+msgstr "切换深色模式"
+
+#: templates/base.html:66 templates/base.html:116
+msgid "Dark"
+msgstr "深色"
+
+#: templates/base.html:83
+msgid "Created for the Agile Web Development Group Project."
+msgstr "为敏捷 Web 开发小组项目创建。"
+
+#: templates/base.html:89 templates/course-selection.html:156
+#: templates/timetable.html:70
+msgid "No courses selected yet."
+msgstr "尚未选择课程。"
+
+#: templates/base.html:90 templates/timetable.html:34
+msgid "Not generated"
+msgstr "未生成"
+
+#: templates/base.html:91
+#, fuzzy
+msgid "Please select courses before generating a timetable."
+msgstr "为本学期选择课程。"
+
+#: templates/base.html:92
+msgid "Ready"
+msgstr ""
+
+#: templates/base.html:93
+#, fuzzy
+msgid "Generated"
+msgstr "未生成"
+
+#: templates/base.html:94
+msgid "Conflict"
+msgstr ""
+
+#: templates/base.html:95
+msgid "The weekly timetable has been generated successfully."
+msgstr ""
+
+#: templates/base.html:96
+#, fuzzy
+msgid "The timetable has been cleared."
+msgstr "已创建时间表"
+
+#: templates/base.html:97
+msgid ""
+"Your timetable has been shared successfully. Other users can now view it "
+"from the shared timetables page."
+msgstr ""
+
+#: templates/base.html:98
+#, fuzzy
+msgid "Please select a degree first."
+msgstr "-- 请先选择学习层级 --"
+
+#: templates/base.html:99
+#, fuzzy
+msgid "Please choose a degree before adding courses."
+msgstr "请先选择学习层级，然后选择学位，再添加课程。"
+
+#: templates/base.html:100 templates/course-selection.html:98
+msgid "Please select a study level, then choose a degree before adding courses."
+msgstr "请先选择学习层级，然后选择学位，再添加课程。"
+
+#: templates/base.html:101 templates/course-selection.html:141
+msgid "Please select a study level and degree to view available courses."
+msgstr "请选择学习层级和学位，以查看可选课程。"
+
+#: templates/base.html:102 templates/course-selection.html:22
+#: templates/course-selection.html:27
+msgid "Not selected"
+msgstr "未选择"
+
+#: templates/base.html:103 templates/course-selection.html:90
+msgid "-- Select a study level first --"
+msgstr "-- 请先选择学习层级 --"
+
+#: templates/base.html:104
+#, fuzzy
+msgid "-- Select a degree --"
+msgstr "-- 选择学习层级 --"
+
+#: templates/base.html:105
+msgid "Now select a degree from the available"
+msgstr ""
+
+#: templates/base.html:106
+#, fuzzy
+msgid "options."
+msgstr "操作"
+
+#: templates/base.html:107
+#, fuzzy
+msgid "selected. You can now add courses to your study plan."
+msgstr "选择您的学位方向，并浏览与学习计划相关的课程。"
+
+#: templates/base.html:108
+#, fuzzy
+msgid "Add Course"
+msgstr "保存课程"
+
+#: templates/base.html:109
+msgid "Remove"
+msgstr ""
+
+#: templates/base.html:110
+#, fuzzy
+msgid "credits"
+msgstr "总学分"
+
+#: templates/base.html:111
+#, fuzzy
+msgid "credit points"
+msgstr "0 学分"
+
+#: templates/base.html:112
+msgid "has already been added."
+msgstr ""
+
+#: templates/base.html:113
+#, fuzzy
+msgid "added successfully."
+msgstr "登录成功。"
+
+#: templates/base.html:114
+msgid "Semester conflict detected. Please select courses from the same semester."
+msgstr ""
+
+#: templates/base.html:115
+msgid "Light"
+msgstr ""
+
+#: templates/base.html:117
+msgid "Monday"
+msgstr ""
+
+#: templates/base.html:118
+msgid "Tuesday"
+msgstr ""
+
+#: templates/base.html:119
+msgid "Wednesday"
+msgstr ""
+
+#: templates/base.html:120
+msgid "Thursday"
+msgstr ""
+
+#: templates/base.html:121
+msgid "Friday"
+msgstr ""
+
+#: templates/base.html:122
+msgid ""
+"You selected courses from different semesters. Please choose courses from"
+" one semester before generating a timetable."
+msgstr ""
+
+#: templates/base.html:123
+#, fuzzy
+msgid "Please complete all fields."
+msgstr "请填写所有注册字段。"
+
+#: templates/base.html:124
+#, fuzzy
+msgid "Please enter your email address."
+msgstr "请输入您的邮箱地址"
+
+#: templates/base.html:125
+#, fuzzy
+msgid "Verification code sent. Redirecting..."
+msgstr "验证码"
+
+#: templates/base.html:126
+#, fuzzy
+msgid "Please enter the verification code and new password."
+msgstr "请输入验证码并创建新密码。"
+
+#: templates/base.html:127
+#, fuzzy
+msgid "Invalid verification code. Please try again."
+msgstr "请输入发送到您邮箱的验证码。"
+
+#: templates/base.html:128
+#, fuzzy
+msgid "Password must be at least 6 characters."
+msgstr "密码长度必须至少为 6 个字符。"
+
+#: templates/base.html:129
+msgid "Password reset successful! You can now sign in with your new password."
+msgstr ""
+
+#: templates/base.html:130
+#, fuzzy
+msgid "Password reset successful! Please sign in again."
+msgstr "账户创建成功。请登录。"
+
+#: templates/course-selection.html:3
+msgid "Course Selection"
+msgstr "课程选择"
+
+#: templates/course-selection.html:10
+msgid "Course planning"
+msgstr "课程规划"
+
+#: templates/course-selection.html:11
+msgid "Select courses for your semester."
+msgstr "为本学期选择课程。"
+
+#: templates/course-selection.html:13
+msgid ""
+"Choose your study level and degree pathway, browse available courses, and"
+" add units to your study plan before generating a timetable."
+msgstr "选择您的学习层级和学位方向，浏览可选课程，并在生成时间表之前将课程添加到您的学习计划中。"
+
+#: templates/course-selection.html:18
+msgid "Selection Summary"
+msgstr "选择摘要"
+
+#: templates/course-selection.html:21 templates/course-selection.html:56
+msgid "Study level"
+msgstr "学习层级"
+
+#: templates/course-selection.html:26 templates/course-selection.html:82
+#: templates/homepage.html:49
+msgid "Degree"
+msgstr "学位"
+
+#: templates/course-selection.html:31 templates/timetable.html:66
+msgid "Selected courses"
+msgstr "已选课程"
+
+#: templates/course-selection.html:36 templates/course-selection.html:160
+#: templates/timetable.html:28
+msgid "Total credits"
+msgstr "总学分"
+
+#: templates/course-selection.html:48
+msgid "Step 1"
+msgstr "第 1 步"
+
+#: templates/course-selection.html:49
+msgid "Choose your study pathway"
+msgstr "选择您的学习路径"
+
+#: templates/course-selection.html:63
+msgid "-- Select a study level --"
+msgstr "-- 选择学习层级 --"
+
+#: templates/course-selection.html:67
+msgid "Bachelor"
+msgstr "本科"
+
+#: templates/course-selection.html:71
+msgid "Master"
+msgstr "硕士"
+
+#: templates/course-selection.html:75
+msgid "Diploma"
+msgstr "文凭课程"
+
+#: templates/course-selection.html:106
+msgid "Step 2"
+msgstr "第 2 步"
+
+#: templates/course-selection.html:116
+msgid "Search courses..."
+msgstr "搜索课程..."
+
+#: templates/course-selection.html:124
+msgid "All Semesters"
+msgstr "所有学期"
+
+#: templates/course-selection.html:128
+msgid "Semester 1"
+msgstr "第一学期"
+
+#: templates/course-selection.html:132
+msgid "Semester 2"
+msgstr "第二学期"
+
+#: templates/course-selection.html:151
+msgid "Step 3"
+msgstr "第 3 步"
+
+#: templates/course-selection.html:153
+msgid "Your selected courses"
+msgstr "您选择的课程"
+
+#: templates/course-selection.html:167
+msgid "Continue to Timetable"
+msgstr "继续查看时间表"
+
+#: templates/dashboard-base.html:5 templates/homepage.html:81
+msgid "Dashboard"
+msgstr "仪表板"
+
+#: templates/dashboard-base.html:7 templates/timetable.html:4
+msgid "Timetable"
+msgstr "时间表"
+
+#: templates/dashboard-base.html:8
+msgid "Admin"
+msgstr "管理员"
+
+#: templates/dashboard-base.html:9
+msgid "Logout"
+msgstr "退出登录"
+
+#: templates/forgot-password.html:4 templates/forgot-password.html:11
+msgid "Forgot Password"
+msgstr "忘记密码"
+
+#: templates/forgot-password.html:12
+msgid "Enter your email address and we will send you a verification code."
+msgstr "请输入您的邮箱地址，我们将向您发送验证码。"
+
+#: templates/forgot-password.html:17 templates/index.html:73
+#: templates/signup.html:74
+msgid "Email Address"
+msgstr "邮箱地址"
+
+#: templates/forgot-password.html:21 templates/index.html:78
+#: templates/signup.html:79
+msgid "Enter your email address"
+msgstr "请输入您的邮箱地址"
+
+#: templates/forgot-password.html:25
+msgid "Send Verification Code"
+msgstr "发送验证码"
+
+#: templates/forgot-password.html:29
+msgid "Back to Sign In"
+msgstr "返回登录"
+
+#: templates/forgot-password.html:34
+msgid "Enter your email address to receive a verification code."
+msgstr "请输入您的邮箱地址以接收验证码。"
+
+#: templates/homepage.html:3
+msgid "Course Planner - Dashboard"
+msgstr "课程规划系统 - 仪表板"
+
+#: templates/homepage.html:10
+msgid "Student workspace"
+msgstr "学生工作区"
+
+#: templates/homepage.html:11
+msgid "Welcome to your course planning dashboard."
+msgstr "欢迎来到您的课程规划仪表板。"
+
+#: templates/homepage.html:13
+msgid ""
+"Review your study progress, browse available courses, prepare your "
+"timetable, and explore planning tools from one central place."
+msgstr "在一个中心位置查看您的学习进度、浏览可选课程、准备时间表，并使用各种规划工具。"
+
+#: templates/homepage.html:18
+msgid "Current Plan Status"
+msgstr "当前计划状态"
+
+#: templates/homepage.html:21
+msgid "Degree selected"
+msgstr "已选择学位"
+
+#: templates/homepage.html:22
+msgid "Yes"
+msgstr "是"
+
+#: templates/homepage.html:26
+msgid "Courses added"
+msgstr "已添加课程"
+
+#: templates/homepage.html:31
+msgid "Timetable created"
+msgstr "已创建时间表"
+
+#: templates/homepage.html:32
+msgid "No"
+msgstr "否"
+
+#: templates/homepage.html:41
+msgid "Overview"
+msgstr "概览"
+
+#: templates/homepage.html:42
+msgid "Study Summary"
+msgstr "学习摘要"
+
+#: templates/homepage.html:50
+msgid "Master of IT"
+msgstr "信息技术硕士"
+
+#: templates/homepage.html:51
+msgid "Current study pathway"
+msgstr "当前学习路径"
+
+#: templates/homepage.html:56
+msgid "Selected Courses"
+msgstr "已选课程"
+
+#: templates/homepage.html:57
+msgid "0 Units"
+msgstr "0 门课程"
+
+#: templates/homepage.html:58
+msgid "Courses selected for this semester"
+msgstr "本学期已选择的课程"
+
+#: templates/homepage.html:63
+msgid "Total Credits"
+msgstr "总学分"
+
+#: templates/homepage.html:64
+msgid "0 Credit Points"
+msgstr "0 学分"
+
+#: templates/homepage.html:65
+msgid "Calculated from selected courses"
+msgstr "根据已选课程计算"
+
+#: templates/homepage.html:71
+msgid "Progress"
+msgstr "进度"
+
+#: templates/homepage.html:72
+msgid "Planning Flow"
+msgstr "规划流程"
+
+#: templates/homepage.html:76
+msgid "Sign in"
+msgstr "登录"
+
+#: templates/homepage.html:77
+msgid "Done"
+msgstr "完成"
+
+#: templates/homepage.html:86
+msgid "Course selection"
+msgstr "课程选择"
+
+#: templates/homepage.html:91 templates/timetable.html:12
+msgid "Timetable planning"
+msgstr "时间表规划"
+
+#: templates/homepage.html:101
+msgid "Actions"
+msgstr "操作"
+
+#: templates/homepage.html:102
+msgid "What would you like to do?"
+msgstr "您想做什么？"
+
+#: templates/homepage.html:109 templates/homepage.html:112
+#: templates/index.html:37
+msgid "Browse Courses"
+msgstr "浏览课程"
+
+#: templates/homepage.html:110
+msgid ""
+"Explore available courses, course codes, credit points, and scheduling "
+"information."
+msgstr "查看可选课程、课程代码、学分和排课信息。"
+
+#: templates/homepage.html:118
+msgid "Plan Timetable"
+msgstr "规划时间表"
+
+#: templates/homepage.html:119
+msgid "Use your selected courses to prepare a clear weekly timetable structure."
+msgstr "使用您选择的课程来准备清晰的每周时间表结构。"
+
+#: templates/homepage.html:121
+msgid "Open Timetable"
+msgstr "打开时间表"
+
+#: templates/homepage.html:128
+msgid "System message"
+msgstr "系统消息"
+
+#: templates/homepage.html:129
+msgid "Dashboard Updates"
+msgstr "仪表板更新"
+
+#: templates/homepage.html:131
+msgid ""
+"Use this dashboard to review your study plan and access the main course "
+"planning features."
+msgstr "使用此仪表板查看您的学习计划，并访问主要的课程规划功能。"
+
+#: templates/index.html:3
+msgid "Course Planner - Sign In"
+msgstr "课程规划系统 - 登录"
+
+#: templates/index.html:9 templates/signup.html:9
+msgid "Features"
+msgstr "功能"
+
+#: templates/index.html:18
+msgid "Semester planning made simpler"
+msgstr "让学期规划更简单"
+
+#: templates/index.html:20
+msgid "Build your course plan with confidence."
+msgstr "自信地制定您的课程计划。"
+
+#: templates/index.html:23
+msgid ""
+"Select your degree, explore available courses, organise your timetable, "
+"and compare study plans with other students before finalising your "
+"semester."
+msgstr "选择您的学位，浏览可选课程，安排时间表，并在确定学期计划前与其他学生的学习计划进行比较。"
+
+#: templates/index.html:28 templates/signup.html:111
+msgid "Create Account"
+msgstr "创建账户"
+
+#: templates/index.html:31
+msgid "View Features"
+msgstr "查看功能"
+
+#: templates/index.html:38
+msgid "View course codes, credit points, and scheduling details in one place."
+msgstr "在一个地方查看课程代码、学分和排课详情。"
+
+#: templates/index.html:43
+msgid "Plan Timetables"
+msgstr "规划时间表"
+
+#: templates/index.html:44
+msgid "Create a structured weekly timetable based on your selected courses."
+msgstr "根据您选择的课程创建结构清晰的每周时间表。"
+
+#: templates/index.html:49
+msgid "Track Demand"
+msgstr "跟踪需求"
+
+#: templates/index.html:50
+msgid "Support administrators with basic enrolment and course demand insights."
+msgstr "通过基本的选课和课程需求信息支持管理员。"
+
+#: templates/index.html:57
+msgid "Welcome back"
+msgstr "欢迎回来"
+
+#: templates/index.html:58
+msgid "Sign in to continue planning your semester."
+msgstr "登录以继续规划您的学期。"
+
+#: templates/index.html:82 templates/signup.html:92
+msgid "Password"
+msgstr "密码"
+
+#: templates/index.html:87
+msgid "Enter your password"
+msgstr "请输入您的密码"
+
+#: templates/index.html:96
+msgid "Forgot Password?"
+msgstr "忘记密码？"
+
+#: templates/index.html:101
+msgid "New to Course Planner?"
+msgstr "第一次使用课程规划系统？"
+
+#: templates/index.html:103
+msgid "Create an account"
+msgstr "创建账户"
+
+#: templates/reset-password.html:4 templates/reset-password.html:11
+#: templates/reset-password.html:48
+msgid "Reset Password"
+msgstr "重置密码"
+
+#: templates/reset-password.html:12
+msgid "Enter the verification code and create a new password."
+msgstr "请输入验证码并创建新密码。"
+
+#: templates/reset-password.html:17
+msgid "Verification Code"
+msgstr "验证码"
+
+#: templates/reset-password.html:35
+msgid "New Password"
+msgstr "新密码"
+
+#: templates/reset-password.html:39
+msgid "Enter new password"
+msgstr "请输入新密码"
+
+#: templates/reset-password.html:52
+msgid "Back"
+msgstr "返回"
+
+#: templates/reset-password.html:57
+msgid "Enter the verification code sent to your email."
+msgstr "请输入发送到您邮箱的验证码。"
+
+#: templates/signup.html:3
+msgid "Course Planner - Sign Up"
+msgstr "课程规划系统 - 注册"
+
+#: templates/signup.html:18
+msgid "Create your study planning account"
+msgstr "创建您的学习规划账户"
+
+#: templates/signup.html:20
+msgid "Start organising your semester in one place."
+msgstr "在一个地方开始安排您的学期。"
+
+#: templates/signup.html:23
+msgid ""
+"Create an account to save your course selections, prepare your timetable,"
+" and manage your study planning more easily throughout the semester."
+msgstr "创建账户以保存您的课程选择、准备时间表，并在整个学期中更轻松地管理学习计划。"
+
+#: templates/signup.html:29
+msgid "Select Degree"
+msgstr "选择学位"
+
+#: templates/signup.html:30
+msgid "Choose your degree pathway and browse courses relevant to your study plan."
+msgstr "选择您的学位方向，并浏览与学习计划相关的课程。"
+
+#: templates/signup.html:35
+msgid "Save Courses"
+msgstr "保存课程"
+
+#: templates/signup.html:36
+msgid "Add preferred courses to your plan and keep track of your selections."
+msgstr "将偏好的课程添加到计划中，并跟踪您的选择。"
+
+#: templates/signup.html:41
+msgid "Build Timetable"
+msgstr "创建时间表"
+
+#: templates/signup.html:42
+msgid "Use your selected courses to create a clearer weekly timetable structure."
+msgstr "使用您选择的课程创建更清晰的每周时间表结构。"
+
+#: templates/signup.html:49
+msgid "Create account"
+msgstr "创建账户"
+
+#: templates/signup.html:50
+msgid "Enter your details to begin using Course Planner."
+msgstr "输入您的详细信息以开始使用课程规划系统。"
+
+#: templates/signup.html:65
+msgid "Full Name"
+msgstr "全名"
+
+#: templates/signup.html:70
+msgid "Enter your full name"
+msgstr "请输入您的全名"
+
+#: templates/signup.html:88
+msgid "Enter your student ID"
+msgstr "请输入您的学生 ID"
+
+#: templates/signup.html:97
+msgid "Create a password"
+msgstr "创建密码"
+
+#: templates/signup.html:101
+msgid "Confirm Password"
+msgstr "确认密码"
+
+#: templates/signup.html:106
+msgid "Re-enter your password"
+msgstr "请再次输入您的密码"
+
+#: templates/signup.html:115
+msgid "Already have an account? Sign in"
+msgstr "已经有账户？登录"
+
+#: templates/timetable.html:13
+msgid "Your weekly timetable."
+msgstr "您的每周时间表。"
+
+#: templates/timetable.html:15
+msgid ""
+"Generate a sample weekly timetable based on selected courses and review "
+"how your semester schedule may look."
+msgstr "根据已选课程生成示例每周时间表，并查看您的学期安排可能是什么样子。"
+
+#: templates/timetable.html:20
+msgid "Timetable Status"
+msgstr "时间表状态"
+
+#: templates/timetable.html:23
+msgid "Courses selected"
+msgstr "已选择课程"
+
+#: templates/timetable.html:44
+msgid "Weekly schedule"
+msgstr "每周安排"
+
+#: templates/timetable.html:45
+msgid "Generated Timetable"
+msgstr "已生成时间表"
+
+#: templates/timetable.html:54
+msgid "Generate Timetable"
+msgstr "生成时间表"
+
+#: templates/timetable.html:58
+msgid "Clear Timetable"
+msgstr "清除时间表"
+
+#: templates/timetable.html:67
+msgid "Course Summary"
+msgstr "课程摘要"
+
+#: templates/timetable.html:75
+msgid "Sharing"
+msgstr "分享"
+
+#: templates/timetable.html:76 templates/timetable.html:82
+msgid "Share Timetable"
+msgstr "分享时间表"
+
+#: templates/timetable.html:78
+msgid "Make your timetable available for other users to view."
+msgstr "让其他用户可以查看您的时间表。"
+
+#: templates/timetable.html:86
+msgid "View Shared Timetables"
+msgstr "查看共享时间表"
+

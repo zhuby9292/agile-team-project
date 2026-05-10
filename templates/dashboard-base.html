@@ -2,10 +2,10 @@
 
 {% block nav %}
 <nav class="auth-links app-links">
-    <a href="{{ url_for('homepage') }}">Dashboard</a>
-    <a href="{{ url_for('course_selection') }}">Courses</a>
-    <a href="{{ url_for('timetable') }}">Timetable</a>
-    <a href="{{ url_for('admin_dashboard') }}">Admin</a>
-    <a href="{{ url_for('index') }}">Logout</a>
+    <a href="{{ url_for('homepage') }}">{{ _("Dashboard") }}</a>
+    <a href="{{ url_for('course_selection') }}">{{ _("Courses") }}</a>
+    <a href="{{ url_for('timetable') }}">{{ _("Timetable") }}</a>
+    <a href="{{ url_for('admin_dashboard') }}">{{ _("Admin") }}</a>
+    <a href="{{ url_for('logout') }}">{{ _("Logout") }}</a>
 </nav>
 {% endblock %}

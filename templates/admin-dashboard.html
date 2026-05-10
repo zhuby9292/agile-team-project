@@ -1,7 +1,7 @@
 {% extends "dashboard-base.html" %}
 
 {% block title %}
-Admin Dashboard
+{{ _('Admin Dashboard') }}
 {% endblock %}
 
 {% block content %}
@@ -9,194 +9,253 @@ Admin Dashboard
 
     <section class="dashboard-hero admin-hero">
         <div class="dashboard-welcome">
-            <p class="dashboard-kicker">System management</p>
-            <h1>Admin Dashboard</h1>
+            <p class="dashboard-kicker">{{ _('System management') }}</p>
+
+            <h1>{{ _('Admin Dashboard') }}</h1>
+
             <p class="dashboard-description">
-                Monitor users, courses, enrolment activity, and timetable usage from one central admin workspace.
+                {{ _('Monitor users, courses, enrolment activity, and timetable usage from one central admin workspace.') }}
             </p>
         </div>
 
         <div class="dashboard-status-card">
-            <p class="status-label">System Summary</p>
+            <p class="status-label">{{ _('System Summary') }}</p>
 
             <div class="status-row">
-                <span>Registered users</span>
+                <span>{{ _('Registered users') }}</span>
                 <strong>128</strong>
             </div>
 
             <div class="status-row">
-                <span>Available courses</span>
+                <span>{{ _('Available courses') }}</span>
                 <strong>24</strong>
             </div>
 
             <div class="status-row">
-                <span>Timetables created</span>
+                <span>{{ _('Timetables created') }}</span>
                 <strong>76</strong>
             </div>
         </div>
     </section>
 
     <section class="admin-summary-grid">
+
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-user"></span>
-            <p class="mini-label">Users</p>
+            <p class="mini-label">{{ _('Users') }}</p>
             <h3>128</h3>
-            <p class="mini-note">Registered student accounts</p>
+            <p class="mini-note">{{ _('Registered student accounts') }}</p>
         </div>
 
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-book"></span>
-            <p class="mini-label">Courses</p>
+            <p class="mini-label">{{ _('Courses') }}</p>
             <h3>24</h3>
-            <p class="mini-note">Courses available for planning</p>
+            <p class="mini-note">{{ _('Courses available for planning') }}</p>
         </div>
 
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-stats"></span>
-            <p class="mini-label">Selections</p>
+            <p class="mini-label">{{ _('Selections') }}</p>
             <h3>312</h3>
-            <p class="mini-note">Course selections recorded</p>
+            <p class="mini-note">{{ _('Course selections recorded') }}</p>
         </div>
 
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-calendar"></span>
-            <p class="mini-label">Timetables</p>
+            <p class="mini-label">{{ _('Timetables') }}</p>
             <h3>76</h3>
-            <p class="mini-note">Generated timetable plans</p>
+            <p class="mini-note">{{ _('Generated timetable plans') }}</p>
         </div>
+
     </section>
 
     <section class="dashboard-overview-grid admin-management-grid">
+
         <div class="dashboard-panel dashboard-panel-large">
             <div class="panel-title-row">
                 <div>
-                    <p class="dashboard-kicker">Registered users</p>
-                    <h2>User Management Preview</h2>
+                    <p class="dashboard-kicker">{{ _('Registered users') }}</p>
+                    <h2>{{ _('User Management Preview') }}</h2>
                 </div>
             </div>
 
             <div class="admin-table-wrapper">
                 <table class="table admin-table">
+
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Student ID</th>
-                            <th>Status</th>
+                            <th>{{ _('Name') }}</th>
+                            <th>{{ _('Email') }}</th>
+                            <th>{{ _('Student ID') }}</th>
+                            <th>{{ _('Status') }}</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <tr>
-                            <td>Sample Student</td>
+                            <td>{{ _('Sample Student') }}</td>
                             <td>student@example.com</td>
                             <td>12345678</td>
-                            <td><span class="admin-status active">Active</span></td>
+                            <td>
+                                <span class="admin-status active">
+                                    {{ _('Active') }}
+                                </span>
+                            </td>
                         </tr>
 
                         <tr>
-                            <td>Course Planner User</td>
+                            <td>{{ _('Course Planner User') }}</td>
                             <td>planner@example.com</td>
                             <td>23456789</td>
-                            <td><span class="admin-status active">Active</span></td>
+                            <td>
+                                <span class="admin-status active">
+                                    {{ _('Active') }}
+                                </span>
+                            </td>
                         </tr>
 
                         <tr>
-                            <td>Pending User</td>
+                            <td>{{ _('Pending User') }}</td>
                             <td>pending@example.com</td>
                             <td>34567890</td>
-                            <td><span class="admin-status pending">Pending</span></td>
+                            <td>
+                                <span class="admin-status pending">
+                                    {{ _('Pending') }}
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
+
                 </table>
             </div>
         </div>
 
         <div class="dashboard-panel">
-            <p class="dashboard-kicker">Course statistics</p>
-            <h2>Popular Courses</h2>
+            <p class="dashboard-kicker">{{ _('Course statistics') }}</p>
+
+            <h2>{{ _('Popular Courses') }}</h2>
 
             <div class="progress-list admin-course-list">
+
                 <div class="progress-item">
                     <span>CITS5505</span>
-                    <strong>42 selections</strong>
+                    <strong>{{ _('42 selections') }}</strong>
                 </div>
 
                 <div class="progress-item">
                     <span>CITS4401</span>
-                    <strong>37 selections</strong>
+                    <strong>{{ _('37 selections') }}</strong>
                 </div>
 
                 <div class="progress-item">
                     <span>CITS5206</span>
-                    <strong>35 selections</strong>
+                    <strong>{{ _('35 selections') }}</strong>
                 </div>
 
                 <div class="progress-item">
                     <span>CITS5503</span>
-                    <strong>29 selections</strong>
+                    <strong>{{ _('29 selections') }}</strong>
                 </div>
+
             </div>
         </div>
+
     </section>
 
     <section class="dashboard-panel">
+
         <div class="panel-title-row">
             <div>
-                <p class="dashboard-kicker">Admin actions</p>
-                <h2>Quick Management Tools</h2>
+                <p class="dashboard-kicker">{{ _('Admin actions') }}</p>
+                <h2>{{ _('Quick Management Tools') }}</h2>
             </div>
         </div>
 
         <div class="action-grid admin-action-grid">
+
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-user"></span>
-                <h3>View Users</h3>
-                <p>Review registered users and account status information.</p>
-                <button type="button" class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('User management tools will be connected to database records in a future update.')">
-                    View Users
+
+                <h3>{{ _('View Users') }}</h3>
+
+                <p>
+                    {{ _('Review registered users and account status information.') }}
+                </p>
+
+                <button type="button"
+                    class="btn dashboard-btn-secondary"
+                    data-message="{{ _('User management tools will be connected to database records in a future update.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
+                    {{ _('View Users') }}
                 </button>
             </div>
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-book"></span>
-                <h3>Manage Courses</h3>
-                <p>Check available courses and prepare future course management features.</p>
-                <button type="button" class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('Course management tools will be expanded in the next development stage.')">
-                    Manage Courses
+
+                <h3>{{ _('Manage Courses') }}</h3>
+
+                <p>
+                    {{ _('Check available courses and prepare future course management features.') }}
+                </p>
+
+                <button type="button"
+                    class="btn dashboard-btn-secondary"
+                    data-message="{{ _('Course management tools will be expanded in the next development stage.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
+                    {{ _('Manage Courses') }}
                 </button>
             </div>
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-stats"></span>
-                <h3>View Statistics</h3>
-                <p>Monitor course demand and timetable usage across the system.</p>
-                <button type="button" class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('Statistics preview is currently based on sample dashboard data.')">
-                    View Statistics
+
+                <h3>{{ _('View Statistics') }}</h3>
+
+                <p>
+                    {{ _('Monitor course demand and timetable usage across the system.') }}
+                </p>
+
+                <button type="button"
+                    class="btn dashboard-btn-secondary"
+                    data-message="{{ _('Statistics preview is currently based on sample dashboard data.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
+                    {{ _('View Statistics') }}
                 </button>
             </div>
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-calendar"></span>
-                <h3>Monitor Timetables</h3>
-                <p>Review how many timetable plans have been created by students.</p>
-                <button type="button" class="btn dashboard-btn-secondary"
-                    onclick="showDashboardMessage('Timetable monitoring will use real timetable data in a later update.')">
-                    Monitor Usage
+
+                <h3>{{ _('Monitor Timetables') }}</h3>
+
+                <p>
+                    {{ _('Review how many timetable plans have been created by students.') }}
+                </p>
+
+                <button type="button"
+                    class="btn dashboard-btn-secondary"
+                    data-message="{{ _('Timetable monitoring will use real timetable data in a later update.') }}"
+                    onclick="showDashboardMessage(this.dataset.message)">
+                    {{ _('Monitor Usage') }}
                 </button>
             </div>
+
         </div>
+
     </section>
 
     <section class="dashboard-panel dashboard-message-panel">
-        <p class="dashboard-kicker">Admin message</p>
-        <h2>System Management Updates</h2>
+
+        <p class="dashboard-kicker">{{ _('Admin message') }}</p>
+
+        <h2>{{ _('System Management Updates') }}</h2>
+
         <p id="dashboard-output">
-            Use this admin dashboard to monitor users, courses, statistics, and timetable usage.
+            {{ _('Use this admin dashboard to monitor users, courses, statistics, and timetable usage.') }}
         </p>
+
     </section>
 
 </div>

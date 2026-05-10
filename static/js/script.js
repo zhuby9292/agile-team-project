@@ -1,55 +1,50 @@
+function t(text) {
+    if (window.translations && window.translations[text]) {
+        return window.translations[text];
+    }
+
+    return text;
+}
+
 // Checks the sign in form and shows a message to the user.
 function loginUser() {
     let userEmail = document.getElementById("user-email").value;
     let userPassword = document.getElementById("user-password").value;
 
     if (userEmail === "" || userPassword === "") {
-        alert("Please enter both your email address and password.");
+        alert(t("Please enter both your email address and password."));
         document.getElementById("signin-output").innerHTML =
-            "Sign in failed. Please complete all fields.";
+            t("Sign in failed. Please complete all fields.");
         console.log("Sign in failed: missing email or password.");
     } else {
         document.getElementById("signin-output").innerHTML =
-            "You have signed in successfully with email: " + userEmail;
-        alert("Sign in successful.");
+            t("You have signed in successfully with email:") + " " + userEmail;
+        alert(t("Sign in successful."));
         console.log("User signed in with email: " + userEmail);
     }
 }
 
-// Takes the user to the forgot password page.
 function goToForgotPassword() {
     window.location.href = "/forgot-password";
 }
 
 function resetPassword() {
-
-    const recoveryEmail =
-        document.getElementById("recovery-email").value.trim();
-
-    const newPassword =
-        document.getElementById("new-password").value;
-
-    const output =
-        document.getElementById("forgot-output");
+    const recoveryEmail = document.getElementById("recovery-email").value.trim();
+    const newPassword = document.getElementById("new-password").value;
+    const output = document.getElementById("forgot-output");
 
     if (recoveryEmail === "" || newPassword === "") {
-
-        output.innerHTML =
-            "Please complete all fields.";
-
+        output.innerHTML = t("Please complete all fields.");
         return;
     }
 
     if (newPassword.length < 6) {
-
-        output.innerHTML =
-            "Password must be at least 6 characters.";
-
+        output.innerHTML = t("Password must be at least 6 characters.");
         return;
     }
 
     output.innerHTML =
-        "Password reset successful for: " + recoveryEmail;
+        t("Password reset successful for:") + " " + recoveryEmail;
 }
 
 let demoVerificationCode = "";
@@ -59,14 +54,14 @@ function sendVerificationCode() {
     const output = document.getElementById("forgot-output");
 
     if (email === "") {
-        output.innerHTML = "Please enter your email address.";
+        output.innerHTML = t("Please enter your email address.");
         return;
     }
 
     localStorage.setItem("recoveryEmail", email);
     localStorage.setItem("verificationCode", "1234");
 
-    output.innerHTML = "Verification code sent. Redirecting...";
+    output.innerHTML = t("Verification code sent. Redirecting...");
 
     setTimeout(function () {
         window.location.href = "/reset-password";
@@ -79,25 +74,24 @@ function resetPasswordWithCode() {
     const output = document.getElementById("reset-output");
 
     const savedCode = localStorage.getItem("verificationCode");
-    const recoveryEmail = localStorage.getItem("recoveryEmail");
 
     if (verificationCode === "" || newPassword === "") {
-        output.innerHTML = "Please enter the verification code and new password.";
+        output.innerHTML = t("Please enter the verification code and new password.");
         return;
     }
 
     if (verificationCode !== savedCode) {
-        output.innerHTML = "Invalid verification code. Please try again.";
+        output.innerHTML = t("Invalid verification code. Please try again.");
         return;
     }
 
     if (newPassword.length < 6) {
-        output.innerHTML = "Password must be at least 6 characters.";
+        output.innerHTML = t("Password must be at least 6 characters.");
         return;
     }
 
-    output.innerHTML = "Password reset successful! You can now sign in with your new password.";
-    alert("Password reset successful! Please sign in again.");
+    output.innerHTML = t("Password reset successful! You can now sign in with your new password.");
+    alert(t("Password reset successful! Please sign in again."));
 
     localStorage.removeItem("verificationCode");
     localStorage.removeItem("recoveryEmail");
@@ -163,19 +157,14 @@ function handleCodeBackspace(event) {
     setTimeout(updateResetFormState, 0);
 }
 
-
-
-// Takes the user to the sign up page.
 function goToSignUp() {
     window.location.href = "/signup.html";
 }
 
-// Takes the user back to the sign in page.
 function goToSignIn() {
     window.location.href = "/";
 }
 
-// Checks the sign up form and shows a message to the user.
 function registerUser() {
     let fullName = document.getElementById("full-name").value.trim();
     let signupEmail = document.getElementById("signup-email").value.trim();
@@ -191,29 +180,28 @@ function registerUser() {
         signupPassword === "" ||
         confirmPassword === ""
     ) {
-        alert("Please complete all registration fields.");
-        output.innerHTML = "Registration failed. Please complete all fields.";
+        alert(t("Please complete all registration fields."));
+        output.innerHTML = t("Registration failed. Please complete all fields.");
         return;
     }
 
     if (signupPassword !== confirmPassword) {
-        alert("Passwords do not match.");
-        output.innerHTML = "Registration failed. The passwords do not match.";
+        alert(t("Passwords do not match."));
+        output.innerHTML = t("Registration failed. The passwords do not match.");
         return;
     }
 
     if (signupPassword.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        output.innerHTML = "Registration failed. Password must contain at least 6 characters.";
+        alert(t("Password must be at least 6 characters long."));
+        output.innerHTML = t("Registration failed. Password must contain at least 6 characters.");
         return;
     }
 
     output.innerHTML =
-        "Account created successfully for " + fullName + " with email: " + signupEmail;
-    alert("Registration successful.");
+        t("Account created successfully for") + " " + fullName + " " + t("with email:") + " " + signupEmail;
+    alert(t("Registration successful."));
 }
 
-// Shows a dashboard message when the user clicks a dashboard action button.
 function showDashboardMessage(message) {
     const dashboardOutput = document.getElementById("dashboard-output");
 
@@ -224,7 +212,6 @@ function showDashboardMessage(message) {
     console.log("Dashboard action clicked: " + message);
 }
 
-// Stores selected courses so they can be used across pages.
 const SELECTED_COURSES_STORAGE_KEY = "selectedCourses";
 
 let selectedCourses = loadSelectedCourses();
@@ -251,7 +238,6 @@ function saveSelectedCourses() {
     );
 }
 
-// Sample UWA-style degree data used for the course selection page.
 const degreeOptions = {
     bachelor: [
         "Bachelor of Arts",
@@ -276,8 +262,6 @@ const degreeOptions = {
     ]
 };
 
-// Sample course data for each degree.
-// These are sample frontend/demo values for the prototype.
 const courseOptions = {
     "Bachelor of Arts": [
         {
@@ -710,7 +694,6 @@ function updateDegreeOptions(shouldResetCourses = true) {
         loadDashboardStats();
     }
 
-    // Clear available courses until a degree is selected.
     displayAvailableCourses("");
 
     degreeSelect.innerHTML = "";
@@ -720,19 +703,19 @@ function updateDegreeOptions(shouldResetCourses = true) {
 
         const defaultOption = document.createElement("option");
         defaultOption.value = "";
-        defaultOption.textContent = "-- Select a study level first --";
+        defaultOption.textContent = t("-- Select a study level first --");
         degreeSelect.appendChild(defaultOption);
 
         if (courseMessage) {
-            courseMessage.textContent = "Please select a study level, then choose a degree before adding courses.";
+            courseMessage.textContent = t("Please select a study level, then choose a degree before adding courses.");
         }
 
         if (degreeSummary) {
-            degreeSummary.textContent = "Not selected";
+            degreeSummary.textContent = t("Not selected");
         }
 
         if (studyLevelSummary) {
-            studyLevelSummary.textContent = "Not selected";
+            studyLevelSummary.textContent = t("Not selected");
         }
 
         return;
@@ -742,22 +725,23 @@ function updateDegreeOptions(shouldResetCourses = true) {
 
     const placeholderOption = document.createElement("option");
     placeholderOption.value = "";
-    placeholderOption.textContent = "-- Select a degree --";
+    placeholderOption.textContent = t("-- Select a degree --");
     degreeSelect.appendChild(placeholderOption);
 
     degreeOptions[selectedLevel].forEach(function (degreeName) {
         const option = document.createElement("option");
         option.value = degreeName;
-        option.textContent = degreeName;
+        option.textContent = t(degreeName);
         degreeSelect.appendChild(option);
     });
 
     if (courseMessage) {
-        courseMessage.textContent = "Now select a degree from the available " + selectedLevelText + " options.";
+        courseMessage.textContent =
+            t("Now select a degree from the available") + " " + selectedLevelText + " " + t("options.");
     }
 
     if (degreeSummary) {
-        degreeSummary.textContent = "Not selected";
+        degreeSummary.textContent = t("Not selected");
     }
 
     if (studyLevelSummary) {
@@ -788,11 +772,11 @@ function selectDegree(shouldResetCourses = true) {
         loadDashboardStats();
 
         if (courseMessage) {
-            courseMessage.textContent = "Please choose a degree before adding courses.";
+            courseMessage.textContent = t("Please choose a degree before adding courses.");
         }
 
         if (degreeSummary) {
-            degreeSummary.textContent = "Not selected";
+            degreeSummary.textContent = t("Not selected");
         }
 
         displayAvailableCourses("");
@@ -811,17 +795,17 @@ function selectDegree(shouldResetCourses = true) {
     }
 
     if (courseMessage) {
-        courseMessage.textContent = selectedDegree + " selected. You can now add courses to your study plan.";
+        courseMessage.textContent =
+            t(selectedDegree) + " " + t("selected. You can now add courses to your study plan.");
     }
 
     if (degreeSummary) {
-        degreeSummary.textContent = selectedDegree;
+        degreeSummary.textContent = t(selectedDegree);
     }
 
     displayAvailableCourses(selectedDegree);
 }
 
-// Displays course cards based on the selected degree.
 function displayAvailableCourses(degreeName) {
     const availableCoursesBox = document.getElementById("available-courses");
 
@@ -834,7 +818,7 @@ function displayAvailableCourses(degreeName) {
     if (!courses || courses.length === 0) {
         availableCoursesBox.innerHTML = `
             <div class="empty-course-state">
-                <p>Please select a study level and degree to view available courses.</p>
+                <p>${t("Please select a study level and degree to view available courses.")}</p>
             </div>
         `;
         return;
@@ -848,10 +832,10 @@ function displayAvailableCourses(degreeName) {
 
                 <div class="course-card-top">
                     <span class="course-code">${course.code}</span>
-                    <span class="credit-pill">${course.credits} credits</span>
+                    <span class="credit-pill">${course.credits} ${t("credits")}</span>
                 </div>
 
-                <h3>${course.name}</h3>
+                <h3>${t(course.name)}</h3>
 
                 <div class="course-detail-list">
                     <p>
@@ -860,43 +844,45 @@ function displayAvailableCourses(degreeName) {
                     </p>
                     <p>
                         <span class="glyphicon glyphicon-map-marker"></span>
-                        ${course.stream}
+                        ${t(course.stream)}
                     </p>
                 </div>
 
                 <button type="button" class="btn dashboard-btn-primary" onclick="addCourse('${course.code}', '${course.name}', ${course.credits}, '${course.time}', '${course.stream}', '${course.semester}')">
-                    Add Course
+                    ${t("Add Course")}
                 </button>
             </div>
         `;
     }).join("");
+
     filterCourses();
 }
 
-// Adds a selected course to the user's course plan.
 function addCourse(code, name, credits, time, stream, semester) {
     const degreeSelect = document.getElementById("degree-select");
     const message = document.getElementById("course-message");
 
     if (degreeSelect && degreeSelect.value === "") {
         if (message) {
-            message.innerHTML = "Please select a degree first.";
+            message.innerHTML = t("Please select a degree first.");
         }
         return;
     }
+
     const existingSemester = selectedCourses.length > 0
         ? selectedCourses[0].semester
         : null;
 
     if (existingSemester && existingSemester !== semester) {
-        alert("Semester conflict detected. Please select courses from the same semester.");
+        alert(t("Semester conflict detected. Please select courses from the same semester."));
         return;
     }
+
     const exists = selectedCourses.some(course => course.code === code);
 
     if (exists) {
         if (message) {
-            message.innerHTML = code + " has already been added.";
+            message.innerHTML = code + " " + t("has already been added.");
         }
         return;
     }
@@ -913,13 +899,12 @@ function addCourse(code, name, credits, time, stream, semester) {
     localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
 
     if (message) {
-        message.innerHTML = code + " added successfully.";
+        message.innerHTML = code + " " + t("added successfully.");
     }
 
     displaySelectedCourses();
 }
 
-// Displays selected courses and updates credit/course summaries.
 function displaySelectedCourses() {
     const selectedBox = document.getElementById("selected-courses");
     const creditOutput = document.getElementById("credit-output");
@@ -931,7 +916,7 @@ function displaySelectedCourses() {
     }
 
     if (selectedCourses.length === 0) {
-        selectedBox.innerHTML = "<p>No courses selected yet.</p>";
+        selectedBox.innerHTML = `<p>${t("No courses selected yet.")}</p>`;
         creditOutput.innerHTML = "0";
 
         if (creditSummary) {
@@ -954,13 +939,13 @@ function displaySelectedCourses() {
             <div class="selected-course-item">
                 <div>
                     <strong>${course.code}</strong>
-                    <span>${course.name}</span>
-                    <small>${course.credits} credit points</small>
+                    <span>${t(course.name)}</span>
+                    <small>${course.credits} ${t("credit points")}</small>
                 </div>
 
                 <button class="btn btn-xs btn-danger"
                     onclick="removeCourse('${course.code}')">
-                    Remove
+                    ${t("Remove")}
                 </button>
             </div>
         `;
@@ -977,7 +962,6 @@ function displaySelectedCourses() {
     }
 }
 
-// Removes a selected course from the user's course plan.
 function removeCourse(code) {
     selectedCourses = selectedCourses.filter(course => course.code !== code);
     saveSelectedCourses();
@@ -993,7 +977,6 @@ function removeCourse(code) {
     loadDashboardStats();
 }
 
-// Filters displayed courses based on the search input and semester filter.
 function filterCourses() {
     const searchInput = document.getElementById("course-search");
     const semesterFilter = document.getElementById("semester-filter");
@@ -1024,7 +1007,6 @@ function filterCourses() {
     });
 }
 
-// Applies the saved theme when a page loads.
 function applySavedTheme() {
     const savedTheme = localStorage.getItem("coursePlannerTheme");
 
@@ -1037,7 +1019,6 @@ function applySavedTheme() {
     }
 }
 
-// Switches between light mode and dark mode.
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
 
@@ -1050,8 +1031,6 @@ function toggleDarkMode() {
     }
 }
 
-// Updates only the label inside the theme toggle.
-// This keeps the slider track and thumb structure intact.
 function updateThemeToggleLabel(labelText) {
     const themeButtons = document.querySelectorAll(".theme-toggle");
 
@@ -1059,7 +1038,7 @@ function updateThemeToggleLabel(labelText) {
         const label = button.querySelector(".theme-toggle-label");
 
         if (label) {
-            label.textContent = labelText;
+            label.textContent = t(labelText);
         }
 
         if (labelText === "Light") {
@@ -1084,14 +1063,14 @@ function loadTimetablePage() {
     }
 
     if (savedCourses.length === 0) {
-        courseList.innerHTML = "<p>No courses selected yet.</p>";
+        courseList.innerHTML = `<p>${t("No courses selected yet.")}</p>`;
 
         if (status) {
-            status.innerHTML = "Not generated";
+            status.innerHTML = t("Not generated");
         }
 
         if (output) {
-            output.innerHTML = "Please select courses before generating a timetable.";
+            output.innerHTML = t("Please select courses before generating a timetable.");
         }
 
         if (courseCount) {
@@ -1107,20 +1086,23 @@ function loadTimetablePage() {
     }
 
     let totalCredits = 0;
+
     courseList.innerHTML = savedCourses.map(function (course) {
         totalCredits += course.credits;
+
         return `
             <div class="timetable-course-item">
                 <strong>${course.code}</strong>
-                <span>${course.name}</span>
-                <small>${course.time} · ${course.credits} credits</small>
+                <span>${t(course.name)}</span>
+                <small>${course.time} · ${course.credits} ${t("credits")}</small>
             </div>
         `;
     }).join("");
 
     if (status) {
-        status.innerHTML = "Ready";
+        status.innerHTML = t("Ready");
     }
+
     if (courseCount) {
         courseCount.innerHTML = savedCourses.length;
     }
@@ -1152,7 +1134,7 @@ function renderEmptyWeeklyCalendar() {
     let html = `<div class="calendar-time-header"></div>`;
 
     days.forEach(function (day) {
-        html += `<div class="calendar-day-header">${day}</div>`;
+        html += `<div class="calendar-day-header">${t(day)}</div>`;
     });
 
     times.forEach(function (time) {
@@ -1173,7 +1155,7 @@ function generateTimetable() {
 
     if (savedCourses.length === 0) {
         if (output) {
-            output.innerHTML = "Please select courses before generating a timetable.";
+            output.innerHTML = t("Please select courses before generating a timetable.");
         }
         return;
     }
@@ -1183,11 +1165,11 @@ function generateTimetable() {
 
     if (uniqueSemesters.length > 1) {
         if (status) {
-            status.innerHTML = "Conflict";
+            status.innerHTML = t("Conflict");
         }
 
         if (output) {
-            output.innerHTML = "You selected courses from different semesters. Please choose courses from one semester before generating a timetable.";
+            output.innerHTML = t("You selected courses from different semesters. Please choose courses from one semester before generating a timetable.");
         }
 
         renderEmptyWeeklyCalendar();
@@ -1208,18 +1190,18 @@ function generateTimetable() {
             cell.classList.add("course-block");
             cell.innerHTML = `
                 <strong>${course.code}</strong>
-                <span>${course.name}</span>
+                <span>${t(course.name)}</span>
                 <small>${course.time}</small>
             `;
         }
     });
 
     if (status) {
-        status.innerHTML = "Generated";
+        status.innerHTML = t("Generated");
     }
 
     if (output) {
-        output.innerHTML = "The weekly timetable has been generated successfully.";
+        output.innerHTML = t("The weekly timetable has been generated successfully.");
     }
 
     localStorage.setItem("timetableGenerated", "true");
@@ -1232,11 +1214,11 @@ function clearTimetable() {
     const output = document.getElementById("timetable-output");
 
     if (status) {
-        status.innerHTML = "Not generated";
+        status.innerHTML = t("Not generated");
     }
 
     if (output) {
-        output.innerHTML = "The timetable has been cleared.";
+        output.innerHTML = t("The timetable has been cleared.");
     }
 
     localStorage.setItem("timetableGenerated", "false");
@@ -1256,7 +1238,7 @@ function shareTimetable() {
 
     if (output) {
         output.innerHTML =
-            "Your timetable has been shared successfully. Other users can now view it from the shared timetables page.";
+            t("Your timetable has been shared successfully. Other users can now view it from the shared timetables page.");
     }
 }
 
