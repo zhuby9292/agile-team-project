@@ -120,20 +120,18 @@
                     <span class="action-icon glyphicon glyphicon-search"></span>
                     <h3>Browse Courses</h3>
                     <p>Explore available courses, course codes, credit points, and scheduling information.</p>
-                    <button type="button" class="btn dashboard-btn-primary"
-                        onclick="window.location.href='{{ url_for('course_selection') }}'">
+                    <a href="{{ url_for('course_selection') }}" class="btn dashboard-btn-primary">
                         Browse Courses
-                    </button>
+                    </a>
                 </div>
 
                 <div class="action-box">
                     <span class="action-icon glyphicon glyphicon-time"></span>
                     <h3>Plan Timetable</h3>
                     <p>Use your selected courses to prepare a clear weekly timetable structure.</p>
-                    <button type="button" class="btn dashboard-btn-primary"
-                        onclick="window.location.href='{{ url_for('timetable') }}'">
+                    <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-primary">
                         Open Timetable
-                    </button>
+                    </a>
                 </div>
 
                 <div class="action-box">
