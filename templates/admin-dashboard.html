@@ -21,7 +21,7 @@ Admin Dashboard
 
             <div class="status-row">
                 <span>Registered users</span>
-                <strong>128</strong>
+                <strong>{{ total_users }}</strong>
             </div>
 
             <div class="status-row">
@@ -40,7 +40,7 @@ Admin Dashboard
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-user"></span>
             <p class="mini-label">Users</p>
-            <h3>128</h3>
+            <h3>{{ total_users }}</h3>
             <p class="mini-note">Registered student accounts</p>
         </div>
 
@@ -71,7 +71,7 @@ Admin Dashboard
             <div class="panel-title-row">
                 <div>
                     <p class="dashboard-kicker">Registered users</p>
-                    <h2>User Management Preview</h2>
+                    <h2>Recent Registered Users</h2>
                 </div>
             </div>
 
@@ -86,28 +86,22 @@ Admin Dashboard
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>Sample Student</td>
-                            <td>student@example.com</td>
-                            <td>12345678</td>
-                            <td><span class="admin-status active">Active</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Course Planner User</td>
-                            <td>planner@example.com</td>
-                            <td>23456789</td>
-                            <td><span class="admin-status active">Active</span></td>
-                        </tr>
-
-                        <tr>
-                            <td>Pending User</td>
-                            <td>pending@example.com</td>
-                            <td>34567890</td>
-                            <td><span class="admin-status pending">Pending</span></td>
-                        </tr>
-                    </tbody>
+                   <tbody>
+    {% if recent_users %}
+        {% for user in recent_users %}
+        <tr>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.student_id }}</td>
+            <td><span class="admin-status active">Active</span></td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4">No registered users found.</td>
+        </tr>
+    {% endif %}
+</tbody>
                 </table>
             </div>
         </div>
