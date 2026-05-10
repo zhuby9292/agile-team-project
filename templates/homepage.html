@@ -1,201 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Planner - Dashboard</title>
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+{% extends "dashboard-base.html" %}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+{% block title %}Course Planner - Dashboard{% endblock %}
 
-<body class="app-page">
-    <header class="app-header">
-        <div class="container app-nav">
-            <div class="brand">
-                <span class="brand-icon glyphicon glyphicon-calendar"></span>
-                <span class="brand-name">Course Planner</span>
+{% block content %}
+<div class="container dashboard-container">
+
+    <section class="dashboard-hero">
+        <div class="dashboard-welcome">
+            <p class="dashboard-kicker">Student workspace</p>
+            <h1>Welcome to your course planning dashboard.</h1>
+            <p class="dashboard-description">
+                Review your study progress, browse available courses, prepare your timetable,
+                and explore planning tools from one central place.
+            </p>
+        </div>
+
+        <div class="dashboard-status-card">
+            <p class="status-label">Current Plan Status</p>
+
+            <div class="status-row">
+                <span>Degree selected</span>
+                <strong>Yes</strong>
             </div>
 
-            <nav class="auth-links app-links">
-               <a href="{{ url_for('homepage') }}" class="active">Dashboard</a>
-<a href="{{ url_for('course_selection') }}">Courses</a>
-<a href="{{ url_for('timetable') }}">Timetable</a>
-<a href="{{ url_for('admin_dashboard') }}">Admin</a>
-<a href="{{ url_for('index') }}">Logout</a>
-            </nav>
+            <div class="status-row">
+                <span>Courses added</span>
+                <strong>0</strong>
+            </div>
 
-            <button type="button" class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode" aria-pressed="false">
-                <span class="theme-toggle-label">Dark</span>
-                <span class="theme-toggle-thumb"></span>
-            </button>
+            <div class="status-row">
+                <span>Timetable created</span>
+                <strong>No</strong>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main class="dashboard-main">
-        <div class="container dashboard-container">
+    <section class="dashboard-overview-grid">
+        <div class="dashboard-panel dashboard-panel-large">
+            <div class="panel-title-row">
+                <div>
+                    <p class="dashboard-kicker">Overview</p>
+                    <h2>Study Summary</h2>
+                </div>
+            </div>
 
-            <section class="dashboard-hero">
-                <div class="dashboard-welcome">
-                    <p class="dashboard-kicker">Student workspace</p>
-                    <h1>Welcome to your course planning dashboard.</h1>
-                    <p class="dashboard-description">
-                        Review your study progress, browse available courses, prepare your timetable,
-                        and explore planning tools from one central place.
-                    </p>
+            <div class="summary-grid">
+                <div class="mini-card">
+                    <span class="mini-icon glyphicon glyphicon-education"></span>
+                    <p class="mini-label">Degree</p>
+                    <h3>Master of IT</h3>
+                    <p class="mini-note">Current study pathway</p>
                 </div>
 
-                <div class="dashboard-status-card">
-                    <p class="status-label">Current Plan Status</p>
-
-                    <div class="status-row">
-                        <span>Degree selected</span>
-                        <strong>Yes</strong>
-                    </div>
-
-                    <div class="status-row">
-                        <span>Courses added</span>
-                        <strong>0</strong>
-                    </div>
-
-                    <div class="status-row">
-                        <span>Timetable created</span>
-                        <strong>No</strong>
-                    </div>
-                </div>
-            </section>
-
-            <section class="dashboard-overview-grid">
-                <div class="dashboard-panel dashboard-panel-large">
-                    <div class="panel-title-row">
-                        <div>
-                            <p class="dashboard-kicker">Overview</p>
-                            <h2>Study Summary</h2>
-                        </div>
-                    </div>
-
-                    <div class="summary-grid">
-                        <div class="mini-card">
-                            <span class="mini-icon glyphicon glyphicon-education"></span>
-                            <p class="mini-label">Degree</p>
-                            <h3>Master of IT</h3>
-                            <p class="mini-note">Current study pathway</p>
-                        </div>
-
-                        <div class="mini-card">
-                            <span class="mini-icon glyphicon glyphicon-list-alt"></span>
-                            <p class="mini-label">Selected Courses</p>
-                            <h3>0 Units</h3>
-                            <p class="mini-note">Courses selected for this semester</p>
-                        </div>
-
-                        <div class="mini-card">
-                            <span class="mini-icon glyphicon glyphicon-credit-card"></span>
-                            <p class="mini-label">Total Credits</p>
-                            <h3>0 Credit Points</h3>
-                            <p class="mini-note">Calculated from selected courses</p>
-                        </div>
-                    </div>
+                <div class="mini-card">
+                    <span class="mini-icon glyphicon glyphicon-list-alt"></span>
+                    <p class="mini-label">Selected Courses</p>
+                    <h3>0 Units</h3>
+                    <p class="mini-note">Courses selected for this semester</p>
                 </div>
 
-                <div class="dashboard-panel">
-                    <p class="dashboard-kicker">Progress</p>
-                    <h2>Planning Flow</h2>
-
-                    <div class="progress-list">
-                        <div class="progress-item">
-                            <span>Sign in</span>
-                            <span class="progress-done">Done</span>
-                        </div>
-
-                        <div class="progress-item">
-                            <span>Dashboard</span>
-                            <span class="progress-done">Active</span>
-                        </div>
-
-                        <div class="progress-item">
-                            <span>Course selection</span>
-                            <span class="progress-pending">Pending</span>
-                        </div>
-
-                        <div class="progress-item">
-                            <span>Timetable planning</span>
-                            <span class="progress-pending">Pending</span>
-                        </div>
-                    </div>
+                <div class="mini-card">
+                    <span class="mini-icon glyphicon glyphicon-credit-card"></span>
+                    <p class="mini-label">Total Credits</p>
+                    <h3>0 Credit Points</h3>
+                    <p class="mini-note">Calculated from selected courses</p>
                 </div>
-            </section>
-
-            <section class="dashboard-panel">
-                <div class="panel-title-row">
-                    <div>
-                        <p class="dashboard-kicker">Actions</p>
-                        <h2>What would you like to do?</h2>
-                    </div>
-                </div>
-
-                <div class="action-grid dashboard-action-grid">
-                    <div class="action-box">
-                        <span class="action-icon glyphicon glyphicon-search"></span>
-                        <h3>Browse Courses</h3>
-                        <p>Explore available courses, course codes, credit points, and scheduling information.</p>
-                        <button type="button" class="btn dashboard-btn-primary"
-                            onclick="window.location.href='course-selection.html'">
-                            Browse Courses
-                        </button>
-                    </div>
-
-                    <div class="action-box">
-                        <span class="action-icon glyphicon glyphicon-time"></span>
-                        <h3>Plan Timetable</h3>
-                        <p>Use your selected courses to prepare a clear weekly timetable structure.</p>
-                        <button type="button" class="btn dashboard-btn-primary"
-                            onclick="window.location.href='timetable.html'">
-                            Open Timetable
-                        </button>
-                    </div>
-
-                    <div class="action-box">
-                        <span class="action-icon glyphicon glyphicon-user"></span>
-                        <h3>Compare Plans</h3>
-                        <p>View other students’ timetable examples to explore different course combinations.</p>
-                        <button type="button" class="btn dashboard-btn-secondary"
-                            onclick="showDashboardMessage('Student timetable comparison will be added in a future update.')">
-                            View Examples
-                        </button>
-                    </div>
-
-                    <div class="action-box">
-                        <span class="action-icon glyphicon glyphicon-stats"></span>
-                        <h3>Admin Statistics</h3>
-                        <p>Preview course demand and enrolment statistics for teachers or administrators.</p>
-                        <button type="button" class="btn dashboard-btn-secondary"
-                            onclick="showDashboardMessage('Admin statistics will be available in a future update.')">
-                            View Statistics
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="dashboard-panel dashboard-message-panel">
-                <p class="dashboard-kicker">System message</p>
-                <h2>Dashboard Updates</h2>
-                <p id="dashboard-output">
-                    Use this dashboard to review your study plan and access the main course planning features.
-                </p>
-            </section>
-
+            </div>
         </div>
-    </main>
 
-    <footer class="auth-footer">
-        <div class="container">
-            <p>Created for the Agile Web Development Group Project.</p>
+        <div class="dashboard-panel">
+            <p class="dashboard-kicker">Progress</p>
+            <h2>Planning Flow</h2>
+
+            <div class="progress-list">
+                <div class="progress-item">
+                    <span>Sign in</span>
+                    <span class="progress-done">Done</span>
+                </div>
+
+                <div class="progress-item">
+                    <span>Dashboard</span>
+                    <span class="progress-done">Active</span>
+                </div>
+
+                <div class="progress-item">
+                    <span>Course selection</span>
+                    <span class="progress-pending">Pending</span>
+                </div>
+
+                <div class="progress-item">
+                    <span>Timetable planning</span>
+                    <span class="progress-pending">Pending</span>
+                </div>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+    <section class="dashboard-panel">
+        <div class="panel-title-row">
+            <div>
+                <p class="dashboard-kicker">Actions</p>
+                <h2>What would you like to do?</h2>
+            </div>
+        </div>
+
+        <div class="action-grid dashboard-action-grid">
+            <div class="action-box">
+                <span class="action-icon glyphicon glyphicon-search"></span>
+                <h3>Browse Courses</h3>
+                <p>Explore available courses, course codes, credit points, and scheduling information.</p>
+                <a href="{{ url_for('course_selection') }}" class="btn dashboard-btn-primary">
+                    Browse Courses
+                </a>
+            </div>
+
+            <div class="action-box">
+                <span class="action-icon glyphicon glyphicon-time"></span>
+                <h3>Plan Timetable</h3>
+                <p>Use your selected courses to prepare a clear weekly timetable structure.</p>
+                <a href="{{ url_for('timetable') }}" class="btn dashboard-btn-primary">
+                    Open Timetable
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard-panel dashboard-message-panel">
+        <p class="dashboard-kicker">System message</p>
+        <h2>Dashboard Updates</h2>
+        <p id="dashboard-output">
+            Use this dashboard to review your study plan and access the main course planning features.
+        </p>
+    </section>
+
+</div>
+{% endblock %}
