@@ -5,7 +5,11 @@
     <a href="{{ url_for('homepage') }}">{{ _("Dashboard") }}</a>
     <a href="{{ url_for('course_selection') }}">{{ _("Courses") }}</a>
     <a href="{{ url_for('timetable') }}">{{ _("Timetable") }}</a>
+
+    {% if is_admin %}
     <a href="{{ url_for('admin_dashboard') }}">{{ _("Admin") }}</a>
+    {% endif %}
+
     <a href="{{ url_for('logout') }}">{{ _("Logout") }}</a>
 </nav>
 {% endblock %}
