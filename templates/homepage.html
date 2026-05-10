@@ -20,17 +20,17 @@
 
             <div class="status-row">
                 <span>Degree selected</span>
-                <strong>Yes</strong>
+                <strong id="dashboard-degree-status">Yes</strong>
             </div>
 
             <div class="status-row">
                 <span>Courses added</span>
-                <strong>0</strong>
+                <strong id="dashboard-course-count">0</strong>
             </div>
 
             <div class="status-row">
                 <span>Timetable created</span>
-                <strong>No</strong>
+                <strong id="dashboard-timetable-status">No</strong>
             </div>
         </div>
     </section>
@@ -48,21 +48,21 @@
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-education"></span>
                     <p class="mini-label">Degree</p>
-                    <h3>Master of IT</h3>
+                    <h3 id="dashboard-degree-name">Not selected</h3>
                     <p class="mini-note">Current study pathway</p>
                 </div>
 
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-list-alt"></span>
                     <p class="mini-label">Selected Courses</p>
-                    <h3>0 Units</h3>
+                    <h3><span id="dashboard-selected-count">0</span> Units</h3>
                     <p class="mini-note">Courses selected for this semester</p>
                 </div>
 
                 <div class="mini-card">
                     <span class="mini-icon glyphicon glyphicon-credit-card"></span>
                     <p class="mini-label">Total Credits</p>
-                    <h3>0 Credit Points</h3>
+                    <h3><span id="dashboard-credit-total">0</span> Credit Points</h3>
                     <p class="mini-note">Calculated from selected courses</p>
                 </div>
             </div>
@@ -85,12 +85,16 @@
 
                 <div class="progress-item">
                     <span>Course selection</span>
-                    <span class="progress-pending">Pending</span>
+                    <span id="dashboard-course-progress" class="progress-pending">
+                        Pending
+                    </span>
                 </div>
 
                 <div class="progress-item">
                     <span>Timetable planning</span>
-                    <span class="progress-pending">Pending</span>
+                    <span id="dashboard-timetable-progress" class="progress-pending">
+                        Pending
+                    </span>
                 </div>
             </div>
         </div>
