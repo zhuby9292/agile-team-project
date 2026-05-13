@@ -383,15 +383,47 @@ def timetable():
 @admin_required
 def admin_dashboard():
     total_users = User.query.count()
-    recent_users = User.query.order_by(User.id.desc()).limit(5).all()
+    total_courses = Course.query.count()
+    total_selections = Selection.query.count()
+    timetables_created = db.session.query(Selection.user_id).distinct().count()
+
+    recent_user_records = User.query.order_by(User.id.desc()).limit(5).all()
+    recent_users = []
+
+    for user in recent_user_records:
+        selected_count = Selection.query.filter_by(user_id=user.id).count()
+
+        recent_users.append({
+            "full_name": user.full_name,
+            "email": user.email,
+            "student_id": user.student_id,
+            "selected_count": selected_count,
+            "status": "Active" if selected_count > 0 else "No selections",
+        })
+
+    popular_courses = (
+        db.session.query(
+            Course.code,
+            Course.name,
+            db.func.count(Selection.id).label("selection_count")
+        )
+        .join(Selection, Selection.course_id == Course.id)
+        .group_by(Course.id, Course.code, Course.name)
+        .order_by(db.func.count(Selection.id).desc())
+        .limit(5)
+        .all()
+    )
 
     return render_template(
         "admin-dashboard.html",
         current_user=current_user,
         total_users=total_users,
+        total_courses=total_courses,
+        total_selections=total_selections,
+        timetables_created=timetables_created,
         recent_users=recent_users,
+        popular_courses=popular_courses,
     )
-
 
 @app.route("/logout")
 @login_required
