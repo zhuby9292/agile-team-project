@@ -26,15 +26,15 @@
                 <strong>{{ total_users }}</strong>
             </div>
 
-            <div class="status-row">
-                <span>{{ _('Available courses') }}</span>
-                <strong>24</strong>
-            </div>
+           <div class="status-row">
+               <span>{{ _('Available courses') }}</span>
+               <strong>{{ total_courses }}</strong>
+           </div>
 
-            <div class="status-row">
-                <span>{{ _('Timetables created') }}</span>
-                <strong>76</strong>
-            </div>
+           <div class="status-row">
+               <span>{{ _('Timetables created') }}</span>
+               <strong>{{ timetables_created }}</strong>
+           </div>
         </div>
     </section>
 
@@ -48,25 +48,25 @@
         </div>
 
         <div class="mini-card admin-stat-card">
-            <span class="mini-icon glyphicon glyphicon-book"></span>
-            <p class="mini-label">{{ _('Courses') }}</p>
-            <h3>24</h3>
-            <p class="mini-note">{{ _('Courses available for planning') }}</p>
-        </div>
+    <span class="mini-icon glyphicon glyphicon-book"></span>
+    <p class="mini-label">{{ _('Courses') }}</p>
+    <h3>{{ total_courses }}</h3>
+    <p class="mini-note">{{ _('Courses available for planning') }}</p>
+</div>
 
-        <div class="mini-card admin-stat-card">
-            <span class="mini-icon glyphicon glyphicon-stats"></span>
-            <p class="mini-label">{{ _('Selections') }}</p>
-            <h3>312</h3>
-            <p class="mini-note">{{ _('Course selections recorded') }}</p>
-        </div>
+<div class="mini-card admin-stat-card">
+    <span class="mini-icon glyphicon glyphicon-stats"></span>
+    <p class="mini-label">{{ _('Selections') }}</p>
+    <h3>{{ total_selections }}</h3>
+    <p class="mini-note">{{ _('Course selections recorded') }}</p>
+</div>
 
-        <div class="mini-card admin-stat-card">
-            <span class="mini-icon glyphicon glyphicon-calendar"></span>
-            <p class="mini-label">{{ _('Timetables') }}</p>
-            <h3>76</h3>
-            <p class="mini-note">{{ _('Generated timetable plans') }}</p>
-        </div>
+<div class="mini-card admin-stat-card">
+    <span class="mini-icon glyphicon glyphicon-calendar"></span>
+    <p class="mini-label">{{ _('Timetables') }}</p>
+    <h3>{{ timetables_created }}</h3>
+    <p class="mini-note">{{ _('Generated timetable plans') }}</p>
+</div>
 
     </section>
 
@@ -92,28 +92,34 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        {% if recent_users %}
-                            {% for user in recent_users %}
-                            <tr>
-                                <td>{{ user.full_name }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.student_id }}</td>
-                                <td>
-                                    <span class="admin-status active">
-                                        {{ _('Active') }}
-                                    </span>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr>
-                                <td colspan="4">
-                                    {{ _('No registered users found.') }}
-                                </td>
-                            </tr>
-                        {% endif %}
-                    </tbody>
+                  <tbody>
+    {% if recent_users %}
+        {% for user in recent_users %}
+        <tr>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.student_id }}</td>
+            <td>
+                {% if user.selected_count > 0 %}
+                    <span class="admin-status active">
+                        {{ _('Active') }} · {{ user.selected_count }} {{ _('selected') }}
+                    </span>
+                {% else %}
+                    <span class="admin-status pending">
+                        {{ _('No selections') }}
+                    </span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4">
+                {{ _('No registered users found.') }}
+            </td>
+        </tr>
+    {% endif %}
+</tbody>
 
                 </table>
             </div>
@@ -126,27 +132,21 @@
 
             <div class="progress-list admin-course-list">
 
-                <div class="progress-item">
-                    <span>CITS5505</span>
-                    <strong>{{ _('42 selections') }}</strong>
-                </div>
+    {% if popular_courses %}
+        {% for course in popular_courses %}
+        <div class="progress-item">
+            <span>{{ course.code }} - {{ course.name }}</span>
+            <strong>{{ course.selection_count }} {{ _('selections') }}</strong>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="progress-item">
+            <span>{{ _('No course selections recorded yet.') }}</span>
+            <strong>0</strong>
+        </div>
+    {% endif %}
 
-                <div class="progress-item">
-                    <span>CITS4401</span>
-                    <strong>{{ _('37 selections') }}</strong>
-                </div>
-
-                <div class="progress-item">
-                    <span>CITS5206</span>
-                    <strong>{{ _('35 selections') }}</strong>
-                </div>
-
-                <div class="progress-item">
-                    <span>CITS5503</span>
-                    <strong>{{ _('29 selections') }}</strong>
-                </div>
-
-            </div>
+</div>
         </div>
 
     </section>
@@ -207,7 +207,7 @@
 
                 <button type="button"
                     class="btn dashboard-btn-secondary"
-                    data-message="{{ _('Statistics preview is currently based on sample dashboard data.') }}"
+                   data-message="{{ _('Statistics are now calculated from current user and course selection records.') }}"
                     onclick="showDashboardMessage(this.dataset.message)">
                     {{ _('View Statistics') }}
                 </button>
