@@ -659,7 +659,7 @@ footer p {
     display: flex;
     align-items: center;
     gap: 18px;
-    margin-bottom: 0;
+    margin-bottom: 34px;
 }
 .hero-btn-primary,
 .signin-btn {

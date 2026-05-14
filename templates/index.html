@@ -6,7 +6,6 @@
 <nav class="auth-links">
     <a href="{{ url_for('index') }}" class="active">{{ _('Sign In') }}</a>
     <a href="{{ url_for('signup') }}">{{ _('Sign Up') }}</a>
-    
     <a href="{{ url_for('admin_login') }}">{{ _('Admin Login') }}</a>
 </nav>
 {% endblock %}
@@ -28,22 +27,6 @@
                     <button type="button" class="btn hero-btn-primary" onclick="goToSignUp()">
                         {{ _('Create Account') }}
                     </button>
-
-                    
-                </div>
-
-
-                    <div class="feature-card">
-                        <span class="glyphicon glyphicon-time"></span>
-                        <h3>{{ _('Plan Timetables') }}</h3>
-                        <p>{{ _('Create a structured weekly timetable based on your selected courses.') }}</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <span class="glyphicon glyphicon-stats"></span>
-                        <h3>{{ _('Track Demand') }}</h3>
-                        <p>{{ _('Support administrators with basic enrolment and course demand insights.') }}</p>
-                    </div>
                 </div>
             </section>
 
