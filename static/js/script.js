@@ -282,6 +282,7 @@ function loadCoursesFromBackend() {
                     credits: course.credits,
                     time: course.time,
                     stream: course.degree,
+                    degree: course.degree,
                     semester: course.semester
                 });
             });
@@ -475,36 +476,37 @@ function displayAvailableCourses(degreeName) {
         return;
     }
 
-    availableCoursesBox.innerHTML = courses.map(course => {
-        return `
-            <div class="course-card"
+    availableCoursesBox.innerHTML = `
+    <div class="course-table">
+        <div class="course-table-header">
+            <span>Code</span>
+            <span>Course</span>
+            <span>Time</span>
+            <span>Credits</span>
+            <span></span>
+        </div>
+
+        ${courses.map(course => `
+            <div class="course-table-row"
                 data-search="${course.code.toLowerCase()} ${course.name.toLowerCase()}"
                 data-semester="${course.semester}">
 
-                <div class="course-card-top">
-                    <span class="course-code">${course.code}</span>
-                    <span class="credit-pill">${course.credits} ${t("credits")}</span>
-                </div>
+                <span class="course-code">${course.code}</span>
 
-                <h3>${t(course.name)}</h3>
+                <span class="course-table-name">${course.name}</span>
 
-                <div class="course-detail-list">
-                    <p>
-                        <span class="glyphicon glyphicon-time"></span>
-                        ${course.time}
-                    </p>
-                    <p>
-                        <span class="glyphicon glyphicon-map-marker"></span>
-                        ${t(course.stream)}
-                    </p>
-                </div>
+                <span>${course.time}</span>
 
-                <button type="button" class="btn dashboard-btn-primary" onclick="addCourse('${course.code}', '${course.name}', ${course.credits}, '${course.time}', '${course.stream}', '${course.semester}')">
-                    ${t("Add Course")}
+                <span>${course.credits} credits</span>
+
+                <button type="button" class="btn dashboard-btn-primary"
+                    onclick="addCourse('${course.code}', '${course.name}', ${course.credits}, '${course.time}', '${course.degree}', '${course.semester}')">
+                    Add
                 </button>
             </div>
-        `;
-    }).join("");
+        `).join("")}
+    </div>
+`;
 
     filterCourses();
 }
@@ -643,7 +645,7 @@ function removeCourse(code) {
 function filterCourses() {
     const searchInput = document.getElementById("course-search");
     const semesterFilter = document.getElementById("semester-filter");
-    const courseCards = document.querySelectorAll(".course-card");
+    const courseCards = document.querySelectorAll(".course-table-row");
 
     if (!searchInput || !semesterFilter) {
         return;
@@ -663,7 +665,7 @@ function filterCourses() {
             semesterData === selectedSemester;
 
         if (matchesSearch && matchesSemester) {
-            card.style.display = "block";
+            card.style.display = "grid";
         } else {
             card.style.display = "none";
         }
