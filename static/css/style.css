@@ -2584,6 +2584,7 @@ body.dark-mode .app-header {
     cursor: not-allowed;
     border: none;
     opacity: 1;
+}
 .enrollment-banner {
     display: flex;
     align-items: flex-start;
@@ -2649,7 +2650,8 @@ body.dark-mode .app-header {
     color: #7ac4f0;
 }
 
-/* ===================================================================   Sidebar — confirm & request-change buttons
+/* ==========================================================================
+   Sidebar — confirm & request-change buttons
    ========================================================================== */
 
 .enrollment-action-btn {
@@ -2658,7 +2660,8 @@ body.dark-mode .app-header {
     text-align: center;
 }
 
-/* ===================================================================   Pending change notice (inside sidebar)
+/* ==========================================================================
+   Pending change notice (inside sidebar)
    ========================================================================== */
 
 .pending-change-notice {
@@ -2687,7 +2690,8 @@ body.dark-mode .app-header {
     color: #ffd54f;
 }
 
-/* ===================================================================   Admin dashboard — change request styles
+/* ==========================================================================
+   Admin dashboard — change request styles
    ========================================================================== */
 
 /* Orange stat card when there are pending requests */
@@ -2775,4 +2779,162 @@ body.dark-mode .app-header {
 .dark-mode .admin-status--planning {
     background-color: #2d3748;
     color: #a0aec0;
+}
+
+/* ===== Strong dark mode fix for available courses table/tiles ===== */
+
+body.dark-mode #available-courses,
+body.dark-mode .course-table {
+    background: transparent;
+}
+
+body.dark-mode #available-courses .course-table-header {
+    background: #111827;
+    color: #f8fafc;
+    border: 1px solid #334155;
+}
+
+body.dark-mode #available-courses .course-table-row {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: #e5e7eb;
+}
+
+body.dark-mode #available-courses .course-table-row:hover {
+    background: #273449 !important;
+    border-color: #475569 !important;
+}
+
+body.dark-mode #available-courses .course-table-row span {
+    color: #e5e7eb;
+}
+
+body.dark-mode #available-courses .course-table-name {
+    color: #f8fafc;
+}
+
+body.dark-mode #available-courses .course-code {
+    background: #60a5fa;
+    color: #0f172a !important;
+}
+
+body.dark-mode #available-courses .dashboard-btn-primary {
+    background: #60a5fa;
+    color: #0f172a;
+    border: none;
+}
+
+body.dark-mode #available-courses .dashboard-btn-primary:hover {
+    background: #93c5fd;
+    color: #0f172a;
+}
+
+/* ===== Dark mode fixes for course filter/search box ===== */
+
+body.dark-mode .course-filter-bar {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .course-filter-bar .form-control {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .course-filter-bar .form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* Only selected/disabled Added buttons should look disabled */
+
+.course-table-row button.added-course-btn:disabled {
+    background: #d9e2ec !important;
+    color: #5f6b76 !important;
+    border: 1px solid #c7d3df !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
+/* Keep normal Add buttons unchanged */
+
+.course-table-row button.dashboard-btn-primary:not(.added-course-btn) {
+    background: #183b5b !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Dark mode Added button */
+
+body.dark-mode .course-table-row button.added-course-btn:disabled {
+    background: #334155 !important;
+    color: #94a3b8 !important;
+    border: 1px solid #475569 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
+/* Dark mode normal Add button */
+
+body.dark-mode .course-table-row button.dashboard-btn-primary:not(.added-course-btn) {
+    background: #60a5fa !important;
+    color: #0f172a !important;
+    border: none !important;
+}
+
+/* ===== Dark mode fix for selected courses section ===== */
+
+body.dark-mode .selected-course-item {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-mode .selected-course-info strong {
+    color: #f8fafc;
+}
+
+body.dark-mode .selected-course-info span {
+    color: #cbd5e1;
+}
+
+body.dark-mode .remove-course-btn {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+/* ===== Dark mode fix for generated timetable grid ===== */
+
+body.dark-mode .weekly-calendar {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-mode .calendar-time {
+    background: #111827;
+    color: #cbd5e1;
+    border-top-color: #334155;
+}
+
+body.dark-mode .calendar-cell {
+    background: #0f172a;
+    border-top-color: #334155;
+    border-left-color: #334155;
+}
+
+body.dark-mode .course-block {
+    background: #1e293b;
+    color: #f8fafc;
+    border-left-color: #60a5fa;
+}
+
+body.dark-mode .course-block strong {
+    color: #93c5fd;
+}
+
+body.dark-mode .course-block span {
+    color: #f8fafc;
+}
+
+body.dark-mode .course-block small {
+    color: #cbd5e1;
 }

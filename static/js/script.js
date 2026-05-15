@@ -366,12 +366,8 @@ function lockEnrollmentUI(status) {
     if (studyLevelSelect) studyLevelSelect.disabled = true;
     if (degreeSelect) degreeSelect.disabled = true;
 
-    // Disable all Add buttons in the course table
-    document.querySelectorAll("[data-course-code]").forEach(function (btn) {
-        btn.disabled = true;
-        btn.textContent = "Added";
-        btn.classList.add("added-course-btn");
-    });
+    // Disable course buttons while keeping selected courses visually different
+    updateAddButtonStates();
 
     // Show enrollment status banner
     const banner = document.getElementById("enrollment-status-banner");
@@ -732,7 +728,7 @@ function displayAvailableCourses(degreeName) {
                     <span>${course.time}</span>
                     <span>${course.credits} credits</span>
                     <button type="button"
-                        class="btn dashboard-btn-primary${isLocked ? ' added-course-btn' : ''}"
+                        class="btn dashboard-btn-primary"
                         data-course-code="${course.code}"
                         ${isLocked ? 'disabled' : ''}
                         onclick="addCourse(event,'${course.code}','${course.name}',${course.credits},'${course.time}','${course.degree}','${course.semester}')">
@@ -757,7 +753,12 @@ function updateAddButtonStates() {
         if (isLocked || isSelected) {
             button.textContent = isSelected ? "Added" : "Add";
             button.disabled = true;
-            button.classList.add("added-course-btn");
+
+            if (isSelected) {
+                button.classList.add("added-course-btn");
+            } else {
+            button.classList.remove("added-course-btn");
+            }
         } else {
             button.textContent = "Add";
             button.disabled = false;
