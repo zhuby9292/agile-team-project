@@ -26,15 +26,22 @@
                 <strong>{{ total_users }}</strong>
             </div>
 
-           <div class="status-row">
-               <span>{{ _('Available courses') }}</span>
-               <strong>{{ total_courses }}</strong>
-           </div>
+            <div class="status-row">
+                <span>{{ _('Available courses') }}</span>
+                <strong>{{ total_courses }}</strong>
+            </div>
 
-           <div class="status-row">
-               <span>{{ _('Timetables created') }}</span>
-               <strong>{{ timetables_created }}</strong>
-           </div>
+            <div class="status-row">
+                <span>{{ _('Timetables created') }}</span>
+                <strong>{{ timetables_created }}</strong>
+            </div>
+
+            <div class="status-row">
+                <span>{{ _('Pending change requests') }}</span>
+                <strong class="{% if pending_change_count > 0 %}admin-badge--alert{% endif %}">
+                    {{ pending_change_count }}
+                </strong>
+            </div>
         </div>
     </section>
 
@@ -48,28 +55,111 @@
         </div>
 
         <div class="mini-card admin-stat-card">
-    <span class="mini-icon glyphicon glyphicon-book"></span>
-    <p class="mini-label">{{ _('Courses') }}</p>
-    <h3>{{ total_courses }}</h3>
-    <p class="mini-note">{{ _('Courses available for planning') }}</p>
-</div>
+            <span class="mini-icon glyphicon glyphicon-book"></span>
+            <p class="mini-label">{{ _('Courses') }}</p>
+            <h3>{{ total_courses }}</h3>
+            <p class="mini-note">{{ _('Courses available for planning') }}</p>
+        </div>
 
-<div class="mini-card admin-stat-card">
-    <span class="mini-icon glyphicon glyphicon-stats"></span>
-    <p class="mini-label">{{ _('Selections') }}</p>
-    <h3>{{ total_selections }}</h3>
-    <p class="mini-note">{{ _('Course selections recorded') }}</p>
-</div>
+        <div class="mini-card admin-stat-card">
+            <span class="mini-icon glyphicon glyphicon-stats"></span>
+            <p class="mini-label">{{ _('Selections') }}</p>
+            <h3>{{ total_selections }}</h3>
+            <p class="mini-note">{{ _('Course selections recorded') }}</p>
+        </div>
 
-<div class="mini-card admin-stat-card">
-    <span class="mini-icon glyphicon glyphicon-calendar"></span>
-    <p class="mini-label">{{ _('Timetables') }}</p>
-    <h3>{{ timetables_created }}</h3>
-    <p class="mini-note">{{ _('Generated timetable plans') }}</p>
-</div>
+        <div class="mini-card admin-stat-card {% if pending_change_count > 0 %}admin-stat-card--alert{% endif %}">
+            <span class="mini-icon glyphicon glyphicon-transfer"></span>
+            <p class="mini-label">{{ _('Change Requests') }}</p>
+            <h3>{{ pending_change_count }}</h3>
+            <p class="mini-note">{{ _('Pending admin review') }}</p>
+        </div>
 
     </section>
 
+    {# ------------------------------------------------------------------ #}
+    {# Pending Enrollment Change Requests                                   #}
+    {# ------------------------------------------------------------------ #}
+    <section class="dashboard-panel" id="pending-changes-section">
+        <div class="panel-title-row">
+            <div>
+                <p class="dashboard-kicker">{{ _('Enrollment management') }}</p>
+                <h2>{{ _('Pending Change Requests') }}</h2>
+            </div>
+            {% if pending_change_count > 0 %}
+            <span class="admin-pending-badge">{{ pending_change_count }} {{ _('pending') }}</span>
+            {% endif %}
+        </div>
+
+        <div class="admin-table-wrapper">
+            <table class="table admin-table">
+                <thead>
+                    <tr>
+                        <th>{{ _('Student') }}</th>
+                        <th>{{ _('Current Degree') }}</th>
+                        <th>{{ _('Requested Degree') }}</th>
+                        <th>{{ _('Courses') }}</th>
+                        <th>{{ _('Submitted') }}</th>
+                        <th>{{ _('Action') }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% if pending_changes %}
+                        {% for req in pending_changes %}
+                        <tr>
+                            <td>
+                                <strong>{{ req.student_name }}</strong>
+                                <br>
+                                <small class="text-muted">{{ req.student_id }}</small>
+                            </td>
+                            <td>{{ req.current_degree }}</td>
+                            <td>
+                                {% if req.requested_degree != req.current_degree %}
+                                    <span class="admin-changed-value">{{ req.requested_degree }}</span>
+                                {% else %}
+                                    {{ req.requested_degree }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span title="{{ req.requested_courses | join(', ') }}">
+                                    {{ req.course_count }} {{ _('course(s)') }}
+                                </span>
+                            </td>
+                            <td>
+                                <small>{{ req.created_at }}</small>
+                            </td>
+                            <td class="admin-action-cell">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm dashboard-btn-primary"
+                                    onclick="approveChange({{ req.id }})">
+                                    {{ _('Approve') }}
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm dashboard-btn-secondary"
+                                    onclick="rejectChange({{ req.id }})">
+                                    {{ _('Reject') }}
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="admin-empty-row">
+                                {{ _('No pending change requests. All enrollments are up to date.') }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    {# ------------------------------------------------------------------ #}
+    {# Recent Users + Popular Courses                                       #}
+    {# ------------------------------------------------------------------ #}
     <section class="dashboard-overview-grid admin-management-grid">
 
         <div class="dashboard-panel dashboard-panel-large">
@@ -82,45 +172,53 @@
 
             <div class="admin-table-wrapper">
                 <table class="table admin-table">
-
                     <thead>
                         <tr>
                             <th>{{ _('Name') }}</th>
                             <th>{{ _('Email') }}</th>
                             <th>{{ _('Student ID') }}</th>
+                            <th>{{ _('Enrollment') }}</th>
                             <th>{{ _('Status') }}</th>
                         </tr>
                     </thead>
 
-                  <tbody>
-    {% if recent_users %}
-        {% for user in recent_users %}
-        <tr>
-            <td>{{ user.full_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.student_id }}</td>
-            <td>
-                {% if user.selected_count > 0 %}
-                    <span class="admin-status active">
-                        {{ _('Active') }} · {{ user.selected_count }} {{ _('selected') }}
-                    </span>
-                {% else %}
-                    <span class="admin-status pending">
-                        {{ _('No selections') }}
-                    </span>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    {% else %}
-        <tr>
-            <td colspan="4">
-                {{ _('No registered users found.') }}
-            </td>
-        </tr>
-    {% endif %}
-</tbody>
-
+                    <tbody>
+                        {% if recent_users %}
+                            {% for user in recent_users %}
+                            <tr>
+                                <td>{{ user.full_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.student_id }}</td>
+                                <td>
+                                    {% if user.enrollment_status == 'enrolled' %}
+                                        <span class="admin-status admin-status--enrolled">{{ _('Enrolled') }}</span>
+                                    {% elif user.enrollment_status == 'change_requested' %}
+                                        <span class="admin-status admin-status--pending">{{ _('Change Pending') }}</span>
+                                    {% else %}
+                                        <span class="admin-status admin-status--planning">{{ _('Planning') }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if user.selected_count > 0 %}
+                                        <span class="admin-status active">
+                                            {{ _('Active') }} · {{ user.selected_count }} {{ _('selected') }}
+                                        </span>
+                                    {% else %}
+                                        <span class="admin-status pending">
+                                            {{ _('No selections') }}
+                                        </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5">
+                                    {{ _('No registered users found.') }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -132,25 +230,28 @@
 
             <div class="progress-list admin-course-list">
 
-    {% if popular_courses %}
-        {% for course in popular_courses %}
-        <div class="progress-item">
-            <span>{{ course.code }} - {{ course.name }}</span>
-            <strong>{{ course.selection_count }} {{ _('selections') }}</strong>
-        </div>
-        {% endfor %}
-    {% else %}
-        <div class="progress-item">
-            <span>{{ _('No course selections recorded yet.') }}</span>
-            <strong>0</strong>
-        </div>
-    {% endif %}
+                {% if popular_courses %}
+                    {% for course in popular_courses %}
+                    <div class="progress-item">
+                        <span>{{ course.code }} - {{ course.name }}</span>
+                        <strong>{{ course.selection_count }} {{ _('selections') }}</strong>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="progress-item">
+                        <span>{{ _('No course selections recorded yet.') }}</span>
+                        <strong>0</strong>
+                    </div>
+                {% endif %}
 
-</div>
+            </div>
         </div>
 
     </section>
 
+    {# ------------------------------------------------------------------ #}
+    {# Quick Management Tools                                               #}
+    {# ------------------------------------------------------------------ #}
     <section class="dashboard-panel">
 
         <div class="panel-title-row">
@@ -164,13 +265,8 @@
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-user"></span>
-
                 <h3>{{ _('View Users') }}</h3>
-
-                <p>
-                    {{ _('Review registered users and account status information.') }}
-                </p>
-
+                <p>{{ _('Review registered users and account status information.') }}</p>
                 <button type="button"
                     class="btn dashboard-btn-secondary"
                     data-message="{{ _('User management tools will be connected to database records in a future update.') }}"
@@ -181,13 +277,8 @@
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-book"></span>
-
                 <h3>{{ _('Manage Courses') }}</h3>
-
-                <p>
-                    {{ _('Check available courses and prepare future course management features.') }}
-                </p>
-
+                <p>{{ _('Check available courses and prepare future course management features.') }}</p>
                 <button type="button"
                     class="btn dashboard-btn-secondary"
                     data-message="{{ _('Course management tools will be expanded in the next development stage.') }}"
@@ -198,16 +289,11 @@
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-stats"></span>
-
                 <h3>{{ _('View Statistics') }}</h3>
-
-                <p>
-                    {{ _('Monitor course demand and timetable usage across the system.') }}
-                </p>
-
+                <p>{{ _('Monitor course demand and timetable usage across the system.') }}</p>
                 <button type="button"
                     class="btn dashboard-btn-secondary"
-                   data-message="{{ _('Statistics are now calculated from current user and course selection records.') }}"
+                    data-message="{{ _('Statistics are now calculated from current user and course selection records.') }}"
                     onclick="showDashboardMessage(this.dataset.message)">
                     {{ _('View Statistics') }}
                 </button>
@@ -215,13 +301,8 @@
 
             <div class="action-box">
                 <span class="action-icon glyphicon glyphicon-calendar"></span>
-
                 <h3>{{ _('Monitor Timetables') }}</h3>
-
-                <p>
-                    {{ _('Review how many timetable plans have been created by students.') }}
-                </p>
-
+                <p>{{ _('Review how many timetable plans have been created by students.') }}</p>
                 <button type="button"
                     class="btn dashboard-btn-secondary"
                     data-message="{{ _('Timetable monitoring will use real timetable data in a later update.') }}"
@@ -235,15 +316,11 @@
     </section>
 
     <section class="dashboard-panel dashboard-message-panel">
-
         <p class="dashboard-kicker">{{ _('Admin message') }}</p>
-
         <h2>{{ _('System Management Updates') }}</h2>
-
         <p id="dashboard-output">
             {{ _('Use this admin dashboard to monitor users, courses, statistics, and timetable usage.') }}
         </p>
-
     </section>
 
 </div>

@@ -39,6 +39,21 @@
         </div>
     </section>
 
+    {#
+        Enrollment status banner — hidden by default.
+        JavaScript (lockEnrollmentUI / requestChange) toggles visibility
+        and sets the correct class and message based on enrollment_status:
+          .enrollment-banner--enrolled    → green / locked
+          .enrollment-banner--pending     → amber / pending
+          .enrollment-banner--draft       → blue / drafting a change
+    #}
+    <div id="enrollment-status-banner"
+         class="enrollment-banner"
+         style="display: none;"
+         role="status"
+         aria-live="polite">
+    </div>
+
     <section class="course-layout">
         <div class="course-main-column">
 
@@ -161,12 +176,47 @@
                     <strong id="credit-output">0</strong>
                 </div>
 
+                {#
+                    Confirm Enrollment button — visible while the student is in
+                    'planning' status and has selected at least one course.
+                    Hidden by JS once they are enrolled.
+                #}
+                <button id="confirm-enrollment-btn"
+                    type="button"
+                    class="btn dashboard-btn-primary selected-next-btn"
+                    onclick="confirmEnrollment()"
+                    style="display: none;">
+                    {{ _('Confirm Enrollment') }}
+                </button>
+
+                {#
+                    Request Change button — visible only when enrollment_status
+                    is 'enrolled'.  Clicking this enters change-request draft mode.
+                #}
+                <button id="request-change-btn"
+                    type="button"
+                    class="btn dashboard-btn-secondary selected-next-btn enrollment-action-btn"
+                    onclick="requestChange()"
+                    style="display: none;">
+                    {{ _('Request Change') }}
+                </button>
+
+                {#
+                    Pending notice — visible only when enrollment_status is
+                    'change_requested'.  No action available while pending.
+                #}
+                <div id="pending-change-notice"
+                     class="pending-change-notice"
+                     style="display: none;">
+                    <span class="pending-change-notice__icon">⏳</span>
+                    <p>{{ _('Your change request is awaiting admin approval. No further changes can be made until it is reviewed.') }}</p>
+                </div>
+
                 <a href="{{ url_for('timetable') }}"
                     class="btn dashboard-btn-secondary selected-next-btn">
-
                     {{ _('Continue to Timetable') }}
-
                 </a>
+
             </section>
         </aside>
     </section>
