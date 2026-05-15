@@ -36,8 +36,10 @@ class ServerThread(threading.Thread):
 @pytest.fixture(scope="module")
 def live_server():
     app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
     app.config["ADMIN_EMAILS"] = "admin@example.com"
+
+    test_db_path = os.path.join(app.instance_path, "test.db")
 
     with app.app_context():
         db.drop_all()
@@ -79,6 +81,13 @@ def live_server():
 
     server.shutdown()
 
+    with app.app_context():
+        db.session.remove()
+        db.drop_all()
+
+    if os.path.exists(test_db_path):
+        os.remove(test_db_path)
+
 
 @pytest.fixture
 def browser():
@@ -111,28 +120,24 @@ def login_student(browser, live_server):
     )
 
 
-# Selenium test 1: landing page loads in a real browser.
 def test_selenium_index_page_loads(browser, live_server):
     browser.get(live_server + "/")
 
     assert "Course Planner" in browser.page_source
 
 
-# Selenium test 2: signup page loads in a real browser.
 def test_selenium_signup_page_loads(browser, live_server):
     browser.get(live_server + "/signup.html")
 
     assert "Sign" in browser.page_source or "Account" in browser.page_source
 
 
-# Selenium test 3: student can log in through the browser.
 def test_selenium_student_can_login(browser, live_server):
     login_student(browser, live_server)
 
     assert "homepage" in browser.current_url
 
 
-# Selenium test 4: logged-in student can open course selection page.
 def test_selenium_course_selection_page_loads(browser, live_server):
     login_student(browser, live_server)
 
@@ -145,7 +150,6 @@ def test_selenium_course_selection_page_loads(browser, live_server):
     assert "Available courses" in browser.page_source
 
 
-# Selenium test 5: student can select a study level and degree.
 def test_selenium_can_select_degree(browser, live_server):
     login_student(browser, live_server)
 
@@ -166,7 +170,6 @@ def test_selenium_can_select_degree(browser, live_server):
     assert "Master of Information Technology" in browser.page_source
 
 
-# Selenium test 6: timetable page loads after login.
 def test_selenium_timetable_page_loads(browser, live_server):
     login_student(browser, live_server)
 
