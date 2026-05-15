@@ -1527,6 +1527,45 @@ body.dark-mode .auth-links a.active {
     color: #0f172a;
 }
 
+body.dark-mode .auth-links a:hover,
+body.dark-mode .auth-links a.active {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+/* Dark mode language dropdown */
+
+body.dark-mode .language-dropdown-toggle {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+body.dark-mode .language-dropdown-toggle:hover {
+    background: #334155;
+    border-color: #64748b;
+    color: #ffffff;
+}
+
+body.dark-mode .language-caret {
+    color: #cbd5e1;
+}
+
+body.dark-mode .language-dropdown-menu {
+    background: #1e293b;
+    border-color: #475569;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+body.dark-mode .language-dropdown-item {
+    color: #cbd5e1;
+}
+
+body.dark-mode .language-dropdown-item:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
 /* Dark mode buttons and icons */
 
 body.dark-mode .brand-icon,
@@ -2023,31 +2062,89 @@ body.dark-mode .signup-prompt p {
     gap: 10px;
 }
 
-.language-icon-dropdown {
+/* Language dropdown */
+
+.language-dropdown {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    position: relative;
-    z-index: 50;
+}
+
+.language-dropdown-toggle {
+    height: 38px;
+    border: 1px solid rgba(201, 214, 226, 0.95);
+    background: rgba(255, 255, 255, 0.82);
+    color: #183b5b;
+    border-radius: 999px;
+    padding: 7px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(24, 59, 91, 0.06);
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.language-dropdown-toggle:hover {
+    background: #ffffff;
+    border-color: #b8c7d6;
+    color: #102c45;
+    box-shadow: 0 10px 26px rgba(24, 59, 91, 0.1);
 }
 
 .language-icon {
     width: 18px;
     height: 18px;
     object-fit: contain;
-    pointer-events: none;
 }
 
-.language-icon-select {
-    width: 42px;
-    height: 30px;
-    border: none;
-    background: transparent;
-    color: #183b5b;
-    cursor: pointer;
-    appearance: auto;
+.language-caret {
     font-size: 12px;
-    text-indent: -9999px;
-    padding-left: 22px;
+    color: #526273;
+    margin-left: 2px;
+}
+
+.language-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 150px;
+    background: #ffffff;
+    border: 1px solid #d9e4ee;
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 12px 28px rgba(24, 59, 91, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 1000;
+}
+
+.language-dropdown:hover .language-dropdown-menu,
+.language-dropdown:focus-within .language-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-dropdown-item {
+    display: block;
+    color: #526273;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 12px;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.language-dropdown-item:hover {
+    background: #edf3f8;
+    color: #183b5b;
+    text-decoration: none;
 }
 
 .language-icon-select:focus {
@@ -2461,3 +2558,20 @@ body.dark-mode .app-header {
 
 }
 
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Cursive UniPlanner navbar brand */
+
+.brand-name {
+    font-family: "Pacifico", cursive;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #ffffff;
+    line-height: 1;
+}

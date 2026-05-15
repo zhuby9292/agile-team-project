@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}{{ _('Course Planner') }}{% endblock %}</title>
+    <title>{% block title %}{{ _('UniPlanner') }}{% endblock %}</title>
 
     <link rel="icon" type="image/svg+xml"
         href="{{ url_for('static', filename='favicon.svg') }}">
@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -28,8 +28,10 @@
         <div class="container app-nav">
 
             <div class="brand">
-                <span class="brand-icon glyphicon glyphicon-calendar"></span>
-                <span class="brand-name">{{ _('Course Planner') }}</span>
+                <img src="{{ url_for('static', filename='images/graduation.png') }}"
+                     alt="{{ _('UniPlanner logo') }}"
+                     class="brand-logo">
+                <span class="brand-name">{{ _('UniPlanner') }}</span>
             </div>
 
             {% block nav %}
@@ -41,26 +43,37 @@
 
             <div class="header-actions">
 
-                <div class="language-icon-dropdown">
-                    <img src="{{ url_for('static', filename='images/translate.png') }}"
-                        alt="{{ _('Language') }}"
-                        class="language-icon">
-
-                    <select onchange="window.location.href=this.value"
-                        class="language-icon-select"
+                <div class="language-dropdown">
+                    <button type="button"
+                        class="language-dropdown-toggle"
                         aria-label="{{ _('Select language') }}">
 
-                        <option value="{{ url_for('set_language', language='en') }}"
-                            {% if session.get("language", "en") == "en" %}selected{% endif %}>
+                        <img src="{{ url_for('static', filename='images/translate.png') }}"
+                            alt="{{ _('Language') }}"
+                            class="language-icon">
+
+                        <span>
+                            {% if session.get("language", "en") == "zh" %}
+                                {{ _('Chinese') }}
+                            {% else %}
+                                {{ _('English') }}
+                            {% endif %}
+                        </span>
+
+                        <span class="language-caret">▾</span>
+                    </button>
+
+                    <div class="language-dropdown-menu">
+                        <a class="language-dropdown-item"
+                            href="{{ url_for('set_language', language='en') }}">
                             {{ _('English') }}
-                        </option>
+                        </a>
 
-                        <option value="{{ url_for('set_language', language='zh') }}"
-                            {% if session.get("language", "en") == "zh" %}selected{% endif %}>
+                        <a class="language-dropdown-item"
+                            href="{{ url_for('set_language', language='zh') }}">
                             {{ _('Chinese') }}
-                        </option>
-
-                    </select>
+                        </a>
+                    </div>
                 </div>
 
                 <button type="button"
