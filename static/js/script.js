@@ -462,6 +462,10 @@ function confirmEnrollment() {
                 return;
             }
             enrollmentStatus = "enrolled";
+
+            const confirmedSemester = parseInt(selectedCourses[0].semester.replace("semester", ""), 10);
+            localStorage.setItem("completedSemester", confirmedSemester);
+
             lockEnrollmentUI("enrolled");
             alert(t("Enrollment confirmed successfully!"));
         })
@@ -757,7 +761,7 @@ function updateAddButtonStates() {
             if (isSelected) {
                 button.classList.add("added-course-btn");
             } else {
-            button.classList.remove("added-course-btn");
+                button.classList.remove("added-course-btn");
             }
         } else {
             button.textContent = "Add";
@@ -784,6 +788,14 @@ function addCourse(event, code, name, credits, time, degree, semester) {
     }
 
     const existingSemester = selectedCourses.length > 0 ? selectedCourses[0].semester : null;
+
+    const semesterNumber = parseInt(semester.replace("semester", ""), 10);
+
+    if (enrollmentStatus === "planning" && semesterNumber > 1) {
+        alert(t("Please complete and confirm your previous semester enrollment before selecting courses for a later semester."));
+        return;
+    }
+
     if (existingSemester && existingSemester !== semester) {
         alert(t("Semester conflict detected. Please select courses from the same semester."));
         return;
