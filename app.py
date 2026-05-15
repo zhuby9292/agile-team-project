@@ -324,6 +324,31 @@ def save_selection():
 
     return {"message": "Selections saved successfully"}
 
+@app.route("/api/selected-courses")
+@student_required
+def api_selected_courses():
+    selections = Selection.query.filter_by(user_id=current_user.id).all()
+
+    selected_degree = ""
+
+    if selections:
+        selected_degree = selections[0].course.degree
+
+    return {
+        "degree": selected_degree,
+        "courses": [
+            {
+                "code": selection.course.code,
+                "name": selection.course.name,
+                "credits": selection.course.credits,
+                "time": selection.course.time,
+                "semester": selection.course.semester,
+                "degree": selection.course.degree,
+                "stream": selection.course.degree,
+            }
+            for selection in selections
+        ]
+    }
 
 @app.route("/timetable.html")
 @student_required
