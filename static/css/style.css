@@ -2938,3 +2938,83 @@ body.dark-mode .course-block span {
 body.dark-mode .course-block small {
     color: #cbd5e1;
 }
+
+/* ===== Dark mode fix for admin dashboard tables ===== */
+
+body.dark-mode .admin-table-wrapper,
+body.dark-mode .admin-table {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-table thead th {
+    background: #111827;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-table tbody td {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-table tbody tr {
+    background: #1e293b;
+}
+
+body.dark-mode .admin-table .text-muted,
+body.dark-mode .admin-table small {
+    color: #cbd5e1;
+}
+
+body.dark-mode .admin-empty-row {
+    background: #1e293b;
+    color: #cbd5e1;
+}
+
+/* ===== Admin dashboard spacing + popular course dark mode fix ===== */
+
+.admin-management-grid {
+    gap: 28px;
+    align-items: stretch;
+}
+
+.admin-management-grid .dashboard-panel {
+    margin-bottom: 0;
+}
+
+body.dark-mode .admin-course-list .progress-item {
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .admin-course-list .progress-item span {
+    color: #e5e7eb;
+}
+
+body.dark-mode .admin-course-list .progress-item strong {
+    color: #93c5fd;
+}
+
+/* ===== Strong spacing fix for admin dashboard panels ===== */
+
+#pending-changes-section {
+    margin-bottom: 32px;
+}
+
+.admin-management-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    column-gap: 32px;
+    row-gap: 32px;
+}
+
+.admin-management-grid .dashboard-panel {
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .admin-management-grid {
+        grid-template-columns: 1fr;
+    }
+}
