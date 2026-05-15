@@ -925,7 +925,7 @@ footer p {
 }
 
 .dashboard-container {
-    max-width: 1120px;
+    max-width: 1280px;
 }
 
 .dashboard-hero {
@@ -2233,4 +2233,99 @@ body.dark-mode .language-icon-dropdown::after {
 .selected-courses-box {
     min-height: 80px;
     padding: 16px;
+}
+
+/* ===== Course Table Final Version ===== */
+
+#available-courses {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.course-table {
+    width: 100%;
+    min-width: 1075px;
+}
+
+.course-table-header,
+.course-table-row {
+    display: grid;
+    grid-template-columns: 150px minmax(220px, 1fr) 190px 100px 100px;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+}
+
+/* Header */
+
+.course-table-header {
+    background: #e9f0f7;
+    color: #183b5b;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+/* Each Row */
+
+.course-table-row {
+    background: #f8fbfe;
+    border: 1px solid #dce6ef;
+    transition: 0.2s ease;
+}
+
+.course-table-row:hover {
+    background: #f2f7fc;
+    border-color: #c9d8e6;
+}
+
+/* Course Code */
+
+.course-code {
+    background: #183b5b;
+    color: white;
+    border-radius: 999px;
+
+    padding: 8px 14px;
+    font-weight: bold;
+    text-align: center;
+
+    display: inline-block;
+    min-width: 120px;
+}
+
+/* Course Name */
+
+.course-table-name {
+    color: #102c45;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Time + Credits */
+
+.course-table-time,
+.course-table-credits {
+    color: #4f6274;
+    font-weight: 500;
+}
+
+/* Button */
+
+.course-table-row .dashboard-btn-primary {
+    width: 100%;
+    max-width: 100px;
+    padding: 8px 0;
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+
+    .course-table {
+        min-width: 760px;
+    }
+
 }
