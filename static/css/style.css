@@ -2584,4 +2584,195 @@ body.dark-mode .app-header {
     cursor: not-allowed;
     border: none;
     opacity: 1;
+.enrollment-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    flex-wrap: wrap;
+}
+
+.enrollment-banner__icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.enrollment-banner__actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Enrolled — locked, green */
+.enrollment-banner--enrolled {
+    background-color: #d4edda;
+    border: 1px solid #acd2b8;
+    color: #155724;
+}
+
+/* Change pending — amber */
+.enrollment-banner--pending {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+}
+
+/* Drafting a change request — blue */
+.enrollment-banner--draft {
+    background-color: #d0e8ff;
+    border: 1px solid #90c4f9;
+    color: #0a4a7c;
+}
+
+/* Dark mode overrides */
+.dark-mode .enrollment-banner--enrolled {
+    background-color: #1a3a24;
+    border-color: #2d6a40;
+    color: #8dd4a0;
+}
+
+.dark-mode .enrollment-banner--pending {
+    background-color: #3a2f10;
+    border-color: #b38b00;
+    color: #ffd54f;
+}
+
+.dark-mode .enrollment-banner--draft {
+    background-color: #0d2a40;
+    border-color: #2870a0;
+    color: #7ac4f0;
+}
+
+/* ===================================================================   Sidebar — confirm & request-change buttons
+   ========================================================================== */
+
+.enrollment-action-btn {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ===================================================================   Pending change notice (inside sidebar)
+   ========================================================================== */
+
+.pending-change-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+    font-size: 0.88rem;
+    margin-top: 10px;
+    line-height: 1.45;
+}
+
+.pending-change-notice__icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.dark-mode .pending-change-notice {
+    background-color: #3a2f10;
+    border-color: #b38b00;
+    color: #ffd54f;
+}
+
+/* ===================================================================   Admin dashboard — change request styles
+   ========================================================================== */
+
+/* Orange stat card when there are pending requests */
+.admin-stat-card--alert {
+    border-top: 3px solid #f0ad4e;
+}
+
+/* Badge shown next to the section title */
+.admin-pending-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background-color: #f0ad4e;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Alert value (e.g. pending count in summary card) */
+.admin-badge--alert {
+    color: #d9534f;
+}
+
+/* Degree value that is different from current */
+.admin-changed-value {
+    color: #e67e22;
+    font-weight: 600;
+}
+
+/* Action buttons column */
+.admin-action-cell {
+    white-space: nowrap;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Empty state row */
+.admin-empty-row {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+/* Enrollment status badges in user table */
+.admin-status--enrolled {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.admin-status--pending {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.admin-status--planning {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.dark-mode .admin-status--enrolled {
+    background-color: #1a3a24;
+    color: #8dd4a0;
+}
+
+.dark-mode .admin-status--pending {
+    background-color: #3a2f10;
+    color: #ffd54f;
+}
+
+.dark-mode .admin-status--planning {
+    background-color: #2d3748;
+    color: #a0aec0;
 }

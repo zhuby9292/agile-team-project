@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}{{ _('Course Planner - Admin Login') }}{% endblock %}
+{% block title %}{{ _('UniPlanner - Admin Login') }}{% endblock %}
 
 {% block nav %}
 <nav class="auth-links">
     <a href="{{ url_for('index') }}">{{ _('Student Sign In') }}</a>
     <a href="{{ url_for('signup') }}">{{ _('Sign Up') }}</a>
-    <a href="{{ url_for('admin_login') }}" class="active">{{ _('Admin Login') }}</a>
+    <a href="{{ url_for('admin_login') }}" class="active">{{ _('Admin') }}</a>
 </nav>
 {% endblock %}
 
@@ -26,7 +26,7 @@
 
             <section class="signin-card">
                 <div class="signin-card-header">
-                    <h2>{{ _('Admin login') }}</h2>
+                    <h2>{{ _('Admin Login') }}</h2>
                     <p>{{ _('Only authorised administrator accounts can access this area.') }}</p>
                 </div>
 
