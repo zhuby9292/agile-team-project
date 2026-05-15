@@ -214,7 +214,7 @@ function showDashboardMessage(message) {
 
 const SELECTED_COURSES_STORAGE_KEY = "selectedCourses";
 
-let selectedCourses = loadSelectedCourses();
+let selectedCourses = [];
 
 function loadSelectedCourses() {
     const savedCourses = localStorage.getItem(SELECTED_COURSES_STORAGE_KEY);
@@ -260,6 +260,50 @@ function saveSelectedCoursesToBackend() {
         })
         .catch(function (error) {
             console.log("Selected courses could not be saved:", error);
+        });
+}
+
+function loadSelectedCoursesFromBackend() {
+    fetch("/api/selected-courses")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            selectedCourses = data.courses || [];
+
+            localStorage.setItem(
+                SELECTED_COURSES_STORAGE_KEY,
+                JSON.stringify(selectedCourses)
+            );
+
+            if (selectedCourses.length > 0 && data.degree) {
+                const studyLevel = getStudyLevelByDegree(data.degree);
+
+                localStorage.setItem("selectedDegree", data.degree);
+                localStorage.setItem("selectedStudyLevel", studyLevel);
+
+                const studyLevelSelect = document.getElementById("study-level-select");
+                const degreeSelect = document.getElementById("degree-select");
+
+                if (studyLevelSelect && degreeSelect) {
+                    studyLevelSelect.value = studyLevel;
+                    updateDegreeOptions(false);
+
+                    degreeSelect.value = data.degree;
+                    selectDegree(false);
+                }
+            } else {
+                localStorage.removeItem("selectedDegree");
+                localStorage.removeItem("selectedStudyLevel");
+                localStorage.setItem("timetableGenerated", "false");
+            }
+
+            displaySelectedCourses();
+            loadDashboardStats();
+            loadTimetablePage();
+        })
+        .catch(function (error) {
+            console.log("Selected courses could not be loaded from backend:", error);
         });
 }
 
@@ -319,6 +363,16 @@ const degreeOptions = {
         "Graduate Diploma in Education"
     ]
 };
+
+function getStudyLevelByDegree(degreeName) {
+    for (const level in degreeOptions) {
+        if (degreeOptions[level].includes(degreeName)) {
+            return level;
+        }
+    }
+
+    return "";
+}
 
 
 // Updates the degree dropdown after the user selects a study level.
@@ -901,9 +955,7 @@ function getCourseStartTime(timeText) {
 document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
     loadCoursesFromBackend();
-    displaySelectedCourses();
-    loadTimetablePage();
-    loadDashboardStats();
+    loadSelectedCoursesFromBackend();
 });
 
 function loadDashboardStats() {

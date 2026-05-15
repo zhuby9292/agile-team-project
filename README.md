@@ -6,13 +6,15 @@ The application helps users explore degrees, select courses, and organise their 
 
 ## Features
 
-- Landing and sign-up pages
-- Student dashboard
-- Study level selection
-- Dynamic degree and course selection
-- Credit point tracking
-- Timetable planning page
-- Flask backend with Jinja templates
+- User login and logout
+- Admin login and admin dashboard
+- Course data loaded from JSON into SQLite database
+- Course search and semester filtering
+- Selected course persistence
+- Timetable CSV download
+- English/Chinese language switching
+- Dark mode
+- Pytest unit testing and Selenium browser testing
 
 ## Tech Stack
 
@@ -22,6 +24,12 @@ The application helps users explore degrees, select courses, and organise their 
 - Bootstrap
 - Python
 - Flask
+- SQLite
+- SQLAlchemy
+- Flask-Login
+- Flask-Babel
+- Selenium
+- Pytest
 
 ## Project Structure
 
@@ -31,15 +39,45 @@ agile-team-project/
 ├── requirements.txt
 ├── README.md
 ├── CheckPoint2.md
+├── babel.cfg
+├── messages.pot
+│
+├── data/
+│   └── courses.json
+│
+├── instance/
+│   └── course_planner.db
+│
 ├── static/
 │   ├── css/
-│   └── js/
-└── templates/
-    ├── index.html
-    ├── signup.html
-    ├── homepage.html
-    ├── course-selection.html
-    └── timetable.html
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   └── script.js
+│   │
+│   ├── images/
+│   │
+│   └── favicon.svg
+│
+├── templates/
+│   ├── base.html
+│   ├── dashboard-base.html
+│   ├── index.html
+│   ├── signup.html
+│   ├── homepage.html
+│   ├── course-selection.html
+│   ├── timetable.html
+│   ├── admin-login.html
+│   ├── admin-dashboard.html
+│   ├── forgot-password.html
+│   └── reset-password.html
+│
+├── tests/
+│   ├── test_app.py
+│   └── test_selenium.py
+│
+└── translations/
+
 ```
 
 ## Setup
@@ -89,11 +127,27 @@ Open in browser:
 http://127.0.0.1:5000
 ```
 
+## Running Tests
+
+Run unit tests:
+
+```bash
+pytest tests/test_app.py -v
+```
+
+Run selenium tests:
+
+```bash
+pytest tests/test_selenium.py -v
+```
+
+The Selenium tests run against a live local Flask server.
+
 ## Team Member Details
 
 | Name | UWA ID | GitHub Username |
 |---|---|---|
 | Aneesh Kumar Bandari | 24553634 | wowitsaneesh |
-| biyingzhu | 24208028 | zhuby9292 |
+| Biying Zhu | 24208028 | zhuby9292 |
 | yonghehu | 24108102 | YongheHu |
 | Fahim Abrar | 24435912 | Fahim-abrar |
