@@ -2575,3 +2575,13 @@ body.dark-mode .app-header {
     color: #ffffff;
     line-height: 1;
 }
+
+.added-course-btn,
+.added-course-btn:hover,
+.added-course-btn:disabled {
+    background-color: #d6dde6;
+    color: #526273;
+    cursor: not-allowed;
+    border: none;
+    opacity: 1;
+}
