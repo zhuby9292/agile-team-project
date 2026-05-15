@@ -554,7 +554,8 @@ function displayAvailableCourses(degreeName) {
                 <span>${course.credits} credits</span>
 
                 <button type="button" class="btn dashboard-btn-primary"
-                    onclick="addCourse('${course.code}', '${course.name}', ${course.credits}, '${course.time}', '${course.degree}', '${course.semester}')">
+                    data-course-code="${course.code}"
+                    onclick="addCourse(event,'${course.code}', '${course.name}', ${course.credits}, '${course.time}', '${course.degree}', '${course.semester}')">
                     Add
                 </button>
             </div>
@@ -563,9 +564,32 @@ function displayAvailableCourses(degreeName) {
 `;
 
     filterCourses();
+    updateAddButtonStates();
 }
 
-function addCourse(code, name, credits, time, stream, semester) {
+function updateAddButtonStates() {
+    const addButtons = document.querySelectorAll("[data-course-code]");
+
+    addButtons.forEach(function (button) {
+        const courseCode = button.dataset.courseCode;
+
+        const isSelected = selectedCourses.some(function (course) {
+            return course.code === courseCode;
+        });
+
+        if (isSelected) {
+            button.textContent = "Added";
+            button.disabled = true;
+            button.classList.add("added-course-btn");
+        } else {
+            button.textContent = "Add";
+            button.disabled = false;
+            button.classList.remove("added-course-btn");
+        }
+    });
+}
+
+function addCourse(event, code, name, credits, time, degree, semester) {
     const degreeSelect = document.getElementById("degree-select");
     const message = document.getElementById("course-message");
 
@@ -608,7 +632,8 @@ function addCourse(code, name, credits, time, stream, semester) {
         name: name,
         credits: credits,
         time: time,
-        stream: stream,
+        stream: degree,
+        degree: degree,
         semester: semester
     });
 
@@ -619,6 +644,7 @@ function addCourse(code, name, credits, time, stream, semester) {
     }
 
     displaySelectedCourses();
+    updateAddButtonStates();
     saveSelectedCoursesToBackend();
 }
 
@@ -681,19 +707,28 @@ function displaySelectedCourses() {
 }
 
 function removeCourse(code) {
+    const currentDegree = localStorage.getItem("selectedDegree");
+    const message = document.getElementById("course-message");
+
     selectedCourses = selectedCourses.filter(course => course.code !== code);
     saveSelectedCourses();
 
     if (selectedCourses.length === 0) {
         localStorage.setItem("timetableGenerated", "false");
-        localStorage.removeItem("selectedDegree");
-        localStorage.removeItem("selectedStudyLevel");
     }
 
     displaySelectedCourses();
     loadTimetablePage();
     loadDashboardStats();
     saveSelectedCoursesToBackend();
+
+    if (currentDegree) {
+        displayAvailableCourses(currentDegree);
+    }
+
+    if (message) {
+        message.innerHTML = code + " " + t("removed successfully.");
+    }
 }
 
 function filterCourses() {
