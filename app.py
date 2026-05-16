@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+import re
 from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
@@ -19,7 +19,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "temporary-development-secret-key")
-app.config["ADMIN_EMAILS"] = os.environ.get("ADMIN_EMAILS", "admin@example.com")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///course_planner.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -136,13 +135,12 @@ def load_user(user_id):
 
 
 def is_admin_user(user):
-    admin_emails = {
-        email.strip().lower()
-        for email in app.config["ADMIN_EMAILS"].split(",")
-        if email.strip()
-    }
-    return user.is_authenticated and user.email.lower() in admin_emails
+    if not user.is_authenticated:
+        return False
 
+    admin_email_pattern = r"^[a-zA-Z0-9._%+-]+\.admin@edu\.com$"
+
+    return re.match(admin_email_pattern, user.email.lower()) is not None
 
 def admin_required(view_function):
     @wraps(view_function)
