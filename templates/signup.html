@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}{{ _('Course Planner - Sign Up') }}{% endblock %}
+{% block title %}{{ _('UniPlanner - Sign Up') }}{% endblock %}
 
 {% block nav %}
 <nav class="auth-links">
     <a href="{{ url_for('index') }}">{{ _('Sign In') }}</a>
     <a href="{{ url_for('signup') }}" class="active">{{ _('Sign Up') }}</a>
-    <a href="{{ url_for('admin_login') }}">{{ _('Admin Login') }}</a>
+    <a href="{{ url_for('admin_login') }}">{{ _('Admin') }}</a>
 </nav>
 {% endblock %}
 

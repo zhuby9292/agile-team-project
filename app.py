@@ -20,7 +20,6 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "temporary-development-secret-key")
 
-# Basic SQLite database configuration.
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///course_planner.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -46,12 +45,35 @@ login_manager.login_message = "Please sign in to access this page."
 login_manager.login_message_category = "error"
 
 
+# ---------------------------------------------------------------------------
+# Models
+# ---------------------------------------------------------------------------
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     student_id = db.Column(db.String(30), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
+    # Enrollment fields added for degree/course locking
+    selected_degree = db.Column(db.String(120), nullable=True)
+    enrollment_status = db.Column(
+        db.String(20),
+        default="planning"
+        # Values: 'planning' | 'enrolled' | 'change_requested'
+    )
+
+
+class EnrollmentChangeRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    requested_degree = db.Column(db.String(120), nullable=False)
+    requested_course_codes = db.Column(db.Text, nullable=False)  # JSON string
+    status = db.Column(db.String(20), default="pending")  # 'pending' | 'approved' | 'rejected'
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    reviewed_at = db.Column(db.DateTime, nullable=True)
+
+    user = db.relationship("User", backref="change_requests")
 
 
 class Course(db.Model):
@@ -73,6 +95,10 @@ class Selection(db.Model):
     course = db.relationship("Course", backref="selections")
 
 
+# ---------------------------------------------------------------------------
+# Seed
+# ---------------------------------------------------------------------------
+
 def seed_courses():
     if Course.query.first():
         return
@@ -93,12 +119,15 @@ def seed_courses():
             semester=item["semester"],
             degree=item["degree"],
         )
-
         courses.append(course)
 
     db.session.add_all(courses)
     db.session.commit()
 
+
+# ---------------------------------------------------------------------------
+# Auth helpers
+# ---------------------------------------------------------------------------
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -120,9 +149,7 @@ def admin_required(view_function):
         if not is_admin_user(current_user):
             flash(gettext("You do not have permission to access the admin dashboard."), "error")
             return redirect(url_for("homepage"))
-
         return view_function(*args, **kwargs)
-
     return wrapped_view
 
 
@@ -132,9 +159,7 @@ def student_required(view_function):
     def wrapped_view(*args, **kwargs):
         if is_admin_user(current_user):
             return redirect(url_for("admin_dashboard"))
-
         return view_function(*args, **kwargs)
-
     return wrapped_view
 
 
@@ -145,13 +170,20 @@ def inject_admin_status():
     }
 
 
+# ---------------------------------------------------------------------------
+# Language
+# ---------------------------------------------------------------------------
+
 @app.route("/set-language/<language>")
 def set_language(language):
     if language in app.config["LANGUAGES"]:
         session["language"] = language
-
     return redirect(request.referrer or url_for("index"))
 
+
+# ---------------------------------------------------------------------------
+# Auth routes
+# ---------------------------------------------------------------------------
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -267,6 +299,10 @@ def signup():
     return render_template("signup.html")
 
 
+# ---------------------------------------------------------------------------
+# Student page routes
+# ---------------------------------------------------------------------------
+
 @app.route("/homepage.html")
 @student_required
 def homepage():
@@ -279,11 +315,20 @@ def course_selection():
     return render_template("course-selection.html", current_user=current_user)
 
 
+@app.route("/timetable.html")
+@student_required
+def timetable():
+    return render_template("timetable.html", current_user=current_user)
+
+
+# ---------------------------------------------------------------------------
+# Student API — courses
+# ---------------------------------------------------------------------------
+
 @app.route("/api/courses")
 @student_required
 def api_courses():
     courses = Course.query.all()
-
     return {
         "courses": [
             {
@@ -300,59 +345,165 @@ def api_courses():
     }
 
 
-@app.route("/api/save-selection", methods=["POST"])
-@student_required
-def save_selection():
-    data = request.get_json()
-    course_codes = data.get("courses", [])
-
-    Selection.query.filter_by(user_id=current_user.id).delete()
-
-    for course_code in course_codes:
-        course = Course.query.filter_by(code=course_code).first()
-
-        if course:
-            selection = Selection(
-                user_id=current_user.id,
-                course_id=course.id
-            )
-            db.session.add(selection)
-
-    db.session.commit()
-
-    return {"message": "Selections saved successfully"}
-
 @app.route("/api/selected-courses")
 @student_required
 def api_selected_courses():
     selections = Selection.query.filter_by(user_id=current_user.id).all()
 
-    selected_degree = ""
-
-    if selections:
+    # Prefer the locked degree on the User record; fall back to inferring from courses.
+    selected_degree = current_user.selected_degree or ""
+    if not selected_degree and selections:
         selected_degree = selections[0].course.degree
 
     return {
         "degree": selected_degree,
+        "enrollment_status": current_user.enrollment_status or "planning",
         "courses": [
             {
-                "code": selection.course.code,
-                "name": selection.course.name,
-                "credits": selection.course.credits,
-                "time": selection.course.time,
-                "semester": selection.course.semester,
-                "degree": selection.course.degree,
-                "stream": selection.course.degree,
+                "code": s.course.code,
+                "name": s.course.name,
+                "credits": s.course.credits,
+                "time": s.course.time,
+                "semester": s.course.semester,
+                "degree": s.course.degree,
+                "stream": s.course.degree,
             }
-            for selection in selections
-        ]
+            for s in selections
+        ],
     }
 
-@app.route("/timetable.html")
-@student_required
-def timetable():
-    return render_template("timetable.html", current_user=current_user)
 
+# ---------------------------------------------------------------------------
+# Student API — enrollment
+# ---------------------------------------------------------------------------
+
+@app.route("/api/save-selection", methods=["POST"])
+@student_required
+def save_selection():
+    """
+    Draft save: persists the student's current working selection while they are
+    still in 'planning' status.  Does NOT lock them into 'enrolled'.
+    Once enrolled (or a change request is pending) this endpoint is blocked.
+    """
+    if current_user.enrollment_status in ("enrolled", "change_requested"):
+        return {
+            "error": "Already enrolled. Submit a change request to make changes."
+        }, 403
+
+    data = request.get_json()
+    course_codes = data.get("courses", [])
+    degree = data.get("degree", "")
+
+    Selection.query.filter_by(user_id=current_user.id).delete()
+    for code in course_codes:
+        course = Course.query.filter_by(code=code).first()
+        if course:
+            db.session.add(Selection(user_id=current_user.id, course_id=course.id))
+
+    if degree:
+        current_user.selected_degree = degree
+
+    db.session.commit()
+    return {"message": "Selection saved."}
+
+
+@app.route("/api/confirm-enrollment", methods=["POST"])
+@student_required
+def confirm_enrollment():
+    """
+    Locks the student's current selection as their official enrollment.
+    After this they can only change via the change-request workflow.
+    """
+    if current_user.enrollment_status == "enrolled":
+        return {"error": "Already enrolled."}, 400
+
+    if current_user.enrollment_status == "change_requested":
+        return {"error": "A change request is already pending approval."}, 400
+
+    selections = Selection.query.filter_by(user_id=current_user.id).count()
+    if selections == 0:
+        return {"error": "Please select at least one course before confirming enrollment."}, 400
+
+    if not current_user.selected_degree:
+        return {"error": "Please select a degree before confirming enrollment."}, 400
+
+    current_user.enrollment_status = "enrolled"
+    db.session.commit()
+    return {"message": "Enrollment confirmed! Changes now require admin approval."}
+
+
+@app.route("/api/request-change", methods=["POST"])
+@student_required
+def request_change():
+    """
+    Submits a change request for an already-enrolled student.
+    The student's current enrollment is preserved until the admin approves.
+    """
+    if current_user.enrollment_status != "enrolled":
+        return {"error": "You must be enrolled before submitting a change request."}, 400
+
+    existing_pending = EnrollmentChangeRequest.query.filter_by(
+        user_id=current_user.id, status="pending"
+    ).first()
+    if existing_pending:
+        return {"error": "You already have a pending change request."}, 400
+
+    data = request.get_json()
+    requested_degree = data.get("degree", "")
+    requested_courses = data.get("courses", [])
+
+    if not requested_degree or not requested_courses:
+        return {"error": "Please include a degree and at least one course in your request."}, 400
+
+    change_req = EnrollmentChangeRequest(
+        user_id=current_user.id,
+        requested_degree=requested_degree,
+        requested_course_codes=json.dumps(requested_courses),
+    )
+    current_user.enrollment_status = "change_requested"
+    db.session.add(change_req)
+    db.session.commit()
+    return {"message": "Change request submitted. Awaiting admin approval."}
+
+
+# ---------------------------------------------------------------------------
+# Admin API — change request management
+# ---------------------------------------------------------------------------
+
+@app.route("/api/admin/approve-change/<int:request_id>", methods=["POST"])
+@admin_required
+def approve_change(request_id):
+    req = EnrollmentChangeRequest.query.get_or_404(request_id)
+    user = User.query.get(req.user_id)
+
+    Selection.query.filter_by(user_id=user.id).delete()
+    for code in json.loads(req.requested_course_codes):
+        course = Course.query.filter_by(code=code).first()
+        if course:
+            db.session.add(Selection(user_id=user.id, course_id=course.id))
+
+    user.selected_degree = req.requested_degree
+    user.enrollment_status = "enrolled"
+    req.status = "approved"
+    req.reviewed_at = datetime.utcnow()
+    db.session.commit()
+    return {"message": "Change approved and applied."}
+
+
+@app.route("/api/admin/reject-change/<int:request_id>", methods=["POST"])
+@admin_required
+def reject_change(request_id):
+    req = EnrollmentChangeRequest.query.get_or_404(request_id)
+    req.user.enrollment_status = "enrolled"  # revert to locked without changes
+    req.status = "rejected"
+    req.reviewed_at = datetime.utcnow()
+    db.session.commit()
+    return {"message": "Change request rejected."}
+
+
+# ---------------------------------------------------------------------------
+# Admin dashboard route
+# ---------------------------------------------------------------------------
 
 @app.route("/admin-dashboard.html")
 @admin_required
@@ -364,15 +515,14 @@ def admin_dashboard():
 
     recent_user_records = User.query.order_by(User.id.desc()).limit(5).all()
     recent_users = []
-
     for user in recent_user_records:
         selected_count = Selection.query.filter_by(user_id=user.id).count()
-
         recent_users.append({
             "full_name": user.full_name,
             "email": user.email,
             "student_id": user.student_id,
             "selected_count": selected_count,
+            "enrollment_status": user.enrollment_status or "planning",
             "status": "Active" if selected_count > 0 else "No selections",
         })
 
@@ -389,6 +539,24 @@ def admin_dashboard():
         .all()
     )
 
+    # Pending change requests for the new admin panel
+    pending_req_records = EnrollmentChangeRequest.query.filter_by(status="pending").all()
+    pending_change_count = len(pending_req_records)
+    pending_changes = []
+    for req in pending_req_records:
+        course_codes = json.loads(req.requested_course_codes)
+        pending_changes.append({
+            "id": req.id,
+            "student_name": req.user.full_name,
+            "student_id": req.user.student_id,
+            "email": req.user.email,
+            "current_degree": req.user.selected_degree or "N/A",
+            "requested_degree": req.requested_degree,
+            "course_count": len(course_codes),
+            "requested_courses": course_codes,
+            "created_at": req.created_at.strftime("%d %b %Y, %H:%M") if req.created_at else "N/A",
+        })
+
     return render_template(
         "admin-dashboard.html",
         current_user=current_user,
@@ -398,7 +566,14 @@ def admin_dashboard():
         timetables_created=timetables_created,
         recent_users=recent_users,
         popular_courses=popular_courses,
+        pending_changes=pending_changes,
+        pending_change_count=pending_change_count,
     )
+
+
+# ---------------------------------------------------------------------------
+# Misc routes
+# ---------------------------------------------------------------------------
 
 @app.route("/logout")
 @login_required
