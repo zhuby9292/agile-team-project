@@ -28,25 +28,7 @@ function goToForgotPassword() {
     window.location.href = "/forgot-password";
 }
 
-function resetPassword() {
-    const recoveryEmail = document.getElementById("recovery-email").value.trim();
-    const newPassword = document.getElementById("new-password").value;
-    const output = document.getElementById("forgot-output");
-
-    if (recoveryEmail === "" || newPassword === "") {
-        output.innerHTML = t("Please complete all fields.");
-        return;
-    }
-    if (newPassword.length < 6) {
-        output.innerHTML = t("Password must be at least 6 characters.");
-        return;
-    }
-    output.innerHTML = t("Password reset successful for:") + " " + recoveryEmail;
-}
-
-let demoVerificationCode = "";
-
-function sendVerificationCode() {
+async function sendVerificationCode() {
     const email = document.getElementById("recovery-email").value.trim();
     const output = document.getElementById("forgot-output");
 
@@ -54,36 +36,101 @@ function sendVerificationCode() {
         output.innerHTML = t("Please enter your email address.");
         return;
     }
+
+    const response = await fetch("/api/send-reset-code", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        output.innerHTML = t(result.error || "Something went wrong.");
+        return;
+    }
+
     localStorage.setItem("recoveryEmail", email);
-    localStorage.setItem("verificationCode", "1234");
-    output.innerHTML = t("Verification code sent. Redirecting...");
+    output.innerHTML = t(result.message || "Verification code sent. Redirecting...");
+
     setTimeout(function () {
-        window.location.href = "/reset-password";
+        window.location.href = result.redirect || "/reset-password";
     }, 600);
 }
 
-function resetPasswordWithCode() {
+
+async function resetPasswordWithCode() {
     const verificationCode = getVerificationCodeFromBoxes();
     const newPassword = document.getElementById("new-password").value;
     const output = document.getElementById("reset-output");
-    const savedCode = localStorage.getItem("verificationCode");
+    const email = localStorage.getItem("recoveryEmail");
+
+    if (!email) {
+        output.innerHTML = t("Please request a verification code first.");
+        return;
+    }
 
     if (verificationCode === "" || newPassword === "") {
         output.innerHTML = t("Please enter the verification code and new password.");
         return;
     }
-    if (verificationCode !== savedCode) {
-        output.innerHTML = t("Invalid verification code. Please try again.");
-        return;
-    }
+
     if (newPassword.length < 6) {
         output.innerHTML = t("Password must be at least 6 characters.");
         return;
     }
-    output.innerHTML = t("Password reset successful! You can now sign in with your new password.");
+
+    const response = await fetch("/api/reset-password", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            code: verificationCode,
+            new_password: newPassword
+        })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        output.innerHTML = t(result.error || "Something went wrong.");
+        return;
+    }
+
+    output.innerHTML = t(result.message || "Password reset successful.");
     alert(t("Password reset successful! Please sign in again."));
-    localStorage.removeItem("verificationCode");
+
     localStorage.removeItem("recoveryEmail");
+
+    setTimeout(function () {
+        window.location.href = result.redirect || "/";
+    }, 800);
+}
+
+function handleCodePaste(event) {
+    event.preventDefault();
+
+    const pastedText = event.clipboardData.getData("text").replace(/\D/g, "").slice(0, 4);
+    const inputs = Array.from(document.querySelectorAll(".code-input"));
+
+    pastedText.split("").forEach(function (digit, index) {
+        if (inputs[index]) {
+            inputs[index].value = digit;
+        }
+    });
+
+    const nextEmptyInput = inputs.find(input => input.value === "");
+    if (nextEmptyInput) {
+        nextEmptyInput.focus();
+    } else if (inputs[inputs.length - 1]) {
+        inputs[inputs.length - 1].focus();
+    }
+
+    updateResetFormState();
 }
 
 function getVerificationCodeFromBoxes() {
@@ -130,31 +177,31 @@ function goToSignUp() { window.location.href = "/signup.html"; }
 function goToSignIn() { window.location.href = "/"; }
 
 function registerUser() {
-    let fullName = document.getElementById("full-name").value.trim();
-    let signupEmail = document.getElementById("signup-email").value.trim();
-    let studentId = document.getElementById("student-id").value.trim();
-    let signupPassword = document.getElementById("signup-password").value;
-    let confirmPassword = document.getElementById("confirm-password").value;
-    let output = document.getElementById("signup-output");
+    const fullName = document.getElementById("full-name").value.trim();
+    const studentId = document.getElementById("student-id").value.trim();
+    const signupPassword = document.getElementById("signup-password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
 
-    if (!fullName || !signupEmail || !studentId || !signupPassword || !confirmPassword) {
+    if (!fullName || !studentId || !signupPassword || !confirmPassword) {
         alert(t("Please complete all registration fields."));
-        output.innerHTML = t("Registration failed. Please complete all fields.");
         return;
     }
+
+    // Student ID: exactly 8 digits, no leading zero
+    if (!/^[1-9][0-9]{7}$/.test(studentId)) {
+        alert(t("Student ID must be exactly 8 digits and cannot start with zero."));
+        return;
+    }
+
     if (signupPassword !== confirmPassword) {
         alert(t("Passwords do not match."));
-        output.innerHTML = t("Registration failed. The passwords do not match.");
         return;
     }
+
     if (signupPassword.length < 6) {
         alert(t("Password must be at least 6 characters long."));
-        output.innerHTML = t("Registration failed. Password must contain at least 6 characters.");
         return;
     }
-    output.innerHTML =
-        t("Account created successfully for") + " " + fullName + " " + t("with email:") + " " + signupEmail;
-    alert(t("Registration successful."));
 }
 
 function showDashboardMessage(message) {
