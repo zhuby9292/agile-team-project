@@ -4,6 +4,12 @@
 {{ _('Admin Dashboard') }}
 {% endblock %}
 
+{% block nav %}
+<nav class="auth-links app-links">
+    <a href="{{ url_for('logout') }}">{{ _("Logout") }}</a>
+</nav>
+{% endblock %}
+
 {% block content %}
 <div class="container dashboard-container">
 
@@ -249,78 +255,69 @@
 
     </section>
 
-    {# ------------------------------------------------------------------ #}
-    {# Quick Management Tools                                               #}
-    {# ------------------------------------------------------------------ #}
-    <section class="dashboard-panel">
+<section class="dashboard-panel">
 
-        <div class="panel-title-row">
-            <div>
-                <p class="dashboard-kicker">{{ _('Admin actions') }}</p>
-                <h2>{{ _('Quick Management Tools') }}</h2>
-            </div>
+    <div class="panel-title-row">
+        <div>
+            <p class="dashboard-kicker">{{ _('Admin guidance') }}</p>
+            <h2>{{ _('Admin Workspace Notes') }}</h2>
+        </div>
+    </div>
+
+    <div class="action-grid admin-action-grid">
+
+        <div class="action-box">
+            <span class="action-icon glyphicon glyphicon-lock"></span>
+
+            <h3>{{ _('Admin Access') }}</h3>
+
+            <p>
+                {{ _('Admin access is limited to approved staff-style accounts to keep management pages separate from student use.') }}
+            </p>
         </div>
 
-        <div class="action-grid admin-action-grid">
+        <div class="action-box">
+            <span class="action-icon glyphicon glyphicon-eye-open"></span>
 
-            <div class="action-box">
-                <span class="action-icon glyphicon glyphicon-user"></span>
-                <h3>{{ _('View Users') }}</h3>
-                <p>{{ _('Review registered users and account status information.') }}</p>
-                <button type="button"
-                    class="btn dashboard-btn-secondary"
-                    data-message="{{ _('User management tools will be connected to database records in a future update.') }}"
-                    onclick="showDashboardMessage(this.dataset.message)">
-                    {{ _('View Users') }}
-                </button>
-            </div>
+            <h3>{{ _('Read-only Review') }}</h3>
 
-            <div class="action-box">
-                <span class="action-icon glyphicon glyphicon-book"></span>
-                <h3>{{ _('Manage Courses') }}</h3>
-                <p>{{ _('Check available courses and prepare future course management features.') }}</p>
-                <button type="button"
-                    class="btn dashboard-btn-secondary"
-                    data-message="{{ _('Course management tools will be expanded in the next development stage.') }}"
-                    onclick="showDashboardMessage(this.dataset.message)">
-                    {{ _('Manage Courses') }}
-                </button>
-            </div>
-
-            <div class="action-box">
-                <span class="action-icon glyphicon glyphicon-stats"></span>
-                <h3>{{ _('View Statistics') }}</h3>
-                <p>{{ _('Monitor course demand and timetable usage across the system.') }}</p>
-                <button type="button"
-                    class="btn dashboard-btn-secondary"
-                    data-message="{{ _('Statistics are now calculated from current user and course selection records.') }}"
-                    onclick="showDashboardMessage(this.dataset.message)">
-                    {{ _('View Statistics') }}
-                </button>
-            </div>
-
-            <div class="action-box">
-                <span class="action-icon glyphicon glyphicon-calendar"></span>
-                <h3>{{ _('Monitor Timetables') }}</h3>
-                <p>{{ _('Review how many timetable plans have been created by students.') }}</p>
-                <button type="button"
-                    class="btn dashboard-btn-secondary"
-                    data-message="{{ _('Timetable monitoring will use real timetable data in a later update.') }}"
-                    onclick="showDashboardMessage(this.dataset.message)">
-                    {{ _('Monitor Usage') }}
-                </button>
-            </div>
-
+            <p>
+                {{ _('This dashboard is designed for reviewing system activity without directly changing student records.') }}
+            </p>
         </div>
 
-    </section>
+        <div class="action-box">
+            <span class="action-icon glyphicon glyphicon-ok-circle"></span>
+
+            <h3>{{ _('Data Checking') }}</h3>
+
+            <p>
+                {{ _('Admins can use the page to notice unusual user, course, or timetable activity before further investigation.') }}
+            </p>
+        </div>
+
+        <div class="action-box">
+            <span class="action-icon glyphicon glyphicon-info-sign"></span>
+
+            <h3>{{ _('Support Context') }}</h3>
+
+            <p>
+                {{ _('The summary information can help staff understand what students have done before responding to support requests.') }}
+            </p>
+        </div>
+
+    </div>
+
+</section>
 
     <section class="dashboard-panel dashboard-message-panel">
         <p class="dashboard-kicker">{{ _('Admin message') }}</p>
         <h2>{{ _('System Management Updates') }}</h2>
-        <p id="dashboard-output">
-            {{ _('Use this admin dashboard to monitor users, courses, statistics, and timetable usage.') }}
-        </p>
+
+<p id="dashboard-output">
+    {{ _('This admin page provides a read-only workspace for checking system activity and supporting student planning issues.') }}
+</p>
+
     </section>
 
 </div>
