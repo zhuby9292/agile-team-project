@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}{{ _('Course Planner - Sign In') }}{% endblock %}
+{% block title %}{{ _('UniPlanner - Sign In') }}{% endblock %}
 
 {% block nav %}
 <nav class="auth-links">
     <a href="{{ url_for('index') }}" class="active">{{ _('Sign In') }}</a>
     <a href="{{ url_for('signup') }}">{{ _('Sign Up') }}</a>
-    <a href="{{ url_for('admin_login') }}">{{ _('Admin Login') }}</a>
+    <a href="{{ url_for('admin_login') }}">{{ _('Admin') }}</a>
 </nav>
 {% endblock %}
 
@@ -23,11 +23,6 @@
                     {{ _('Select your degree, explore available courses, organise your timetable, and compare study plans with other students before finalising your semester.') }}
                 </p>
 
-                <div class="hero-actions">
-                    <button type="button" class="btn hero-btn-primary" onclick="goToSignUp()">
-                        {{ _('Create Account') }}
-                    </button>
-                </div>
             </section>
 
             <section class="signin-card">
@@ -76,7 +71,7 @@
                 </form>
 
                 <div class="signup-prompt">
-                    <p>{{ _('New to Course Planner?') }}</p>
+                    <p>{{ _('Don\'t have an account?') }}</p>
                     <button type="button" class="btn signup-btn" onclick="goToSignUp()">
                         {{ _('Create an account') }}
                     </button>

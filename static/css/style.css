@@ -1527,6 +1527,45 @@ body.dark-mode .auth-links a.active {
     color: #0f172a;
 }
 
+body.dark-mode .auth-links a:hover,
+body.dark-mode .auth-links a.active {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+/* Dark mode language dropdown */
+
+body.dark-mode .language-dropdown-toggle {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+body.dark-mode .language-dropdown-toggle:hover {
+    background: #334155;
+    border-color: #64748b;
+    color: #ffffff;
+}
+
+body.dark-mode .language-caret {
+    color: #cbd5e1;
+}
+
+body.dark-mode .language-dropdown-menu {
+    background: #1e293b;
+    border-color: #475569;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+body.dark-mode .language-dropdown-item {
+    color: #cbd5e1;
+}
+
+body.dark-mode .language-dropdown-item:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
 /* Dark mode buttons and icons */
 
 body.dark-mode .brand-icon,
@@ -2023,31 +2062,89 @@ body.dark-mode .signup-prompt p {
     gap: 10px;
 }
 
-.language-icon-dropdown {
+/* Language dropdown */
+
+.language-dropdown {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    position: relative;
-    z-index: 50;
+}
+
+.language-dropdown-toggle {
+    height: 38px;
+    border: 1px solid rgba(201, 214, 226, 0.95);
+    background: rgba(255, 255, 255, 0.82);
+    color: #183b5b;
+    border-radius: 999px;
+    padding: 7px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(24, 59, 91, 0.06);
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.language-dropdown-toggle:hover {
+    background: #ffffff;
+    border-color: #b8c7d6;
+    color: #102c45;
+    box-shadow: 0 10px 26px rgba(24, 59, 91, 0.1);
 }
 
 .language-icon {
     width: 18px;
     height: 18px;
     object-fit: contain;
-    pointer-events: none;
 }
 
-.language-icon-select {
-    width: 42px;
-    height: 30px;
-    border: none;
-    background: transparent;
-    color: #183b5b;
-    cursor: pointer;
-    appearance: auto;
+.language-caret {
     font-size: 12px;
-    text-indent: -9999px;
-    padding-left: 22px;
+    color: #526273;
+    margin-left: 2px;
+}
+
+.language-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 150px;
+    background: #ffffff;
+    border: 1px solid #d9e4ee;
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 12px 28px rgba(24, 59, 91, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 1000;
+}
+
+.language-dropdown:hover .language-dropdown-menu,
+.language-dropdown:focus-within .language-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-dropdown-item {
+    display: block;
+    color: #526273;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 12px;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.language-dropdown-item:hover {
+    background: #edf3f8;
+    color: #183b5b;
+    text-decoration: none;
 }
 
 .language-icon-select:focus {
@@ -2235,6 +2332,137 @@ body.dark-mode .language-icon-dropdown::after {
     padding: 16px;
 }
 
+/* ===== Themed navigation bar ===== */
+
+.app-header {
+    background: linear-gradient(135deg, #183b5b 0%, #245f88 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 18px 0;
+    box-shadow: 0 10px 28px rgba(24, 59, 91, 0.22);
+}
+
+.app-nav {
+    min-height: 64px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+.brand {
+    color: white;
+}
+
+.brand-name {
+    color: white;
+}
+
+.brand-icon {
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.auth-links {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 6px;
+    box-shadow: none;
+}
+
+.auth-links a {
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 17px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.auth-links a:hover,
+.auth-links a.active {
+    background: white;
+    color: #183b5b;
+    text-decoration: none;
+}
+
+.language-icon-dropdown {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: none;
+}
+
+.language-icon-select,
+.language-icon-dropdown::after {
+    color: white;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: white;
+}
+
+.theme-toggle-label {
+    color: white;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.26);
+}
+
+/* Dark mode version */
+
+body.dark-mode .app-header {
+    background: linear-gradient(135deg, #020617 0%, #1e293b 100%);
+    border-bottom-color: #334155;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== Navbar alignment fix ===== */
+
+.app-nav {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    flex: 0 0 auto;
+}
+
+.auth-links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+.header-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@media (max-width: 991px) {
+    .app-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .auth-links {
+        margin: 0;
+        justify-content: center;
+    }
+}
+
 /* ===== Course Table Final Version ===== */
 
 #available-courses {
@@ -2328,4 +2556,768 @@ body.dark-mode .language-icon-dropdown::after {
         min-width: 760px;
     }
 
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+/* Cursive UniPlanner navbar brand */
+
+.brand-name {
+    font-family: "Pacifico", cursive;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.added-course-btn,
+.added-course-btn:hover,
+.added-course-btn:disabled {
+    background-color: #d6dde6;
+    color: #526273;
+    cursor: not-allowed;
+    border: none;
+    opacity: 1;
+}
+.enrollment-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    flex-wrap: wrap;
+}
+
+.enrollment-banner__icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.enrollment-banner__actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Enrolled — locked, green */
+.enrollment-banner--enrolled {
+    background-color: #d4edda;
+    border: 1px solid #acd2b8;
+    color: #155724;
+}
+
+/* Change pending — amber */
+.enrollment-banner--pending {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+}
+
+/* Drafting a change request — blue */
+.enrollment-banner--draft {
+    background-color: #d0e8ff;
+    border: 1px solid #90c4f9;
+    color: #0a4a7c;
+}
+
+/* Dark mode overrides */
+.dark-mode .enrollment-banner--enrolled {
+    background-color: #1a3a24;
+    border-color: #2d6a40;
+    color: #8dd4a0;
+}
+
+.dark-mode .enrollment-banner--pending {
+    background-color: #3a2f10;
+    border-color: #b38b00;
+    color: #ffd54f;
+}
+
+.dark-mode .enrollment-banner--draft {
+    background-color: #0d2a40;
+    border-color: #2870a0;
+    color: #7ac4f0;
+}
+
+/* ==========================================================================
+   Sidebar — confirm & request-change buttons
+   ========================================================================== */
+
+.enrollment-action-btn {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Pending change notice (inside sidebar)
+   ========================================================================== */
+
+.pending-change-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+    font-size: 0.88rem;
+    margin-top: 10px;
+    line-height: 1.45;
+}
+
+.pending-change-notice__icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.dark-mode .pending-change-notice {
+    background-color: #3a2f10;
+    border-color: #b38b00;
+    color: #ffd54f;
+}
+
+/* ==========================================================================
+   Admin dashboard — change request styles
+   ========================================================================== */
+
+/* Orange stat card when there are pending requests */
+.admin-stat-card--alert {
+    border-top: 3px solid #f0ad4e;
+}
+
+/* Badge shown next to the section title */
+.admin-pending-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background-color: #f0ad4e;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Alert value (e.g. pending count in summary card) */
+.admin-badge--alert {
+    color: #d9534f;
+}
+
+/* Degree value that is different from current */
+.admin-changed-value {
+    color: #e67e22;
+    font-weight: 600;
+}
+
+/* Action buttons column */
+.admin-action-cell {
+    white-space: nowrap;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Empty state row */
+.admin-empty-row {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+/* Enrollment status badges in user table */
+.admin-status--enrolled {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.admin-status--pending {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.admin-status--planning {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.dark-mode .admin-status--enrolled {
+    background-color: #1a3a24;
+    color: #8dd4a0;
+}
+
+.dark-mode .admin-status--pending {
+    background-color: #3a2f10;
+    color: #ffd54f;
+}
+
+.dark-mode .admin-status--planning {
+    background-color: #2d3748;
+    color: #a0aec0;
+}
+
+/* ===== Strong dark mode fix for available courses table/tiles ===== */
+
+body.dark-mode #available-courses,
+body.dark-mode .course-table {
+    background: transparent;
+}
+
+body.dark-mode #available-courses .course-table-header {
+    background: #111827;
+    color: #f8fafc;
+    border: 1px solid #334155;
+}
+
+body.dark-mode #available-courses .course-table-row {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    color: #e5e7eb;
+}
+
+body.dark-mode #available-courses .course-table-row:hover {
+    background: #273449 !important;
+    border-color: #475569 !important;
+}
+
+body.dark-mode #available-courses .course-table-row span {
+    color: #e5e7eb;
+}
+
+body.dark-mode #available-courses .course-table-name {
+    color: #f8fafc;
+}
+
+body.dark-mode #available-courses .course-code {
+    background: #60a5fa;
+    color: #0f172a !important;
+}
+
+body.dark-mode #available-courses .dashboard-btn-primary {
+    background: #60a5fa;
+    color: #0f172a;
+    border: none;
+}
+
+body.dark-mode #available-courses .dashboard-btn-primary:hover {
+    background: #93c5fd;
+    color: #0f172a;
+}
+
+/* ===== Dark mode fixes for course filter/search box ===== */
+
+body.dark-mode .course-filter-bar {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .course-filter-bar .form-control {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .course-filter-bar .form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* Only selected/disabled Added buttons should look disabled */
+
+.course-table-row button.added-course-btn:disabled {
+    background: #d9e2ec !important;
+    color: #5f6b76 !important;
+    border: 1px solid #c7d3df !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
+/* Keep normal Add buttons unchanged */
+
+.course-table-row button.dashboard-btn-primary:not(.added-course-btn) {
+    background: #183b5b !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Dark mode Added button */
+
+body.dark-mode .course-table-row button.added-course-btn:disabled {
+    background: #334155 !important;
+    color: #94a3b8 !important;
+    border: 1px solid #475569 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
+/* Dark mode normal Add button */
+
+body.dark-mode .course-table-row button.dashboard-btn-primary:not(.added-course-btn) {
+    background: #60a5fa !important;
+    color: #0f172a !important;
+    border: none !important;
+}
+
+/* ===== Dark mode fix for selected courses section ===== */
+
+body.dark-mode .selected-course-item {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-mode .selected-course-info strong {
+    color: #f8fafc;
+}
+
+body.dark-mode .selected-course-info span {
+    color: #cbd5e1;
+}
+
+body.dark-mode .remove-course-btn {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+/* ===== Dark mode fix for generated timetable grid ===== */
+
+body.dark-mode .weekly-calendar {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+body.dark-mode .calendar-time {
+    background: #111827;
+    color: #cbd5e1;
+    border-top-color: #334155;
+}
+
+body.dark-mode .calendar-cell {
+    background: #0f172a;
+    border-top-color: #334155;
+    border-left-color: #334155;
+}
+
+body.dark-mode .course-block {
+    background: #1e293b;
+    color: #f8fafc;
+    border-left-color: #60a5fa;
+}
+
+body.dark-mode .course-block strong {
+    color: #93c5fd;
+}
+
+body.dark-mode .course-block span {
+    color: #f8fafc;
+}
+
+body.dark-mode .course-block small {
+    color: #cbd5e1;
+}
+
+/* ===== Dark mode fix for admin dashboard tables ===== */
+
+body.dark-mode .admin-table-wrapper,
+body.dark-mode .admin-table {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-table thead th {
+    background: #111827;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-table tbody td {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-table tbody tr {
+    background: #1e293b;
+}
+
+body.dark-mode .admin-table .text-muted,
+body.dark-mode .admin-table small {
+    color: #cbd5e1;
+}
+
+body.dark-mode .admin-empty-row {
+    background: #1e293b;
+    color: #cbd5e1;
+}
+
+/* ===== Admin dashboard spacing + popular course dark mode fix ===== */
+
+.admin-management-grid {
+    gap: 28px;
+    align-items: stretch;
+}
+
+.admin-management-grid .dashboard-panel {
+    margin-bottom: 0;
+}
+
+body.dark-mode .admin-course-list .progress-item {
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .admin-course-list .progress-item span {
+    color: #e5e7eb;
+}
+
+body.dark-mode .admin-course-list .progress-item strong {
+    color: #93c5fd;
+}
+
+/* ===== Strong spacing fix for admin dashboard panels ===== */
+
+#pending-changes-section {
+    margin-bottom: 32px;
+}
+
+.admin-management-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    column-gap: 32px;
+    row-gap: 32px;
+}
+
+.admin-management-grid .dashboard-panel {
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .admin-management-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Course page layout improvement ===== */
+
+.course-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.course-main-column {
+    display: contents;
+}
+
+.course-main-column .dashboard-panel:first-child {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.course-side-column {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+}
+
+.course-main-column .dashboard-panel:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.step-pill {
+    background: #edf3f8;
+    color: #183b5b;
+    border: 1px solid #c9d8e6;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 4px;
+}
+
+body.dark-mode .step-pill {
+    background: #334155;
+    color: #e5e7eb;
+    border-color: #475569;
+}
+
+.section-heading h2 {
+    font-size: 26px;
+}
+
+.section-heading p {
+    font-size: 14px;
+}
+
+@media (max-width: 991px) {
+    .course-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .course-main-column {
+        display: flex;
+    }
+
+    .course-side-column {
+        width: 100%;
+    }
+}
+
+/* Make Step 1 and Step 3 boxes equal height */
+
+.course-layout {
+    align-items: stretch;
+}
+
+.course-main-column .dashboard-panel:first-child,
+.course-side-column .dashboard-panel {
+    height: 100%;
+}
+
+.course-side-column,
+.selected-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-courses-box {
+    flex: 1;
+}
+
+/* Step 2 action buttons */
+
+.course-action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.course-action-row .btn {
+    width: 100%;
+    border-radius: 14px;
+    padding: 12px 18px;
+}
+
+@media (max-width: 700px) {
+    .course-action-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Compact course page spacing fix ===== */
+
+.course-layout {
+    gap: 18px;
+}
+
+.dashboard-panel {
+    padding: 22px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.section-heading h2 {
+    margin: 0 0 4px;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.section-heading p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.step-pill {
+    padding: 5px 10px;
+    font-size: 10px;
+    letter-spacing: 0.4px;
+    margin-top: 3px;
+}
+
+.degree-select-card {
+    padding: 18px;
+}
+
+.degree-form-grid {
+    gap: 14px;
+}
+
+.helper-message {
+    margin-top: 12px;
+    padding: 11px 13px;
+}
+
+.course-filter-bar {
+    padding: 13px;
+    margin-bottom: 14px;
+}
+
+.selected-courses-box {
+    margin: 12px 0;
+    padding: 14px;
+    min-height: 70px;
+}
+
+.credit-total-box {
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+/* Make Review your selection wider */
+
+.course-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(420px, 0.9fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.course-side-column {
+    width: 100%;
+}
+
+.selected-panel {
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .course-layout {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* ===== Final hero heading emphasis ===== */
+
+.course-page-hero h1 {
+    margin: 0 0 10px;
+    color: #102c45;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+}
+
+body.dark-mode .course-page-hero h1 {
+    color: #f8fafc;
+}
+
+.course-selection-top h1,
+.course-selection-top h2 {
+    color: #102c45;
+    font-size: 42px;
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin: 0 0 14px;
+}
+
+body.dark-mode .course-selection-top h1,
+body.dark-mode .course-selection-top h2 {
+    color: #f8fafc;
+}
+
+.course-selection-top .dashboard-description {
+    max-width: none;
+}
+
+/* ===== More compact selected courses ===== */
+
+.selected-course-item {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 10px;
+}
+
+.selected-course-info strong {
+    font-size: 13px;
+    line-height: 1.15;
+    margin-bottom: 2px;
+}
+
+.selected-course-info span {
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.remove-course-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    border-radius: 6px;
+}
+
+.selected-courses-box {
+    padding: 10px;
+    margin: 8px 0;
+    min-height: 50px;
+}
+
+.credit-total-box {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+}
+
+/* Dark mode fix for Course Selection hero box */
+
+body.dark-mode .course-selection-top {
+    background: #1e293b;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+body.dark-mode .course-selection-top h1,
+body.dark-mode .course-selection-top h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode .course-selection-top .dashboard-kicker {
+    color: #93c5fd;
+}
+
+body.dark-mode .course-selection-top .dashboard-description {
+    color: #cbd5e1;
 }
