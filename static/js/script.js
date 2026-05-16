@@ -697,13 +697,50 @@ function selectDegree(shouldResetCourses = true) {
     displayAvailableCourses(selectedDegree);
 }
 
+function updateSemesterFilter(courses) {
+    const semesterFilter = document.getElementById("semester-filter");
+
+    if (!semesterFilter) {
+        return;
+    }
+
+    semesterFilter.innerHTML = "";
+
+    const allOption = document.createElement("option");
+    allOption.value = "all";
+    allOption.textContent = "All Semesters";
+    semesterFilter.appendChild(allOption);
+
+    const semesters = [...new Set(courses.map(function (course) {
+        return course.semester;
+    }))];
+
+    semesters.sort(function (a, b) {
+        const numberA = parseInt(a.replace(/\D/g, ""));
+        const numberB = parseInt(b.replace(/\D/g, ""));
+        return numberA - numberB;
+    });
+
+    semesters.forEach(function (semester) {
+        const option = document.createElement("option");
+        option.value = semester;
+        option.textContent = "Semester " + semester.replace(/\D/g, "");
+        semesterFilter.appendChild(option);
+    });
+}
+
 function displayAvailableCourses(degreeName) {
     const availableCoursesBox = document.getElementById("available-courses");
     if (!availableCoursesBox) return;
 
     const courses = courseOptions[degreeName];
 
+    if (courses) {
+    updateSemesterFilter(courses);
+}
+
     if (!courses || courses.length === 0) {
+        
         availableCoursesBox.innerHTML = `
             <div class="empty-course-state">
                 <p>${t("Please select a study level and degree to view available courses.")}</p>
