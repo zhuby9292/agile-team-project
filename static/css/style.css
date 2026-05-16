@@ -2742,27 +2742,27 @@ body.dark-mode .app-header {
 .admin-status--enrolled {
     background-color: #d4edda;
     color: #155724;
-    padding: 2px 8px;
+    padding: 6px 14px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .admin-status--pending {
     background-color: #fff3cd;
     color: #856404;
-    padding: 2px 8px;
+    padding: 6px 14px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .admin-status--planning {
     background-color: #e2e8f0;
     color: #4a5568;
-    padding: 2px 8px;
+    padding: 6px 14px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -3320,4 +3320,276 @@ body.dark-mode .course-selection-top .dashboard-kicker {
 
 body.dark-mode .course-selection-top .dashboard-description {
     color: #cbd5e1;
+}
+
+/* ==========================================================================
+   APPEND TO END OF style.css
+   Admin dashboard — enrollment overview + course management additions
+   ========================================================================== */
+
+/* Panel title row with filter controls side-by-side */
+.admin-panel-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.admin-filter-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admin-filter-input {
+    min-width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #cfdbe6;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.admin-filter-select {
+    min-width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #cfdbe6;
+    font-size: 14px;
+}
+
+/* Add Course button in panel title */
+.admin-add-btn {
+    white-space: nowrap;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* Inline add / edit forms */
+.admin-inline-form {
+    background: #f6f9fc;
+    border: 1px solid #dce6ef;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.admin-inline-form--edit {
+    background: #fffbf0;
+    border-color: #f0d080;
+}
+
+.admin-form-title {
+    color: #183b5b;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 18px;
+}
+
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 900px) {
+    .admin-form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-form-actions .btn {
+    min-width: 130px;
+    border-radius: 10px;
+    padding: 10px 16px;
+}
+
+/* Danger / delete button */
+.admin-btn-danger {
+    background: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-btn-danger:hover {
+    background: #c9302c;
+    color: white;
+}
+
+/* Dark mode — inline forms */
+body.dark-mode .admin-inline-form {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .admin-inline-form--edit {
+    background: #2a2410;
+    border-color: #6b5a00;
+}
+
+body.dark-mode .admin-form-title {
+    color: #f8fafc;
+}
+
+/* Dark mode — filter inputs */
+body.dark-mode .admin-filter-input,
+body.dark-mode .admin-filter-select {
+    background: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+/* Dark mode — course management table rows */
+body.dark-mode #course-mgmt-tbody tr td {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #334155;
+}
+
+/* Dark mode — enrollment table rows */
+body.dark-mode #enrollment-table-body tr td {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #334155;
+}
+
+/* Enrollment overview — expand button */
+.enrollment-expand-btn {
+    background: #edf3f8;
+    color: #183b5b;
+    border: 1px solid #c9d8e6;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.enrollment-expand-btn:hover,
+.enrollment-expand-btn--active {
+    background: #183b5b;
+    color: #ffffff;
+    border-color: #183b5b;
+}
+
+body.dark-mode .enrollment-expand-btn {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #475569;
+}
+
+body.dark-mode .enrollment-expand-btn:hover,
+body.dark-mode .enrollment-expand-btn--active {
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
+}
+/* Expanded course detail panel */
+.enrollment-courses-detail {
+    background: #f6f9fc;
+    border-top: 1px solid #dce6ef;
+    padding: 16px 20px;
+}
+.enrollment-courses-heading {
+    font-size: 13px;
+    color: #526273;
+    margin: 0 0 12px;
+}
+.enrollment-course-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e4edf5;
+}
+.enrollment-course-item:last-child {
+    border-bottom: none;
+}
+.enrollment-course-name {
+    font-weight: 600;
+    color: #102c45;
+    flex: 1;
+}
+.enrollment-course-meta {
+    font-size: 12px;
+    color: #778594;
+    white-space: nowrap;
+}
+
+/* Dark mode */
+body.dark-mode .enrollment-expand-btn {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #475569;
+}
+body.dark-mode .enrollment-expand-btn:hover,
+body.dark-mode .enrollment-expand-btn--active {
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
+}
+body.dark-mode .enrollment-courses-detail {
+    background: #111827;
+    border-top-color: #334155;
+}
+body.dark-mode .enrollment-courses-heading { color: #94a3b8; }
+body.dark-mode .enrollment-course-name { color: #f8fafc; }
+body.dark-mode .enrollment-course-meta { color: #64748b; }
+body.dark-mode .enrollment-course-item { border-bottom-color: #1e293b; }
+
+/* Admin logout button in header-actions */
+.admin-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 7px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+    background: white;
+    border-color: white;
+    color: #183b5b;
+    text-decoration: none;
+}
+
+body.dark-mode .admin-logout-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .admin-logout-btn:hover {
+    background: #60a5fa;
+    border-color: #60a5fa;
+    color: #0f172a;
 }

@@ -1,92 +1,60 @@
 {% extends "dashboard-base.html" %}
 
-{% block title %}
-{{ _('Admin Dashboard') }}
+{% block header_extra %}
+<a href="{{ url_for('logout') }}" class="admin-logout-btn">
+    <span>{{ _('Logout') }}</span>
+</a>
 {% endblock %}
 
-{% block nav %}
-<nav class="auth-links app-links">
-    <a href="{{ url_for('logout') }}">{{ _("Logout") }}</a>
-</nav>
-{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block title %}{{ _('Admin Dashboard') }}{% endblock %}
 
 {% block content %}
 <div class="container dashboard-container">
 
-    <section class="dashboard-hero admin-hero">
+    <!-- Hero -->
+    <section class="dashboard-hero admin-hero" style="margin-bottom: 24px;">
         <div class="dashboard-welcome">
             <p class="dashboard-kicker">{{ _('System management') }}</p>
-
             <h1>{{ _('Admin Dashboard') }}</h1>
-
             <p class="dashboard-description">
-                {{ _('Monitor users, courses, enrolment activity, and timetable usage from one central admin workspace.') }}
+                {{ _('Monitor enrollments, manage courses, review change requests, and track system activity.') }}
             </p>
         </div>
-
-        <div class="dashboard-status-card">
-            <p class="status-label">{{ _('System Summary') }}</p>
-
-            <div class="status-row">
-                <span>{{ _('Registered users') }}</span>
-                <strong>{{ total_users }}</strong>
-            </div>
-
-            <div class="status-row">
-                <span>{{ _('Available courses') }}</span>
-                <strong>{{ total_courses }}</strong>
-            </div>
-
-            <div class="status-row">
-                <span>{{ _('Timetables created') }}</span>
-                <strong>{{ timetables_created }}</strong>
-            </div>
-
-            <div class="status-row">
-                <span>{{ _('Pending change requests') }}</span>
-                <strong class="{% if pending_change_count > 0 %}admin-badge--alert{% endif %}">
-                    {{ pending_change_count }}
-                </strong>
-            </div>
-        </div>
+        
     </section>
 
-    <section class="admin-summary-grid">
-
+    <!-- Stat cards -->
+    <section class="admin-summary-grid" style="margin-bottom: 24px;">
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-user"></span>
             <p class="mini-label">{{ _('Users') }}</p>
             <h3>{{ total_users }}</h3>
             <p class="mini-note">{{ _('Registered student accounts') }}</p>
         </div>
-
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-book"></span>
             <p class="mini-label">{{ _('Courses') }}</p>
             <h3>{{ total_courses }}</h3>
             <p class="mini-note">{{ _('Courses available for planning') }}</p>
         </div>
-
         <div class="mini-card admin-stat-card">
             <span class="mini-icon glyphicon glyphicon-stats"></span>
             <p class="mini-label">{{ _('Selections') }}</p>
             <h3>{{ total_selections }}</h3>
             <p class="mini-note">{{ _('Course selections recorded') }}</p>
         </div>
-
         <div class="mini-card admin-stat-card {% if pending_change_count > 0 %}admin-stat-card--alert{% endif %}">
             <span class="mini-icon glyphicon glyphicon-transfer"></span>
             <p class="mini-label">{{ _('Change Requests') }}</p>
             <h3>{{ pending_change_count }}</h3>
             <p class="mini-note">{{ _('Pending admin review') }}</p>
         </div>
-
     </section>
 
-    {# ------------------------------------------------------------------ #}
-    {# Pending Enrollment Change Requests                                   #}
-    {# ------------------------------------------------------------------ #}
-    <section class="dashboard-panel" id="pending-changes-section">
+    <!-- Pending Change Requests -->
+    <section class="dashboard-panel" id="pending-changes-section" style="margin-bottom: 24px;">
         <div class="panel-title-row">
             <div>
                 <p class="dashboard-kicker">{{ _('Enrollment management') }}</p>
@@ -109,14 +77,12 @@
                         <th>{{ _('Action') }}</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     {% if pending_changes %}
                         {% for req in pending_changes %}
                         <tr>
                             <td>
-                                <strong>{{ req.student_name }}</strong>
-                                <br>
+                                <strong>{{ req.student_name }}</strong><br>
                                 <small class="text-muted">{{ req.student_id }}</small>
                             </td>
                             <td>{{ req.current_degree }}</td>
@@ -132,22 +98,12 @@
                                     {{ req.course_count }} {{ _('course(s)') }}
                                 </span>
                             </td>
-                            <td>
-                                <small>{{ req.created_at }}</small>
-                            </td>
+                            <td><small>{{ req.created_at }}</small></td>
                             <td class="admin-action-cell">
-                                <button
-                                    type="button"
-                                    class="btn btn-sm dashboard-btn-primary"
-                                    onclick="approveChange({{ req.id }})">
-                                    {{ _('Approve') }}
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-sm dashboard-btn-secondary"
-                                    onclick="rejectChange({{ req.id }})">
-                                    {{ _('Reject') }}
-                                </button>
+                                <button type="button" class="btn btn-sm dashboard-btn-primary"
+                                    onclick="approveChange({{ req.id }})">{{ _('Approve') }}</button>
+                                <button type="button" class="btn btn-sm dashboard-btn-secondary"
+                                    onclick="rejectChange({{ req.id }})">{{ _('Reject') }}</button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -163,161 +119,204 @@
         </div>
     </section>
 
-    {# ------------------------------------------------------------------ #}
-    {# Recent Users + Popular Courses                                       #}
-    {# ------------------------------------------------------------------ #}
-    <section class="dashboard-overview-grid admin-management-grid">
-
-        <div class="dashboard-panel dashboard-panel-large">
-            <div class="panel-title-row">
-                <div>
-                    <p class="dashboard-kicker">{{ _('Registered users') }}</p>
-                    <h2>{{ _('Recent Registered Users') }}</h2>
-                </div>
+    <!-- Enrollment Overview -->
+    <section class="dashboard-panel" id="enrollment-overview-section" style="margin-bottom: 24px;">
+        <div class="panel-title-row admin-panel-title-row">
+            <div>
+                <p class="dashboard-kicker">{{ _('Student records') }}</p>
+                <h2>{{ _('Enrollment Overview') }}</h2>
             </div>
-
-            <div class="admin-table-wrapper">
-                <table class="table admin-table">
-                    <thead>
-                        <tr>
-                            <th>{{ _('Name') }}</th>
-                            <th>{{ _('Email') }}</th>
-                            <th>{{ _('Student ID') }}</th>
-                            <th>{{ _('Enrollment') }}</th>
-                            <th>{{ _('Status') }}</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% if recent_users %}
-                            {% for user in recent_users %}
-                            <tr>
-                                <td>{{ user.full_name }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.student_id }}</td>
-                                <td>
-                                    {% if user.enrollment_status == 'enrolled' %}
-                                        <span class="admin-status admin-status--enrolled">{{ _('Enrolled') }}</span>
-                                    {% elif user.enrollment_status == 'change_requested' %}
-                                        <span class="admin-status admin-status--pending">{{ _('Change Pending') }}</span>
-                                    {% else %}
-                                        <span class="admin-status admin-status--planning">{{ _('Planning') }}</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if user.selected_count > 0 %}
-                                        <span class="admin-status active">
-                                            {{ _('Active') }} · {{ user.selected_count }} {{ _('selected') }}
-                                        </span>
-                                    {% else %}
-                                        <span class="admin-status pending">
-                                            {{ _('No selections') }}
-                                        </span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        {% else %}
-                            <tr>
-                                <td colspan="5">
-                                    {{ _('No registered users found.') }}
-                                </td>
-                            </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
+            <div class="admin-filter-row">
+                <input type="text"
+                    id="enrollment-search"
+                    class="form-control admin-filter-input"
+                    placeholder="{{ _('Search name or student ID...') }}"
+                    oninput="filterEnrollmentTable()">
+                <select id="enrollment-status-filter"
+                    class="form-control admin-filter-select"
+                    onchange="filterEnrollmentTable()">
+                    <option value="all">{{ _('All statuses') }}</option>
+                    <option value="planning">{{ _('Planning') }}</option>
+                    <option value="enrolled">{{ _('Enrolled') }}</option>
+                    <option value="change_requested">{{ _('Change Pending') }}</option>
+                </select>
             </div>
         </div>
 
-        <div class="dashboard-panel">
-            <p class="dashboard-kicker">{{ _('Course statistics') }}</p>
-
-            <h2>{{ _('Popular Courses') }}</h2>
-
-            <div class="progress-list admin-course-list">
-
-                {% if popular_courses %}
-                    {% for course in popular_courses %}
-                    <div class="progress-item">
-                        <span>{{ course.code }} - {{ course.name }}</span>
-                        <strong>{{ course.selection_count }} {{ _('selections') }}</strong>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="progress-item">
-                        <span>{{ _('No course selections recorded yet.') }}</span>
-                        <strong>0</strong>
-                    </div>
-                {% endif %}
-
-            </div>
+        <div class="admin-table-wrapper">
+            <table class="table admin-table">
+                <thead>
+                    <tr>
+                        <th>{{ _('Name') }}</th>
+                        <th>{{ _('Student ID') }}</th>
+                        <th>{{ _('Degree') }}</th>
+                        <th>{{ _('Courses') }}</th>
+                        <th>{{ _('Enrollment Status') }}</th>
+                    </tr>
+                </thead>
+                <tbody id="enrollment-table-body">
+                    <tr><td colspan="5" class="admin-empty-row">{{ _('Loading...') }}</td></tr>
+                </tbody>
+            </table>
         </div>
-
     </section>
 
-<section class="dashboard-panel">
-
-    <div class="panel-title-row">
-        <div>
-            <p class="dashboard-kicker">{{ _('Admin guidance') }}</p>
-            <h2>{{ _('Admin Workspace Notes') }}</h2>
-        </div>
-    </div>
-
-    <div class="action-grid admin-action-grid">
-
-        <div class="action-box">
-            <span class="action-icon glyphicon glyphicon-lock"></span>
-
-            <h3>{{ _('Admin Access') }}</h3>
-
-            <p>
-                {{ _('Admin access is limited to approved staff-style accounts to keep management pages separate from student use.') }}
-            </p>
+    <!-- Course Management -->
+    <section class="dashboard-panel" id="course-management-section" style="margin-bottom: 24px;">
+        <div class="panel-title-row admin-panel-title-row">
+            <div>
+                <p class="dashboard-kicker">{{ _('Course management') }}</p>
+                <h2>{{ _('Manage Courses') }}</h2>
+            </div>
+            <button type="button"
+                class="btn dashboard-btn-primary admin-add-btn"
+                onclick="toggleAddCourseForm()">
+                + {{ _('Add Course') }}
+            </button>
         </div>
 
-        <div class="action-box">
-            <span class="action-icon glyphicon glyphicon-eye-open"></span>
-
-            <h3>{{ _('Read-only Review') }}</h3>
-
-            <p>
-                {{ _('This dashboard is designed for reviewing system activity without directly changing student records.') }}
-            </p>
+        <!-- Add Course Form -->
+        <div id="add-course-form" class="admin-inline-form" style="display: none;">
+            <h3 class="admin-form-title">{{ _('Add New Course') }}</h3>
+            <div class="admin-form-grid">
+                <div class="form-group">
+                    <label>{{ _('Course Code') }}</label>
+                    <input type="text" id="new-course-code" class="form-control" placeholder="e.g. CITS3403">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Course Name') }}</label>
+                    <input type="text" id="new-course-name" class="form-control" placeholder="e.g. Web Application Development">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Credits') }}</label>
+                    <input type="number" id="new-course-credits" class="form-control" placeholder="6" min="1">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Time') }}</label>
+                    <input type="text" id="new-course-time" class="form-control" placeholder="e.g. Monday 10:00–12:00">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Semester') }}</label>
+                    <select id="new-course-semester" class="form-control">
+                        <option value="semester1">{{ _('Semester 1') }}</option>
+                        <option value="semester2">{{ _('Semester 2') }}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Degree') }}</label>
+                    <input type="text" id="new-course-degree" class="form-control" placeholder="e.g. Bachelor of Science">
+                </div>
+            </div>
+            <div class="admin-form-actions">
+                <button type="button" class="btn dashboard-btn-primary" onclick="addCourseAdmin()">
+                    {{ _('Save Course') }}
+                </button>
+                <button type="button" class="btn dashboard-btn-secondary" onclick="toggleAddCourseForm()">
+                    {{ _('Cancel') }}
+                </button>
+            </div>
+            <p id="add-course-message" class="helper-message" style="display:none;"></p>
         </div>
 
-        <div class="action-box">
-            <span class="action-icon glyphicon glyphicon-ok-circle"></span>
-
-            <h3>{{ _('Data Checking') }}</h3>
-
-            <p>
-                {{ _('Admins can use the page to notice unusual user, course, or timetable activity before further investigation.') }}
-            </p>
+        <!-- Edit Course Form -->
+        <div id="edit-course-form" class="admin-inline-form admin-inline-form--edit" style="display: none;">
+            <h3 class="admin-form-title" id="edit-course-title">{{ _('Edit Course') }}</h3>
+            <div class="admin-form-grid">
+                <div class="form-group">
+                    <label>{{ _('Course Name') }}</label>
+                    <input type="text" id="edit-course-name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Credits') }}</label>
+                    <input type="number" id="edit-course-credits" class="form-control" min="1">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Time') }}</label>
+                    <input type="text" id="edit-course-time" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>{{ _('Semester') }}</label>
+                    <select id="edit-course-semester" class="form-control">
+                        <option value="semester1">{{ _('Semester 1') }}</option>
+                        <option value="semester2">{{ _('Semester 2') }}</option>
+                    </select>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>{{ _('Degree') }}</label>
+                    <input type="text" id="edit-course-degree" class="form-control">
+                </div>
+            </div>
+            <div class="admin-form-actions">
+                <button type="button" class="btn dashboard-btn-primary" onclick="saveCourseEdit()">
+                    {{ _('Save Changes') }}
+                </button>
+                <button type="button" class="btn dashboard-btn-secondary" onclick="cancelEditCourse()">
+                    {{ _('Cancel') }}
+                </button>
+            </div>
+            <p id="edit-course-message" class="helper-message" style="display:none;"></p>
         </div>
 
-        <div class="action-box">
-            <span class="action-icon glyphicon glyphicon-info-sign"></span>
-
-            <h3>{{ _('Support Context') }}</h3>
-
-            <p>
-                {{ _('The summary information can help staff understand what students have done before responding to support requests.') }}
-            </p>
+        <!-- Filter bar -->
+        <div class="course-filter-bar" style="margin-bottom: 16px; grid-template-columns: 1.2fr 1fr 1fr;">
+            <input type="text"
+                id="course-mgmt-search"
+                class="form-control"
+                placeholder="{{ _('Search by code or name...') }}"
+                oninput="filterCourseTable()">
+            <select id="course-degree-filter"
+                class="form-control"
+                onchange="filterCourseTable()">
+                <option value="">{{ _('All degrees') }}</option>
+            </select>
+            <select id="course-semester-filter"
+                class="form-control"
+                onchange="filterCourseTable()">
+                <option value="">{{ _('All semesters') }}</option>
+            </select>
         </div>
 
-    </div>
+        <!-- Course table -->
+        <div class="admin-table-wrapper">
+            <table class="table admin-table">
+                <thead>
+                    <tr>
+                        <th>{{ _('Code') }}</th>
+                        <th>{{ _('Name') }}</th>
+                        <th>{{ _('Degree') }}</th>
+                        <th>{{ _('Credits') }}</th>
+                        <th>{{ _('Time') }}</th>
+                        <th>{{ _('Sem') }}</th>
+                        <th>{{ _('Enrolled') }}</th>
+                        <th>{{ _('Actions') }}</th>
+                    </tr>
+                </thead>
+                <tbody id="course-mgmt-tbody">
+                    <tr><td colspan="8" class="admin-empty-row">{{ _('Loading...') }}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-</section>
-
-    <section class="dashboard-panel dashboard-message-panel">
-        <p class="dashboard-kicker">{{ _('Admin message') }}</p>
-        <h2>{{ _('System Management Updates') }}</h2>
-
-<p id="dashboard-output">
-    {{ _('This admin page provides a read-only workspace for checking system activity and supporting student planning issues.') }}
-</p>
-
+    <!-- Popular Courses -->
+    <section class="dashboard-panel" style="margin-bottom: 24px;">
+        <p class="dashboard-kicker">{{ _('Course statistics') }}</p>
+        <h2>{{ _('Popular Courses') }}</h2>
+        <div class="progress-list admin-course-list">
+            {% if popular_courses %}
+                {% for course in popular_courses %}
+                <div class="progress-item">
+                    <span>{{ course.code }} — {{ course.name }}</span>
+                    <strong>{{ course.selection_count }} {{ _('selections') }}</strong>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="progress-item">
+                    <span>{{ _('No course selections recorded yet.') }}</span>
+                    <strong>0</strong>
+                </div>
+            {% endif %}
+        </div>
     </section>
 
 </div>
