@@ -5,48 +5,16 @@
 {% block content %}
 <div class="container dashboard-container">
 
-    <section class="dashboard-hero course-hero">
+    <section class="dashboard-top course-selection-top">
         <div class="dashboard-welcome">
-            <p class="dashboard-kicker">{{ _('Course planning') }}</p>
-            <h1>{{ _('Select courses for your semester.') }}</h1>
+            <p class="dashboard-kicker">{{ _('Course Selection') }}</p>
+            <h1>{{ _('Welcome to Course Selection') }}</h1>
             <p class="dashboard-description">
-                {{ _('Choose your study level and degree pathway, browse available courses, and add units to your study plan before generating a timetable.') }}
+                {{ _('Build your semester plan, choose eligible courses, and review your enrollment before generating your timetable.') }}
             </p>
-        </div>
-
-        <div class="dashboard-status-card">
-            <p class="status-label">{{ _('Selection Summary') }}</p>
-
-            <div class="status-row">
-                <span>{{ _('Study level') }}</span>
-                <strong id="study-level-summary">{{ _('Not selected') }}</strong>
-            </div>
-
-            <div class="status-row">
-                <span>{{ _('Degree') }}</span>
-                <strong id="degree-summary">{{ _('Not selected') }}</strong>
-            </div>
-
-            <div class="status-row">
-                <span>{{ _('Selected courses') }}</span>
-                <strong id="course-count-summary">0</strong>
-            </div>
-
-            <div class="status-row">
-                <span>{{ _('Total credits') }}</span>
-                <strong id="credit-summary">0</strong>
-            </div>
         </div>
     </section>
 
-    {#
-        Enrollment status banner — hidden by default.
-        JavaScript (lockEnrollmentUI / requestChange) toggles visibility
-        and sets the correct class and message based on enrollment_status:
-          .enrollment-banner--enrolled    → green / locked
-          .enrollment-banner--pending     → amber / pending
-          .enrollment-banner--draft       → blue / drafting a change
-    #}
     <div id="enrollment-status-banner"
          class="enrollment-banner"
          style="display: none;"
@@ -58,10 +26,11 @@
         <div class="course-main-column">
 
             <section class="dashboard-panel">
-                <div class="panel-title-row">
+                <div class="section-heading">
+                    <span class="step-pill">{{ _('Step 1') }}</span>
                     <div>
-                        <p class="dashboard-kicker">{{ _('Step 1') }}</p>
-                        <h2>{{ _('Choose your study pathway') }}</h2>
+                        <h2>{{ _('Enroll in your degree') }}</h2>
+                        <p>{{ _('Choose your study level and degree to begin building your semester plan.') }}</p>
                     </div>
                 </div>
 
@@ -78,18 +47,9 @@
                                     {{ _('-- Select a study level --') }}
                                 </option>
 
-                                <option value="bachelor">
-                                    {{ _('Bachelor') }}
-                                </option>
-
-                                <option value="master">
-                                    {{ _('Master') }}
-                                </option>
-
-                                <option value="diploma">
-                                    {{ _('Diploma') }}
-                                </option>
-
+                                <option value="bachelor">{{ _('Bachelor') }}</option>
+                                <option value="master">{{ _('Master') }}</option>
+                                <option value="diploma">{{ _('Diploma') }}</option>
                             </select>
                         </div>
 
@@ -104,7 +64,6 @@
                                 <option value="">
                                     {{ _('-- Select a study level first --') }}
                                 </option>
-
                             </select>
                         </div>
                     </div>
@@ -116,15 +75,15 @@
             </section>
 
             <section class="dashboard-panel">
-                <div class="panel-title-row">
+                <div class="section-heading">
+                    <span class="step-pill">{{ _('Step 2') }}</span>
                     <div>
-                        <p class="dashboard-kicker">{{ _('Step 2') }}</p>
-                        <h2>{{ _('Available courses') }}</h2>
+                        <h2>{{ _('Browse available courses') }}</h2>
+                        <p>{{ _('Search, filter, and add courses that match your selected degree pathway.') }}</p>
                     </div>
                 </div>
 
                 <div class="course-filter-bar">
-
                     <input type="text"
                         id="course-search"
                         class="form-control"
@@ -135,18 +94,9 @@
                         class="form-control"
                         onchange="filterCourses()">
 
-                        <option value="all">
-                            {{ _('All Semesters') }}
-                        </option>
-
-                        <option value="semester1">
-                            {{ _('Semester 1') }}
-                        </option>
-
-                        <option value="semester2">
-                            {{ _('Semester 2') }}
-                        </option>
-
+                        <option value="all">{{ _('All Semesters') }}</option>
+                        <option value="semester1">{{ _('Semester 1') }}</option>
+                        <option value="semester2">{{ _('Semester 2') }}</option>
                     </select>
                 </div>
 
@@ -157,15 +107,34 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="course-action-row">
+                    <button id="confirm-enrollment-btn"
+                        type="button"
+                        class="btn dashboard-btn-primary"
+                        onclick="confirmEnrollment()"
+                        style="display: none;">
+                        {{ _('Confirm Enrollment') }}
+                    </button>
+
+                    <a href="{{ url_for('timetable') }}"
+                        class="btn dashboard-btn-secondary">
+                        {{ _('Continue to Timetable') }}
+                    </a>
+                </div>
             </section>
         </div>
 
         <aside class="course-side-column">
             <section class="dashboard-panel selected-panel">
 
-                <p class="dashboard-kicker">{{ _('Step 3') }}</p>
-
-                <h2>{{ _('Your selected courses') }}</h2>
+                <div class="section-heading">
+                    <span class="step-pill">{{ _('Step 3') }}</span>
+                    <div>
+                        <h2>{{ _('Review your selection') }}</h2>
+                        <p>{{ _('Check your selected courses and total credits.') }}</p>
+                    </div>
+                </div>
 
                 <div id="selected-courses" class="selected-courses-box">
                     <p>{{ _('No courses selected yet.') }}</p>
@@ -176,23 +145,6 @@
                     <strong id="credit-output">0</strong>
                 </div>
 
-                {#
-                    Confirm Enrollment button — visible while the student is in
-                    'planning' status and has selected at least one course.
-                    Hidden by JS once they are enrolled.
-                #}
-                <button id="confirm-enrollment-btn"
-                    type="button"
-                    class="btn dashboard-btn-primary selected-next-btn"
-                    onclick="confirmEnrollment()"
-                    style="display: none;">
-                    {{ _('Confirm Enrollment') }}
-                </button>
-
-                {#
-                    Request Change button — visible only when enrollment_status
-                    is 'enrolled'.  Clicking this enters change-request draft mode.
-                #}
                 <button id="request-change-btn"
                     type="button"
                     class="btn dashboard-btn-secondary selected-next-btn enrollment-action-btn"
@@ -201,21 +153,12 @@
                     {{ _('Request Change') }}
                 </button>
 
-                {#
-                    Pending notice — visible only when enrollment_status is
-                    'change_requested'.  No action available while pending.
-                #}
                 <div id="pending-change-notice"
                      class="pending-change-notice"
                      style="display: none;">
                     <span class="pending-change-notice__icon">⏳</span>
                     <p>{{ _('Your change request is awaiting admin approval. No further changes can be made until it is reviewed.') }}</p>
                 </div>
-
-                <a href="{{ url_for('timetable') }}"
-                    class="btn dashboard-btn-secondary selected-next-btn">
-                    {{ _('Continue to Timetable') }}
-                </a>
 
             </section>
         </aside>
