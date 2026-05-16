@@ -1361,30 +1361,39 @@ let allCoursesAdmin = [];
 let editingCourseId = null;
 
 function loadCourseManagement() {
+    // Preserve current filter selections before reloading
+    const degreeFilterEl = document.getElementById("course-degree-filter");
+    const semesterFilterEl = document.getElementById("course-semester-filter");
+    const currentDegree = degreeFilterEl ? degreeFilterEl.value : "";
+    const currentSemester = semesterFilterEl ? semesterFilterEl.value : "";
+
     fetch("/api/admin/course-stats")
         .then(r => r.json())
         .then(function (data) {
             allCoursesAdmin = data.courses || [];
 
-            const degreeFilter = document.getElementById("course-degree-filter");
-            if (degreeFilter) {
+            // Rebuild degree dropdown, restoring previous selection
+            if (degreeFilterEl) {
                 const degrees = [...new Set(allCoursesAdmin.map(c => c.degree))].sort();
-                degreeFilter.innerHTML =
+                degreeFilterEl.innerHTML =
                     '<option value="">All degrees</option>' +
                     degrees.map(d => `<option value="${d}">${d}</option>`).join("");
+                degreeFilterEl.value = currentDegree;
             }
 
-            const semesterFilter = document.getElementById("course-semester-filter");
-            if (semesterFilter) {
+            // Rebuild semester dropdown, restoring previous selection
+            if (semesterFilterEl) {
                 const semesters = [...new Set(allCoursesAdmin.map(c => c.semester))].sort(function(a, b) {
                     return parseInt(a.replace(/\D/g, "")) - parseInt(b.replace(/\D/g, ""));
                 });
-                semesterFilter.innerHTML =
+                semesterFilterEl.innerHTML =
                     '<option value="">All semesters</option>' +
                     semesters.map(s => `<option value="${s}">Semester ${s.replace(/\D/g, "")}</option>`).join("");
+                semesterFilterEl.value = currentSemester;
             }
 
-            renderCourseTable(null);
+            // Re-apply the current filters — shows updated data in place
+            filterCourseTable();
         })
         .catch(function (err) {
             console.log("Failed to load courses:", err);
