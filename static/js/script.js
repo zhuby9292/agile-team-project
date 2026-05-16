@@ -586,9 +586,7 @@ function submitChangeRequest() {
         });
 }
 
-// ---------------------------------------------------------------------------
 // Degree / course UI
-// ---------------------------------------------------------------------------
 
 function updateDegreeOptions(shouldResetCourses = true) {
     // Locked while enrolled and not in a change-request draft
@@ -949,9 +947,7 @@ function filterCourses() {
     });
 }
 
-// ---------------------------------------------------------------------------
 // Theme
-// ---------------------------------------------------------------------------
 
 function applySavedTheme() {
     const savedTheme = localStorage.getItem("coursePlannerTheme");
@@ -984,9 +980,7 @@ function updateThemeToggleLabel(labelText) {
     });
 }
 
-// ---------------------------------------------------------------------------
 // Timetable
-// ---------------------------------------------------------------------------
 
 function loadTimetablePage() {
     const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
@@ -1092,9 +1086,7 @@ function clearTimetable() {
 function getCourseDay(timeText) { return timeText.split(" ")[0]; }
 function getCourseStartTime(timeText) { return timeText.split(" ")[1].split("–")[0]; }
 
-// ---------------------------------------------------------------------------
 // Dashboard stats
-// ---------------------------------------------------------------------------
 
 function loadDashboardStats() {
     const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
@@ -1138,9 +1130,7 @@ function loadDashboardStats() {
     }
 }
 
-// ---------------------------------------------------------------------------
 // Restore form on page load
-// ---------------------------------------------------------------------------
 
 function restoreCourseSelectionForm() {
     const savedStudyLevel = localStorage.getItem("selectedStudyLevel");
@@ -1163,9 +1153,7 @@ function restoreCourseSelectionForm() {
     }
 }
 
-// ---------------------------------------------------------------------------
 // Admin — approve / reject change requests
-// ---------------------------------------------------------------------------
 
 function approveChange(requestId) {
     if (!confirm(t("Approve this change request? The student's enrollment will be updated immediately."))) return;
@@ -1191,9 +1179,7 @@ function rejectChange(requestId) {
         .catch(err => console.log("Reject failed:", err));
 }
 
-// ---------------------------------------------------------------------------
 // CSV download
-// ---------------------------------------------------------------------------
 
 function downloadTimetable() {
     const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
@@ -1218,16 +1204,8 @@ function downloadTimetable() {
     if (output) output.innerHTML = "Timetable downloaded successfully.";
 }
 
-// ---------------------------------------------------------------------------
-// Init
-// ---------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------
 // ADMIN — Enrollment Overview
-// ---------------------------------------------------------------------------
-// Paste this entire block into script.js, just before the DOMContentLoaded
-// listener at the bottom of the file.
-// ---------------------------------------------------------------------------
+
 
 function loadEnrollmentOverview() {
     fetch("/api/admin/enrollments")
@@ -1330,9 +1308,7 @@ function filterEnrollmentTable() {
     });
 }
 
-// ---------------------------------------------------------------------------
 // ADMIN — Course Management
-// ---------------------------------------------------------------------------
 
 let allCoursesAdmin = [];
 let editingCourseId = null;
@@ -1411,7 +1387,6 @@ function renderCourseTable(courses) {
     }).join("");
 }
 
-// Replace the existing filterCourseTable() function in script.js with this one.
 // It updates the semester dropdown to only show semesters relevant to
 // the currently selected degree.
 
