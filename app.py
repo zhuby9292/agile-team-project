@@ -1,8 +1,12 @@
 import json
 import os
 import re
-from datetime import datetime
+import random
+from datetime import datetime, timedelta
 from functools import wraps
+from flask_mail import Mail, Message
+from dotenv import load_dotenv
+load_dotenv()
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_babel import Babel, gettext
@@ -30,6 +34,14 @@ app.config["LANGUAGES"] = {
     "zh": "中文",
 }
 
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = 'kumar.aneesh71098@gmail.com'
+app.config["MAIL_PASSWORD"] = 'kkna wewv svyg xcwo'
+app.config["MAIL_DEFAULT_SENDER"] = "kumar.aneesh71098@gmail.com"
+
+mail = Mail(app)
 
 def get_locale():
     return session.get("language", "en")
@@ -50,6 +62,16 @@ login_manager.login_message_category = "error"
 # Models
 # ---------------------------------------------------------------------------
 
+class Admin(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+
+    def get_id(self):
+        return f"a_{self.id}"
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
@@ -58,7 +80,11 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     selected_degree = db.Column(db.String(120), nullable=True)
     enrollment_status = db.Column(db.String(20), default="planning")
-    # Values: 'planning' | 'enrolled' | 'change_requested'
+    reset_code = db.Column(db.String(4), nullable=True)
+    reset_code_expires_at = db.Column(db.DateTime, nullable=True)
+
+    def get_id(self):
+        return f"u_{self.id}"
 
 
 class EnrollmentChangeRequest(db.Model):
@@ -66,7 +92,7 @@ class EnrollmentChangeRequest(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     requested_degree = db.Column(db.String(120), nullable=False)
     requested_course_codes = db.Column(db.Text, nullable=False)
-    status = db.Column(db.String(20), default="pending")  # 'pending' | 'approved' | 'rejected'
+    status = db.Column(db.String(20), default="pending")
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reviewed_at = db.Column(db.DateTime, nullable=True)
 
@@ -121,20 +147,41 @@ def seed_courses():
     db.session.commit()
 
 
+def seed_admin():
+    if Admin.query.first():
+        return
+
+    admin = Admin(
+        full_name="System Admin",
+        email="admin@uniplanner.com",
+        password_hash=generate_password_hash("admin123"),
+    )
+
+    db.session.add(admin)
+    db.session.commit()
+    print("Default admin created: admin@uniplanner.com / admin123")
+
+
 # ---------------------------------------------------------------------------
 # Auth helpers
 # ---------------------------------------------------------------------------
 
 @login_manager.user_loader
 def load_user(user_id):
+    if str(user_id).startswith("a_"):
+        return Admin.query.get(int(user_id[2:]))
+
+    if str(user_id).startswith("u_"):
+        return User.query.get(int(user_id[2:]))
+
     return User.query.get(int(user_id))
 
 
 def is_admin_user(user):
     if not user.is_authenticated:
         return False
-    admin_email_pattern = r"^[a-zA-Z0-9._%+-]+\.admin@edu\.com$"
-    return re.match(admin_email_pattern, user.email.lower()) is not None
+
+    return isinstance(user, Admin)
 
 
 def admin_required(view_function):
@@ -144,7 +191,9 @@ def admin_required(view_function):
         if not is_admin_user(current_user):
             flash(gettext("You do not have permission to access the admin dashboard."), "error")
             return redirect(url_for("homepage"))
+
         return view_function(*args, **kwargs)
+
     return wrapped_view
 
 
@@ -154,7 +203,9 @@ def student_required(view_function):
     def wrapped_view(*args, **kwargs):
         if is_admin_user(current_user):
             return redirect(url_for("admin_dashboard"))
+
         return view_function(*args, **kwargs)
+
     return wrapped_view
 
 
@@ -173,6 +224,7 @@ def inject_admin_status():
 def set_language(language):
     if language in app.config["LANGUAGES"]:
         session["language"] = language
+
     return redirect(request.referrer or url_for("index"))
 
 
@@ -190,6 +242,10 @@ def index():
             flash(gettext("Please enter both your email address and password."), "error")
             return redirect(url_for("index"))
 
+        if Admin.query.filter_by(email=email).first():
+            flash(gettext("Please use the admin login page for administrator access."), "error")
+            return redirect(url_for("admin_login"))
+
         user = User.query.filter_by(email=email).first()
 
         if not user:
@@ -199,10 +255,6 @@ def index():
         if not check_password_hash(user.password_hash, password):
             flash(gettext("Incorrect password. Please try again."), "error")
             return redirect(url_for("index"))
-
-        if is_admin_user(user):
-            flash(gettext("Please use the admin login page for administrator access."), "error")
-            return redirect(url_for("admin_login"))
 
         login_user(user)
         flash(gettext("Signed in successfully."), "success")
@@ -221,21 +273,17 @@ def admin_login():
             flash(gettext("Please enter both your email address and password."), "error")
             return redirect(url_for("admin_login"))
 
-        user = User.query.filter_by(email=email).first()
+        admin = Admin.query.filter_by(email=email).first()
 
-        if not user:
+        if not admin:
             flash(gettext("No admin account found with this email address."), "error")
             return redirect(url_for("admin_login"))
 
-        if not check_password_hash(user.password_hash, password):
+        if not check_password_hash(admin.password_hash, password):
             flash(gettext("Incorrect admin password. Please try again."), "error")
             return redirect(url_for("admin_login"))
 
-        if not is_admin_user(user):
-            flash(gettext("This account does not have administrator access."), "error")
-            return redirect(url_for("admin_login"))
-
-        login_user(user)
+        login_user(admin)
         flash(gettext("Admin signed in successfully."), "success")
         return redirect(url_for("admin_dashboard"))
 
@@ -260,6 +308,10 @@ def signup():
             flash(gettext("Please complete all registration fields."), "error")
             return redirect(url_for("signup"))
 
+        if not re.match(r"^[1-9][0-9]{7}$", student_id):
+            flash(gettext("Student ID must be exactly 8 digits and cannot start with zero."), "error")
+            return redirect(url_for("signup"))
+
         if password != confirm_password:
             flash(gettext("Passwords do not match."), "error")
             return redirect(url_for("signup"))
@@ -268,13 +320,11 @@ def signup():
             flash(gettext("Password must be at least 6 characters long."), "error")
             return redirect(url_for("signup"))
 
-        existing_email = User.query.filter_by(email=email).first()
-        if existing_email:
+        if User.query.filter_by(email=email).first():
             flash(gettext("An account with this email already exists."), "error")
             return redirect(url_for("signup"))
 
-        existing_student_id = User.query.filter_by(student_id=student_id).first()
-        if existing_student_id:
+        if User.query.filter_by(student_id=student_id).first():
             flash(gettext("An account with this student ID already exists."), "error")
             return redirect(url_for("signup"))
 
@@ -324,6 +374,7 @@ def timetable():
 @student_required
 def api_courses():
     courses = Course.query.all()
+
     return {
         "courses": [
             {
@@ -373,11 +424,12 @@ def save_selection():
     if current_user.enrollment_status in ("enrolled", "change_requested"):
         return {"error": "Already enrolled. Submit a change request to make changes."}, 403
 
-    data = request.get_json()
+    data = request.get_json() or {}
     course_codes = data.get("courses", [])
     degree = data.get("degree", "")
 
     Selection.query.filter_by(user_id=current_user.id).delete()
+
     for code in course_codes:
         course = Course.query.filter_by(code=code).first()
         if course:
@@ -387,6 +439,7 @@ def save_selection():
         current_user.selected_degree = degree
 
     db.session.commit()
+
     return {"message": "Selection saved."}
 
 
@@ -400,6 +453,7 @@ def confirm_enrollment():
         return {"error": "A change request is already pending approval."}, 400
 
     selections = Selection.query.filter_by(user_id=current_user.id).count()
+
     if selections == 0:
         return {"error": "Please select at least one course before confirming enrollment."}, 400
 
@@ -408,6 +462,7 @@ def confirm_enrollment():
 
     current_user.enrollment_status = "enrolled"
     db.session.commit()
+
     return {"message": "Enrollment confirmed! Changes now require admin approval."}
 
 
@@ -418,12 +473,14 @@ def request_change():
         return {"error": "You must be enrolled before submitting a change request."}, 400
 
     existing_pending = EnrollmentChangeRequest.query.filter_by(
-        user_id=current_user.id, status="pending"
+        user_id=current_user.id,
+        status="pending",
     ).first()
+
     if existing_pending:
         return {"error": "You already have a pending change request."}, 400
 
-    data = request.get_json()
+    data = request.get_json() or {}
     requested_degree = data.get("degree", "")
     requested_courses = data.get("courses", [])
 
@@ -435,9 +492,12 @@ def request_change():
         requested_degree=requested_degree,
         requested_course_codes=json.dumps(requested_courses),
     )
+
     current_user.enrollment_status = "change_requested"
+
     db.session.add(change_req)
     db.session.commit()
+
     return {"message": "Change request submitted. Awaiting admin approval."}
 
 
@@ -452,6 +512,7 @@ def approve_change(request_id):
     user = User.query.get(req.user_id)
 
     Selection.query.filter_by(user_id=user.id).delete()
+
     for code in json.loads(req.requested_course_codes):
         course = Course.query.filter_by(code=code).first()
         if course:
@@ -459,9 +520,12 @@ def approve_change(request_id):
 
     user.selected_degree = req.requested_degree
     user.enrollment_status = "enrolled"
+
     req.status = "approved"
     req.reviewed_at = datetime.utcnow()
+
     db.session.commit()
+
     return {"message": "Change approved and applied."}
 
 
@@ -469,10 +533,13 @@ def approve_change(request_id):
 @admin_required
 def reject_change(request_id):
     req = EnrollmentChangeRequest.query.get_or_404(request_id)
+
     req.user.enrollment_status = "enrolled"
     req.status = "rejected"
     req.reviewed_at = datetime.utcnow()
+
     db.session.commit()
+
     return {"message": "Change request rejected."}
 
 
@@ -485,8 +552,10 @@ def reject_change(request_id):
 def api_admin_enrollments():
     users = User.query.order_by(User.id.desc()).all()
     result = []
+
     for user in users:
         selections = Selection.query.filter_by(user_id=user.id).all()
+
         result.append({
             "id": user.id,
             "full_name": user.full_name,
@@ -506,6 +575,7 @@ def api_admin_enrollments():
                 for s in selections
             ],
         })
+
     return {"enrollments": result}
 
 
@@ -516,11 +586,12 @@ def api_admin_enrollments():
 @app.route("/api/admin/course-stats")
 @admin_required
 def api_admin_course_stats():
-    """All courses with current student enrollment count."""
     courses = Course.query.order_by(Course.degree, Course.code).all()
     result = []
+
     for course in courses:
         count = Selection.query.filter_by(course_id=course.id).count()
+
         result.append({
             "id": course.id,
             "code": course.code,
@@ -531,14 +602,17 @@ def api_admin_course_stats():
             "degree": course.degree,
             "enrollment_count": count,
         })
+
     return {"courses": result}
 
 
 @app.route("/api/admin/courses", methods=["POST"])
 @admin_required
 def api_admin_add_course():
-    data = request.get_json()
+    data = request.get_json() or {}
+
     required = ["code", "name", "credits", "time", "semester", "degree"]
+
     if not all(data.get(f) for f in required):
         return {"error": "All fields are required."}, 400
 
@@ -553,8 +627,10 @@ def api_admin_add_course():
         semester=data["semester"],
         degree=data["degree"],
     )
+
     db.session.add(course)
     db.session.commit()
+
     return {"message": "Course added successfully.", "id": course.id}, 201
 
 
@@ -562,13 +638,16 @@ def api_admin_add_course():
 @admin_required
 def api_admin_edit_course(course_id):
     course = Course.query.get_or_404(course_id)
-    data = request.get_json()
+    data = request.get_json() or {}
+
     course.name = data.get("name", course.name)
     course.credits = int(data.get("credits", course.credits))
     course.time = data.get("time", course.time)
     course.semester = data.get("semester", course.semester)
     course.degree = data.get("degree", course.degree)
+
     db.session.commit()
+
     return {"message": "Course updated successfully."}
 
 
@@ -577,9 +656,12 @@ def api_admin_edit_course(course_id):
 def api_admin_delete_course(course_id):
     course = Course.query.get_or_404(course_id)
     selection_count = Selection.query.filter_by(course_id=course_id).count()
+
     Selection.query.filter_by(course_id=course_id).delete()
+
     db.session.delete(course)
     db.session.commit()
+
     return {"message": f"Course deleted. {selection_count} student selection(s) also removed."}
 
 
@@ -597,8 +679,10 @@ def admin_dashboard():
 
     recent_user_records = User.query.order_by(User.id.desc()).limit(5).all()
     recent_users = []
+
     for user in recent_user_records:
         selected_count = Selection.query.filter_by(user_id=user.id).count()
+
         recent_users.append({
             "full_name": user.full_name,
             "email": user.email,
@@ -612,7 +696,7 @@ def admin_dashboard():
         db.session.query(
             Course.code,
             Course.name,
-            db.func.count(Selection.id).label("selection_count")
+            db.func.count(Selection.id).label("selection_count"),
         )
         .join(Selection, Selection.course_id == Course.id)
         .group_by(Course.id, Course.code, Course.name)
@@ -624,8 +708,10 @@ def admin_dashboard():
     pending_req_records = EnrollmentChangeRequest.query.filter_by(status="pending").all()
     pending_change_count = len(pending_req_records)
     pending_changes = []
+
     for req in pending_req_records:
         course_codes = json.loads(req.requested_course_codes)
+
         pending_changes.append({
             "id": req.id,
             "student_name": req.user.full_name,
@@ -653,16 +739,8 @@ def admin_dashboard():
 
 
 # ---------------------------------------------------------------------------
-# Misc routes
+# Password reset routes
 # ---------------------------------------------------------------------------
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    flash(gettext("You have been logged out successfully."), "success")
-    return redirect(url_for("index"))
-
 
 @app.route("/forgot-password")
 def forgot_password():
@@ -674,9 +752,100 @@ def reset_password():
     return render_template("reset-password.html")
 
 
+@app.route("/api/send-reset-code", methods=["POST"])
+def send_reset_code():
+    data = request.get_json() or {}
+    email = data.get("email", "").strip().lower()
+
+    if not email:
+        return {"error": "Please enter your email address."}, 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return {"error": "No student account found with this email address."}, 404
+
+    code = str(random.randint(1000, 9999))
+
+    user.reset_code = code
+    user.reset_code_expires_at = datetime.utcnow() + timedelta(minutes=30)
+
+    db.session.commit()
+
+    message = Message(
+        subject="Your UniPlanner Password Reset Code",
+        recipients=[email],
+        body=f"Your UniPlanner password reset code is: {code}\n\nThis code will expire in 30 minutes."
+    )
+
+    mail.send(message)
+
+    return {
+        "message": "Verification code sent successfully.",
+        "redirect": url_for("reset_password"),
+    }
+
+
+@app.route("/api/reset-password", methods=["POST"])
+def reset_password_with_code():
+    data = request.get_json() or {}
+
+    email = data.get("email", "").strip().lower()
+    code = data.get("code", "").strip()
+    new_password = data.get("new_password", "")
+
+    if not email or not code or not new_password:
+        return {"error": "Please complete all fields."}, 400
+
+    if len(new_password) < 6:
+        return {"error": "Password must be at least 6 characters long."}, 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return {"error": "No student account found with this email address."}, 404
+
+    if not user.reset_code or not user.reset_code_expires_at:
+        return {"error": "Please request a new verification code."}, 400
+
+    if datetime.utcnow() > user.reset_code_expires_at:
+        user.reset_code = None
+        user.reset_code_expires_at = None
+        db.session.commit()
+
+        return {"error": "Verification code expired. Please request a new code."}, 400
+
+    if user.reset_code != code:
+        return {"error": "Invalid verification code."}, 400
+
+    user.password_hash = generate_password_hash(new_password)
+    user.reset_code = None
+    user.reset_code_expires_at = None
+
+    db.session.commit()
+
+    return {
+        "message": "Password reset successful.",
+        "redirect": url_for("index"),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Misc routes
+# ---------------------------------------------------------------------------
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash(gettext("You have been logged out successfully."), "success")
+    return redirect(url_for("index"))
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
         seed_courses()
+        seed_admin()
 
     app.run(debug=True)

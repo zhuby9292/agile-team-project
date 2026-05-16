@@ -128,12 +128,13 @@
         </div>
     </section>
 
-    <section class="dashboard-panel dashboard-message-panel">
-        <p class="dashboard-kicker">{{ _('System message') }}</p>
-        <h2>{{ _('Dashboard Updates') }}</h2>
-        <p id="dashboard-output">
-            {{ _('Use this dashboard to review your study plan and access the main course planning features.') }}
-        </p>
+    <section class="dashboard-panel">
+        <p class="dashboard-kicker">{{ _('Selected courses') }}</p>
+        <h2>{{ _('Course Summary') }}</h2>
+
+        <div id="timetable-course-list" class="timetable-course-list">
+            <p>{{ _('No courses selected yet.') }}</p>
+        </div>
     </section>
 
 </div>
