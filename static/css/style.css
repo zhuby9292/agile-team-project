@@ -2742,27 +2742,27 @@ body.dark-mode .app-header {
 .admin-status--enrolled {
     background-color: #d4edda;
     color: #155724;
-    padding: 2px 8px;
+    padding: 6px 14px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .admin-status--pending {
     background-color: #fff3cd;
     color: #856404;
-    padding: 2px 8px;
+    padding: 6px 14px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
 .admin-status--planning {
     background-color: #e2e8f0;
     color: #4a5568;
-    padding: 2px 8px;
+    padding: 6px 14px;
     border-radius: 10px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -3484,19 +3484,28 @@ body.dark-mode #enrollment-table-body tr td {
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.15s;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
+
 .enrollment-expand-btn:hover,
 .enrollment-expand-btn--active {
     background: #183b5b;
-    color: white;
+    color: #ffffff;
     border-color: #183b5b;
 }
-.expand-icon {
-    font-size: 10px;
-    margin-left: 4px;
+
+body.dark-mode .enrollment-expand-btn {
+    background: #1e293b;
+    color: #e5e7eb;
+    border-color: #475569;
 }
 
+body.dark-mode .enrollment-expand-btn:hover,
+body.dark-mode .enrollment-expand-btn--active {
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
+}
 /* Expanded course detail panel */
 .enrollment-courses-detail {
     background: #f6f9fc;
@@ -3549,3 +3558,38 @@ body.dark-mode .enrollment-courses-heading { color: #94a3b8; }
 body.dark-mode .enrollment-course-name { color: #f8fafc; }
 body.dark-mode .enrollment-course-meta { color: #64748b; }
 body.dark-mode .enrollment-course-item { border-bottom-color: #1e293b; }
+
+/* Admin logout button in header-actions */
+.admin-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 7px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+    background: white;
+    border-color: white;
+    color: #183b5b;
+    text-decoration: none;
+}
+
+body.dark-mode .admin-logout-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .admin-logout-btn:hover {
+    background: #60a5fa;
+    border-color: #60a5fa;
+    color: #0f172a;
+}

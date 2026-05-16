@@ -1,12 +1,14 @@
 {% extends "dashboard-base.html" %}
 
-{% block title %}{{ _('Admin Dashboard') }}{% endblock %}
-
-{% block nav %}
-<nav class="auth-links app-links">
-    <a href="{{ url_for('logout') }}">{{ _("Logout") }}</a>
-</nav>
+{% block header_extra %}
+<a href="{{ url_for('logout') }}" class="admin-logout-btn">
+    <span>{{ _('Logout') }}</span>
+</a>
 {% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block title %}{{ _('Admin Dashboard') }}{% endblock %}
 
 {% block content %}
 <div class="container dashboard-container">
@@ -20,28 +22,7 @@
                 {{ _('Monitor enrollments, manage courses, review change requests, and track system activity.') }}
             </p>
         </div>
-
-        <div class="dashboard-status-card">
-            <p class="status-label">{{ _('System Summary') }}</p>
-            <div class="status-row">
-                <span>{{ _('Registered users') }}</span>
-                <strong>{{ total_users }}</strong>
-            </div>
-            <div class="status-row">
-                <span>{{ _('Available courses') }}</span>
-                <strong>{{ total_courses }}</strong>
-            </div>
-            <div class="status-row">
-                <span>{{ _('Timetables created') }}</span>
-                <strong>{{ timetables_created }}</strong>
-            </div>
-            <div class="status-row">
-                <span>{{ _('Pending change requests') }}</span>
-                <strong class="{% if pending_change_count > 0 %}admin-badge--alert{% endif %}">
-                    {{ pending_change_count }}
-                </strong>
-            </div>
-        </div>
+        
     </section>
 
     <!-- Stat cards -->
