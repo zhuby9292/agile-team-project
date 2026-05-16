@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from datetime import datetime
 from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
@@ -55,20 +56,16 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     student_id = db.Column(db.String(30), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    # Enrollment fields added for degree/course locking
     selected_degree = db.Column(db.String(120), nullable=True)
-    enrollment_status = db.Column(
-        db.String(20),
-        default="planning"
-        # Values: 'planning' | 'enrolled' | 'change_requested'
-    )
+    enrollment_status = db.Column(db.String(20), default="planning")
+    # Values: 'planning' | 'enrolled' | 'change_requested'
 
 
 class EnrollmentChangeRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     requested_degree = db.Column(db.String(120), nullable=False)
-    requested_course_codes = db.Column(db.Text, nullable=False)  # JSON string
+    requested_course_codes = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(20), default="pending")  # 'pending' | 'approved' | 'rejected'
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reviewed_at = db.Column(db.DateTime, nullable=True)
@@ -109,7 +106,6 @@ def seed_courses():
         course_data = json.load(file)
 
     courses = []
-
     for item in course_data:
         course = Course(
             code=item["code"],
@@ -137,10 +133,9 @@ def load_user(user_id):
 def is_admin_user(user):
     if not user.is_authenticated:
         return False
-
     admin_email_pattern = r"^[a-zA-Z0-9._%+-]+\.admin@edu\.com$"
-
     return re.match(admin_email_pattern, user.email.lower()) is not None
+
 
 def admin_required(view_function):
     @wraps(view_function)
@@ -322,7 +317,7 @@ def timetable():
 
 
 # ---------------------------------------------------------------------------
-# Student API — courses
+# Student API
 # ---------------------------------------------------------------------------
 
 @app.route("/api/courses")
@@ -350,7 +345,6 @@ def api_courses():
 def api_selected_courses():
     selections = Selection.query.filter_by(user_id=current_user.id).all()
 
-    # Prefer the locked degree on the User record; fall back to inferring from courses.
     selected_degree = current_user.selected_degree or ""
     if not selected_degree and selections:
         selected_degree = selections[0].course.degree
@@ -373,22 +367,11 @@ def api_selected_courses():
     }
 
 
-# ---------------------------------------------------------------------------
-# Student API — enrollment
-# ---------------------------------------------------------------------------
-
 @app.route("/api/save-selection", methods=["POST"])
 @student_required
 def save_selection():
-    """
-    Draft save: persists the student's current working selection while they are
-    still in 'planning' status.  Does NOT lock them into 'enrolled'.
-    Once enrolled (or a change request is pending) this endpoint is blocked.
-    """
     if current_user.enrollment_status in ("enrolled", "change_requested"):
-        return {
-            "error": "Already enrolled. Submit a change request to make changes."
-        }, 403
+        return {"error": "Already enrolled. Submit a change request to make changes."}, 403
 
     data = request.get_json()
     course_codes = data.get("courses", [])
@@ -410,10 +393,6 @@ def save_selection():
 @app.route("/api/confirm-enrollment", methods=["POST"])
 @student_required
 def confirm_enrollment():
-    """
-    Locks the student's current selection as their official enrollment.
-    After this they can only change via the change-request workflow.
-    """
     if current_user.enrollment_status == "enrolled":
         return {"error": "Already enrolled."}, 400
 
@@ -435,10 +414,6 @@ def confirm_enrollment():
 @app.route("/api/request-change", methods=["POST"])
 @student_required
 def request_change():
-    """
-    Submits a change request for an already-enrolled student.
-    The student's current enrollment is preserved until the admin approves.
-    """
     if current_user.enrollment_status != "enrolled":
         return {"error": "You must be enrolled before submitting a change request."}, 400
 
@@ -467,7 +442,7 @@ def request_change():
 
 
 # ---------------------------------------------------------------------------
-# Admin API — change request management
+# Admin API — change requests
 # ---------------------------------------------------------------------------
 
 @app.route("/api/admin/approve-change/<int:request_id>", methods=["POST"])
@@ -494,11 +469,118 @@ def approve_change(request_id):
 @admin_required
 def reject_change(request_id):
     req = EnrollmentChangeRequest.query.get_or_404(request_id)
-    req.user.enrollment_status = "enrolled"  # revert to locked without changes
+    req.user.enrollment_status = "enrolled"
     req.status = "rejected"
     req.reviewed_at = datetime.utcnow()
     db.session.commit()
     return {"message": "Change request rejected."}
+
+
+# ---------------------------------------------------------------------------
+# Admin API — enrollment overview
+# ---------------------------------------------------------------------------
+
+@app.route("/api/admin/enrollments")
+@admin_required
+def api_admin_enrollments():
+    users = User.query.order_by(User.id.desc()).all()
+    result = []
+    for user in users:
+        selections = Selection.query.filter_by(user_id=user.id).all()
+        result.append({
+            "id": user.id,
+            "full_name": user.full_name,
+            "email": user.email,
+            "student_id": user.student_id,
+            "enrollment_status": user.enrollment_status or "planning",
+            "selected_degree": user.selected_degree or "N/A",
+            "course_count": len(selections),
+            "courses": [
+                {
+                    "code": s.course.code,
+                    "name": s.course.name,
+                    "semester": s.course.semester.replace("semester", "Semester "),
+                    "credits": s.course.credits,
+                    "time": s.course.time,
+                }
+                for s in selections
+            ],
+        })
+    return {"enrollments": result}
+
+
+# ---------------------------------------------------------------------------
+# Admin API — course stats + CRUD
+# ---------------------------------------------------------------------------
+
+@app.route("/api/admin/course-stats")
+@admin_required
+def api_admin_course_stats():
+    """All courses with current student enrollment count."""
+    courses = Course.query.order_by(Course.degree, Course.code).all()
+    result = []
+    for course in courses:
+        count = Selection.query.filter_by(course_id=course.id).count()
+        result.append({
+            "id": course.id,
+            "code": course.code,
+            "name": course.name,
+            "credits": course.credits,
+            "time": course.time,
+            "semester": course.semester,
+            "degree": course.degree,
+            "enrollment_count": count,
+        })
+    return {"courses": result}
+
+
+@app.route("/api/admin/courses", methods=["POST"])
+@admin_required
+def api_admin_add_course():
+    data = request.get_json()
+    required = ["code", "name", "credits", "time", "semester", "degree"]
+    if not all(data.get(f) for f in required):
+        return {"error": "All fields are required."}, 400
+
+    if Course.query.filter_by(code=data["code"].upper()).first():
+        return {"error": f"Course code {data['code']} already exists."}, 400
+
+    course = Course(
+        code=data["code"].upper(),
+        name=data["name"],
+        credits=int(data["credits"]),
+        time=data["time"],
+        semester=data["semester"],
+        degree=data["degree"],
+    )
+    db.session.add(course)
+    db.session.commit()
+    return {"message": "Course added successfully.", "id": course.id}, 201
+
+
+@app.route("/api/admin/courses/<int:course_id>", methods=["PUT"])
+@admin_required
+def api_admin_edit_course(course_id):
+    course = Course.query.get_or_404(course_id)
+    data = request.get_json()
+    course.name = data.get("name", course.name)
+    course.credits = int(data.get("credits", course.credits))
+    course.time = data.get("time", course.time)
+    course.semester = data.get("semester", course.semester)
+    course.degree = data.get("degree", course.degree)
+    db.session.commit()
+    return {"message": "Course updated successfully."}
+
+
+@app.route("/api/admin/courses/<int:course_id>", methods=["DELETE"])
+@admin_required
+def api_admin_delete_course(course_id):
+    course = Course.query.get_or_404(course_id)
+    selection_count = Selection.query.filter_by(course_id=course_id).count()
+    Selection.query.filter_by(course_id=course_id).delete()
+    db.session.delete(course)
+    db.session.commit()
+    return {"message": f"Course deleted. {selection_count} student selection(s) also removed."}
 
 
 # ---------------------------------------------------------------------------
@@ -539,7 +621,6 @@ def admin_dashboard():
         .all()
     )
 
-    # Pending change requests for the new admin panel
     pending_req_records = EnrollmentChangeRequest.query.filter_by(status="pending").all()
     pending_change_count = len(pending_req_records)
     pending_changes = []

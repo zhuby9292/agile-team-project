@@ -1222,8 +1222,386 @@ function downloadTimetable() {
 // Init
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// ADMIN — Enrollment Overview
+// ---------------------------------------------------------------------------
+// Paste this entire block into script.js, just before the DOMContentLoaded
+// listener at the bottom of the file.
+// ---------------------------------------------------------------------------
+
+function loadEnrollmentOverview() {
+    fetch("/api/admin/enrollments")
+        .then(r => r.json())
+        .then(function (data) {
+            const tbody = document.getElementById("enrollment-table-body");
+            if (!tbody) return;
+
+            const enrollments = data.enrollments || [];
+
+            if (enrollments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="admin-empty-row">No students registered yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = enrollments.map(function (student) {
+                const statusClass =
+                    student.enrollment_status === "enrolled" ? "admin-status--enrolled" :
+                    student.enrollment_status === "change_requested" ? "admin-status--pending" :
+                    "admin-status--planning";
+
+                const statusText =
+                    student.enrollment_status === "enrolled" ? "Enrolled" :
+                    student.enrollment_status === "change_requested" ? "Change Pending" :
+                    "Planning";
+
+                const degreeDisplay = student.selected_degree !== "N/A"
+                    ? student.selected_degree
+                    : '<span style="color:#aaa;font-style:italic">Not selected</span>';
+
+                const courseCell = student.course_count > 0
+                    ? `<button class="btn btn-sm enrollment-expand-btn"
+                            onclick="toggleCourseDetails(this)"
+                            data-student-id="${student.id}">
+                            ${student.course_count} course${student.course_count !== 1 ? "s" : ""}
+                            <span class="expand-icon">▼</span>
+                       </button>`
+                    : `<span style="color:#aaa">No courses</span>`;
+
+                // Build the course detail rows
+                const courseDetailRows = student.courses.map(function (c) {
+                    return `<div class="enrollment-course-item">
+                        <span class="course-code" style="font-size:11px;padding:3px 8px">${c.code}</span>
+                        <span class="enrollment-course-name">${c.name}</span>
+                        <span class="enrollment-course-meta">${c.semester} · ${c.credits} credits · ${c.time}</span>
+                    </div>`;
+                }).join("");
+
+                return `
+                    <tr data-status="${student.enrollment_status}"
+                        data-search="${student.full_name.toLowerCase()} ${student.student_id.toLowerCase()}">
+                        <td><strong>${student.full_name}</strong><br>
+                            <small style="color:#888">${student.email}</small></td>
+                        <td>${student.student_id}</td>
+                        <td>${degreeDisplay}</td>
+                        <td>${courseCell}</td>
+                        <td><span class="admin-status ${statusClass}">${statusText}</span></td>
+                    </tr>
+                    <tr class="enrollment-courses-row" style="display:none;">
+                        <td colspan="5" style="padding:0">
+                            <div class="enrollment-courses-detail">
+                                <p class="enrollment-courses-heading">
+                                    Enrolled courses for <strong>${student.full_name}</strong>
+                                </p>
+                                ${courseDetailRows || '<p style="color:#aaa;margin:0">No courses selected.</p>'}
+                            </div>
+                        </td>
+                    </tr>`;
+            }).join("");
+        })
+        .catch(function (err) {
+            console.log("Failed to load enrollments:", err);
+            const tbody = document.getElementById("enrollment-table-body");
+            if (tbody) tbody.innerHTML = '<tr><td colspan="5" class="admin-empty-row">Failed to load enrollment data.</td></tr>';
+        });
+}
+
+function toggleCourseDetails(btn) {
+    const parentRow = btn.closest("tr");
+    const detailRow = parentRow.nextElementSibling;
+    const icon = btn.querySelector(".expand-icon");
+
+    if (!detailRow || !detailRow.classList.contains("enrollment-courses-row")) return;
+
+    const isVisible = detailRow.style.display !== "none";
+    detailRow.style.display = isVisible ? "none" : "table-row";
+    icon.textContent = isVisible ? "▼" : "▲";
+    btn.classList.toggle("enrollment-expand-btn--active", !isVisible);
+}
+
+function filterEnrollmentTable() {
+    const search = (document.getElementById("enrollment-search").value || "").toLowerCase();
+    const statusFilter = document.getElementById("enrollment-status-filter").value;
+    const rows = document.querySelectorAll("#enrollment-table-body tr[data-status]");
+
+    rows.forEach(function (row) {
+        const matchesSearch = !search || row.dataset.search.includes(search);
+        const matchesStatus = statusFilter === "all" || row.dataset.status === statusFilter;
+        row.style.display = (matchesSearch && matchesStatus) ? "" : "none";
+    });
+}
+
+// ---------------------------------------------------------------------------
+// ADMIN — Course Management
+// ---------------------------------------------------------------------------
+
+let allCoursesAdmin = [];
+let editingCourseId = null;
+
+function loadCourseManagement() {
+    fetch("/api/admin/course-stats")
+        .then(r => r.json())
+        .then(function (data) {
+            allCoursesAdmin = data.courses || [];
+
+            const degreeFilter = document.getElementById("course-degree-filter");
+            if (degreeFilter) {
+                const degrees = [...new Set(allCoursesAdmin.map(c => c.degree))].sort();
+                degreeFilter.innerHTML =
+                    '<option value="">All degrees</option>' +
+                    degrees.map(d => `<option value="${d}">${d}</option>`).join("");
+            }
+
+            const semesterFilter = document.getElementById("course-semester-filter");
+            if (semesterFilter) {
+                const semesters = [...new Set(allCoursesAdmin.map(c => c.semester))].sort(function(a, b) {
+                    return parseInt(a.replace(/\D/g, "")) - parseInt(b.replace(/\D/g, ""));
+                });
+                semesterFilter.innerHTML =
+                    '<option value="">All semesters</option>' +
+                    semesters.map(s => `<option value="${s}">Semester ${s.replace(/\D/g, "")}</option>`).join("");
+            }
+
+            renderCourseTable(null);
+        })
+        .catch(function (err) {
+            console.log("Failed to load courses:", err);
+            const tbody = document.getElementById("course-mgmt-tbody");
+            if (tbody) tbody.innerHTML = '<tr><td colspan="8" class="admin-empty-row">Failed to load course data.</td></tr>';
+        });
+}
+
+function renderCourseTable(courses) {
+    const tbody = document.getElementById("course-mgmt-tbody");
+    if (!tbody) return;
+
+    // null means no filter selected yet — show placeholder
+    if (courses === null) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="8" class="admin-empty-row" style="padding: 28px 0;">
+                    <span style="font-size:1.5rem">🎓</span><br>
+                    Select a degree or semester above to view courses.
+                </td>
+            </tr>`;
+        return;
+    }
+
+    if (courses.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="admin-empty-row">No courses match your filters.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = courses.map(function (course) {
+        const semLabel = "Sem " + course.semester.replace("semester", "");
+        return `<tr>
+            <td><span class="course-code" style="font-size:12px;padding:4px 10px">${course.code}</span></td>
+            <td>${course.name}</td>
+            <td><small>${course.degree}</small></td>
+            <td>${course.credits}</td>
+            <td><small>${course.time}</small></td>
+            <td>${semLabel}</td>
+            <td><strong>${course.enrollment_count}</strong></td>
+            <td class="admin-action-cell">
+                <button type="button" class="btn btn-sm dashboard-btn-secondary"
+                    onclick="showEditCourse(${course.id})">Edit</button>
+                <button type="button" class="btn btn-sm admin-btn-danger"
+                    onclick="deleteCourseAdmin(${course.id}, '${course.code}')">Delete</button>
+            </td>
+        </tr>`;
+    }).join("");
+}
+
+// Replace the existing filterCourseTable() function in script.js with this one.
+// It updates the semester dropdown to only show semesters relevant to
+// the currently selected degree.
+
+function filterCourseTable() {
+    const search = (document.getElementById("course-mgmt-search").value || "").toLowerCase();
+    const degreeFilter = document.getElementById("course-degree-filter").value;
+    const semesterFilterEl = document.getElementById("course-semester-filter");
+
+    // Rebuild semester options based on the selected degree
+    if (semesterFilterEl) {
+        const relevantCourses = degreeFilter
+            ? allCoursesAdmin.filter(c => c.degree === degreeFilter)
+            : allCoursesAdmin;
+
+        const semesters = [...new Set(relevantCourses.map(c => c.semester))].sort(function (a, b) {
+            return parseInt(a.replace(/\D/g, "")) - parseInt(b.replace(/\D/g, ""));
+        });
+
+        const prevVal = semesterFilterEl.value;
+        semesterFilterEl.innerHTML =
+            '<option value="">All semesters</option>' +
+            semesters.map(s => `<option value="${s}">Semester ${s.replace(/\D/g, "")}</option>`).join("");
+
+        // Restore previous selection if it still applies to the new degree
+        if (semesters.includes(prevVal)) {
+            semesterFilterEl.value = prevVal;
+        }
+    }
+
+    const semesterValue = semesterFilterEl ? semesterFilterEl.value : "";
+
+    // Show placeholder if nothing is selected at all
+    if (!search && !degreeFilter && !semesterValue) {
+        renderCourseTable(null);
+        return;
+    }
+
+    const filtered = allCoursesAdmin.filter(function (c) {
+        const matchesSearch = !search ||
+            c.code.toLowerCase().includes(search) ||
+            c.name.toLowerCase().includes(search);
+        const matchesDegree = !degreeFilter || c.degree === degreeFilter;
+        const matchesSemester = !semesterValue || c.semester === semesterValue;
+        return matchesSearch && matchesDegree && matchesSemester;
+    });
+
+    renderCourseTable(filtered);
+}
+
+function toggleAddCourseForm() {
+    const form = document.getElementById("add-course-form");
+    if (!form) return;
+
+    const isVisible = form.style.display !== "none";
+    form.style.display = isVisible ? "none" : "block";
+
+    if (!isVisible) {
+        // Clear fields
+        ["new-course-code", "new-course-name", "new-course-credits",
+         "new-course-time", "new-course-degree"].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.value = "";
+        });
+        const msg = document.getElementById("add-course-message");
+        if (msg) { msg.textContent = ""; msg.style.display = "none"; }
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+function addCourseAdmin() {
+    const code    = (document.getElementById("new-course-code").value || "").trim();
+    const name    = (document.getElementById("new-course-name").value || "").trim();
+    const credits = (document.getElementById("new-course-credits").value || "").trim();
+    const time    = (document.getElementById("new-course-time").value || "").trim();
+    const semester = document.getElementById("new-course-semester").value;
+    const degree  = (document.getElementById("new-course-degree").value || "").trim();
+    const msg     = document.getElementById("add-course-message");
+
+    if (!code || !name || !credits || !time || !degree) {
+        showFormMessage(msg, "Please fill in all fields.", "error");
+        return;
+    }
+
+    fetch("/api/admin/courses", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, name, credits: parseInt(credits), time, semester, degree }),
+    })
+        .then(r => r.json())
+        .then(function (data) {
+            if (data.error) {
+                showFormMessage(msg, data.error, "error");
+                return;
+            }
+            showFormMessage(msg, "Course added successfully!", "success");
+            loadCourseManagement();
+            setTimeout(toggleAddCourseForm, 1500);
+        })
+        .catch(function () {
+            showFormMessage(msg, "Something went wrong. Please try again.", "error");
+        });
+}
+
+function showEditCourse(courseId) {
+    const course = allCoursesAdmin.find(c => c.id === courseId);
+    if (!course) return;
+
+    editingCourseId = courseId;
+
+    document.getElementById("edit-course-name").value     = course.name;
+    document.getElementById("edit-course-credits").value  = course.credits;
+    document.getElementById("edit-course-time").value     = course.time;
+    document.getElementById("edit-course-semester").value = course.semester;
+    document.getElementById("edit-course-degree").value   = course.degree;
+    document.getElementById("edit-course-title").textContent = "Editing: " + course.code;
+
+    const msg = document.getElementById("edit-course-message");
+    if (msg) { msg.textContent = ""; msg.style.display = "none"; }
+
+    const form = document.getElementById("edit-course-form");
+    form.style.display = "block";
+    form.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function cancelEditCourse() {
+    editingCourseId = null;
+    document.getElementById("edit-course-form").style.display = "none";
+}
+
+function saveCourseEdit() {
+    if (!editingCourseId) return;
+
+    const name     = (document.getElementById("edit-course-name").value || "").trim();
+    const credits  = (document.getElementById("edit-course-credits").value || "").trim();
+    const time     = (document.getElementById("edit-course-time").value || "").trim();
+    const semester = document.getElementById("edit-course-semester").value;
+    const degree   = (document.getElementById("edit-course-degree").value || "").trim();
+    const msg      = document.getElementById("edit-course-message");
+
+    if (!name || !credits || !time || !degree) {
+        showFormMessage(msg, "Please fill in all fields.", "error");
+        return;
+    }
+
+    fetch("/api/admin/courses/" + editingCourseId, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, credits: parseInt(credits), time, semester, degree }),
+    })
+        .then(r => r.json())
+        .then(function (data) {
+            if (data.error) {
+                showFormMessage(msg, data.error, "error");
+                return;
+            }
+            showFormMessage(msg, "Course updated successfully!", "success");
+            loadCourseManagement();
+            setTimeout(cancelEditCourse, 1200);
+        })
+        .catch(function () {
+            showFormMessage(msg, "Something went wrong. Please try again.", "error");
+        });
+}
+
+function deleteCourseAdmin(courseId, courseCode) {
+    if (!confirm("Delete " + courseCode + "? This will also remove all student selections for this course.")) return;
+
+    fetch("/api/admin/courses/" + courseId, { method: "DELETE" })
+        .then(r => r.json())
+        .then(function (data) {
+            alert(data.message || "Course deleted.");
+            loadCourseManagement();
+        })
+        .catch(function (err) {
+            console.log("Delete failed:", err);
+        });
+}
+
+// Shared helper for inline form messages
+function showFormMessage(el, text, type) {
+    if (!el) return;
+    el.textContent = text;
+    el.style.color = type === "error" ? "#d9534f" : "#2f7a47";
+    el.style.display = "block";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
     loadCoursesFromBackend();
     loadSelectedCoursesFromBackend();
+    if (document.getElementById("enrollment-table-body")) loadEnrollmentOverview();
+    if (document.getElementById("course-mgmt-tbody")) loadCourseManagement();
 });
