@@ -4,6 +4,12 @@
 {{ _('Admin Dashboard') }}
 {% endblock %}
 
+{% block nav %}
+<nav class="auth-links app-links">
+    <a href="{{ url_for('logout') }}">{{ _("Logout") }}</a>
+</nav>
+{% endblock %}
+
 {% block content %}
 <div class="container dashboard-container">
 
