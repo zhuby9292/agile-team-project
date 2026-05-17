@@ -234,20 +234,7 @@ let enrolledDegreeSnapshot = "";
 // ---------------------------------------------------------------------------
 // Course selection state
 // ---------------------------------------------------------------------------
-
-const SELECTED_COURSES_STORAGE_KEY = "selectedCourses";
 let selectedCourses = [];
-
-function loadSelectedCourses() {
-    const saved = localStorage.getItem(SELECTED_COURSES_STORAGE_KEY);
-    if (!saved) return [];
-    try { return JSON.parse(saved); }
-    catch (e) { return []; }
-}
-
-function saveSelectedCourses() {
-    localStorage.setItem(SELECTED_COURSES_STORAGE_KEY, JSON.stringify(selectedCourses));
-}
 
 // ---------------------------------------------------------------------------
 // Backend sync — draft save (planning only)
@@ -295,8 +282,6 @@ function loadSelectedCoursesFromBackend() {
             enrollmentStatus = data.enrollment_status || "planning";
             selectedCourses = data.courses || [];
 
-            localStorage.setItem(SELECTED_COURSES_STORAGE_KEY, JSON.stringify(selectedCourses));
-
             if (selectedCourses.length > 0 && data.degree) {
                 const studyLevel = getStudyLevelByDegree(data.degree);
                 localStorage.setItem("selectedDegree", data.degree);
@@ -340,7 +325,7 @@ function loadSelectedCoursesFromBackend() {
 // ---------------------------------------------------------------------------
 
 function loadCoursesFromBackend() {
-    fetch("/api/courses")
+    return fetch("/api/courses")
         .then(r => r.json())
         .then(function (data) {
             courseOptions = {};
@@ -570,7 +555,6 @@ function requestChange() {
 function cancelChangeRequest() {
     isEditingChangeRequest = false;
     selectedCourses = enrolledCoursesSnapshot;
-    localStorage.setItem(SELECTED_COURSES_STORAGE_KEY, JSON.stringify(selectedCourses));
     localStorage.setItem("selectedDegree", enrolledDegreeSnapshot);
 
     const studyLevel = getStudyLevelByDegree(enrolledDegreeSnapshot);
@@ -621,7 +605,6 @@ function submitChangeRequest() {
             // Revert to enrolled snapshot — the change is only pending
             isEditingChangeRequest = false;
             selectedCourses = enrolledCoursesSnapshot;
-            localStorage.setItem(SELECTED_COURSES_STORAGE_KEY, JSON.stringify(selectedCourses));
 
             enrollmentStatus = "change_requested";
             lockEnrollmentUI("change_requested");
@@ -656,7 +639,7 @@ function updateDegreeOptions(shouldResetCourses = true) {
 
     if (shouldResetCourses) {
         selectedCourses = [];
-        saveSelectedCourses();
+        saveSelectedCoursesToBackend();
         localStorage.removeItem("selectedDegree");
         localStorage.setItem("timetableGenerated", "false");
         displaySelectedCourses();
@@ -715,7 +698,7 @@ function selectDegree(shouldResetCourses = true) {
 
     if (!selectedDegree) {
         selectedCourses = [];
-        saveSelectedCourses();
+        saveSelectedCoursesToBackend();
         localStorage.removeItem("selectedDegree");
         localStorage.setItem("timetableGenerated", "false");
         displaySelectedCourses();
@@ -730,7 +713,7 @@ function selectDegree(shouldResetCourses = true) {
 
     if (shouldResetCourses) {
         selectedCourses = [];
-        saveSelectedCourses();
+        saveSelectedCoursesToBackend();
         localStorage.setItem("timetableGenerated", "false");
         displaySelectedCourses();
         loadDashboardStats();
@@ -781,11 +764,11 @@ function displayAvailableCourses(degreeName) {
     const courses = courseOptions[degreeName];
 
     if (courses) {
-    updateSemesterFilter(courses);
-}
+        updateSemesterFilter(courses);
+    }
 
     if (!courses || courses.length === 0) {
-        
+
         availableCoursesBox.innerHTML = `
             <div class="empty-course-state">
                 <p>${t("Please select a study level and degree to view available courses.")}</p>
@@ -896,7 +879,6 @@ function addCourse(event, code, name, credits, time, degree, semester) {
     }
 
     selectedCourses.push({ code, name, credits, time, stream: degree, degree, semester });
-    localStorage.setItem("selectedCourses", JSON.stringify(selectedCourses));
 
     if (message) message.innerHTML = code + " " + t("added successfully.");
 
@@ -938,8 +920,8 @@ function displaySelectedCourses() {
                     <span>${t(course.name)} · ${course.credits} ${t("credit points")}</span>
                 </div>
                 ${canRemove
-                    ? `<button class="remove-course-btn" onclick="removeCourse('${course.code}')">${t("Remove")}</button>`
-                    : ""}
+                ? `<button class="remove-course-btn" onclick="removeCourse('${course.code}')">${t("Remove")}</button>`
+                : ""}
             </div>`;
     }).join("");
 
@@ -959,7 +941,6 @@ function removeCourse(code) {
     const message = document.getElementById("course-message");
 
     selectedCourses = selectedCourses.filter(c => c.code !== code);
-    saveSelectedCourses();
 
     if (selectedCourses.length === 0) {
         localStorage.setItem("timetableGenerated", "false");
@@ -1030,7 +1011,7 @@ function updateThemeToggleLabel(labelText) {
 // Timetable
 
 function loadTimetablePage() {
-    const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
+    const savedCourses = selectedCourses || [];
     const courseList = document.getElementById("timetable-course-list");
     const status = document.getElementById("timetable-status");
     const output = document.getElementById("timetable-output");
@@ -1064,7 +1045,9 @@ function loadTimetablePage() {
     if (courseCount) courseCount.innerHTML = savedCourses.length;
     if (creditTotal) creditTotal.innerHTML = totalCredits;
 
-    if (localStorage.getItem("timetableGenerated") === "true") {
+    const timetableGenerated = localStorage.getItem("timetableGenerated");
+
+    if (timetableGenerated === "true") {
         generateTimetable();
     } else {
         renderEmptyWeeklyCalendar();
@@ -1088,7 +1071,7 @@ function renderEmptyWeeklyCalendar() {
 }
 
 function generateTimetable() {
-    const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
+    const savedCourses = selectedCourses || [];
     const status = document.getElementById("timetable-status");
     const output = document.getElementById("timetable-output");
 
@@ -1123,11 +1106,15 @@ function generateTimetable() {
 
 function clearTimetable() {
     renderEmptyWeeklyCalendar();
+
     const status = document.getElementById("timetable-status");
     const output = document.getElementById("timetable-output");
+
     if (status) status.innerHTML = t("Not generated");
     if (output) output.innerHTML = t("The timetable has been cleared.");
+
     localStorage.setItem("timetableGenerated", "false");
+    loadDashboardStats();
 }
 
 function getCourseDay(timeText) { return timeText.split(" ")[0]; }
@@ -1136,7 +1123,7 @@ function getCourseStartTime(timeText) { return timeText.split(" ")[1].split("–
 // Dashboard stats
 
 function loadDashboardStats() {
-    const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
+    const savedCourses = selectedCourses || [];
     const savedDegree = localStorage.getItem("selectedDegree") || "Not selected";
     let totalCredits = 0;
     savedCourses.forEach(c => { totalCredits += c.credits; });
@@ -1229,7 +1216,7 @@ function rejectChange(requestId) {
 // CSV download
 
 function downloadTimetable() {
-    const savedCourses = JSON.parse(localStorage.getItem("selectedCourses")) || [];
+    const savedCourses = selectedCourses || [];
     const output = document.getElementById("timetable-output");
 
     if (savedCourses.length === 0) {
@@ -1242,7 +1229,10 @@ function downloadTimetable() {
         csvContent += `"${course.code}","${course.name}",${course.credits},"${course.time}","${course.stream}","${course.semester}"\n`;
     });
 
-    const blob = new Blob([csvContent], { type: "text/csv" });
+    const blob = new Blob(
+        ["\uFEFF" + csvContent],
+        { type: "text/csv;charset=utf-8;" }
+    );
     const downloadLink = document.createElement("a");
     downloadLink.href = window.URL.createObjectURL(blob);
     downloadLink.download = "timetable.csv";
@@ -1271,13 +1261,13 @@ function loadEnrollmentOverview() {
             tbody.innerHTML = enrollments.map(function (student) {
                 const statusClass =
                     student.enrollment_status === "enrolled" ? "admin-status--enrolled" :
-                    student.enrollment_status === "change_requested" ? "admin-status--pending" :
-                    "admin-status--planning";
+                        student.enrollment_status === "change_requested" ? "admin-status--pending" :
+                            "admin-status--planning";
 
                 const statusText =
                     student.enrollment_status === "enrolled" ? "Enrolled" :
-                    student.enrollment_status === "change_requested" ? "Change Pending" :
-                    "Planning";
+                        student.enrollment_status === "change_requested" ? "Change Pending" :
+                            "Planning";
 
                 const degreeDisplay = student.selected_degree !== "N/A"
                     ? student.selected_degree
@@ -1383,7 +1373,7 @@ function loadCourseManagement() {
 
             // Rebuild semester dropdown, restoring previous selection
             if (semesterFilterEl) {
-                const semesters = [...new Set(allCoursesAdmin.map(c => c.semester))].sort(function(a, b) {
+                const semesters = [...new Set(allCoursesAdmin.map(c => c.semester))].sort(function (a, b) {
                     return parseInt(a.replace(/\D/g, "")) - parseInt(b.replace(/\D/g, ""));
                 });
                 semesterFilterEl.innerHTML =
@@ -1502,10 +1492,10 @@ function toggleAddCourseForm() {
     if (!isVisible) {
         // Clear fields
         ["new-course-code", "new-course-name", "new-course-credits",
-         "new-course-time", "new-course-degree"].forEach(function (id) {
-            const el = document.getElementById(id);
-            if (el) el.value = "";
-        });
+            "new-course-time", "new-course-degree"].forEach(function (id) {
+                const el = document.getElementById(id);
+                if (el) el.value = "";
+            });
         const msg = document.getElementById("add-course-message");
         if (msg) { msg.textContent = ""; msg.style.display = "none"; }
         form.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1513,13 +1503,13 @@ function toggleAddCourseForm() {
 }
 
 function addCourseAdmin() {
-    const code    = (document.getElementById("new-course-code").value || "").trim();
-    const name    = (document.getElementById("new-course-name").value || "").trim();
+    const code = (document.getElementById("new-course-code").value || "").trim();
+    const name = (document.getElementById("new-course-name").value || "").trim();
     const credits = (document.getElementById("new-course-credits").value || "").trim();
-    const time    = (document.getElementById("new-course-time").value || "").trim();
+    const time = (document.getElementById("new-course-time").value || "").trim();
     const semester = document.getElementById("new-course-semester").value;
-    const degree  = (document.getElementById("new-course-degree").value || "").trim();
-    const msg     = document.getElementById("add-course-message");
+    const degree = (document.getElementById("new-course-degree").value || "").trim();
+    const msg = document.getElementById("add-course-message");
 
     if (!code || !name || !credits || !time || !degree) {
         showFormMessage(msg, "Please fill in all fields.", "error");
@@ -1552,11 +1542,11 @@ function showEditCourse(courseId) {
 
     editingCourseId = courseId;
 
-    document.getElementById("edit-course-name").value     = course.name;
-    document.getElementById("edit-course-credits").value  = course.credits;
-    document.getElementById("edit-course-time").value     = course.time;
+    document.getElementById("edit-course-name").value = course.name;
+    document.getElementById("edit-course-credits").value = course.credits;
+    document.getElementById("edit-course-time").value = course.time;
     document.getElementById("edit-course-semester").value = course.semester;
-    document.getElementById("edit-course-degree").value   = course.degree;
+    document.getElementById("edit-course-degree").value = course.degree;
     document.getElementById("edit-course-title").textContent = "Editing: " + course.code;
 
     const msg = document.getElementById("edit-course-message");
@@ -1575,12 +1565,12 @@ function cancelEditCourse() {
 function saveCourseEdit() {
     if (!editingCourseId) return;
 
-    const name     = (document.getElementById("edit-course-name").value || "").trim();
-    const credits  = (document.getElementById("edit-course-credits").value || "").trim();
-    const time     = (document.getElementById("edit-course-time").value || "").trim();
+    const name = (document.getElementById("edit-course-name").value || "").trim();
+    const credits = (document.getElementById("edit-course-credits").value || "").trim();
+    const time = (document.getElementById("edit-course-time").value || "").trim();
     const semester = document.getElementById("edit-course-semester").value;
-    const degree   = (document.getElementById("edit-course-degree").value || "").trim();
-    const msg      = document.getElementById("edit-course-message");
+    const degree = (document.getElementById("edit-course-degree").value || "").trim();
+    const msg = document.getElementById("edit-course-message");
 
     if (!name || !credits || !time || !degree) {
         showFormMessage(msg, "Please fill in all fields.", "error");
@@ -1632,7 +1622,9 @@ function showFormMessage(el, text, type) {
 document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
     loadCoursesFromBackend();
-    loadSelectedCoursesFromBackend();
+    loadCoursesFromBackend().then(function () {
+        loadSelectedCoursesFromBackend();
+    });
     if (document.getElementById("enrollment-table-body")) loadEnrollmentOverview();
     if (document.getElementById("course-mgmt-tbody")) loadCourseManagement();
 });
