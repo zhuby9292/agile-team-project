@@ -187,7 +187,6 @@ function registerUser() {
         return;
     }
 
-    // Student ID: exactly 8 digits, no leading zero
     if (!/^[1-9][0-9]{7}$/.test(studentId)) {
         alert(t("Student ID must be exactly 8 digits and cannot start with zero."));
         return;
@@ -213,17 +212,6 @@ function showDashboardMessage(message) {
 // Enrollment state
 // ---------------------------------------------------------------------------
 
-/**
- * enrollmentStatus mirrors the server-side User.enrollment_status:
- *   'planning'         — student is still freely selecting courses
- *   'enrolled'         — selection is locked; changes need admin approval
- *   'change_requested' — a change request is pending admin review
- *
- * isEditingChangeRequest is true only when the student has clicked
- * "Request Change" and is drafting new course selections.  In this mode
- * the UI is temporarily unlocked but changes go to /api/request-change,
- * not /api/save-selection.
- */
 let enrollmentStatus = "planning";
 let isEditingChangeRequest = false;
 let eligibleSemester = 1;
@@ -232,7 +220,6 @@ let degreeLocked = false;
 let backendStateLoaded = false;
 let catalogueLoaded = false;
 
-// Snapshot of the enrolled selection so we can cancel a change draft.
 let enrolledCoursesSnapshot = [];
 let enrolledDegreeSnapshot = "";
 
@@ -244,7 +231,7 @@ const SELECTED_COURSES_STORAGE_KEY = "selectedCourses";
 let selectedCourses = [];
 
 // ---------------------------------------------------------------------------
-// Backend sync — draft save (planning only)
+// Backend sync — draft save
 // ---------------------------------------------------------------------------
 
 function saveSelectedCoursesToBackend() {
@@ -370,7 +357,7 @@ function loadCoursesFromBackend() {
         .then(r => r.json())
         .then(function (data) {
             courseOptions = {};
-            
+
             data.courses.forEach(function (course) {
                 if (!courseOptions[course.degree]) courseOptions[course.degree] = [];
                 courseOptions[course.degree].push({
@@ -456,10 +443,9 @@ function setDegreeControlsFromState(studyLevel, degree) {
 
     if (courseMessage && degree) {
         courseMessage.textContent =
-            degree + " selected. You can now add courses to your eligible semester.";
+            degree + " " + t("selected. You can now add courses to your eligible semester.");
     }
 }
-
 
 function rebuildDegreeOptions(selectedLevel, selectedDegree) {
     const degreeSelect = document.getElementById("degree-select");
@@ -500,7 +486,6 @@ function rebuildDegreeOptions(selectedLevel, selectedDegree) {
     degreeSelect.disabled = false;
 }
 
-
 function applyDegreeLockState() {
     const studyLevelSelect = document.getElementById("study-level-select");
     const degreeSelect = document.getElementById("degree-select");
@@ -521,12 +506,10 @@ function applyDegreeLockState() {
     }
 }
 
-
 function getSemesterNumber(semesterKey) {
     const match = String(semesterKey || "").match(/\d+/);
     return match ? parseInt(match[0], 10) : null;
 }
-
 
 function getCourseSemesterState(course) {
     const sem = getSemesterNumber(course.semester);
@@ -546,21 +529,14 @@ function getCourseSemesterState(course) {
 // Enrollment UI lock / unlock
 // ---------------------------------------------------------------------------
 
-/**
- * Locks all editable UI elements and shows the appropriate status banner.
- * Called when enrollmentStatus is 'enrolled' or 'change_requested'.
- */
 function lockEnrollmentUI(status) {
-    // Disable degree / study-level selects
     const studyLevelSelect = document.getElementById("study-level-select");
     const degreeSelect = document.getElementById("degree-select");
     if (studyLevelSelect) studyLevelSelect.disabled = true;
     if (degreeSelect) degreeSelect.disabled = true;
 
-    // Disable course buttons while keeping selected courses visually different
     updateAddButtonStates();
 
-    // Show enrollment status banner
     const banner = document.getElementById("enrollment-status-banner");
     if (banner) {
         banner.style.display = "flex";
@@ -577,7 +553,6 @@ function lockEnrollmentUI(status) {
         }
     }
 
-    // Toggle sidebar action buttons
     const confirmBtn = document.getElementById("confirm-enrollment-btn");
     const requestChangeBtn = document.getElementById("request-change-btn");
     const pendingNotice = document.getElementById("pending-change-notice");
@@ -592,15 +567,9 @@ function lockEnrollmentUI(status) {
         if (pendingNotice) pendingNotice.style.display = "block";
     }
 
-    // Re-render selected courses (no Remove buttons while locked)
     displaySelectedCourses();
 }
 
-/**
- * Unlocks the UI for drafting a change request.
- * Only the course list / degree selects are re-enabled — the state is
- * kept separate from the confirmed enrollment until the request is submitted.
- */
 function unlockForChangeRequest() {
     const currentDegree = localStorage.getItem("selectedDegree") || "";
     const currentStudyLevel =
@@ -645,7 +614,7 @@ function confirmEnrollment() {
     });
 
     if (invalidCourse) {
-        alert("You can only confirm Semester " + eligibleSemester + " courses.");
+        alert(t("You can only confirm Semester") + " " + eligibleSemester + " " + t("courses."));
         return;
     }
 
@@ -703,21 +672,13 @@ function confirmEnrollment() {
 // Change request flow
 // ---------------------------------------------------------------------------
 
-/**
- * Enters "draft change request" mode:
- *  - Saves a snapshot of the current enrolled selection.
- *  - Unlocks the UI for editing.
- *  - Swaps the status banner to a draft-mode banner with Submit / Cancel.
- */
 function requestChange() {
-    // Snapshot the enrolled state so Cancel can restore it.
     enrolledCoursesSnapshot = JSON.parse(JSON.stringify(selectedCourses));
     enrolledDegreeSnapshot = localStorage.getItem("selectedDegree") || "";
     isEditingChangeRequest = true;
 
     unlockForChangeRequest();
 
-    // Update the banner to draft mode
     const banner = document.getElementById("enrollment-status-banner");
     if (banner) {
         banner.style.display = "flex";
@@ -731,7 +692,6 @@ function requestChange() {
             '</div>';
     }
 
-    // Hide the Request Change button while drafting
     const requestChangeBtn = document.getElementById("request-change-btn");
     if (requestChangeBtn) requestChangeBtn.style.display = "none";
 
@@ -741,9 +701,6 @@ function requestChange() {
     }
 }
 
-/**
- * Cancels a change request draft and restores the enrolled state.
- */
 function cancelChangeRequest() {
     isEditingChangeRequest = false;
     selectedCourses = enrolledCoursesSnapshot;
@@ -765,15 +722,12 @@ function cancelChangeRequest() {
     lockEnrollmentUI("enrolled");
 }
 
-/**
- * Submits the drafted changes as an EnrollmentChangeRequest.
- * The student's live enrollment is not changed until the admin approves.
- */
 function submitChangeRequest() {
     if (selectedCourses.length === 0) {
         alert(t("Please select at least one course for your change request."));
         return;
     }
+
     const degree = localStorage.getItem("selectedDegree") || "";
     if (!degree) {
         alert(t("Please select a degree for your change request."));
@@ -794,7 +748,7 @@ function submitChangeRequest() {
                 alert(data.error);
                 return;
             }
-            // Revert to enrolled snapshot — the change is only pending
+
             isEditingChangeRequest = false;
             selectedCourses = enrolledCoursesSnapshot;
 
@@ -808,7 +762,9 @@ function submitChangeRequest() {
         });
 }
 
+// ---------------------------------------------------------------------------
 // Degree / course UI
+// ---------------------------------------------------------------------------
 
 function updateDegreeOptions(shouldResetCourses = true) {
     const studyLevelSelect = document.getElementById("study-level-select");
@@ -819,8 +775,6 @@ function updateDegreeOptions(shouldResetCourses = true) {
 
     if (!studyLevelSelect || !degreeSelect) return;
 
-    // Locked while enrolled/change-requested OR after any semester has passed.
-    // This prevents degree switching after progression.
     if (
         ((enrollmentStatus === "enrolled" || enrollmentStatus === "change_requested") && !isEditingChangeRequest)
         || (degreeLocked && !isEditingChangeRequest)
@@ -883,7 +837,6 @@ function updateDegreeOptions(shouldResetCourses = true) {
 }
 
 function selectDegree(shouldResetCourses = true) {
-    // Locked while enrolled and not in a change-request draft
     if (
         ((enrollmentStatus === "enrolled" || enrollmentStatus === "change_requested") && !isEditingChangeRequest)
         || (degreeLocked && !isEditingChangeRequest)
@@ -942,7 +895,7 @@ function updateSemesterFilter(courses) {
 
     const allOption = document.createElement("option");
     allOption.value = "all";
-    allOption.textContent = "All Semesters";
+    allOption.textContent = t("All Semesters");
     semesterFilter.appendChild(allOption);
 
     const semesters = [...new Set(courses.map(function (course) {
@@ -958,7 +911,7 @@ function updateSemesterFilter(courses) {
     semesters.forEach(function (semester) {
         const option = document.createElement("option");
         option.value = semester;
-        option.textContent = "Semester " + semester.replace(/\D/g, "");
+        option.textContent = t("Semester") + " " + semester.replace(/\D/g, "");
         semesterFilter.appendChild(option);
     });
 }
@@ -990,10 +943,10 @@ function displayAvailableCourses(degreeName) {
     availableCoursesBox.innerHTML = `
         <div class="course-table">
             <div class="course-table-header">
-                <span>Code</span>
-                <span>Course</span>
-                <span>Time</span>
-                <span>Credits</span>
+                <span>${t("Code")}</span>
+                <span>${t("Course")}</span>
+                <span>${t("Time")}</span>
+                <span>${t("Credits")}</span>
                 <span></span>
             </div>
 
@@ -1008,10 +961,10 @@ function displayAvailableCourses(degreeName) {
                     || state !== "eligible";
 
                 const buttonLabel =
-                    isSelected ? "Added" :
-                    state === "passed" ? "✓ Passed" :
-                    state === "locked" ? "Locked" :
-                    "Add";
+                    isSelected ? t("Added") :
+                    state === "passed" ? t("✓ Passed") :
+                    state === "locked" ? t("Locked") :
+                    t("Add");
 
                 const rowClass =
                     state === "passed" ? " course-table-row--passed" :
@@ -1028,12 +981,12 @@ function displayAvailableCourses(degreeName) {
                         <span class="course-table-name">
                             ${course.name}
                             <small style="display:block;color:#888">
-                                Semester ${semesterNumber}
+                                ${t("Semester")} ${semesterNumber}
                             </small>
                         </span>
 
                         <span>${course.time}</span>
-                        <span>${course.credits} credits</span>
+                        <span>${course.credits} ${t("credits")}</span>
 
                         <button type="button"
                             class="btn dashboard-btn-primary ${isSelected ? "added-course-btn" : ""}"
@@ -1066,26 +1019,25 @@ function updateAddButtonStates() {
         button.classList.toggle("added-course-btn", isSelected);
 
         if (isSelected) {
-            button.textContent = "Added";
+            button.textContent = t("Added");
             button.disabled = true;
         } else if (state === "passed") {
-            button.textContent = "✓ Passed";
+            button.textContent = t("✓ Passed");
             button.disabled = true;
         } else if (state === "locked") {
-            button.textContent = "Locked";
+            button.textContent = t("Locked");
             button.disabled = true;
         } else if (isEnrollmentLocked) {
-            button.textContent = "Add";
+            button.textContent = t("Add");
             button.disabled = true;
         } else {
-            button.textContent = "Add";
+            button.textContent = t("Add");
             button.disabled = false;
         }
     });
 }
 
 function addCourse(event, code, name, credits, time, degree, semester) {
-    // Block if locked and not in a change-request draft
     if ((enrollmentStatus === "enrolled" || enrollmentStatus === "change_requested")
         && !isEditingChangeRequest) {
         alert(t("You are enrolled. Use the Request Change button to modify your selection."));
@@ -1101,16 +1053,15 @@ function addCourse(event, code, name, credits, time, degree, semester) {
     }
 
     const existingSemester = selectedCourses.length > 0 ? selectedCourses[0].semester : null;
-
     const semesterNumber = getSemesterNumber(semester);
 
     if (passedSemesters.includes(semesterNumber)) {
-        alert("Semester " + semesterNumber + " has already been passed. You cannot add courses from it.");
+        alert(t("Semester") + " " + semesterNumber + " " + t("has already been passed. You cannot add courses from it."));
         return;
     }
 
     if (semesterNumber !== eligibleSemester) {
-        alert("Semester " + semesterNumber + " is locked. You are currently eligible to enrol in Semester " + eligibleSemester + ".");
+        alert(t("Semester") + " " + semesterNumber + " " + t("is locked. You are currently eligible to enrol in Semester") + " " + eligibleSemester + ".");
         return;
     }
 
@@ -1140,7 +1091,6 @@ function addCourse(event, code, name, credits, time, degree, semester) {
     displaySelectedCourses();
     updateAddButtonStates();
 
-    // Only auto-save to backend during planning mode (not during a change-request draft)
     if (!isEditingChangeRequest) {
         saveSelectedCoursesToBackend().catch(function () {
             loadSelectedCoursesFromBackend();
@@ -1156,7 +1106,6 @@ function displaySelectedCourses() {
 
     if (!selectedBox || !creditOutput) return;
 
-    // Remove buttons are only shown while planning or in a change-request draft
     const canRemove = enrollmentStatus === "planning" || isEditingChangeRequest;
 
     if (selectedCourses.length === 0) {
@@ -1174,7 +1123,7 @@ function displaySelectedCourses() {
             <div class="selected-course-item">
                 <div class="selected-course-info">
                     <strong>${course.code}</strong>
-                    <span>${t(course.name)} · ${course.credits} ${t("credit points")}</span>
+                    <span>${course.name} · ${course.credits} ${t("credit points")}</span>
                 </div>
                 ${canRemove
                 ? `<button class="remove-course-btn" onclick="removeCourse('${course.code}')">${t("Remove")}</button>`
@@ -1188,7 +1137,6 @@ function displaySelectedCourses() {
 }
 
 function removeCourse(code) {
-    // Block if locked
     if ((enrollmentStatus === "enrolled" || enrollmentStatus === "change_requested")
         && !isEditingChangeRequest) {
         return;
@@ -1234,7 +1182,9 @@ function filterCourses() {
     });
 }
 
+// ---------------------------------------------------------------------------
 // Theme
+// ---------------------------------------------------------------------------
 
 function applySavedTheme() {
     const savedTheme = localStorage.getItem("coursePlannerTheme");
@@ -1285,7 +1235,9 @@ function getCurrentSelectedCourses() {
     }
 }
 
+// ---------------------------------------------------------------------------
 // Timetable
+// ---------------------------------------------------------------------------
 
 function loadTimetablePage() {
     const savedCourses = getCurrentSelectedCourses();
@@ -1313,7 +1265,7 @@ function loadTimetablePage() {
         return `
             <div class="timetable-course-item">
                 <strong>${course.code}</strong>
-                <span>${t(course.name)}</span>
+                <span>${course.name}</span>
                 <small>${course.time} · ${course.credits} ${t("credits")}</small>
             </div>`;
     }).join("");
@@ -1372,7 +1324,7 @@ function generateTimetable() {
         );
         if (cell) {
             cell.classList.add("course-block");
-            cell.innerHTML = `<strong>${course.code}</strong><span>${t(course.name)}</span><small>${course.time}</small>`;
+            cell.innerHTML = `<strong>${course.code}</strong><span>${course.name}</span><small>${course.time}</small>`;
         }
     });
 
@@ -1397,11 +1349,13 @@ function clearTimetable() {
 function getCourseDay(timeText) { return timeText.split(" ")[0]; }
 function getCourseStartTime(timeText) { return timeText.split(" ")[1].split("–")[0]; }
 
+// ---------------------------------------------------------------------------
 // Dashboard stats
+// ---------------------------------------------------------------------------
 
 function loadDashboardStats() {
     const savedCourses = getCurrentSelectedCourses();
-    const savedDegree = localStorage.getItem("selectedDegree") || "Not selected";
+    const savedDegree = localStorage.getItem("selectedDegree") || t("Not selected");
     let totalCredits = 0;
     savedCourses.forEach(c => { totalCredits += c.credits; });
     const courseCount = savedCourses.length;
@@ -1422,48 +1376,52 @@ function loadDashboardStats() {
     const semesterEnrolStatus = document.getElementById("dashboard-semester-enrol-status");
 
     if (courseCountTop) courseCountTop.innerHTML = courseCount;
-    if (degreeName) degreeName.innerHTML = savedDegree;
-    if (degreeStatus) degreeStatus.innerHTML = savedDegree !== "Not selected" ? "Yes" : "No";
-    if (timetableStatus) timetableStatus.innerHTML = (timetableGenerated === "true" && courseCount > 0) ? "Yes" : "No";
+    if (degreeName) degreeName.innerHTML = savedDegree === t("Not selected") ? t("Not selected") : t(savedDegree);
+    if (degreeStatus) degreeStatus.innerHTML = savedDegree !== t("Not selected") ? t("Yes") : t("No");
+    if (timetableStatus) timetableStatus.innerHTML = (timetableGenerated === "true" && courseCount > 0) ? t("Yes") : t("No");
     if (selectedCount) selectedCount.innerHTML = courseCount;
     if (creditTotal) creditTotal.innerHTML = totalCredits;
 
     if (courseProgress) {
-        courseProgress.innerHTML = courseCount > 0 ? "Done" : "Pending";
+        courseProgress.innerHTML = courseCount > 0 ? t("Done") : t("Pending");
         courseProgress.className = courseCount > 0 ? "progress-done" : "progress-pending";
     }
+
     if (timetableProgress) {
         if (timetableGenerated === "true" && courseCount > 0) {
-            timetableProgress.innerHTML = "Generated";
+            timetableProgress.innerHTML = t("Generated");
             timetableProgress.className = "progress-done";
         } else if (courseCount > 0) {
-            timetableProgress.innerHTML = "Ready";
+            timetableProgress.innerHTML = t("Ready");
             timetableProgress.className = "progress-active";
         } else {
-            timetableProgress.innerHTML = "Pending";
+            timetableProgress.innerHTML = t("Pending");
             timetableProgress.className = "progress-pending";
         }
     }
+
     if (eligibleTop) eligibleTop.innerHTML = eligibleSemester;
     if (eligibleCard) eligibleCard.innerHTML = eligibleSemester;
     if (passedCount) passedCount.innerHTML = passedSemesters.length;
-    if (semesterEnrolStatus) semesterEnrolStatus.innerHTML = "Eligible to enrol";
+    if (semesterEnrolStatus) semesterEnrolStatus.innerHTML = t("Eligible to enrol");
 
     if (passedList) {
         if (passedSemesters.length === 0) {
             passedList.innerHTML =
-                '<div class="progress-item"><span>No semesters completed yet.</span></div>';
+                '<div class="progress-item"><span>' + t("No semesters completed yet.") + '</span></div>';
         } else {
             passedList.innerHTML =
                 passedSemesters.map(function (sem) {
-                    return '<div class="progress-item"><span>Semester ' + sem + '</span><span class="progress-done">Passed</span></div>';
+                    return '<div class="progress-item"><span>' + t("Semester") + ' ' + sem + '</span><span class="progress-done">' + t("Passed") + '</span></div>';
                 }).join("")
-                + '<div class="progress-item"><span>Semester ' + eligibleSemester + '</span><span class="progress-active">Current</span></div>';
+                + '<div class="progress-item"><span>' + t("Semester") + ' ' + eligibleSemester + '</span><span class="progress-active">' + t("Current") + '</span></div>';
         }
     }
 }
 
+// ---------------------------------------------------------------------------
 // Restore form on page load
+// ---------------------------------------------------------------------------
 
 function updateSemesterEligibilityBanner() {
     const banner = document.getElementById("semester-eligibility-banner");
@@ -1476,14 +1434,14 @@ function updateSemesterEligibilityBanner() {
 
     let passedText = "";
     if (passedSemesters.length > 0) {
-        passedText = " &nbsp;·&nbsp; Passed: " +
-            passedSemesters.map(function (s) { return "<strong>Sem " + s + "</strong>"; }).join(", ");
+        passedText = " &nbsp;·&nbsp; " + t("Passed:") + " " +
+            passedSemesters.map(function (s) { return "<strong>" + t("Sem") + " " + s + "</strong>"; }).join(", ");
     }
 
     banner.style.display = "flex";
     banner.innerHTML =
         '<span class="enrollment-banner__icon">📅</span>' +
-        '<span>You are eligible to enrol in <strong>Semester ' + eligibleSemester + '</strong> courses.' +
+        '<span>' + t("You are eligible to enrol in") + ' <strong>' + t("Semester") + ' ' + eligibleSemester + '</strong> ' + t("courses.") +
         passedText + '</span>';
 }
 
@@ -1506,7 +1464,9 @@ function restoreCourseSelectionForm() {
     applyDegreeLockState();
 }
 
+// ---------------------------------------------------------------------------
 // Admin — approve / reject change requests
+// ---------------------------------------------------------------------------
 
 function approveChange(requestId) {
     if (!confirm(t("Approve this change request? The student's enrollment will be updated immediately."))) return;
@@ -1514,7 +1474,7 @@ function approveChange(requestId) {
     fetch("/api/admin/approve-change/" + requestId, { method: "POST" })
         .then(r => r.json())
         .then(function (data) {
-            alert(data.message || "Change approved.");
+            alert(data.message || t("Change approved."));
             location.reload();
         })
         .catch(err => console.log("Approve failed:", err));
@@ -1526,24 +1486,26 @@ function rejectChange(requestId) {
     fetch("/api/admin/reject-change/" + requestId, { method: "POST" })
         .then(r => r.json())
         .then(function (data) {
-            alert(data.message || "Change rejected.");
+            alert(data.message || t("Change rejected."));
             location.reload();
         })
         .catch(err => console.log("Reject failed:", err));
 }
 
+// ---------------------------------------------------------------------------
 // CSV download
+// ---------------------------------------------------------------------------
 
 function downloadTimetable() {
     const savedCourses = getCurrentSelectedCourses();
     const output = document.getElementById("timetable-output");
 
     if (savedCourses.length === 0) {
-        if (output) output.innerHTML = "Please select courses before downloading a timetable.";
+        if (output) output.innerHTML = t("Please select courses before downloading a timetable.");
         return;
     }
 
-    let csvContent = "Course Code,Course Name,Credits,Time,Stream,Semester\n";
+    let csvContent = t("Course Code") + "," + t("Course Name") + "," + t("Credits") + "," + t("Time") + "," + t("Stream") + "," + t("Semester") + "\n";
     savedCourses.forEach(function (course) {
         csvContent += `"${course.code}","${course.name}",${course.credits},"${course.time}","${course.stream}","${course.semester}"\n`;
     });
@@ -1557,19 +1519,21 @@ function downloadTimetable() {
     downloadLink.download = "timetable.csv";
     downloadLink.click();
 
-    if (output) output.innerHTML = "Timetable downloaded successfully.";
+    if (output) output.innerHTML = t("Timetable downloaded successfully.");
 }
 
+// ---------------------------------------------------------------------------
 // Admin — mark semester as passed
+// ---------------------------------------------------------------------------
 
 function markSemesterPassed(userId, semesterNumber, studentName) {
     var nextSem = semesterNumber + 1;
     if (!confirm(
-        "Mark Semester " + semesterNumber + " as passed for " + studentName + "?\n\n" +
-        "This will:\n" +
-        "• Create a pass record for Semester " + semesterNumber + "\n" +
-        "• Clear their current course selections\n" +
-        "• Allow them to enrol in Semester " + nextSem
+        t("Mark Semester") + " " + semesterNumber + " " + t("as passed for") + " " + studentName + "?\n\n" +
+        t("This will:") + "\n" +
+        "• " + t("Create a pass record for Semester") + " " + semesterNumber + "\n" +
+        "• " + t("Clear their current course selections") + "\n" +
+        "• " + t("Allow them to enrol in Semester") + " " + nextSem
     )) return;
 
     fetch("/api/admin/mark-semester-passed/" + userId, {
@@ -1580,7 +1544,7 @@ function markSemesterPassed(userId, semesterNumber, studentName) {
         .then(function (r) { return r.json(); })
         .then(function (data) {
             if (data.error) {
-                alert("Error: " + data.error);
+                alert(t("Error:") + " " + data.error);
                 return;
             }
             alert(data.message);
@@ -1588,11 +1552,13 @@ function markSemesterPassed(userId, semesterNumber, studentName) {
         })
         .catch(function (err) {
             console.log("Mark semester passed failed:", err);
-            alert("Something went wrong. Please try again.");
+            alert(t("Something went wrong. Please try again."));
         });
 }
 
+// ---------------------------------------------------------------------------
 // ADMIN — Enrollment Overview
+// ---------------------------------------------------------------------------
 
 function loadEnrollmentOverview() {
     fetch("/api/admin/enrollments")
@@ -1604,7 +1570,7 @@ function loadEnrollmentOverview() {
             const enrollments = data.enrollments || [];
 
             if (enrollments.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="admin-empty-row">No students registered yet.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="admin-empty-row">' + t("No students registered yet.") + '</td></tr>';
                 return;
             }
 
@@ -1615,41 +1581,39 @@ function loadEnrollmentOverview() {
                             "admin-status--planning";
 
                 const statusText =
-                    student.enrollment_status === "enrolled" ? "Enrolled" :
-                        student.enrollment_status === "change_requested" ? "Change Pending" :
-                            "Planning";
+                    student.enrollment_status === "enrolled" ? t("Enrolled") :
+                        student.enrollment_status === "change_requested" ? t("Change Pending") :
+                            t("Planning");
 
                 const degreeDisplay = student.selected_degree !== "N/A"
                     ? student.selected_degree
-                    : '<span style="color:#aaa;font-style:italic">Not selected</span>';
+                    : '<span style="color:#aaa;font-style:italic">' + t("Not selected") + '</span>';
 
                 const courseCell = student.course_count > 0
                     ? `<button class="btn btn-sm enrollment-expand-btn"
                             onclick="toggleCourseDetails(this)"
                             data-student-id="${student.id}">
-                            ${student.course_count} course${student.course_count !== 1 ? "s" : ""}
+                            ${student.course_count} ${student.course_count !== 1 ? t("courses") : t("course")}
                             <span class="expand-icon">▼</span>
                        </button>`
-                    : `<span style="color:#aaa">No courses</span>`;
+                    : `<span style="color:#aaa">${t("No courses")}</span>`;
 
-                // --- Semester progress cell ---
                 const passedList = student.passed_semesters || [];
                 const eligibleSem = student.eligible_semester || 1;
                 const enrolledSem = student.enrolled_semester || eligibleSem;
 
                 const passedPills = passedList.map(function (sem) {
-                    return '<span class="sem-passed-pill">Sem ' + sem + ' ✓</span>';
+                    return '<span class="sem-passed-pill">' + t("Sem") + ' ' + sem + ' ✓</span>';
                 }).join(" ");
 
                 const eligiblePill = student.selected_degree !== "N/A"
-                    ? '<span class="sem-eligible-pill">→ Sem ' + eligibleSem + '</span>'
+                    ? '<span class="sem-eligible-pill">→ ' + t("Sem") + ' ' + eligibleSem + '</span>'
                     : "";
 
-                // Mark-as-passed button only shown when student is enrolled
                 const markPassedBtn = student.enrollment_status === "enrolled" && student.selected_degree !== "N/A"
                     ? '<br><button class="btn btn-sm admin-mark-passed-btn" style="margin-top:5px;" ' +
                     'onclick="markSemesterPassed(' + student.id + ', ' + enrolledSem + ', \'' + student.full_name.replace(/'/g, "\\'") + '\')">' +
-                    'Mark Sem ' + enrolledSem + ' Passed</button>'
+                    t('Mark Sem') + ' ' + enrolledSem + ' ' + t('Passed') + '</button>'
                     : "";
 
                 const semesterCell =
@@ -1658,12 +1622,11 @@ function loadEnrollmentOverview() {
                     markPassedBtn +
                     '</div>';
 
-                // Build course detail rows
                 const courseDetailRows = student.courses.map(function (c) {
                     return '<div class="enrollment-course-item">' +
                         '<span class="course-code" style="font-size:11px;padding:3px 8px">' + c.code + '</span>' +
                         '<span class="enrollment-course-name">' + c.name + '</span>' +
-                        '<span class="enrollment-course-meta">' + c.semester + ' · ' + c.credits + ' credits · ' + c.time + '</span>' +
+                        '<span class="enrollment-course-meta">' + c.semester + ' · ' + c.credits + ' ' + t('credits') + ' · ' + c.time + '</span>' +
                         '</div>';
                 }).join("");
 
@@ -1680,15 +1643,15 @@ function loadEnrollmentOverview() {
                     '<tr class="enrollment-courses-row" style="display:none;">' +
                     '<td colspan="6" style="padding:0">' +
                     '<div class="enrollment-courses-detail">' +
-                    '<p class="enrollment-courses-heading">Enrolled courses for <strong>' + student.full_name + '</strong></p>' +
-                    (courseDetailRows || '<p style="color:#aaa;margin:0">No courses selected.</p>') +
+                    '<p class="enrollment-courses-heading">' + t("Enrolled courses for") + ' <strong>' + student.full_name + '</strong></p>' +
+                    (courseDetailRows || '<p style="color:#aaa;margin:0">' + t("No courses selected.") + '</p>') +
                     '</div></td></tr>';
             }).join("");
         })
         .catch(function (err) {
             console.log("Failed to load enrollments:", err);
             const tbody = document.getElementById("enrollment-table-body");
-            if (tbody) tbody.innerHTML = '<tr><td colspan="6" class="admin-empty-row">Failed to load enrollment data.</td></tr>';
+            if (tbody) tbody.innerHTML = '<tr><td colspan="6" class="admin-empty-row">' + t("Failed to load enrollment data.") + '</td></tr>';
         });
 }
 
@@ -1717,13 +1680,14 @@ function filterEnrollmentTable() {
     });
 }
 
+// ---------------------------------------------------------------------------
 // ADMIN — Course Management
+// ---------------------------------------------------------------------------
 
 let allCoursesAdmin = [];
 let editingCourseId = null;
 
 function loadCourseManagement() {
-    // Preserve current filter selections before reloading
     const degreeFilterEl = document.getElementById("course-degree-filter");
     const semesterFilterEl = document.getElementById("course-semester-filter");
     const currentDegree = degreeFilterEl ? degreeFilterEl.value : "";
@@ -1734,33 +1698,30 @@ function loadCourseManagement() {
         .then(function (data) {
             allCoursesAdmin = data.courses || [];
 
-            // Rebuild degree dropdown, restoring previous selection
             if (degreeFilterEl) {
                 const degrees = [...new Set(allCoursesAdmin.map(c => c.degree))].sort();
                 degreeFilterEl.innerHTML =
-                    '<option value="">All degrees</option>' +
+                    '<option value="">' + t("All degrees") + '</option>' +
                     degrees.map(d => `<option value="${d}">${d}</option>`).join("");
                 degreeFilterEl.value = currentDegree;
             }
 
-            // Rebuild semester dropdown, restoring previous selection
             if (semesterFilterEl) {
                 const semesters = [...new Set(allCoursesAdmin.map(c => c.semester))].sort(function (a, b) {
                     return parseInt(a.replace(/\D/g, "")) - parseInt(b.replace(/\D/g, ""));
                 });
                 semesterFilterEl.innerHTML =
-                    '<option value="">All semesters</option>' +
-                    semesters.map(s => `<option value="${s}">Semester ${s.replace(/\D/g, "")}</option>`).join("");
+                    '<option value="">' + t("All semesters") + '</option>' +
+                    semesters.map(s => `<option value="${s}">${t("Semester")} ${s.replace(/\D/g, "")}</option>`).join("");
                 semesterFilterEl.value = currentSemester;
             }
 
-            // Re-apply the current filters — shows updated data in place
             filterCourseTable();
         })
         .catch(function (err) {
             console.log("Failed to load courses:", err);
             const tbody = document.getElementById("course-mgmt-tbody");
-            if (tbody) tbody.innerHTML = '<tr><td colspan="8" class="admin-empty-row">Failed to load course data.</td></tr>';
+            if (tbody) tbody.innerHTML = '<tr><td colspan="8" class="admin-empty-row">' + t("Failed to load course data.") + '</td></tr>';
         });
 }
 
@@ -1768,25 +1729,24 @@ function renderCourseTable(courses) {
     const tbody = document.getElementById("course-mgmt-tbody");
     if (!tbody) return;
 
-    // null means no filter selected yet — show placeholder
     if (courses === null) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="8" class="admin-empty-row" style="padding: 28px 0;">
                     <span style="font-size:1.5rem">🎓</span><br>
-                    Select a degree or semester above to view courses.
+                    ${t("Select a degree or semester above to view courses.")}
                 </td>
             </tr>`;
         return;
     }
 
     if (courses.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="admin-empty-row">No courses match your filters.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="admin-empty-row">' + t("No courses match your filters.") + '</td></tr>';
         return;
     }
 
     tbody.innerHTML = courses.map(function (course) {
-        const semLabel = "Sem " + course.semester.replace("semester", "");
+        const semLabel = t("Sem") + " " + course.semester.replace("semester", "");
         return `<tr>
             <td><span class="course-code" style="font-size:12px;padding:4px 10px">${course.code}</span></td>
             <td>${course.name}</td>
@@ -1797,23 +1757,19 @@ function renderCourseTable(courses) {
             <td><strong>${course.enrollment_count}</strong></td>
             <td class="admin-action-cell">
                 <button type="button" class="btn btn-sm dashboard-btn-secondary"
-                    onclick="showEditCourse(${course.id})">Edit</button>
+                    onclick="showEditCourse(${course.id})">${t("Edit")}</button>
                 <button type="button" class="btn btn-sm admin-btn-danger"
-                    onclick="deleteCourseAdmin(${course.id}, '${course.code}')">Delete</button>
+                    onclick="deleteCourseAdmin(${course.id}, '${course.code}')">${t("Delete")}</button>
             </td>
         </tr>`;
     }).join("");
 }
-
-// It updates the semester dropdown to only show semesters relevant to
-// the currently selected degree.
 
 function filterCourseTable() {
     const search = (document.getElementById("course-mgmt-search").value || "").toLowerCase();
     const degreeFilter = document.getElementById("course-degree-filter").value;
     const semesterFilterEl = document.getElementById("course-semester-filter");
 
-    // Rebuild semester options based on the selected degree
     if (semesterFilterEl) {
         const relevantCourses = degreeFilter
             ? allCoursesAdmin.filter(c => c.degree === degreeFilter)
@@ -1825,10 +1781,9 @@ function filterCourseTable() {
 
         const prevVal = semesterFilterEl.value;
         semesterFilterEl.innerHTML =
-            '<option value="">All semesters</option>' +
-            semesters.map(s => `<option value="${s}">Semester ${s.replace(/\D/g, "")}</option>`).join("");
+            '<option value="">' + t("All semesters") + '</option>' +
+            semesters.map(s => `<option value="${s}">${t("Semester")} ${s.replace(/\D/g, "")}</option>`).join("");
 
-        // Restore previous selection if it still applies to the new degree
         if (semesters.includes(prevVal)) {
             semesterFilterEl.value = prevVal;
         }
@@ -1836,7 +1791,6 @@ function filterCourseTable() {
 
     const semesterValue = semesterFilterEl ? semesterFilterEl.value : "";
 
-    // Show placeholder if nothing is selected at all
     if (!search && !degreeFilter && !semesterValue) {
         renderCourseTable(null);
         return;
@@ -1862,7 +1816,6 @@ function toggleAddCourseForm() {
     form.style.display = isVisible ? "none" : "block";
 
     if (!isVisible) {
-        // Clear fields
         ["new-course-code", "new-course-name", "new-course-credits",
             "new-course-time", "new-course-degree"].forEach(function (id) {
                 const el = document.getElementById(id);
@@ -1884,7 +1837,7 @@ function addCourseAdmin() {
     const msg = document.getElementById("add-course-message");
 
     if (!code || !name || !credits || !time || !degree) {
-        showFormMessage(msg, "Please fill in all fields.", "error");
+        showFormMessage(msg, t("Please fill in all fields."), "error");
         return;
     }
 
@@ -1899,12 +1852,12 @@ function addCourseAdmin() {
                 showFormMessage(msg, data.error, "error");
                 return;
             }
-            showFormMessage(msg, "Course added successfully!", "success");
+            showFormMessage(msg, t("Course added successfully!"), "success");
             loadCourseManagement();
             setTimeout(toggleAddCourseForm, 1500);
         })
         .catch(function () {
-            showFormMessage(msg, "Something went wrong. Please try again.", "error");
+            showFormMessage(msg, t("Something went wrong. Please try again."), "error");
         });
 }
 
@@ -1919,7 +1872,7 @@ function showEditCourse(courseId) {
     document.getElementById("edit-course-time").value = course.time;
     document.getElementById("edit-course-semester").value = course.semester;
     document.getElementById("edit-course-degree").value = course.degree;
-    document.getElementById("edit-course-title").textContent = "Editing: " + course.code;
+    document.getElementById("edit-course-title").textContent = t("Editing:") + " " + course.code;
 
     const msg = document.getElementById("edit-course-message");
     if (msg) { msg.textContent = ""; msg.style.display = "none"; }
@@ -1945,7 +1898,7 @@ function saveCourseEdit() {
     const msg = document.getElementById("edit-course-message");
 
     if (!name || !credits || !time || !degree) {
-        showFormMessage(msg, "Please fill in all fields.", "error");
+        showFormMessage(msg, t("Please fill in all fields."), "error");
         return;
     }
 
@@ -1960,22 +1913,22 @@ function saveCourseEdit() {
                 showFormMessage(msg, data.error, "error");
                 return;
             }
-            showFormMessage(msg, "Course updated successfully!", "success");
+            showFormMessage(msg, t("Course updated successfully!"), "success");
             loadCourseManagement();
             setTimeout(cancelEditCourse, 1200);
         })
         .catch(function () {
-            showFormMessage(msg, "Something went wrong. Please try again.", "error");
+            showFormMessage(msg, t("Something went wrong. Please try again."), "error");
         });
 }
 
 function deleteCourseAdmin(courseId, courseCode) {
-    if (!confirm("Delete " + courseCode + "? This will also remove all student selections for this course.")) return;
+    if (!confirm(t("Delete") + " " + courseCode + "? " + t("This will also remove all student selections for this course."))) return;
 
     fetch("/api/admin/courses/" + courseId, { method: "DELETE" })
         .then(r => r.json())
         .then(function (data) {
-            alert(data.message || "Course deleted.");
+            alert(data.message || t("Course deleted."));
             loadCourseManagement();
         })
         .catch(function (err) {
@@ -1983,7 +1936,6 @@ function deleteCourseAdmin(courseId, courseCode) {
         });
 }
 
-// Shared helper for inline form messages
 function showFormMessage(el, text, type) {
     if (!el) return;
     el.textContent = text;
