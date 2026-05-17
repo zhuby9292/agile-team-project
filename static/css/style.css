@@ -2588,18 +2588,45 @@ body.dark-mode .app-header {
 }
 .enrollment-banner {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
-    padding: 14px 18px;
-    border-radius: 8px;
+    padding: 16px 20px;
+    border-radius: 10px;
     margin-bottom: 20px;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    flex-wrap: wrap;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 500;
+    flex-wrap: nowrap;
 }
 
 .enrollment-banner__icon {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.enrollment-banner__message {
+    flex: 1;
+}
+
+.enrollment-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.enrollment-banner__actions .btn {
+    min-width: 125px;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.enrollment-banner__icon {
+    font-size: 1.2rem;
     flex-shrink: 0;
     margin-top: 1px;
 }
@@ -2666,23 +2693,25 @@ body.dark-mode .app-header {
    ========================================================================== */
 
 .pending-change-notice {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 12px 14px;
-    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    column-gap: 10px;
+    align-items: start;
+    padding: 14px 16px;
+    border-radius: 10px;
     background-color: #fff3cd;
     border: 1px solid #ffc107;
     color: #856404;
-    font-size: 0.88rem;
-    margin-top: 10px;
-    line-height: 1.45;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 12px;
+    line-height: 1.5;
 }
 
 .pending-change-notice__icon {
-    font-size: 1rem;
-    flex-shrink: 0;
-    margin-top: 1px;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 0;
 }
 
 .dark-mode .pending-change-notice {
@@ -3597,4 +3626,40 @@ body.dark-mode .admin-logout-btn:hover {
 
 .dashboard-panel + .dashboard-panel {
     margin-top: 24px;
+}
+
+/* ===== Fix button color staying dark after click ===== */
+
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn:focus-visible,
+button:focus,
+button:active,
+button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.dashboard-btn-primary:focus,
+.dashboard-btn-primary:active,
+.dashboard-btn-primary.active {
+    background: #183b5b !important;
+    color: white !important;
+    border: none !important;
+}
+
+.dashboard-btn-secondary:focus,
+.dashboard-btn-secondary:active,
+.dashboard-btn-secondary.active {
+    background: white !important;
+    color: #183b5b !important;
+    border: 1px solid #c9d5e1 !important;
+}
+
+.admin-add-btn:focus,
+.admin-add-btn:active,
+.admin-add-btn.active {
+    background: #183b5b !important;
+    color: white !important;
 }
