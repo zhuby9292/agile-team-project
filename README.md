@@ -1,8 +1,8 @@
 # Agile Web Development Team Project
 
-A CITS5505 group project focused on building a course planning web application for students.
+A web-based course planning system developed as part of the CITS5505 Agile Web Development group project at UWA.
 
-The application helps users explore degrees, select courses, and organise their timetable in a simpler and more structured way.
+The application allows students to explore degrees, manage course enrolments, generate timetables, and track semester progression through an interactive dashboard with multi-language support and administrative management features.
 
 ## Features
 
@@ -10,8 +10,11 @@ The application helps users explore degrees, select courses, and organise their 
 - Admin login and admin dashboard
 - Course data loaded from JSON into SQLite database
 - Course search and semester filtering
-- Selected course persistence
+- Persistent course selection and enrollment tracking
 - Timetable CSV download
+- Semester progression workflow with admin approval
+- Enrollment overview and change request management
+- Admin course management and enrollment monitoring
 - English/Chinese language switching
 - Dark mode
 - Pytest unit testing and Selenium browser testing
@@ -77,6 +80,8 @@ agile-team-project/
 │   └── test_selenium.py
 │
 └── translations/
+    └── zh/
+        └── LC_MESSAGES/
 
 ```
 
@@ -150,4 +155,3 @@ The Selenium tests run against a live local Flask server.
 | Aneesh Kumar Bandari | 24553634 | wowitsaneesh |
 | Biying Zhu | 24208028 | zhuby9292 |
 | yonghehu | 24108102 | YongheHu |
-| Fahim Abrar | 24435912 | Fahim-abrar |
