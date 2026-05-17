@@ -1,1471 +1,2802 @@
 [
   {
-    "code": "ENGL1401", "name": "Narratives of Place", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Arts"
+    "code": "ENGL1401",
+    "name": "Narratives of Place",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "ARTS105",
+    "name": "Sociology Foundations",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "HIST1001",
+    "name": "Making History",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "LING1001",
+    "name": "Language and Communication",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "PHIL1002",
+    "name": "Introduction to Critical Thinking",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "COMM2001",
+    "name": "Digital Communication",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "ARTS206",
+    "name": "Cultural Geography",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "ENGL2402",
+    "name": "Modern Literature",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "HIST2103",
+    "name": "Global History",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "PHIL2004",
+    "name": "Ethics and Society",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "ARTS301",
+    "name": "Writing and Research Skills",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "ARTS305",
+    "name": "Postcolonial Literature",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Arts"
+  },
+  {
+    "code": "ARTS302",
+    "name": "World Literature",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS105", "name": "Sociology Foundations", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Arts"
+    "code": "ARTS303",
+    "name": "Media and Culture",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "HIST1001", "name": "Making History", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester1", "degree": "Bachelor of Arts"
+    "code": "ARTS304",
+    "name": "Creative Writing",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "LING1001", "name": "Language and Communication", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Arts"
+    "code": "ARTS401",
+    "name": "Cultural Studies",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "PHIL1002", "name": "Introduction to Critical Thinking", "credits": 6,
-    "time": "Thursday 11:00–13:00", "semester": "semester1", "degree": "Bachelor of Arts"
+    "code": "ARTS405",
+    "name": "Urban Studies",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Arts"
   },
-
   {
-    "code": "COMM2001", "name": "Digital Communication", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Arts"
+    "code": "ARTS402",
+    "name": "Australian History",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS206", "name": "Cultural Geography", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Arts"
+    "code": "ARTS403",
+    "name": "Social Theory",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ENGL2402", "name": "Modern Literature", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Arts"
+    "code": "ARTS404",
+    "name": "Philosophy of Mind",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "HIST2103", "name": "Global History", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Bachelor of Arts"
+    "code": "ARTS501",
+    "name": "Gender and Society",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "PHIL2004", "name": "Ethics and Society", "credits": 6,
-    "time": "Thursday 11:00–13:00", "semester": "semester2", "degree": "Bachelor of Arts"
+    "code": "ARTS505",
+    "name": "Feminist Scholarship",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Arts"
   },
-
   {
-    "code": "ARTS301", "name": "Writing and Research Skills", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Arts"
+    "code": "ARTS502",
+    "name": "Film Studies",
+    "credits": 6,
+    "time": "Friday 10:00–11:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS305", "name": "Postcolonial Literature", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Arts"
+    "code": "ARTS503",
+    "name": "Linguistic Analysis",
+    "credits": 6,
+    "time": "Friday 11:00–12:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS302", "name": "World Literature", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Bachelor of Arts"
+    "code": "ARTS504",
+    "name": "Public Communication",
+    "credits": 6,
+    "time": "Friday 12:00–13:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS303", "name": "Media and Culture", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Bachelor of Arts"
+    "code": "ARTS601",
+    "name": "Political Thought",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS304", "name": "Creative Writing", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Bachelor of Arts"
+    "code": "ARTS605",
+    "name": "Environmental Ethics",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Arts"
   },
-
   {
-    "code": "ARTS401", "name": "Cultural Studies", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Arts"
+    "code": "ARTS602",
+    "name": "Research in the Humanities",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS405", "name": "Urban Studies", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Arts"
+    "code": "ARTS603",
+    "name": "Contemporary Asia",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS402", "name": "Australian History", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Bachelor of Arts"
+    "code": "ARTS604",
+    "name": "Indigenous Studies",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS403", "name": "Social Theory", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Bachelor of Arts"
+    "code": "ARTS701",
+    "name": "Advanced Writing",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS404", "name": "Philosophy of Mind", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Bachelor of Arts"
+    "code": "ARTS705",
+    "name": "Digital Humanities",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Arts"
   },
-
   {
-    "code": "ARTS501", "name": "Gender and Society", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Arts"
+    "code": "ARTS702",
+    "name": "History of Ideas",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS505", "name": "Feminist Scholarship", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Arts"
+    "code": "ARTS703",
+    "name": "Ethics in Practice",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS502", "name": "Film Studies", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester5", "degree": "Bachelor of Arts"
+    "code": "ARTS704",
+    "name": "Capstone in Arts",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS503", "name": "Linguistic Analysis", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester5", "degree": "Bachelor of Arts"
+    "code": "ARTS801",
+    "name": "Global Cultures",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS504", "name": "Public Communication", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester5", "degree": "Bachelor of Arts"
+    "code": "ARTS805",
+    "name": "Interdisciplinary Practice",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Arts"
   },
-
   {
-    "code": "ARTS601", "name": "Political Thought", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Arts"
+    "code": "ARTS802",
+    "name": "Digital Storytelling",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS605", "name": "Environmental Ethics", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Arts"
+    "code": "ARTS803",
+    "name": "Language in Society",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS602", "name": "Research in the Humanities", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester6", "degree": "Bachelor of Arts"
+    "code": "ARTS804",
+    "name": "Professional Arts Practice",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Arts"
   },
   {
-    "code": "ARTS603", "name": "Contemporary Asia", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester6", "degree": "Bachelor of Arts"
+    "code": "ACCT1101",
+    "name": "Financial Accounting",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS604", "name": "Indigenous Studies", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester6", "degree": "Bachelor of Arts"
+    "code": "FNCE1001",
+    "name": "Business Finance",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "ARTS701", "name": "Advanced Writing", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Arts"
+    "code": "ECON1101",
+    "name": "Microeconomics",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS705", "name": "Digital Humanities", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Arts"
+    "code": "MGMT1135",
+    "name": "Organisational Behaviour",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS702", "name": "History of Ideas", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester7", "degree": "Bachelor of Arts"
+    "code": "BUSN105",
+    "name": "Introduction to Taxation",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS703", "name": "Ethics in Practice", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester7", "degree": "Bachelor of Arts"
+    "code": "ACCT2201",
+    "name": "Management Accounting",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS704", "name": "Capstone in Arts", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester7", "degree": "Bachelor of Arts"
+    "code": "MGMT2234",
+    "name": "Business Strategy",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "ARTS801", "name": "Global Cultures", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Arts"
+    "code": "ECON2202",
+    "name": "Macroeconomics",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS805", "name": "Interdisciplinary Practice", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Arts"
+    "code": "MKTG1203",
+    "name": "Marketing Principles",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS802", "name": "Digital Storytelling", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester8", "degree": "Bachelor of Arts"
+    "code": "BUSN205",
+    "name": "Business Communication",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS803", "name": "Language in Society", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester8", "degree": "Bachelor of Arts"
+    "code": "BUSN301",
+    "name": "Business Statistics",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ARTS804", "name": "Professional Arts Practice", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester8", "degree": "Bachelor of Arts"
+    "code": "BUSN305",
+    "name": "Globalisation and Business",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "ACCT1101", "name": "Financial Accounting", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Commerce"
+    "code": "BUSN302",
+    "name": "Consumer Behaviour",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "FNCE1001", "name": "Business Finance", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Commerce"
+    "code": "BUSN303",
+    "name": "Corporate Finance",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ECON1101", "name": "Microeconomics", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Commerce"
+    "code": "BUSN304",
+    "name": "Business Law",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "MGMT1135", "name": "Organisational Behaviour", "credits": 6,
-    "time": "Friday 12:00–14:00", "semester": "semester1", "degree": "Bachelor of Commerce"
+    "code": "BUSN401",
+    "name": "Human Resource Management",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN105", "name": "Introduction to Taxation", "credits": 6,
-    "time": "Friday 11:00–13:00", "semester": "semester1", "degree": "Bachelor of Commerce"
+    "code": "BUSN405",
+    "name": "Procurement Management",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "ACCT2201", "name": "Management Accounting", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Bachelor of Commerce"
+    "code": "BUSN402",
+    "name": "International Business",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "MGMT2234", "name": "Business Strategy", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Bachelor of Commerce"
+    "code": "BUSN403",
+    "name": "Cost Accounting",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "ECON2202", "name": "Macroeconomics", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Commerce"
+    "code": "BUSN404",
+    "name": "Operations Management",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "MKTG1203", "name": "Marketing Principles", "credits": 6,
-    "time": "Thursday 11:00–13:00", "semester": "semester2", "degree": "Bachelor of Commerce"
+    "code": "BUSN501",
+    "name": "Taxation Principles",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN205", "name": "Business Communication", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester2", "degree": "Bachelor of Commerce"
+    "code": "BUSN505",
+    "name": "Wealth Management",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "BUSN301", "name": "Business Statistics", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Commerce"
+    "code": "BUSN502",
+    "name": "Entrepreneurship",
+    "credits": 6,
+    "time": "Friday 10:00–11:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN305", "name": "Globalisation and Business", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Commerce"
+    "code": "BUSN503",
+    "name": "Investment Analysis",
+    "credits": 6,
+    "time": "Friday 11:00–12:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN302", "name": "Consumer Behaviour", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Bachelor of Commerce"
+    "code": "BUSN504",
+    "name": "Data Analytics for Business",
+    "credits": 6,
+    "time": "Friday 12:00–13:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN303", "name": "Corporate Finance", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Bachelor of Commerce"
+    "code": "BUSN601",
+    "name": "Leadership and Change",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN304", "name": "Business Law", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Bachelor of Commerce"
+    "code": "BUSN605",
+    "name": "Corporate Governance",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "BUSN401", "name": "Human Resource Management", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Commerce"
+    "code": "BUSN602",
+    "name": "Strategic Marketing",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN405", "name": "Procurement Management", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Commerce"
+    "code": "BUSN603",
+    "name": "Auditing",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN402", "name": "International Business", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Bachelor of Commerce"
+    "code": "BUSN604",
+    "name": "Business Information Systems",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN403", "name": "Cost Accounting", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Bachelor of Commerce"
+    "code": "BUSN701",
+    "name": "Business Ethics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN404", "name": "Operations Management", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Bachelor of Commerce"
+    "code": "BUSN705",
+    "name": "Advanced Taxation",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "BUSN501", "name": "Taxation Principles", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Commerce"
+    "code": "BUSN702",
+    "name": "Project Management",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN505", "name": "Wealth Management", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Commerce"
+    "code": "BUSN703",
+    "name": "Global Strategy",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN502", "name": "Entrepreneurship", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester5", "degree": "Bachelor of Commerce"
+    "code": "BUSN704",
+    "name": "Commerce Capstone",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN503", "name": "Investment Analysis", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester5", "degree": "Bachelor of Commerce"
+    "code": "BUSN801",
+    "name": "Risk Management",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN504", "name": "Data Analytics for Business", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester5", "degree": "Bachelor of Commerce"
+    "code": "BUSN805",
+    "name": "International Finance",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Commerce"
   },
-
   {
-    "code": "BUSN601", "name": "Leadership and Change", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Commerce"
+    "code": "BUSN802",
+    "name": "Financial Markets",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN605", "name": "Corporate Governance", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Commerce"
+    "code": "BUSN803",
+    "name": "Service Management",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN602", "name": "Strategic Marketing", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester6", "degree": "Bachelor of Commerce"
+    "code": "BUSN804",
+    "name": "Sustainable Business",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Commerce"
   },
   {
-    "code": "BUSN603", "name": "Auditing", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester6", "degree": "Bachelor of Commerce"
+    "code": "CHEM1002",
+    "name": "Chemistry Foundations",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN604", "name": "Business Information Systems", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester6", "degree": "Bachelor of Commerce"
+    "code": "SCIE1106",
+    "name": "Molecular Biology of the Cell",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "BUSN701", "name": "Business Ethics", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Commerce"
+    "code": "MATH1011",
+    "name": "Mathematical Methods",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN705", "name": "Advanced Taxation", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Commerce"
+    "code": "STAT1400",
+    "name": "Statistics for Science",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN702", "name": "Project Management", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester7", "degree": "Bachelor of Commerce"
+    "code": "SCIE105",
+    "name": "Environmental Chemistry",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN703", "name": "Global Strategy", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester7", "degree": "Bachelor of Commerce"
+    "code": "BIOL2201",
+    "name": "Genetics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN704", "name": "Commerce Capstone", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester7", "degree": "Bachelor of Commerce"
+    "code": "MATH2202",
+    "name": "Linear Algebra",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "BUSN801", "name": "Risk Management", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Commerce"
+    "code": "PHYS1101",
+    "name": "Physics Fundamentals",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN805", "name": "International Finance", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Commerce"
+    "code": "STAT2401",
+    "name": "Applied Statistics",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN802", "name": "Financial Markets", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester8", "degree": "Bachelor of Commerce"
+    "code": "SCIE205",
+    "name": "Evolutionary Biology",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN803", "name": "Service Management", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester8", "degree": "Bachelor of Commerce"
+    "code": "SCIE301",
+    "name": "Scientific Practice",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "BUSN804", "name": "Sustainable Business", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester8", "degree": "Bachelor of Commerce"
+    "code": "SCIE305",
+    "name": "Geoscience",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "CHEM1002", "name": "Chemistry Foundations", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester1", "degree": "Bachelor of Science"
+    "code": "SCIE302",
+    "name": "Earth Systems",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE1106", "name": "Molecular Biology of the Cell", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester1", "degree": "Bachelor of Science"
+    "code": "SCIE303",
+    "name": "Environmental Biology",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "MATH1011", "name": "Mathematical Methods", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Science"
+    "code": "SCIE304",
+    "name": "Calculus for Science",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "STAT1400", "name": "Statistics for Science", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Science"
+    "code": "SCIE401",
+    "name": "Organic Chemistry",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE105", "name": "Environmental Chemistry", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Science"
+    "code": "SCIE405",
+    "name": "Physical Chemistry",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "BIOL2201", "name": "Genetics", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Science"
+    "code": "SCIE402",
+    "name": "Ecology",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "MATH2202", "name": "Linear Algebra", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Science"
+    "code": "SCIE403",
+    "name": "Data Analysis in Science",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "PHYS1101", "name": "Physics Fundamentals", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester2", "degree": "Bachelor of Science"
+    "code": "SCIE404",
+    "name": "Experimental Design",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "STAT2401", "name": "Applied Statistics", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester2", "degree": "Bachelor of Science"
+    "code": "SCIE501",
+    "name": "Microbiology",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE205", "name": "Evolutionary Biology", "credits": 6,
-    "time": "Monday 11:00–13:00", "semester": "semester2", "degree": "Bachelor of Science"
+    "code": "SCIE505",
+    "name": "Immunology",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "SCIE301", "name": "Scientific Practice", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Science"
+    "code": "SCIE502",
+    "name": "Cell Biology",
+    "credits": 6,
+    "time": "Friday 10:00–11:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE305", "name": "Geoscience", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Science"
+    "code": "SCIE503",
+    "name": "Astrophysics",
+    "credits": 6,
+    "time": "Friday 11:00–12:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE302", "name": "Earth Systems", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Bachelor of Science"
+    "code": "SCIE504",
+    "name": "Scientific Computing",
+    "credits": 6,
+    "time": "Friday 12:00–13:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE303", "name": "Environmental Biology", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Bachelor of Science"
+    "code": "SCIE601",
+    "name": "Advanced Genetics",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE304", "name": "Calculus for Science", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Bachelor of Science"
+    "code": "SCIE605",
+    "name": "Virology",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "SCIE401", "name": "Organic Chemistry", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Science"
+    "code": "SCIE602",
+    "name": "Environmental Modelling",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE405", "name": "Physical Chemistry", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Science"
+    "code": "SCIE603",
+    "name": "Biotechnology",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE402", "name": "Ecology", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Bachelor of Science"
+    "code": "SCIE604",
+    "name": "Mathematical Modelling",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE403", "name": "Data Analysis in Science", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Bachelor of Science"
+    "code": "SCIE701",
+    "name": "Research Methods in Science",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE404", "name": "Experimental Design", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Bachelor of Science"
+    "code": "SCIE705",
+    "name": "Biochemistry Advanced",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "SCIE501", "name": "Microbiology", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Science"
+    "code": "SCIE702",
+    "name": "Advanced Statistics",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE505", "name": "Immunology", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Science"
+    "code": "SCIE703",
+    "name": "Science Communication",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE502", "name": "Cell Biology", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester5", "degree": "Bachelor of Science"
+    "code": "SCIE704",
+    "name": "Science Capstone",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE503", "name": "Astrophysics", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester5", "degree": "Bachelor of Science"
+    "code": "SCIE801",
+    "name": "Marine Science",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE504", "name": "Scientific Computing", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester5", "degree": "Bachelor of Science"
+    "code": "SCIE805",
+    "name": "Applied Physics",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Science"
   },
-
   {
-    "code": "SCIE601", "name": "Advanced Genetics", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Science"
+    "code": "SCIE802",
+    "name": "Quantum Concepts",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE605", "name": "Virology", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Science"
+    "code": "SCIE803",
+    "name": "Computational Biology",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE602", "name": "Environmental Modelling", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester6", "degree": "Bachelor of Science"
+    "code": "SCIE804",
+    "name": "Climate Science",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Science"
   },
   {
-    "code": "SCIE603", "name": "Biotechnology", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester6", "degree": "Bachelor of Science"
+    "code": "ANHB1101",
+    "name": "Human Biology I",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE604", "name": "Mathematical Modelling", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester6", "degree": "Bachelor of Science"
+    "code": "MICR1101",
+    "name": "Introduction to Microbiology",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "SCIE701", "name": "Research Methods in Science", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Science"
+    "code": "CHEM1001",
+    "name": "Chemistry for Life Sciences",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE705", "name": "Biochemistry Advanced", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Science"
+    "code": "IMED1001",
+    "name": "Form and Function",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE702", "name": "Advanced Statistics", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester7", "degree": "Bachelor of Science"
+    "code": "BMED105",
+    "name": "Biomedical Communication",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE703", "name": "Science Communication", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester7", "degree": "Bachelor of Science"
+    "code": "BIOC2001",
+    "name": "Biochemistry",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE704", "name": "Science Capstone", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester7", "degree": "Bachelor of Science"
+    "code": "PATH2001",
+    "name": "Pathology Basics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "SCIE801", "name": "Marine Science", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Science"
+    "code": "ANHB2203",
+    "name": "Advanced Anatomy",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE805", "name": "Applied Physics", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Science"
+    "code": "PHYL2002",
+    "name": "Human Physiology",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE802", "name": "Quantum Concepts", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester8", "degree": "Bachelor of Science"
+    "code": "BMED205",
+    "name": "Clinical Communication",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE803", "name": "Computational Biology", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester8", "degree": "Bachelor of Science"
+    "code": "BMED301",
+    "name": "Biomedical Skills",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "SCIE804", "name": "Climate Science", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester8", "degree": "Bachelor of Science"
+    "code": "BMED305",
+    "name": "Histology",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "ANHB1101", "name": "Human Biology I", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED302",
+    "name": "Human Genetics",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "MICR1101", "name": "Introduction to Microbiology", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED303",
+    "name": "Health and Disease",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "CHEM1001", "name": "Chemistry for Life Sciences", "credits": 6,
-    "time": "Tuesday 12:00–14:00", "semester": "semester1", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED304",
+    "name": "Foundations of Pharmacology",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "IMED1001", "name": "Form and Function", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester1", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED401",
+    "name": "Immunology",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED105", "name": "Biomedical Communication", "credits": 6,
-    "time": "Wednesday 11:00–13:00", "semester": "semester1", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED405",
+    "name": "Cardiovascular Science",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "BIOC2001", "name": "Biochemistry", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED402",
+    "name": "Molecular Medicine",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "PATH2001", "name": "Pathology Basics", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED403",
+    "name": "Medical Biochemistry",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "ANHB2203", "name": "Advanced Anatomy", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester2", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED404",
+    "name": "Neuroscience",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "PHYL2002", "name": "Human Physiology", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED501",
+    "name": "Infection and Immunity",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED205", "name": "Clinical Communication", "credits": 6,
-    "time": "Friday 11:00–13:00", "semester": "semester2", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED505",
+    "name": "Haematology",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "BMED301", "name": "Biomedical Skills", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED502",
+    "name": "Clinical Anatomy",
+    "credits": 6,
+    "time": "Friday 10:00–11:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED305", "name": "Histology", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED503",
+    "name": "Laboratory Medicine",
+    "credits": 6,
+    "time": "Friday 11:00–12:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED302", "name": "Human Genetics", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED504",
+    "name": "Epidemiology",
+    "credits": 6,
+    "time": "Friday 12:00–13:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED303", "name": "Health and Disease", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED601",
+    "name": "Advanced Physiology",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED304", "name": "Foundations of Pharmacology", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED605",
+    "name": "Genomics",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "BMED401", "name": "Immunology", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED602",
+    "name": "Cancer Biology",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED405", "name": "Cardiovascular Science", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED603",
+    "name": "Toxicology",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED402", "name": "Molecular Medicine", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED604",
+    "name": "Medical Research Methods",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED403", "name": "Medical Biochemistry", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED701",
+    "name": "Biomedical Data Analysis",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED404", "name": "Neuroscience", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED705",
+    "name": "Stem Cell Biology",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "BMED501", "name": "Infection and Immunity", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED702",
+    "name": "Translational Medicine",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED505", "name": "Haematology", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED703",
+    "name": "Clinical Pathology",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED502", "name": "Clinical Anatomy", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester5", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED704",
+    "name": "Biomedical Science Capstone",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED503", "name": "Laboratory Medicine", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester5", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED801",
+    "name": "Diagnostic Science",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED504", "name": "Epidemiology", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester5", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED805",
+    "name": "Biomedical Imaging",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Biomedical Science"
   },
-
   {
-    "code": "BMED601", "name": "Advanced Physiology", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED802",
+    "name": "Reproductive Biology",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED605", "name": "Genomics", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED803",
+    "name": "Advanced Microbiology",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED602", "name": "Cancer Biology", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester6", "degree": "Bachelor of Biomedical Science"
+    "code": "BMED804",
+    "name": "Public Health Biology",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Biomedical Science"
   },
   {
-    "code": "BMED603", "name": "Toxicology", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester6", "degree": "Bachelor of Biomedical Science"
+    "code": "CITS1001",
+    "name": "Programming Fundamentals",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED604", "name": "Medical Research Methods", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester6", "degree": "Bachelor of Biomedical Science"
+    "code": "ENGG1100",
+    "name": "Engineering Design",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "BMED701", "name": "Biomedical Data Analysis", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Biomedical Science"
+    "code": "MATH1012",
+    "name": "Engineering Mathematics",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED705", "name": "Stem Cell Biology", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Biomedical Science"
+    "code": "PHYS1001",
+    "name": "Physics for Engineers",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED702", "name": "Translational Medicine", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester7", "degree": "Bachelor of Biomedical Science"
+    "code": "ENGG105",
+    "name": "Engineering Ethics",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED703", "name": "Clinical Pathology", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester7", "degree": "Bachelor of Biomedical Science"
+    "code": "ENGG2201",
+    "name": "Engineering Mechanics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED704", "name": "Biomedical Science Capstone", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester7", "degree": "Bachelor of Biomedical Science"
+    "code": "MECH2201",
+    "name": "Thermodynamics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "BMED801", "name": "Diagnostic Science", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Biomedical Science"
+    "code": "CIVL1102",
+    "name": "Structural Engineering Basics",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED805", "name": "Biomedical Imaging", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Biomedical Science"
+    "code": "ELEC2203",
+    "name": "Electrical Systems",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED802", "name": "Reproductive Biology", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester8", "degree": "Bachelor of Biomedical Science"
+    "code": "ENGG205",
+    "name": "Technical Communication",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED803", "name": "Advanced Microbiology", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester8", "degree": "Bachelor of Biomedical Science"
+    "code": "ENGG301",
+    "name": "Engineering Computing",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "BMED804", "name": "Public Health Biology", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester8", "degree": "Bachelor of Biomedical Science"
+    "code": "ENGG305",
+    "name": "CAD Fundamentals",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "CITS1001", "name": "Programming Fundamentals", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Engineering"
+    "code": "ENGG302",
+    "name": "Materials Engineering",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG1100", "name": "Engineering Design", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Engineering"
+    "code": "ENGG303",
+    "name": "Systems Engineering",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "MATH1012", "name": "Engineering Mathematics", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester1", "degree": "Bachelor of Engineering"
+    "code": "ENGG304",
+    "name": "Engineering Drawing",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "PHYS1001", "name": "Physics for Engineers", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Engineering"
+    "code": "ENGG401",
+    "name": "Fluid Mechanics",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG105", "name": "Engineering Ethics", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester1", "degree": "Bachelor of Engineering"
+    "code": "ENGG405",
+    "name": "Environmental Engineering",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "ENGG2201", "name": "Engineering Mechanics", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Engineering"
+    "code": "ENGG402",
+    "name": "Digital Systems",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "MECH2201", "name": "Thermodynamics", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester2", "degree": "Bachelor of Engineering"
+    "code": "ENGG403",
+    "name": "Surveying and Design",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "CIVL1102", "name": "Structural Engineering Basics", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester2", "degree": "Bachelor of Engineering"
+    "code": "ENGG404",
+    "name": "Engineering Statistics",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ELEC2203", "name": "Electrical Systems", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester2", "degree": "Bachelor of Engineering"
+    "code": "ENGG501",
+    "name": "Control Systems",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG205", "name": "Technical Communication", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester2", "degree": "Bachelor of Engineering"
+    "code": "ENGG505",
+    "name": "Mechatronics",
+    "credits": 6,
+    "time": "Friday 09:00–10:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "ENGG301", "name": "Engineering Computing", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Engineering"
+    "code": "ENGG502",
+    "name": "Project Design",
+    "credits": 6,
+    "time": "Friday 10:00–11:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG305", "name": "CAD Fundamentals", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Bachelor of Engineering"
+    "code": "ENGG503",
+    "name": "Geotechnical Engineering",
+    "credits": 6,
+    "time": "Friday 11:00–12:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG302", "name": "Materials Engineering", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Bachelor of Engineering"
+    "code": "ENGG504",
+    "name": "Signals and Systems",
+    "credits": 6,
+    "time": "Friday 12:00–13:00",
+    "semester": "semester5",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG303", "name": "Systems Engineering", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Bachelor of Engineering"
+    "code": "ENGG601",
+    "name": "Heat Transfer",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG304", "name": "Engineering Drawing", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Bachelor of Engineering"
+    "code": "ENGG605",
+    "name": "Smart Grids",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "ENGG401", "name": "Fluid Mechanics", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Engineering"
+    "code": "ENGG602",
+    "name": "Software for Engineers",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG405", "name": "Environmental Engineering", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Bachelor of Engineering"
+    "code": "ENGG603",
+    "name": "Transport Engineering",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG402", "name": "Digital Systems", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Bachelor of Engineering"
+    "code": "ENGG604",
+    "name": "Renewable Energy Systems",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester6",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG403", "name": "Surveying and Design", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Bachelor of Engineering"
+    "code": "ENGG701",
+    "name": "Engineering Management",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG404", "name": "Engineering Statistics", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Bachelor of Engineering"
+    "code": "ENGG705",
+    "name": "Innovation and Entrepreneurship",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "ENGG501", "name": "Control Systems", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Engineering"
+    "code": "ENGG702",
+    "name": "Professional Engineering Practice",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG505", "name": "Mechatronics", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester5", "degree": "Bachelor of Engineering"
+    "code": "ENGG703",
+    "name": "Advanced Design Project",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG502", "name": "Project Design", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester5", "degree": "Bachelor of Engineering"
+    "code": "ENGG704",
+    "name": "Engineering Capstone",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester7",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG503", "name": "Geotechnical Engineering", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester5", "degree": "Bachelor of Engineering"
+    "code": "ENGG801",
+    "name": "Robotics Fundamentals",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG504", "name": "Signals and Systems", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester5", "degree": "Bachelor of Engineering"
+    "code": "ENGG805",
+    "name": "Advanced Robotics",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Engineering"
   },
-
   {
-    "code": "ENGG601", "name": "Heat Transfer", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Engineering"
+    "code": "ENGG802",
+    "name": "Water Engineering",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG605", "name": "Smart Grids", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester6", "degree": "Bachelor of Engineering"
+    "code": "ENGG803",
+    "name": "Power Systems",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG602", "name": "Software for Engineers", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester6", "degree": "Bachelor of Engineering"
+    "code": "ENGG804",
+    "name": "Manufacturing Processes",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester8",
+    "degree": "Bachelor of Engineering"
   },
   {
-    "code": "ENGG603", "name": "Transport Engineering", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester6", "degree": "Bachelor of Engineering"
+    "code": "CITS5206",
+    "name": "IT Project Management",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG604", "name": "Renewable Energy Systems", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester6", "degree": "Bachelor of Engineering"
+    "code": "CITS5505",
+    "name": "Agile Web Development",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Information Technology"
   },
-
   {
-    "code": "ENGG701", "name": "Engineering Management", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Engineering"
+    "code": "CITS5504",
+    "name": "Data Warehousing",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG705", "name": "Innovation and Entrepreneurship", "credits": 6,
-    "time": "Tuesday 09:00–11:00", "semester": "semester7", "degree": "Bachelor of Engineering"
+    "code": "CITS5508",
+    "name": "Machine Learning",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG702", "name": "Professional Engineering Practice", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester7", "degree": "Bachelor of Engineering"
+    "code": "CITS5509",
+    "name": "Internet of Things",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG703", "name": "Advanced Design Project", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester7", "degree": "Bachelor of Engineering"
+    "code": "CITS3003",
+    "name": "Graphics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG704", "name": "Engineering Capstone", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester7", "degree": "Bachelor of Engineering"
+    "code": "CITS4407",
+    "name": "Open Source Tools",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Information Technology"
   },
-
   {
-    "code": "ENGG801", "name": "Robotics Fundamentals", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Engineering"
+    "code": "CITS3002",
+    "name": "Networks",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG805", "name": "Advanced Robotics", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester8", "degree": "Bachelor of Engineering"
+    "code": "CITS4012",
+    "name": "Distributed Computing",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG802", "name": "Water Engineering", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester8", "degree": "Bachelor of Engineering"
+    "code": "CITS5001",
+    "name": "Blockchain Technology",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG803", "name": "Power Systems", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester8", "degree": "Bachelor of Engineering"
+    "code": "CITS301",
+    "name": "Software Requirements",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "ENGG804", "name": "Manufacturing Processes", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester8", "degree": "Bachelor of Engineering"
+    "code": "CITS305",
+    "name": "DevOps Engineering",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Information Technology"
   },
-
   {
-    "code": "CITS5206", "name": "IT Project Management", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Master of Information Technology"
+    "code": "CITS302",
+    "name": "Cloud Computing",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS5505", "name": "Agile Web Development", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Master of Information Technology"
+    "code": "CITS303",
+    "name": "Cybersecurity",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS5504", "name": "Data Warehousing", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester1", "degree": "Master of Information Technology"
+    "code": "CITS304",
+    "name": "Database Systems",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS5508", "name": "Machine Learning", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester1", "degree": "Master of Information Technology"
+    "code": "CITS401",
+    "name": "Software Testing",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS5509", "name": "Internet of Things", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester1", "degree": "Master of Information Technology"
+    "code": "CITS405",
+    "name": "IT Governance",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Information Technology"
   },
-
   {
-    "code": "CITS3003", "name": "Graphics", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Information Technology"
+    "code": "CITS402",
+    "name": "Human Computer Interaction",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS4407", "name": "Open Source Tools", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Information Technology"
+    "code": "CITS403",
+    "name": "Advanced Algorithms",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS3002", "name": "Networks", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester2", "degree": "Master of Information Technology"
+    "code": "CITS404",
+    "name": "Capstone Project",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Master of Information Technology"
   },
   {
-    "code": "CITS4012", "name": "Distributed Computing", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester2", "degree": "Master of Information Technology"
+    "code": "DATA103",
+    "name": "Programming for Data Science",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS5001", "name": "Blockchain Technology", "credits": 6,
-    "time": "Friday 11:00–13:00", "semester": "semester2", "degree": "Master of Information Technology"
+    "code": "DATA105",
+    "name": "Introduction to AI",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Data Science"
   },
-
   {
-    "code": "CITS301", "name": "Software Requirements", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Information Technology"
+    "code": "DATA104",
+    "name": "Data Wrangling",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS305", "name": "DevOps Engineering", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Information Technology"
+    "code": "DATA5508",
+    "name": "Machine Learning",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS302", "name": "Cloud Computing", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Master of Information Technology"
+    "code": "STAT4066",
+    "name": "Bayesian Computing and Statistics",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS303", "name": "Cybersecurity", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Master of Information Technology"
+    "code": "DATA202",
+    "name": "Data Visualisation",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS304", "name": "Database Systems", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Master of Information Technology"
+    "code": "DATA205",
+    "name": "Graph Analytics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Data Science"
   },
-
   {
-    "code": "CITS401", "name": "Software Testing", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Information Technology"
+    "code": "DATA203",
+    "name": "Statistical Learning",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS405", "name": "IT Governance", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Information Technology"
+    "code": "DATA204",
+    "name": "Big Data Analytics",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS402", "name": "Human Computer Interaction", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Master of Information Technology"
+    "code": "DATA5001",
+    "name": "Data Science Principles",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS403", "name": "Advanced Algorithms", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Master of Information Technology"
+    "code": "DATA301",
+    "name": "Database Management",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "CITS404", "name": "Capstone Project", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Master of Information Technology"
+    "code": "DATA305",
+    "name": "Explainable AI",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Data Science"
   },
-
   {
-    "code": "DATA103", "name": "Programming for Data Science", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Data Science"
+    "code": "DATA302",
+    "name": "Natural Language Processing",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "DATA105", "name": "Introduction to AI", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Data Science"
+    "code": "DATA303",
+    "name": "Deep Learning",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "DATA104", "name": "Data Wrangling", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester1", "degree": "Master of Data Science"
+    "code": "DATA304",
+    "name": "Cloud Data Engineering",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "DATA5508", "name": "Machine Learning", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Master of Data Science"
+    "code": "DATA401",
+    "name": "Time Series Forecasting",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "STAT4066", "name": "Bayesian Computing and Statistics", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester1", "degree": "Master of Data Science"
+    "code": "DATA405",
+    "name": "AI in Healthcare",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Data Science"
   },
-
   {
-    "code": "DATA202", "name": "Data Visualisation", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Data Science"
+    "code": "DATA402",
+    "name": "Data Ethics",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "DATA205", "name": "Graph Analytics", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Data Science"
+    "code": "DATA403",
+    "name": "Data Science Capstone",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "DATA203", "name": "Statistical Learning", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Master of Data Science"
+    "code": "DATA404",
+    "name": "Business Intelligence",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Master of Data Science"
   },
   {
-    "code": "DATA204", "name": "Big Data Analytics", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Master of Data Science"
+    "code": "BUSA103",
+    "name": "Analytics Programming",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA5001", "name": "Data Science Principles", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester2", "degree": "Master of Data Science"
+    "code": "BUSA105",
+    "name": "Introduction to Business Intelligence",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Business Analytics"
   },
-
   {
-    "code": "DATA301", "name": "Database Management", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Data Science"
+    "code": "BUSA104",
+    "name": "Business Statistics",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA305", "name": "Explainable AI", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Data Science"
+    "code": "BUSN5001",
+    "name": "Business Analytics Foundations",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA302", "name": "Natural Language Processing", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Master of Data Science"
+    "code": "MKTG5502",
+    "name": "Marketing Analytics",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA303", "name": "Deep Learning", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Master of Data Science"
+    "code": "BUSA204",
+    "name": "Customer Analytics",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA304", "name": "Cloud Data Engineering", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Master of Data Science"
+    "code": "MGMT5504",
+    "name": "Data Analysis and Decision Making",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Business Analytics"
   },
-
   {
-    "code": "DATA401", "name": "Time Series Forecasting", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Data Science"
+    "code": "BUSA202",
+    "name": "Predictive Analytics",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA405", "name": "AI in Healthcare", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Data Science"
+    "code": "BUSA203",
+    "name": "Data Management",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA402", "name": "Data Ethics", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Master of Data Science"
+    "code": "BUSA205",
+    "name": "Market Research Analytics",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA403", "name": "Data Science Capstone", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Master of Data Science"
+    "code": "BUSA301",
+    "name": "Operations Analytics",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "DATA404", "name": "Business Intelligence", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Master of Data Science"
+    "code": "BUSA305",
+    "name": "Supply Chain Analytics",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Business Analytics"
   },
-
   {
-    "code": "BUSA103", "name": "Analytics Programming", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Business Analytics"
+    "code": "BUSA302",
+    "name": "Financial Analytics",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "BUSA105", "name": "Introduction to Business Intelligence", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Business Analytics"
+    "code": "BUSA303",
+    "name": "Visual Analytics",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "BUSA104", "name": "Business Statistics", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester1", "degree": "Master of Business Analytics"
+    "code": "BUSA304",
+    "name": "Decision Modelling",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "BUSN5001", "name": "Business Analytics Foundations", "credits": 6,
-    "time": "Monday 11:00–13:00", "semester": "semester1", "degree": "Master of Business Analytics"
+    "code": "BUSA401",
+    "name": "Risk Analytics",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "MKTG5502", "name": "Marketing Analytics", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester1", "degree": "Master of Business Analytics"
+    "code": "BUSA405",
+    "name": "HR Analytics",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Business Analytics"
   },
-
   {
-    "code": "BUSA204", "name": "Customer Analytics", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Master of Business Analytics"
+    "code": "BUSA402",
+    "name": "Strategy and Analytics",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "MGMT5504", "name": "Data Analysis and Decision Making", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Master of Business Analytics"
+    "code": "BUSA403",
+    "name": "Analytics Capstone",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "BUSA202", "name": "Predictive Analytics", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Business Analytics"
+    "code": "BUSA404",
+    "name": "People Analytics",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Master of Business Analytics"
   },
   {
-    "code": "BUSA203", "name": "Data Management", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Master of Business Analytics"
+    "code": "GENG5507",
+    "name": "Risk, Reliability and Safety",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA205", "name": "Market Research Analytics", "credits": 6,
-    "time": "Wednesday 11:00–13:00", "semester": "semester2", "degree": "Master of Business Analytics"
+    "code": "MPE103",
+    "name": "Engineering Analysis",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Professional Engineering"
   },
-
   {
-    "code": "BUSA301", "name": "Operations Analytics", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Business Analytics"
+    "code": "ENGG5501",
+    "name": "Engineering Practice",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA305", "name": "Supply Chain Analytics", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Business Analytics"
+    "code": "MPE104",
+    "name": "Systems Safety",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA302", "name": "Financial Analytics", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Master of Business Analytics"
+    "code": "MPE105",
+    "name": "Engineering Innovation",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA303", "name": "Visual Analytics", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Master of Business Analytics"
+    "code": "MPE202",
+    "name": "Professional Practice",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA304", "name": "Decision Modelling", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Master of Business Analytics"
+    "code": "MPE205",
+    "name": "Asset Management",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Professional Engineering"
   },
-
   {
-    "code": "BUSA401", "name": "Risk Analytics", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Business Analytics"
+    "code": "CIVL5502",
+    "name": "Advanced Structural Analysis",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA405", "name": "HR Analytics", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Business Analytics"
+    "code": "MPE203",
+    "name": "Engineering Modelling",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA402", "name": "Strategy and Analytics", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Master of Business Analytics"
+    "code": "MPE204",
+    "name": "Advanced Fluid Systems",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA403", "name": "Analytics Capstone", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Master of Business Analytics"
+    "code": "MPE301",
+    "name": "Project Management for Engineers",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "BUSA404", "name": "People Analytics", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Master of Business Analytics"
+    "code": "MPE305",
+    "name": "Digital Twin Technologies",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Professional Engineering"
   },
-
   {
-    "code": "GENG5507", "name": "Risk, Reliability and Safety", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Professional Engineering"
+    "code": "MPE302",
+    "name": "Sustainable Engineering",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "MPE103", "name": "Engineering Analysis", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Professional Engineering"
+    "code": "MPE303",
+    "name": "Control and Automation",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "ENGG5501", "name": "Engineering Practice", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester1", "degree": "Master of Professional Engineering"
+    "code": "MPE304",
+    "name": "Advanced Materials",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "MPE104", "name": "Systems Safety", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester1", "degree": "Master of Professional Engineering"
+    "code": "MPE401",
+    "name": "Infrastructure Planning",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "MPE105", "name": "Engineering Innovation", "credits": 6,
-    "time": "Thursday 11:00–13:00", "semester": "semester1", "degree": "Master of Professional Engineering"
+    "code": "MPE405",
+    "name": "Engineering Leadership",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Professional Engineering"
   },
-
   {
-    "code": "MPE202", "name": "Professional Practice", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Professional Engineering"
+    "code": "MPE402",
+    "name": "Energy Systems",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "MPE205", "name": "Asset Management", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Master of Professional Engineering"
+    "code": "MPE403",
+    "name": "Engineering Design Project",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "CIVL5502", "name": "Advanced Structural Analysis", "credits": 6,
-    "time": "Friday 09:00–11:00", "semester": "semester2", "degree": "Master of Professional Engineering"
+    "code": "MPE404",
+    "name": "Research Methods for Engineers",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Master of Professional Engineering"
   },
   {
-    "code": "MPE203", "name": "Engineering Modelling", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Master of Professional Engineering"
+    "code": "STUD102",
+    "name": "Academic Communication",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE204", "name": "Advanced Fluid Systems", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Master of Professional Engineering"
+    "code": "STUD5001",
+    "name": "Research Methods",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Master of Studies"
   },
-
   {
-    "code": "MPE301", "name": "Project Management for Engineers", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Professional Engineering"
+    "code": "STUD103",
+    "name": "Research Design",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE305", "name": "Digital Twin Technologies", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Professional Engineering"
+    "code": "STUD104",
+    "name": "Critical Inquiry",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE302", "name": "Sustainable Engineering", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Master of Professional Engineering"
+    "code": "STUD105",
+    "name": "Scholarly Writing",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE303", "name": "Control and Automation", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Master of Professional Engineering"
+    "code": "STUD203",
+    "name": "Independent Study A",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE304", "name": "Advanced Materials", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Master of Professional Engineering"
+    "code": "STUD205",
+    "name": "Advanced Seminar II",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Master of Studies"
   },
-
   {
-    "code": "MPE401", "name": "Infrastructure Planning", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Professional Engineering"
+    "code": "STUD204",
+    "name": "Advanced Seminar",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE405", "name": "Engineering Leadership", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Professional Engineering"
+    "code": "STUD5002",
+    "name": "Advanced Academic Practice",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE402", "name": "Energy Systems", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Master of Professional Engineering"
+    "code": "STUD5003",
+    "name": "Project Preparation",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE403", "name": "Engineering Design Project", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Master of Professional Engineering"
+    "code": "STUD301",
+    "name": "Professional Practice",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Studies"
   },
   {
-    "code": "MPE404", "name": "Research Methods for Engineers", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Master of Professional Engineering"
+    "code": "STUD305",
+    "name": "Field Research Methods",
+    "credits": 6,
+    "time": "Wednesday 09:00–10:00",
+    "semester": "semester3",
+    "degree": "Master of Studies"
   },
-
   {
-    "code": "STUD102", "name": "Academic Communication", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Master of Studies"
+    "code": "STUD302",
+    "name": "Independent Study B",
+    "credits": 6,
+    "time": "Wednesday 10:00–11:00",
+    "semester": "semester3",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD5001", "name": "Research Methods", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Master of Studies"
+    "code": "STUD303",
+    "name": "Research Project",
+    "credits": 6,
+    "time": "Wednesday 11:00–12:00",
+    "semester": "semester3",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD103", "name": "Research Design", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Master of Studies"
+    "code": "STUD304",
+    "name": "Discipline Studies A",
+    "credits": 6,
+    "time": "Wednesday 12:00–13:00",
+    "semester": "semester3",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD104", "name": "Critical Inquiry", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester1", "degree": "Master of Studies"
+    "code": "STUD401",
+    "name": "Discipline Studies B",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD105", "name": "Scholarly Writing", "credits": 6,
-    "time": "Tuesday 11:00–13:00", "semester": "semester1", "degree": "Master of Studies"
+    "code": "STUD405",
+    "name": "Applied Research Project",
+    "credits": 6,
+    "time": "Thursday 09:00–10:00",
+    "semester": "semester4",
+    "degree": "Master of Studies"
   },
-
   {
-    "code": "STUD203", "name": "Independent Study A", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Master of Studies"
+    "code": "STUD402",
+    "name": "Advanced Project",
+    "credits": 6,
+    "time": "Thursday 10:00–11:00",
+    "semester": "semester4",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD205", "name": "Advanced Seminar II", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Master of Studies"
+    "code": "STUD403",
+    "name": "Studies Capstone",
+    "credits": 6,
+    "time": "Thursday 11:00–12:00",
+    "semester": "semester4",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD204", "name": "Advanced Seminar", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Master of Studies"
+    "code": "STUD404",
+    "name": "Interdisciplinary Methods",
+    "credits": 6,
+    "time": "Thursday 12:00–13:00",
+    "semester": "semester4",
+    "degree": "Master of Studies"
   },
   {
-    "code": "STUD5002", "name": "Advanced Academic Practice", "credits": 6,
-    "time": "Wednesday 12:00–14:00", "semester": "semester2", "degree": "Master of Studies"
+    "code": "HPEA5101",
+    "name": "Teaching and Learning in Health",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD5003", "name": "Project Preparation", "credits": 6,
-    "time": "Friday 11:00–13:00", "semester": "semester2", "degree": "Master of Studies"
+    "code": "HPEA102",
+    "name": "Simulation in Health Education",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
-
   {
-    "code": "STUD301", "name": "Professional Practice", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Studies"
+    "code": "HPEA103",
+    "name": "Learning Technologies in Health",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD305", "name": "Field Research Methods", "credits": 6,
-    "time": "Wednesday 09:00–11:00", "semester": "semester3", "degree": "Master of Studies"
+    "code": "HPEA104",
+    "name": "Health Education Leadership",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD302", "name": "Independent Study B", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester3", "degree": "Master of Studies"
+    "code": "HPEA105",
+    "name": "Patient Safety Education",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD303", "name": "Research Project", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester3", "degree": "Master of Studies"
+    "code": "HPEA5102",
+    "name": "Assessment in Health Professions",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD304", "name": "Discipline Studies A", "credits": 6,
-    "time": "Wednesday 14:00–16:00", "semester": "semester3", "degree": "Master of Studies"
+    "code": "HPEA201",
+    "name": "Clinical Supervision",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
-
   {
-    "code": "STUD401", "name": "Discipline Studies B", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Studies"
+    "code": "HPEA5103",
+    "name": "Curriculum Design in Health",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD405", "name": "Applied Research Project", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester4", "degree": "Master of Studies"
+    "code": "HPEA202",
+    "name": "Mentoring in Healthcare",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD402", "name": "Advanced Project", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester4", "degree": "Master of Studies"
+    "code": "HPEA203",
+    "name": "Health Education Research",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Health Professions Education"
   },
   {
-    "code": "STUD403", "name": "Studies Capstone", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester4", "degree": "Master of Studies"
+    "code": "IDIS102",
+    "name": "Antimicrobial Stewardship",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "STUD404", "name": "Interdisciplinary Methods", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester4", "degree": "Master of Studies"
+    "code": "IDIS103",
+    "name": "Epidemiology of Infections",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
-
   {
-    "code": "HPEA5101", "name": "Teaching and Learning in Health", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "MICR5001",
+    "name": "Medical Microbiology",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA102", "name": "Simulation in Health Education", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "IDIS104",
+    "name": "Virology Fundamentals",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA103", "name": "Learning Technologies in Health", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "IDIS105",
+    "name": "Global Health Threats",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA104", "name": "Health Education Leadership", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester1", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "IDIS5002",
+    "name": "Principles of Infectious Diseases",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA105", "name": "Patient Safety Education", "credits": 6,
-    "time": "Thursday 11:00–13:00", "semester": "semester1", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "IDIS201",
+    "name": "Infection Control",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
-
   {
-    "code": "HPEA5102", "name": "Assessment in Health Professions", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "PUBH5749",
+    "name": "Foundations of Public Health",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA201", "name": "Clinical Supervision", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "IDIS202",
+    "name": "Clinical Microbiology",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA5103", "name": "Curriculum Design in Health", "credits": 6,
-    "time": "Friday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "IDIS203",
+    "name": "Vaccine Science",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Infectious Diseases"
   },
   {
-    "code": "HPEA202", "name": "Mentoring in Healthcare", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "ENVT102",
+    "name": "Environmental Monitoring",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "HPEA203", "name": "Health Education Research", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Graduate Diploma in Health Professions Education"
+    "code": "ENVT4401",
+    "name": "Environmental Impact Assessment",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Environmental Science"
   },
-
   {
-    "code": "IDIS102", "name": "Antimicrobial Stewardship", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT103",
+    "name": "Ecological Systems",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "IDIS103", "name": "Epidemiology of Infections", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT104",
+    "name": "Pollution Control",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "MICR5001", "name": "Medical Microbiology", "credits": 6,
-    "time": "Monday 11:00–13:00", "semester": "semester1", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT105",
+    "name": "Sustainable Development",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "IDIS104", "name": "Virology Fundamentals", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester1", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT5502",
+    "name": "Climate Change Science",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "IDIS105", "name": "Global Health Threats", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester1", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT201",
+    "name": "Environmental Policy",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Environmental Science"
   },
-
   {
-    "code": "IDIS5002", "name": "Principles of Infectious Diseases", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT5503",
+    "name": "Environmental Management",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "IDIS201", "name": "Infection Control", "credits": 6,
-    "time": "Tuesday 14:00–16:00", "semester": "semester2", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT202",
+    "name": "Remote Sensing",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "PUBH5749", "name": "Foundations of Public Health", "credits": 6,
-    "time": "Thursday 09:00–11:00", "semester": "semester2", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "ENVT203",
+    "name": "Waste Management",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Environmental Science"
   },
   {
-    "code": "IDIS202", "name": "Clinical Microbiology", "credits": 6,
-    "time": "Wednesday 11:00–13:00", "semester": "semester2", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "BUSN5101",
+    "name": "Business Foundations",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Business"
   },
   {
-    "code": "IDIS203", "name": "Vaccine Science", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Infectious Diseases"
+    "code": "BUSG103",
+    "name": "Business Communication",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Business"
   },
-
   {
-    "code": "ENVT102", "name": "Environmental Monitoring", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Environmental Science"
+    "code": "ECON5503",
+    "name": "Economic Management",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Business"
   },
   {
-    "code": "ENVT4401", "name": "Environmental Impact Assessment", "credits": 6,
-    "time": "Monday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Environmental Science"
+    "code": "BUSG104",
+    "name": "Financial Literacy",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Business"
   },
   {
-    "code": "ENVT103", "name": "Ecological Systems", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester1", "degree": "Graduate Diploma in Environmental Science"
+    "code": "BUSG105",
+    "name": "Digital Business",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Business"
   },
   {
-    "code": "ENVT104", "name": "Pollution Control", "credits": 6,
-    "time": "Thursday 11:00–13:00", "semester": "semester1", "degree": "Graduate Diploma in Environmental Science"
+    "code": "BUSG202",
+    "name": "Accounting for Managers",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Business"
   },
   {
-    "code": "ENVT105", "name": "Sustainable Development", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester1", "degree": "Graduate Diploma in Environmental Science"
+    "code": "MGMT5501",
+    "name": "Management and Organisations",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Business"
   },
-
   {
-    "code": "ENVT5502", "name": "Climate Change Science", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Environmental Science"
-  },
-  {
-    "code": "ENVT201", "name": "Environmental Policy", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Environmental Science"
-  },
-  {
-    "code": "ENVT5503", "name": "Environmental Management", "credits": 6,
-    "time": "Friday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Environmental Science"
-  },
-  {
-    "code": "ENVT202", "name": "Remote Sensing", "credits": 6,
-    "time": "Monday 11:00–13:00", "semester": "semester2", "degree": "Graduate Diploma in Environmental Science"
-  },
-  {
-    "code": "ENVT203", "name": "Waste Management", "credits": 6,
-    "time": "Tuesday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Environmental Science"
-  },
-
-  {
-    "code": "BUSN5101", "name": "Business Foundations", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "BUSG103", "name": "Business Communication", "credits": 6,
-    "time": "Monday 13:00–15:00", "semester": "semester1", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "ECON5503", "name": "Economic Management", "credits": 6,
-    "time": "Thursday 12:00–14:00", "semester": "semester1", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "BUSG104", "name": "Financial Literacy", "credits": 6,
-    "time": "Wednesday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "BUSG105", "name": "Digital Business", "credits": 6,
-    "time": "Friday 11:00–13:00", "semester": "semester1", "degree": "Graduate Diploma in Business"
-  },
-
-  {
-    "code": "BUSG202", "name": "Accounting for Managers", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "MGMT5501", "name": "Management and Organisations", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "BUSG203", "name": "Marketing Fundamentals", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "BUSG204", "name": "Business Analytics", "credits": 6,
-    "time": "Thursday 14:00–16:00", "semester": "semester2", "degree": "Graduate Diploma in Business"
-  },
-  {
-    "code": "BUSG205", "name": "Entrepreneurship", "credits": 6,
-    "time": "Monday 11:00–13:00", "semester": "semester2", "degree": "Graduate Diploma in Business"
-  },
-
-  {
-    "code": "EDUC5501", "name": "Teaching and Learning", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC103", "name": "Educational Technology", "credits": 6,
-    "time": "Monday 09:00–11:00", "semester": "semester1", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC5503", "name": "Curriculum and Assessment", "credits": 6,
-    "time": "Friday 14:00–16:00", "semester": "semester1", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC104", "name": "Inclusive Education", "credits": 6,
-    "time": "Wednesday 13:00–15:00", "semester": "semester1", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC105", "name": "Child Development", "credits": 6,
-    "time": "Thursday 10:00–12:00", "semester": "semester1", "degree": "Graduate Diploma in Education"
-  },
-
-  {
-    "code": "EDUC202", "name": "Educational Psychology", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC201", "name": "Learning Theories", "credits": 6,
-    "time": "Tuesday 10:00–12:00", "semester": "semester2", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC5502", "name": "Classroom Practice", "credits": 6,
-    "time": "Wednesday 11:00–13:00", "semester": "semester2", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC203", "name": "Special Education", "credits": 6,
-    "time": "Thursday 13:00–15:00", "semester": "semester2", "degree": "Graduate Diploma in Education"
-  },
-  {
-    "code": "EDUC204", "name": "Digital Pedagogy", "credits": 6,
-    "time": "Monday 14:00–16:00", "semester": "semester2", "degree": "Graduate Diploma in Education"
+    "code": "BUSG203",
+    "name": "Marketing Fundamentals",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Business"
+  },
+  {
+    "code": "BUSG204",
+    "name": "Business Analytics",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Business"
+  },
+  {
+    "code": "BUSG205",
+    "name": "Entrepreneurship",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Business"
+  },
+  {
+    "code": "EDUC5501",
+    "name": "Teaching and Learning",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC103",
+    "name": "Educational Technology",
+    "credits": 6,
+    "time": "Monday 09:00–10:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC5503",
+    "name": "Curriculum and Assessment",
+    "credits": 6,
+    "time": "Monday 10:00–11:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC104",
+    "name": "Inclusive Education",
+    "credits": 6,
+    "time": "Monday 11:00–12:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC105",
+    "name": "Child Development",
+    "credits": 6,
+    "time": "Monday 12:00–13:00",
+    "semester": "semester1",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC202",
+    "name": "Educational Psychology",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC201",
+    "name": "Learning Theories",
+    "credits": 6,
+    "time": "Tuesday 09:00–10:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC5502",
+    "name": "Classroom Practice",
+    "credits": 6,
+    "time": "Tuesday 10:00–11:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC203",
+    "name": "Special Education",
+    "credits": 6,
+    "time": "Tuesday 11:00–12:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Education"
+  },
+  {
+    "code": "EDUC204",
+    "name": "Digital Pedagogy",
+    "credits": 6,
+    "time": "Tuesday 12:00–13:00",
+    "semester": "semester2",
+    "degree": "Graduate Diploma in Education"
   }
 ]
