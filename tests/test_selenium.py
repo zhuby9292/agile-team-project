@@ -159,7 +159,7 @@ def login_admin(browser, live_server):
 def test_selenium_index_page_loads(browser, live_server):
     browser.get(live_server + "/")
 
-    assert "Course Planner" in browser.page_source
+    assert "UniPlanner" in browser.page_source
 
 
 def test_selenium_signup_page_loads(browser, live_server):
@@ -183,7 +183,7 @@ def test_selenium_course_selection_page_loads(browser, live_server):
         EC.presence_of_element_located((By.ID, "study-level-select"))
     )
 
-    assert "Available courses" in browser.page_source
+    assert "Course Selection" in browser.page_source
 
 
 def test_selenium_can_select_degree(browser, live_server):
@@ -272,9 +272,15 @@ def test_selenium_semester_1_courses_addable_semester_2_locked(browser, live_ser
     time.sleep(0.5)
 
     # The locked button does not carry data-course-code, so find by class
-    locked_buttons = browser.find_elements(By.CLASS_NAME, "semester-locked-btn")
+    buttons = browser.find_elements(By.TAG_NAME, "button")
+
+    locked_buttons = [
+        btn for btn in buttons
+        if "Locked" in btn.text or "🔒" in btn.text
+    ]
+
     assert len(locked_buttons) > 0, (
-        "Expected at least one semester-locked-btn for Semester 2, but found none."
+        "Expected at least one locked button for Semester 2, but found none."
     )
 
     for btn in locked_buttons:
