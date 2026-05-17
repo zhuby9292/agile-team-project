@@ -239,6 +239,8 @@ let enrolledDegreeSnapshot = "";
 // ---------------------------------------------------------------------------
 // Course selection state
 // ---------------------------------------------------------------------------
+
+const SELECTED_COURSES_STORAGE_KEY = "selectedCourses";
 let selectedCourses = [];
 
 // ---------------------------------------------------------------------------
@@ -969,8 +971,6 @@ function displayAvailableCourses(degreeName) {
     const courses = courseOptions[degreeName];
 
     if (courses) {
-        updateSemesterFilter(courses);
-    }
         updateSemesterFilter(courses);
     }
 
@@ -1972,15 +1972,26 @@ function showFormMessage(el, text, type) {
 document.addEventListener("DOMContentLoaded", function () {
     applySavedTheme();
 
-    Promise.all([
-        loadCoursesFromBackend(),
-        loadSelectedCoursesFromBackend(),
-    ]).then(function () {
-        restoreCourseSelectionForm();
-        loadDashboardStats();
-        updateSemesterEligibilityBanner();
-        applyDegreeLockState();
-    });
+    const hasStudentCourseUI =
+        document.getElementById("study-level-select") ||
+        document.getElementById("available-courses") ||
+        document.getElementById("selected-courses") ||
+        document.getElementById("timetable-course-list") ||
+        document.getElementById("dashboard-course-count");
+
+    if (hasStudentCourseUI) {
+        Promise.all([
+            loadCoursesFromBackend(),
+            loadSelectedCoursesFromBackend(),
+        ]).then(function () {
+            restoreCourseSelectionForm();
+            loadDashboardStats();
+            updateSemesterEligibilityBanner();
+            applyDegreeLockState();
+        }).catch(function (err) {
+            console.log("Student page setup failed:", err);
+        });
+    }
 
     if (document.getElementById("enrollment-table-body")) {
         loadEnrollmentOverview();
