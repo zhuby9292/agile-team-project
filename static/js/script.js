@@ -1133,6 +1133,8 @@ function addCourse(event, code, name, credits, time, degree, semester) {
 
     selectedCourses.push({ code, name, credits, time, stream: degree, degree, semester });
 
+    localStorage.setItem(SELECTED_COURSES_STORAGE_KEY, JSON.stringify(selectedCourses));
+
     if (message) message.innerHTML = code + " " + t("added successfully.");
 
     displaySelectedCourses();
@@ -1196,6 +1198,8 @@ function removeCourse(code) {
     const message = document.getElementById("course-message");
 
     selectedCourses = selectedCourses.filter(c => c.code !== code);
+
+    localStorage.setItem(SELECTED_COURSES_STORAGE_KEY, JSON.stringify(selectedCourses));
 
     if (selectedCourses.length === 0) {
         localStorage.setItem("timetableGenerated", "false");
@@ -1263,10 +1267,28 @@ function updateThemeToggleLabel(labelText) {
     });
 }
 
+function getCurrentSelectedCourses() {
+    if (Array.isArray(selectedCourses) && selectedCourses.length > 0) {
+        return selectedCourses;
+    }
+
+    const saved = localStorage.getItem(SELECTED_COURSES_STORAGE_KEY);
+
+    if (!saved) {
+        return [];
+    }
+
+    try {
+        return JSON.parse(saved);
+    } catch (e) {
+        return [];
+    }
+}
+
 // Timetable
 
 function loadTimetablePage() {
-    const savedCourses = selectedCourses || [];
+    const savedCourses = getCurrentSelectedCourses();
     const courseList = document.getElementById("timetable-course-list");
     const status = document.getElementById("timetable-status");
     const output = document.getElementById("timetable-output");
@@ -1326,7 +1348,7 @@ function renderEmptyWeeklyCalendar() {
 }
 
 function generateTimetable() {
-    const savedCourses = selectedCourses || [];
+    const savedCourses = getCurrentSelectedCourses();
     const status = document.getElementById("timetable-status");
     const output = document.getElementById("timetable-output");
 
@@ -1378,7 +1400,7 @@ function getCourseStartTime(timeText) { return timeText.split(" ")[1].split("–
 // Dashboard stats
 
 function loadDashboardStats() {
-    const savedCourses = selectedCourses || [];
+    const savedCourses = getCurrentSelectedCourses();
     const savedDegree = localStorage.getItem("selectedDegree") || "Not selected";
     let totalCredits = 0;
     savedCourses.forEach(c => { totalCredits += c.credits; });
@@ -1513,7 +1535,7 @@ function rejectChange(requestId) {
 // CSV download
 
 function downloadTimetable() {
-    const savedCourses = selectedCourses || [];
+    const savedCourses = getCurrentSelectedCourses();
     const output = document.getElementById("timetable-output");
 
     if (savedCourses.length === 0) {
