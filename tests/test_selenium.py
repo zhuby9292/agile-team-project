@@ -16,7 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # Let pytest import app.py from the project root.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from app import app, db, User, Course
+from app import app, db, User, Admin, Course
 
 
 class ServerThread(threading.Thread):
@@ -37,7 +37,6 @@ class ServerThread(threading.Thread):
 def live_server():
     app.config["TESTING"] = True
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
-    app.config["ADMIN_EMAILS"] = "admin@example.com"
 
     test_db_path = os.path.join(app.instance_path, "test.db")
 
@@ -52,14 +51,15 @@ def live_server():
             password_hash=generate_password_hash("password123"),
         )
 
-        admin = User(
+        # Admin is its own model — no student_id, no ADMIN_EMAILS config needed.
+        admin = Admin(
             full_name="Selenium Admin",
             email="admin@example.com",
-            student_id="99999998",
             password_hash=generate_password_hash("admin123"),
         )
 
-        course = Course(
+        # Semester 1 course
+        course_sem1 = Course(
             code="CITS5505",
             name="Agile Web Development",
             credits=6,
@@ -68,7 +68,17 @@ def live_server():
             degree="Master of Information Technology",
         )
 
-        db.session.add_all([student, admin, course])
+        # Semester 2 course — used to verify locking behaviour
+        course_sem2 = Course(
+            code="CITS3003",
+            name="Graphics",
+            credits=6,
+            time="Tuesday 09:00–10:00",
+            semester="semester2",
+            degree="Master of Information Technology",
+        )
+
+        db.session.add_all([student, admin, course_sem1, course_sem2])
         db.session.commit()
 
     server = ServerThread()
@@ -102,6 +112,10 @@ def browser():
     driver.quit()
 
 
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
 def login_student(browser, live_server):
     browser.get(live_server + "/")
 
@@ -119,6 +133,28 @@ def login_student(browser, live_server):
         EC.url_contains("homepage")
     )
 
+
+def login_admin(browser, live_server):
+    browser.get(live_server + "/admin-login")
+
+    email_input = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.NAME, "email"))
+    )
+    password_input = browser.find_element(By.NAME, "password")
+
+    email_input.send_keys("admin@example.com")
+    password_input.send_keys("admin123")
+
+    browser.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+
+    WebDriverWait(browser, 10).until(
+        EC.url_contains("admin-dashboard")
+    )
+
+
+# ---------------------------------------------------------------------------
+# Original selenium tests (1-5) — kept intact, admin fixture now uses Admin model.
+# ---------------------------------------------------------------------------
 
 def test_selenium_index_page_loads(browser, live_server):
     browser.get(live_server + "/")
@@ -176,3 +212,72 @@ def test_selenium_timetable_page_loads(browser, live_server):
     browser.get(live_server + "/timetable.html")
 
     assert "timetable" in browser.page_source.lower()
+
+
+# ---------------------------------------------------------------------------
+# Semester progression selenium test (6)
+# ---------------------------------------------------------------------------
+
+def test_selenium_semester_1_courses_addable_semester_2_locked(browser, live_server):
+    """
+    Verifies that on the course-selection page:
+      - Semester 1 courses have an enabled 'Add' button (eligible semester).
+      - Semester 2 courses show a '🔒 Locked' disabled button (not yet eligible).
+
+    This confirms the semester enforcement is visible in the UI, not just enforced
+    server-side.
+    """
+    login_student(browser, live_server)
+
+    browser.get(live_server + "/course-selection.html")
+
+    # Select study level = Master
+    study_level = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.ID, "study-level-select"))
+    )
+    Select(study_level).select_by_value("master")
+
+    # Select degree = MIT
+    degree_select = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.ID, "degree-select"))
+    )
+    Select(degree_select).select_by_visible_text("Master of Information Technology")
+
+    # Wait for course rows to render
+    WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "course-table-row"))
+    )
+
+    # Allow JS to finish rendering locked/eligible states
+    time.sleep(1)
+
+    # --- Semester 1 (CITS5505) should have an ENABLED Add button ---
+    sem1_add_btn = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "button[data-course-code='CITS5505']")
+        )
+    )
+    assert not sem1_add_btn.get_attribute("disabled"), (
+        "Expected CITS5505 (Semester 1) Add button to be enabled, but it was disabled."
+    )
+    assert sem1_add_btn.text.strip() in ("Add", "Added"), (
+        f"Unexpected button text for CITS5505: '{sem1_add_btn.text.strip()}'"
+    )
+
+    # --- Semester 2 (CITS3003) should show a LOCKED button ---
+    # Switch the semester filter to show Semester 2 rows
+    semester_filter = browser.find_element(By.ID, "semester-filter")
+    Select(semester_filter).select_by_value("semester2")
+
+    time.sleep(0.5)
+
+    # The locked button does not carry data-course-code, so find by class
+    locked_buttons = browser.find_elements(By.CLASS_NAME, "semester-locked-btn")
+    assert len(locked_buttons) > 0, (
+        "Expected at least one semester-locked-btn for Semester 2, but found none."
+    )
+
+    for btn in locked_buttons:
+        assert btn.get_attribute("disabled") is not None, (
+            "Locked semester button should be disabled."
+        )

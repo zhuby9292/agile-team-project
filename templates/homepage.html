@@ -31,6 +31,11 @@
                 <span>{{ _('Timetable created') }}</span>
                 <strong id="dashboard-timetable-status">{{ _('No') }}</strong>
             </div>
+
+            <div class="status-row">
+                <span>{{ _('Current semester') }}</span>
+                <strong id="dashboard-current-semester-status">1</strong>
+            </div>
         </div>
     </section>
 
@@ -84,17 +89,45 @@
 
                 <div class="progress-item">
                     <span>{{ _('Course selection') }}</span>
-                    <span id="dashboard-course-progress" class="progress-pending">
-                        Pending
-                    </span>
+                    <span id="dashboard-course-progress" class="progress-pending">Pending</span>
                 </div>
 
                 <div class="progress-item">
                     <span>{{ _('Timetable planning') }}</span>
-                    <span id="dashboard-timetable-progress" class="progress-pending">
-                        {{ _('Pending
-                    ') }}</span>
+                    <span id="dashboard-timetable-progress" class="progress-pending">{{ _('Pending') }}</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Semester Progression -->
+    <section class="dashboard-panel">
+        <div class="panel-title-row">
+            <div>
+                <p class="dashboard-kicker">{{ _('Academic progress') }}</p>
+                <h2>{{ _('Semester Progression') }}</h2>
+            </div>
+        </div>
+
+        <div class="summary-grid" style="margin-bottom: 18px;">
+            <div class="mini-card">
+                <span class="mini-icon glyphicon glyphicon-forward"></span>
+                <p class="mini-label">{{ _('Current Semester') }}</p>
+                <h3 id="dashboard-eligible-semester">1</h3>
+                <p class="mini-note" id="dashboard-semester-enrol-status">{{ _('Eligible to enrol') }}</p>
+            </div>
+
+            <div class="mini-card">
+                <span class="mini-icon glyphicon glyphicon-ok-circle"></span>
+                <p class="mini-label">{{ _('Semesters Passed') }}</p>
+                <h3 id="dashboard-passed-count">0</h3>
+                <p class="mini-note">{{ _('Completed and approved by admin') }}</p>
+            </div>
+        </div>
+
+        <div id="semester-progress-list" class="progress-list">
+            <div class="progress-item">
+                <span>{{ _('No semesters completed yet.') }}</span>
             </div>
         </div>
     </section>

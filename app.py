@@ -24,7 +24,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "temporary-development-secret-key")
-
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///course_planner.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -42,6 +41,7 @@ app.config["MAIL_PASSWORD"] = 'kkna wewv svyg xcwo'
 app.config["MAIL_DEFAULT_SENDER"] = "kumar.aneesh71098@gmail.com"
 
 mail = Mail(app)
+
 
 def get_locale():
     return session.get("language", "en")
@@ -63,6 +63,7 @@ login_manager.login_message_category = "error"
 # ---------------------------------------------------------------------------
 
 class Admin(UserMixin, db.Model):
+    """Separate admin accounts — completely independent from student User records."""
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -73,6 +74,7 @@ class Admin(UserMixin, db.Model):
 
 
 class User(UserMixin, db.Model):
+    """Student accounts only."""
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -80,11 +82,29 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     selected_degree = db.Column(db.String(120), nullable=True)
     enrollment_status = db.Column(db.String(20), default="planning")
+    # Values: 'planning' | 'enrolled' | 'change_requested'
     reset_code = db.Column(db.String(4), nullable=True)
     reset_code_expires_at = db.Column(db.DateTime, nullable=True)
 
     def get_id(self):
         return f"u_{self.id}"
+
+
+class SemesterPass(db.Model):
+    """
+    Records that a student has passed a specific semester for a degree.
+    Created by admin via POST /api/admin/mark-semester-passed/<user_id>.
+
+    Semester 1 is open by default (no pass record needed).
+    To enrol in Semester N, the student must have a SemesterPass for Semester N-1.
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    degree = db.Column(db.String(120), nullable=False)
+    semester_number = db.Column(db.Integer, nullable=False)
+    passed_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship("User", backref="semester_passes")
 
 
 class EnrollmentChangeRequest(db.Model):
@@ -93,6 +113,7 @@ class EnrollmentChangeRequest(db.Model):
     requested_degree = db.Column(db.String(120), nullable=False)
     requested_course_codes = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(20), default="pending")
+    # Values: 'pending' | 'approved' | 'rejected'
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reviewed_at = db.Column(db.DateTime, nullable=True)
 
@@ -117,6 +138,135 @@ class Selection(db.Model):
     user = db.relationship("User", backref="selections")
     course = db.relationship("Course", backref="selections")
 
+
+# ---------------------------------------------------------------------------
+# Semester progression helpers
+# ---------------------------------------------------------------------------
+
+def semester_key_to_number(semester_key):
+    """Converts values like 'semester1' or 'Semester 1' into integer 1."""
+    if semester_key is None:
+        return None
+
+    match = re.search(r"\d+", str(semester_key))
+    return int(match.group()) if match else None
+
+
+def get_passed_semester_numbers_for_degree(user, degree):
+    """Returns sorted passed semester numbers for this exact user + degree."""
+    if not user or not degree:
+        return []
+
+    passes = SemesterPass.query.filter_by(
+        user_id=user.id,
+        degree=degree,
+    ).all()
+
+    return sorted({p.semester_number for p in passes})
+
+
+def get_eligible_semester_number_for_degree(user, degree):
+    """
+    Returns the semester number the student is eligible to enrol in for the
+    requested degree.
+
+    Important:
+    We pass degree into this function instead of always using
+    user.selected_degree. This prevents students from bypassing semester rules
+    by submitting courses for another degree.
+    """
+    passed = get_passed_semester_numbers_for_degree(user, degree)
+    return (max(passed) + 1) if passed else 1
+
+
+def get_eligible_semester_number(user):
+    """Returns eligibility for the user's currently stored selected degree."""
+    return get_eligible_semester_number_for_degree(user, user.selected_degree)
+
+
+def get_passed_semester_numbers(user):
+    """Returns passed semesters for the user's currently stored selected degree."""
+    return get_passed_semester_numbers_for_degree(user, user.selected_degree)
+
+
+def validate_semester_selection(
+    user,
+    requested_degree,
+    course_codes,
+    allow_empty=False,
+    allow_degree_change=False,
+):
+    """
+    Central backend enforcement for semester progression.
+
+    Rules enforced here:
+      - degree is required when courses are being saved/confirmed
+      - course codes must exist
+      - courses must belong to the requested degree
+      - all selected courses must be from one semester only
+      - selected semester must equal the eligible semester for the requested degree
+      - after a pass exists in the current degree, direct degree switching is blocked
+    """
+    requested_degree = (requested_degree or "").strip()
+    course_codes = course_codes or []
+
+    if not requested_degree:
+        return None, "Please select a degree before saving courses."
+
+    if not course_codes and not allow_empty:
+        return None, "Please select at least one course."
+
+    current_degree = user.selected_degree or ""
+    current_degree_passes = get_passed_semester_numbers_for_degree(user, current_degree)
+
+    if (
+        current_degree
+        and requested_degree != current_degree
+        and current_degree_passes
+        and not allow_degree_change
+    ):
+        return None, (
+            "Your degree is locked because you have already passed at least one semester. "
+            "Please use the change request flow for admin approval."
+        )
+
+    eligible_semester = get_eligible_semester_number_for_degree(user, requested_degree)
+    passed_semesters = get_passed_semester_numbers_for_degree(user, requested_degree)
+
+    selected_semesters = set()
+    valid_courses = []
+
+    for code in course_codes:
+        course = Course.query.filter_by(code=code).first()
+
+        if not course:
+            return None, f"Course {code} was not found."
+
+        if course.degree != requested_degree:
+            return None, f"Course {course.code} does not belong to {requested_degree}."
+
+        semester_number = semester_key_to_number(course.semester)
+
+        if semester_number in passed_semesters:
+            return None, f"Semester {semester_number} has already been passed."
+
+        if semester_number != eligible_semester:
+            return None, (
+                f"Semester {semester_number} is locked. "
+                f"You are currently eligible to enrol in Semester {eligible_semester}."
+            )
+
+        selected_semesters.add(semester_number)
+        valid_courses.append(course)
+
+    if len(selected_semesters) > 1:
+        return None, "Please select courses from one semester only."
+
+    return {
+        "courses": valid_courses,
+        "eligible_semester": eligible_semester,
+        "passed_semesters": passed_semesters,
+    }, None
 
 # ---------------------------------------------------------------------------
 # Seed
@@ -170,17 +320,14 @@ def seed_admin():
 def load_user(user_id):
     if str(user_id).startswith("a_"):
         return Admin.query.get(int(user_id[2:]))
-
     if str(user_id).startswith("u_"):
         return User.query.get(int(user_id[2:]))
-
     return User.query.get(int(user_id))
 
 
 def is_admin_user(user):
     if not user.is_authenticated:
         return False
-
     return isinstance(user, Admin)
 
 
@@ -191,9 +338,7 @@ def admin_required(view_function):
         if not is_admin_user(current_user):
             flash(gettext("You do not have permission to access the admin dashboard."), "error")
             return redirect(url_for("homepage"))
-
         return view_function(*args, **kwargs)
-
     return wrapped_view
 
 
@@ -203,9 +348,7 @@ def student_required(view_function):
     def wrapped_view(*args, **kwargs):
         if is_admin_user(current_user):
             return redirect(url_for("admin_dashboard"))
-
         return view_function(*args, **kwargs)
-
     return wrapped_view
 
 
@@ -224,7 +367,6 @@ def inject_admin_status():
 def set_language(language):
     if language in app.config["LANGUAGES"]:
         session["language"] = language
-
     return redirect(request.referrer or url_for("index"))
 
 
@@ -374,7 +516,6 @@ def timetable():
 @student_required
 def api_courses():
     courses = Course.query.all()
-
     return {
         "courses": [
             {
@@ -397,12 +538,26 @@ def api_selected_courses():
     selections = Selection.query.filter_by(user_id=current_user.id).all()
 
     selected_degree = current_user.selected_degree or ""
+
     if not selected_degree and selections:
         selected_degree = selections[0].course.degree
 
+    eligible_semester = get_eligible_semester_number_for_degree(
+        current_user,
+        selected_degree,
+    )
+
+    passed_semesters = get_passed_semester_numbers_for_degree(
+        current_user,
+        selected_degree,
+    )
+
     return {
         "degree": selected_degree,
+        "degree_locked": bool(selected_degree and passed_semesters),
         "enrollment_status": current_user.enrollment_status or "planning",
+        "eligible_semester": eligible_semester,
+        "passed_semesters": passed_semesters,
         "courses": [
             {
                 "code": s.course.code,
@@ -425,22 +580,40 @@ def save_selection():
         return {"error": "Already enrolled. Submit a change request to make changes."}, 403
 
     data = request.get_json() or {}
+
     course_codes = data.get("courses", [])
-    degree = data.get("degree", "")
+    requested_degree = data.get("degree", "")
+
+    validation, error = validate_semester_selection(
+        current_user,
+        requested_degree,
+        course_codes,
+        allow_empty=True,
+        allow_degree_change=False,
+    )
+
+    if error:
+        return {"error": error}, 403
 
     Selection.query.filter_by(user_id=current_user.id).delete()
 
-    for code in course_codes:
-        course = Course.query.filter_by(code=code).first()
-        if course:
-            db.session.add(Selection(user_id=current_user.id, course_id=course.id))
+    for course in validation["courses"]:
+        db.session.add(
+            Selection(
+                user_id=current_user.id,
+                course_id=course.id,
+            )
+        )
 
-    if degree:
-        current_user.selected_degree = degree
+    current_user.selected_degree = requested_degree
 
     db.session.commit()
 
-    return {"message": "Selection saved."}
+    return {
+        "message": "Selection saved.",
+        "eligible_semester": validation["eligible_semester"],
+        "passed_semesters": validation["passed_semesters"],
+    }
 
 
 @app.route("/api/confirm-enrollment", methods=["POST"])
@@ -452,18 +625,51 @@ def confirm_enrollment():
     if current_user.enrollment_status == "change_requested":
         return {"error": "A change request is already pending approval."}, 400
 
-    selections = Selection.query.filter_by(user_id=current_user.id).count()
+    data = request.get_json(silent=True) or {}
 
-    if selections == 0:
-        return {"error": "Please select at least one course before confirming enrollment."}, 400
+    requested_degree = (
+        data.get("degree")
+        or current_user.selected_degree
+        or ""
+    ).strip()
 
-    if not current_user.selected_degree:
-        return {"error": "Please select a degree before confirming enrollment."}, 400
+    submitted_codes = data.get("courses")
 
+    if submitted_codes is None:
+        selections = Selection.query.filter_by(user_id=current_user.id).all()
+        submitted_codes = [selection.course.code for selection in selections]
+
+    validation, error = validate_semester_selection(
+        current_user,
+        requested_degree,
+        submitted_codes,
+        allow_empty=False,
+        allow_degree_change=False,
+    )
+
+    if error:
+        return {"error": error}, 403
+
+    Selection.query.filter_by(user_id=current_user.id).delete()
+
+    for course in validation["courses"]:
+        db.session.add(
+            Selection(
+                user_id=current_user.id,
+                course_id=course.id,
+            )
+        )
+
+    current_user.selected_degree = requested_degree
     current_user.enrollment_status = "enrolled"
+
     db.session.commit()
 
-    return {"message": "Enrollment confirmed! Changes now require admin approval."}
+    return {
+        "message": "Enrollment confirmed! Changes now require admin approval.",
+        "eligible_semester": validation["eligible_semester"],
+        "passed_semesters": validation["passed_semesters"],
+    }
 
 
 @app.route("/api/request-change", methods=["POST"])
@@ -481,16 +687,27 @@ def request_change():
         return {"error": "You already have a pending change request."}, 400
 
     data = request.get_json() or {}
+
     requested_degree = data.get("degree", "")
     requested_courses = data.get("courses", [])
 
-    if not requested_degree or not requested_courses:
-        return {"error": "Please include a degree and at least one course in your request."}, 400
+    validation, error = validate_semester_selection(
+        current_user,
+        requested_degree,
+        requested_courses,
+        allow_empty=False,
+        allow_degree_change=True,
+    )
+
+    if error:
+        return {"error": error}, 403
 
     change_req = EnrollmentChangeRequest(
         user_id=current_user.id,
         requested_degree=requested_degree,
-        requested_course_codes=json.dumps(requested_courses),
+        requested_course_codes=json.dumps(
+            [course.code for course in validation["courses"]]
+        ),
     )
 
     current_user.enrollment_status = "change_requested"
@@ -509,14 +726,30 @@ def request_change():
 @admin_required
 def approve_change(request_id):
     req = EnrollmentChangeRequest.query.get_or_404(request_id)
-    user = User.query.get(req.user_id)
+    user = User.query.get_or_404(req.user_id)
+
+    requested_courses = json.loads(req.requested_course_codes)
+
+    validation, error = validate_semester_selection(
+        user,
+        req.requested_degree,
+        requested_courses,
+        allow_empty=False,
+        allow_degree_change=True,
+    )
+
+    if error:
+        return {"error": error}, 403
 
     Selection.query.filter_by(user_id=user.id).delete()
 
-    for code in json.loads(req.requested_course_codes):
-        course = Course.query.filter_by(code=code).first()
-        if course:
-            db.session.add(Selection(user_id=user.id, course_id=course.id))
+    for course in validation["courses"]:
+        db.session.add(
+            Selection(
+                user_id=user.id,
+                course_id=course.id,
+            )
+        )
 
     user.selected_degree = req.requested_degree
     user.enrollment_status = "enrolled"
@@ -539,8 +772,95 @@ def reject_change(request_id):
     req.reviewed_at = datetime.utcnow()
 
     db.session.commit()
-
     return {"message": "Change request rejected."}
+
+
+# ---------------------------------------------------------------------------
+# Admin API — semester progression
+# ---------------------------------------------------------------------------
+
+@app.route("/api/admin/mark-semester-passed/<int:user_id>", methods=["POST"])
+@admin_required
+def mark_semester_passed(user_id):
+    """
+    Admin marks the currently enrolled semester as passed.
+
+    Effects:
+      - creates SemesterPass(user_id, degree, semester_number)
+      - clears current Selection rows
+      - resets enrollment_status to planning
+      - preserves selected_degree so the student's degree remains pre-selected
+    """
+    user = User.query.get_or_404(user_id)
+
+    data = request.get_json() or {}
+    semester_number = data.get("semester_number")
+
+    if not user.selected_degree:
+        return {"error": "Student has not selected a degree yet."}, 400
+
+    if user.enrollment_status != "enrolled":
+        return {
+            "error": "Student must be enrolled before a semester can be marked as passed."
+        }, 400
+
+    selections = Selection.query.filter_by(user_id=user.id).all()
+
+    if not selections:
+        return {"error": "Student has no enrolled course selections to pass."}, 400
+
+    enrolled_semesters = {
+        semester_key_to_number(selection.course.semester)
+        for selection in selections
+    }
+
+    if len(enrolled_semesters) != 1:
+        return {
+            "error": "Student selections must belong to one semester before marking passed."
+        }, 400
+
+    enrolled_semester = enrolled_semesters.pop()
+
+    if semester_number is not None and int(semester_number) != enrolled_semester:
+        return {
+            "error": f"Student is enrolled in Semester {enrolled_semester}, not Semester {semester_number}."
+        }, 400
+
+    existing = SemesterPass.query.filter_by(
+        user_id=user.id,
+        degree=user.selected_degree,
+        semester_number=enrolled_semester,
+    ).first()
+
+    if existing:
+        return {
+            "error": f"Semester {enrolled_semester} is already marked as passed for this student."
+        }, 400
+
+    semester_pass = SemesterPass(
+        user_id=user.id,
+        degree=user.selected_degree,
+        semester_number=enrolled_semester,
+    )
+
+    db.session.add(semester_pass)
+
+    Selection.query.filter_by(user_id=user.id).delete()
+
+    user.enrollment_status = "planning"
+
+    db.session.commit()
+
+    next_semester = enrolled_semester + 1
+
+    return {
+        "message": (
+            f"Semester {enrolled_semester} marked as passed for {user.full_name}. "
+            f"They are now eligible to enrol in Semester {next_semester}."
+        ),
+        "passed_semester": enrolled_semester,
+        "next_eligible_semester": next_semester,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -555,6 +875,15 @@ def api_admin_enrollments():
 
     for user in users:
         selections = Selection.query.filter_by(user_id=user.id).all()
+        eligible_semester = get_eligible_semester_number(user)
+        passed_semesters = get_passed_semester_numbers(user)
+
+        selected_semesters = sorted({
+            semester_key_to_number(s.course.semester)
+            for s in selections
+        })
+
+        enrolled_semester = selected_semesters[0] if len(selected_semesters) == 1 else None
 
         result.append({
             "id": user.id,
@@ -564,6 +893,9 @@ def api_admin_enrollments():
             "enrollment_status": user.enrollment_status or "planning",
             "selected_degree": user.selected_degree or "N/A",
             "course_count": len(selections),
+            "eligible_semester": eligible_semester,
+            "enrolled_semester": enrolled_semester,
+            "passed_semesters": passed_semesters,
             "courses": [
                 {
                     "code": s.course.code,
@@ -647,7 +979,6 @@ def api_admin_edit_course(course_id):
     course.degree = data.get("degree", course.degree)
 
     db.session.commit()
-
     return {"message": "Course updated successfully."}
 
 
@@ -812,7 +1143,6 @@ def reset_password_with_code():
         user.reset_code = None
         user.reset_code_expires_at = None
         db.session.commit()
-
         return {"error": "Verification code expired. Please request a new code."}, 400
 
     if user.reset_code != code:

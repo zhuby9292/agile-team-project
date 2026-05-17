@@ -19,10 +19,9 @@
             <p class="dashboard-kicker">{{ _('System management') }}</p>
             <h1>{{ _('Admin Dashboard') }}</h1>
             <p class="dashboard-description">
-                {{ _('Monitor enrollments, manage courses, review change requests, and track system activity.') }}
+                {{ _('Monitor enrollments, manage courses, review change requests, and track semester progression.') }}
             </p>
         </div>
-        
     </section>
 
     <!-- Stat cards -->
@@ -152,10 +151,11 @@
                         <th>{{ _('Degree') }}</th>
                         <th>{{ _('Courses') }}</th>
                         <th>{{ _('Enrollment Status') }}</th>
+                        <th>{{ _('Semester Progress') }}</th>
                     </tr>
                 </thead>
                 <tbody id="enrollment-table-body">
-                    <tr><td colspan="5" class="admin-empty-row">{{ _('Loading...') }}</td></tr>
+                    <tr><td colspan="6" class="admin-empty-row">{{ _('Loading...') }}</td></tr>
                 </tbody>
             </table>
         </div>
